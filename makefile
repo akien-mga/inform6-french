@@ -14,17 +14,15 @@ distrib:
 	-zip InformLibFR.zip  -r ./
 	-zip -d InformLibFR.zip ".svn/*"
 	-zip -d InformLibFR.zip "makefile"
-	-zip -d InformLibFR.zip "Inform6FR/.svn/*"
-	-zip -d InformLibFR.zip "Inform6FR/tools/.svn/*"
-	-zip -d InformLibFR.zip "Inform7FR/.svn/*" 
-	-zip -d InformLibFR.zip "Inform7FR/Eric\ Forgeot/.svn/*" 
+	-zip -d InformLibFR.zip "I6/.svn/*"
+	-zip -d InformLibFR.zip "I7/.svn/*" 
+	-zip -d InformLibFR.zip "I7/Eric\ Forgeot/.svn/*" 
 
 clean:
 	-rm -fr .*~ 
-	-rm -fr Inform6FR/.*~ 
-	-rm -fr Inform6FR/tools/.*~
-	-rm -fr Inform7FR/.*~ 
-	-rm -fr Inform7FR/fichier*.txt*
-	-touch  Inform7FR/fichier.txt
-	-rm -fr Inform7FR/Eric\ Forgeot/.*~
+	-rm -fr I6/.*~ 
+	-rm -fr I7/.*~ 
+	-rm -fr I7/fichier*.txt*
+	-touch  I7/fichier.txt
+	-rm -fr I7/Eric\ Forgeot/.*~
 
