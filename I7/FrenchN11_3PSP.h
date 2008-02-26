@@ -778,7 +778,7 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
 
 Constant NKEY__TX     = "S = suivant";
 Constant PKEY__TX     = "P = précédent";
-Constant QKEY1__TX    = "   Q = retour";
+Constant QKEY1__TX    = "        Q = retour"; !huit espaces pour aligner à droite
 Constant QKEY2__TX    = "Q = menu précédent";
 Constant RKEY__TX     = "ENTREE = lire sujet";
 
