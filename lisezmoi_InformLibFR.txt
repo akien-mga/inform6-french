@@ -5,8 +5,8 @@ http://informfr.tuxfamily.org
 http://ifiction.free.fr/
 
 
-Inform6FR
-=========
+I6
+==
 
 French.h	: Inform 6, seconde personne du pluriel, présent
 FrenchG.h	: Inform 6, seconde personne du pluriel, présent
@@ -18,8 +18,8 @@ French1PSP.h	: Inform 6, variante première personne du singulier, passé
 FrenchG1PSP.h	: Inform 6, variante première personne du singulier, passé
 
 
-Inform7FR
-=========
+I7
+==
 
 FrenchN11.h	: Inform 7 base, seconde personne du pluriel, présent, utilisé pour FrenchN11_3PSP.h également.
 FrenchGN11.h 	: Inform 7 base, seconde personne du pluriel, présent

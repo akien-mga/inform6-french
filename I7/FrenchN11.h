@@ -1363,7 +1363,8 @@ Constant COMMA__TX      = ", ";
                   WriteListFrom(child(x1),
                       TERSE_BIT + ENGLISH_BIT + CONCEAL_BIT);
                   ".";
-               4: "Vous ne trouvez rien d'intéressant.";
+               4: if (x1 has animate) "Tenez donc vos mains tranquilles.";
+                  else "Vous ne trouvez rien d'intéressant.";
                5: "Vous ne pouvez pas voir à l'intérieur, puisque ", (the) x1, " ",
                   (isorare) x1, " fermé",(es) x1,".";
                6: print_ret (The) x1, " ", (isorare) x1, " vide",(s) x1,".";
