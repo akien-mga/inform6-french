@@ -403,7 +403,7 @@ Verb 'nouer' 'attacher' 'fixer'
 ! ------- Verbes de communication avec des personnages
 Verb 'repondre' 'dire' 'crier' 'demander'
                 * creature   		              -> Answer ! "dis-lui" !*! pas logique ? (dis-lui quoi ?)
-                * creature topic	              -> Answer
+                * creature topic	              -> Answer reverse
                 * 'à'/'a'/'au'/'aux' creature             -> Answer ! reverse ? !*!
  !!               * creature topic	              -> Answer reverse ! "dis-leur bonjour"
                 * topic 'à'/'a'/'au'/'aux' creature       -> Answer;
@@ -413,14 +413,14 @@ Verb 'parler'  'discuter' 'causer'
                 * 'avec'/'à'/'a'/'au'/'aux' creature 'de'/'du'/'des' topic -> Tell
                 * creature                                          -> Tell ! "parle-lui"
                 * creature 'de'/'du'/'des' topic                    -> Tell ! "parle-lui"
-                * 'un' topic 'à'/'a'/'au'/'aux'/'avec' creature            -> Tell
-                * topic 'à'/'a'/'au'/'aux'/'avec' creature                 -> Tell;
+                * 'un' topic 'à'/'a'/'au'/'aux'/'avec' creature            -> Tell reverse
+                * topic 'à'/'a'/'au'/'aux'/'avec' creature                 -> Tell reverse;
 
 Verb 'questionner' 'interroger'
                 * creature 'à'/'a' 'propos' 'de'/'du'/'des' topic   -> Ask
                 * creature 'au' 'sujet' 'de'/'du'/'des' topic   -> Ask
                 * creature 'sur' topic               -> Ask
-                * topic 'à'/'a' creature              -> Ask;
+                * topic 'à'/'a' creature              -> Ask reverse;
 
 Verb 'exiger' !*! reclamer
                 * topic 'à'/'a'/'au'/'aux' creature   -> Tell
