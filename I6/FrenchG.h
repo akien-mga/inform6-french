@@ -74,7 +74,11 @@ Verb meta 'notify' 'notification'
         * 'off'                             -> NotifyOff;
 
 Verb meta 'version'
-        *                                   -> Version;
+        *                                   -> Version
+	* 'francaise'/'fr'/'vf'			-> VersionFR;
+
+Verb 'vf'
+	*						-> VersionFR;
 
 #IFNDEF NO_PLACES;
 Verb meta 'places' 'endroits'
@@ -478,6 +482,12 @@ Verb 'nouer' 'attacher' 'fixer'
     if (noun==player) "Vous ne savez pas quoi vous dire que vous ne sachiez déjà.";
     "Lui parler, pourquoi pas, mais de quoi ?";
 ];
+
+[VersionFRSub;
+	<version>;
+     print "^Compilé avec la version ", (string) LibReleaseFR, " de la bibliothèque francophone.^" ;
+];
+
 
 Verb 'repondre' 'dire' 'crier' 'hurler'
         *                                             -> ParlerIncorrect ! dire (d'accord mais quoi...)
