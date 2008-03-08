@@ -377,7 +377,13 @@ Verb 'faire'
         * 'bruler'/'cramer' noun                    -> Burn
         * 'bruler'/'cramer' noun 'avec' held        -> Burn
         * 'signe'                                   -> WaveHands
-        * 'bonjour'/'signe' 'de'/'avec' 'la' 'main' -> WaveHands;
+        * 'bonjour'/'signe' 'de'/'avec' 'la' 'main' -> WaveHands
+        * 'signe' creature                          -> WaveHands
+        * 'signe' 'à'/'a'/'au'/'aux' creature       -> WaveHands
+        * 'signe' creature                          -> WaveHands
+        * 'signe' 'à'/'a'/'au'/'aux' creature       -> WaveHands
+        * 'bonjour'/'signe' 'de'/'avec' 'la' 'main' creature  -> WaveHands
+        * 'bonjour'/'signe' 'de'/'avec' 'la' 'main' 'à'/'a'/'au'/'aux' creature  -> WaveHands;
 
 Verb 'couper' 'trancher' 'elaguer'
         * noun                                      -> Cut
@@ -490,15 +496,15 @@ Verb 'nouer' 'attacher' 'fixer'
 
 
 Verb 'repondre' 'dire' 'crier' 'hurler'
-        *                                             -> ParlerIncorrect ! dire (d'accord mais quoi...)
-        * creature                                    -> ParlerIncorrect ! dis-lui (d'accord mais quoi...)
-        * 'à'/'a'/'au'/'aux' creature                 -> ParlerIncorrect ! dire à toto (d'accord mais quoi...)
-        * 'de'/'d^' topic                             -> ParlerIncorrect ! dire de partir (d'accord mais à qui...)  
-        * creature 'de'/'d^' topic                    -> AskTo           ! dis lui de faire ça
-        * 'à'/'a'/'au'/'aux' creature 'de'/'d^' topic -> AskTo           ! dire a toto de faire ça
-        * creature topic                              -> Answer reverse  ! dis-lui bonjour
-        * 'à'/'a'/'au'/'aux' creature topic           -> Answer reverse  ! dire a toto bonjour
-        * topic 'à'/'a'/'au'/'aux' creature           -> Answer;         ! dire bonjour à toto
+        *                                               -> ParlerIncorrect ! dire (d'accord mais quoi...)
+        * creature                                      -> ParlerIncorrect ! dis-lui (d'accord mais quoi...)
+        * 'à'/'a'/'au'/'aux' creature               -> ParlerIncorrect ! dire à toto (d'accord mais quoi...)
+        * 'de'/'d^' topic                               -> ParlerIncorrect ! dire de partir (d'accord mais à qui...)  
+        * creature 'de'/'d^' topic                      -> AskTo           ! dis lui de faire ça
+        * 'à'/'a'/'au'/'aux' creature 'de'/'d^' topic   -> AskTo           ! dire a toto de faire ça
+        * creature topic                                -> Answer reverse  ! dis-lui bonjour
+        * 'à'/'a'/'au'/'aux' creature topic             -> Answer reverse  ! dire a toto bonjour
+        * topic '->'/'à'/'a'/'au'/'aux' creature        -> Answer;         ! dire bonjour à toto
 
 Extend only 'crier' 'hurler' first
         *                                             -> CrierSansPrecision;
