@@ -400,6 +400,8 @@ Verb 'creuser'
 
 Verb 'regarder' 'voir' 'r//' 'l//' 'v//'
         *                                       -> Look
+        * 'autour'                              -> Look
+        * 'autour' topic                        -> Look
         * noun                                  -> Examine
         * 'sur' noun                            -> Examine
         * 'dans'/'atravers' noun                -> Search
