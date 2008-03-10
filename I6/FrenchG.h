@@ -73,12 +73,16 @@ Verb meta 'notify' 'notification'
         * 'on'                              -> NotifyOn
         * 'off'                             -> NotifyOff;
 
+[VersionFRSub;
+    <version>;
+     print "^Compilé avec la version ", (string) LibReleaseFR, " de la bibliothèque francophone.^" ;
+];
 Verb meta 'version'
         *                                   -> Version
-	* 'francaise'/'fr'/'vf'			-> VersionFR;
+        * 'francaise'/'fr'/'vf'             -> VersionFR;
 
 Verb 'vf'
-	*						-> VersionFR;
+        *                                   -> VersionFR;
 
 #IFNDEF NO_PLACES;
 Verb meta 'places' 'endroits'
@@ -491,16 +495,11 @@ Verb 'nouer' 'attacher' 'fixer'
     "Lui parler, pourquoi pas, mais de quoi ?";
 ];
 
-[VersionFRSub;
-	<version>;
-     print "^Compilé avec la version ", (string) LibReleaseFR, " de la bibliothèque francophone.^" ;
-];
-
 
 Verb 'repondre' 'dire' 'crier' 'hurler'
         *                                               -> ParlerIncorrect ! dire (d'accord mais quoi...)
         * creature                                      -> ParlerIncorrect ! dis-lui (d'accord mais quoi...)
-        * 'à'/'a'/'au'/'aux' creature               -> ParlerIncorrect ! dire à toto (d'accord mais quoi...)
+        * 'à'/'a'/'au'/'aux' creature                   -> ParlerIncorrect ! dire à toto (d'accord mais quoi...)
         * 'de'/'d^' topic                               -> ParlerIncorrect ! dire de partir (d'accord mais à qui...)  
         * creature 'de'/'d^' topic                      -> AskTo           ! dis lui de faire ça
         * 'à'/'a'/'au'/'aux' creature 'de'/'d^' topic   -> AskTo           ! dire a toto de faire ça
