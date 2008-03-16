@@ -7,7 +7,7 @@
 !
 !   Traduit en français par Jean-Luc Pontico 2001-2004. Version 2.2 du 20/02/2008
 !   Certaines fonctions sont tirées de la traduction en espagnol de Jose Luis Diaz.
-!   Diverses corrections apportées par Samuel Verschelde (Stormi) sur LanguageToInformese
+!   Diverses modifications apportées par Samuel Verschelde (Stormi)
 !
 !   Dans votre fichier de jeu, incluez les trois bibliothèques dans l'ordre suivant :
 !       Include "Parser";
@@ -476,9 +476,9 @@ Verb 'balancer'
 Verb 'frotter' 'cirer' 'astiquer' 'balayer' 'nettoyer' 'depoussierer' 'essuyer' 'recurer'
         * noun                           -> Rub;
 
-Verb 'nouer' 'attacher' 'fixer'
-        * noun                                  -> Tie
-        * noun 'à'/'a'/'au'/'aux'/'avec' noun   -> Tie;
+Verb 'nouer' 'attacher' 'fixer' 'connecter' 'brancher'
+        * noun                                        -> Tie
+        * noun 'à'/'a'/'au'/'aux'/'avec'/'sur' noun   -> Tie;
 
 ! ------- Verbes de communication avec des personnages
 [ParlerIncorrectSub;
@@ -663,6 +663,7 @@ Verb 'zut' 'maudit'
     if (word=='bois') return 'boire';
     if (word=='bondis') return 'bondir';
     if (word=='bouge') return 'bouger';
+    if (word=='branche') return 'brancher';
     if (word=='brandis') return 'brandir';
     if (word=='brise') return 'briser';
     if (word=='brule') return 'bruler';
@@ -673,6 +674,7 @@ Verb 'zut' 'maudit'
     if (word=='cogne') return 'cogner';
     if (word=='combats') return 'combattre';
     if (word=='comprime') return 'comprimer';
+    if (word=='connecte') return 'connecter';
     if (word=='consulte') return 'consulter';
     if (word=='couche') return 'coucher';
     if (word=='coupe') return 'couper';
@@ -831,6 +833,7 @@ Verb 'zut' 'maudit'
     if (word=='balayez') return 'balayer';
     if (word=='bondissez') return 'bondir';
     if (word=='bougez') return 'bouger';
+    if (word=='branchez') return 'brancher';
     if (word=='brandissez') return 'brandir';
     if (word=='brisez') return 'briser';
     if (word=='brulez') return 'bruler';
@@ -842,6 +845,7 @@ Verb 'zut' 'maudit'
     if (word=='cognez') return 'cogner';
     if (word=='combattez') return 'combattre';
     if (word=='comprimez') return 'comprimer';
+    if (word=='connectez') return 'connecter';
     if (word=='consultez') return 'consulter';
     if (word=='couchez') return 'coucher';
     if (word=='coupez') return 'couper';
@@ -1006,6 +1010,7 @@ Verb 'zut' 'maudit'
     if (word=='balayons') return 'balayer';
     if (word=='bondissons') return 'bondir';
     if (word=='bougeons') return 'bouger';
+    if (word=='branchons') return 'brancher';
     if (word=='brandissons') return 'brandir';
     if (word=='brisons') return 'briser';
     if (word=='brulons') return 'bruler';
@@ -1017,6 +1022,7 @@ Verb 'zut' 'maudit'
     if (word=='cognons') return 'cogner';
     if (word=='combattons') return 'combattre';
     if (word=='comprimons') return 'comprimer';
+    if (word=='connectons') return 'connecter';
     if (word=='consultons') return 'consulter';
     if (word=='couchons') return 'coucher';
     if (word=='coupons') return 'couper';

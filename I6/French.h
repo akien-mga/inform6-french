@@ -8,7 +8,7 @@
 !   Traduit en français par Jean-Luc Pontico 2001-2004. Version 2.2 du 17/02/2008
 !   L'adaptation à Glulx a été réalisée avec l'aide d'Eric Forgeot.
 !   Certaines fonctions sont tirées de la traduction en espagnol de Jose Luis Diaz.
-!   Diverses corrections apportées par Samuel Verschelde (Stormi) sur LanguageToInformese
+!   Diverses modifications apportées par Samuel Verschelde (Stormi)
 !
 !   This file is automatically Included in your game file by "parserm".
 !   Strictly, "parserm" includes the file named in the "language__" variable,
@@ -886,7 +886,7 @@ Constant COMMA__TX      = ", ";
     Answer, Ask:    if (x1 == player) "Vous ne savez pas quoi vous répondre."; ! ce test ne fonctionne que si AnswerSub et AskSub sont modifiés pour renvoyer l'objet interlocuteur, sinon réponse standard "Pas de réponse."
                     else "Pas de réponse.";
 !    Ask:      see Answer
-    Attack:         "La violence n'est pas une solution.";
+    Attack:         "La violence n'est pas une solution ici.";
     Blow:           "Vous ne pouvez pas utilement souffler dedans.";
     Burn:           "Cet acte dangereux ne mènerait pas à grand-chose.";
     Buy:            "Il n'y a rien à vendre, ici.";
