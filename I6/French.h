@@ -861,6 +861,7 @@ Constant COMMA__TX      = ", ";
         ! Les lignes qui suivent sont copiées de la fonction PrefaceByArticle de parserm.h
         ! afin de connaître la valeur de LanguageContraction pour le nom affiché de l'objet
         ! Je suis le seul à trouver cela atrocement compliqué ?
+#ifdef TARGET_ZCODE;
         StorageForShortName-->0 = 160;
         @output_stream 3 StorageForShortName;
         print (PSN__) noun;
@@ -871,6 +872,9 @@ Constant COMMA__TX      = ", ";
         else {
             print "à ", (the) obj;
         }
+#ifnot; ! TARGET_GLULX;
+		print "à quelqu'un : ", (name) obj;
+#endif;
     }
 ];
 [ nt obj; ! ex: semble(nt)
