@@ -298,7 +298,7 @@ Verb 'deverrouiller' 'forcer'
                 * noun 'avec' held               -> Unlock;
 
 ! ------- Verbes concernant ce que le joueur possède
-Verb 'inventaire' 'inv' ! 'i//'
+Verb 'inventaire' ! 'inv' ! 'i//'
                 *                                -> Inv
                 * 'haut'/'tall'                         -> InvTall
                 * 'large'/'wide'                         -> InvWide;
