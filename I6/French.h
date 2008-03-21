@@ -1276,7 +1276,7 @@ Constant COMMA__TX      = ", ";
     }
     Quit: switch (n) {
         1:  print "Répondez par oui ou par non, je vous prie.";
-        2:  print "Etes-vous sûr de vouloir quitter ? (O/N) ";
+        2:  print "Êtes-vous sûr de vouloir quitter ? (O/N) ";
     }
     Remove: switch (n) {
         1:  if (x1 has pluralname)
@@ -1289,7 +1289,7 @@ Constant COMMA__TX      = ", ";
         3:  "D'accord."; ! Ok
     }
     Restart: switch (n) {
-        1: print "Etes-vous sûr de vouloir recommencer ? (O/N) ";
+        1: print "Êtes-vous sûr de vouloir recommencer ? (O/N) ";
         2: "Raté.";
     }
     Restore: switch (n) {
@@ -1343,7 +1343,7 @@ Constant COMMA__TX      = ", ";
         1:  "Vous n'avez pas ", (the) x1, ".";
         2:  print_ret (The) x1, " ", (isorare) x1, " peu impressionné",(es) x1,".";
     }
-    Sing:           "Vouz chantez un morceau de la première chanson qui vous vient.";
+    Sing:           "Vous chantez un morceau de la première chanson qui vous vient à l'esprit.";
     Sleep:          "Vous n'avez pas particulièrement sommeil.";
     Smell:          "Vous ne sentez rien de particulier.";
     Sorry:          "Pas grave.";
