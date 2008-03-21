@@ -525,7 +525,7 @@ Verb 'demander'
         * topic 'à'/'a'/'au'/'aux' creature           -> Ask reverse     ! demander de l'aide à toto...
         * 'à'/'a'/'au'/'aux' creature topic           -> Ask;            ! dire a toto bonjour
 
-Verb 'parler' 'discuter' 'causer' '!//'
+Verb 'parler' 'discuter' 'causer'
         * 'avec'/'à'/'a'/'au'/'aux' creature                                              -> ParlerSansPrecision
         * 'avec'/'à'/'a'/'au'/'aux' creature 'de'/'du'/'des'/'d^' topic                   -> Tell
         * 'avec'/'à'/'a'/'au'/'aux' creature 'au' 'sujet' 'de'/'du'/'des'/'d^' topic      -> Tell
@@ -536,7 +536,9 @@ Verb 'parler' 'discuter' 'causer' '!//'
         * creature                                                                        -> ParlerSansPrecision ! "parle-lui"
         * creature 'de'/'du'/'des'/'d^' topic                                             -> Tell ! "parle-lui"
         * creature 'au' 'sujet' 'de'/'du'/'des'/'d^' topic                                -> Tell ! "parle-lui"
-        * creature 'a'/'à' 'propos' 'de'/'du'/'des'/'d^' topic                            -> Tell
+        * creature 'a'/'à' 'propos' 'de'/'du'/'des'/'d^' topic                            -> Tell;
+
+Verb '!//'
         * topic '->' creature                                                             -> Tell reverse;
 
 Verb 'questionner' 'interroger' '?//'
