@@ -492,7 +492,7 @@ Verb 'nouer' 'attacher' 'fixer' 'connecter' 'brancher'
 [ParlerSansPrecisionSub;
     if (RunLife(noun,##ParlerSansPrecision) ~= 0) rfalse;
     if (noun==player) "Vous ne savez pas quoi vous dire que vous ne sachiez déjà.";
-    "Lui parler, pourquoi pas, mais de quoi ?";
+    "Pas de réponse.";
 ];
 
 
