@@ -513,17 +513,17 @@ Extend only 'crier' 'hurler' first
 Verb 'demander'
         *                                             -> ParlerIncorrect ! demander (d'accord mais quoi...)
         * creature                                    -> ParlerIncorrect ! demande-lui (d'accord mais quoi...)
-        * 'à'/'a'/'au'/'aux' creature                 -> ParlerIncorrect ! demander à toto (d'accord mais quoi...)
+        * '->'/'à'/'a'/'au'/'aux' creature                 -> ParlerIncorrect ! demander à toto (d'accord mais quoi...)
         * 'que'/'qu^' topic                           -> ParlerIncorrect ! (on ne gère pas "demander que toto sorte" à cause du subjonctif)
         * creature 'de'/'d^' topic                    -> AskTo           ! demande lui de faire ça
-        * 'à'/'a'/'au'/'aux' creature 'de'/'d^' topic -> AskTo           ! demander a toto de faire ça
+        * '->'/'à'/'a'/'au'/'aux' creature 'de'/'d^' topic -> AskTo           ! demander a toto de faire ça
 !        * 'de'/'d^' topic 'à'/'a'/'au'/'aux' creature -> AskTo reverse  ! demander de partir à toto   !x! ça plante
         * creature noun                               -> AskFor          ! demande-lui du pain
-        * noun 'à'/'a'/'au'/'aux' creature            -> AskFor reverse  ! demander du pain au boulanger
-        * 'à'/'a'/'au'/'aux' creature noun            -> AskFor          ! demander au boulanger du pain
+        * noun '->'/'à'/'a'/'au'/'aux' creature            -> AskFor reverse  ! demander du pain au boulanger
+        * '->'/'à'/'a'/'au'/'aux' creature noun            -> AskFor          ! demander au boulanger du pain
         * creature topic                              -> Ask             ! dis-lui bonjour
-        * topic 'à'/'a'/'au'/'aux' creature           -> Ask reverse     ! demander de l'aide à toto...
-        * 'à'/'a'/'au'/'aux' creature topic           -> Ask;            ! dire a toto bonjour
+        * topic '->'/'à'/'a'/'au'/'aux' creature           -> Ask reverse     ! demander de l'aide à toto...
+        * '->'/'à'/'a'/'au'/'aux' creature topic           -> Ask;            ! dire a toto bonjour
 
 Verb 'parler' 'discuter' 'causer'
         * 'avec'/'à'/'a'/'au'/'aux' creature                                              -> ParlerSansPrecision
