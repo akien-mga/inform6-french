@@ -787,7 +787,7 @@ Constant YOU__TX        = "Vous";
 Constant DARKNESS__TX = "L'obscurité";
 
 Constant THOSET__TX   = "ces choses-là";
-Constant THAT__TX     = "ça";
+Constant THAT__TX     = "cela";
 Constant OR__TX       = " ou ";
 Constant NOTHING__TX  = "rien";
 Constant IS__TX       = "est ";   ! utilisés par WriteListFrom
@@ -887,8 +887,7 @@ Constant COMMA__TX      = ", ";
 ];
 
 [ LanguageLM n x1;
-    Answer, Ask:    if (x1 == player) "Vous ne savez pas quoi vous répondre."; ! ce test ne fonctionne que si AnswerSub et AskSub sont modifiés pour renvoyer l'objet interlocuteur, sinon réponse standard "Pas de réponse."
-                    else "Pas de réponse.";
+    Answer, Ask:    "Pas de réponse.";
 !    Ask:      see Answer
     Attack:         "La violence n'est pas une solution ici.";
     Blow:           "Vous ne pouvez pas utilement souffler dedans.";
@@ -926,6 +925,7 @@ Constant COMMA__TX      = ", ";
         #Endif; ! TARGET_
     }
     Consult:        "Vous ne trouvez rien d'intéressant dans ", (the) x1, ".";
+    CrierSansPrecision : "Vous criez ce qui vous passe par la tête.";
     Cut:            "Allons, ", (itorthem) x1, " couper ne mènerait pas à grand-chose.";
     Dig:            "Creuser ne mènerait à rien ici.";
     Disrobe: switch (n) {
@@ -1186,9 +1186,7 @@ Constant COMMA__TX      = ", ";
         45: print "Précisez : "; !*!
         46: print "Précisez : "; !*!
         47: "Désolé, vous pouvez seulement avoir un objet ici. Lequel voulez-vous exactement ?";
-!        48: print "Pouvez-vous préciser à qui ? (tapez le nom seul, sans la préposition 'à')^";
         48: print "Pouvez-vous préciser qui est concerné par cette action ?^"; !*!
-!        49: print "Pouvez-vous préciser avec quoi ? (tapez le nom seul, sans la préposition 'avec')^";
         49: print "Pouvez-vous préciser le nom de l'objet à utiliser ?^"; !*!
         50: print "Votre score vient ";
             if (x1 > 0) print "d'augmenter"; else { x1 = -x1; print "de diminuer"; }
@@ -1237,6 +1235,9 @@ Constant COMMA__TX      = ", ";
             if (x1 has pluralname) 
                 print " ont"; else print " a";
                 " mieux à faire.";
+    ParlerIncorrect : "Soyez plus précis dans votre communication, ou reformulez.";
+    ParlerSansPrecision :   if (noun==player) "Vous ne savez pas quoi vous dire que vous ne sachiez déjà.";
+                            else "Pas de réponse.";
     Places: switch (n) {
         1:  print "Vous avez visité : ";
         2:  print ".^";
@@ -1411,7 +1412,8 @@ Constant COMMA__TX      = ", ";
         3:  "Cela ne rentre pas dans la serrure.";
         4:  "Vous déverrouillez ", (the) x1, ".";
     }
-    VagueGo:  "Vous devez donner la direction dans laquelle aller.";
+    VagueDo: "Soyez plus précis."; 
+    VagueGo: "Vous devez donner la direction dans laquelle aller.";
     Verify: switch (n) {
         1: "Le fichier semble intact.";
         2: "Le fichier est certainement corrompu !";

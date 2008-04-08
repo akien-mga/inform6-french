@@ -334,7 +334,7 @@ Verb 'laisser'
         * held                              -> Drop
         * 'tomber' held                     -> Drop;
 
-Verb 'enlever' 'oter' 'retirer'  !! j'ai ajouté retirer
+Verb 'enlever' 'oter' 'retirer'
         * held                                      -> Disrobe
         * multiinside 'de'/'du'/'des'/'d^' noun     -> Remove;
 
@@ -366,16 +366,17 @@ Verb 'bruler' 'incendier' 'embraser' 'cramer'
 
 Verb 'attaquer' 'casser' 'frapper' 'combattre' 'ruiner' 'briser' 'detruire'
      'tuer' 'torturer' 'cogner'
-!        * noun                           -> Attack ! ligne commentée car redondante, avec la suite, et supprimée dans lieux communs. A voir...
-        * 'à'/'a' noun                   -> Attack
-        * 'à' noun                       -> Attack
         * noun                           -> Attack
-        * noun 'avec' held               -> Attack;
+        * noun 'avec' held               -> Attack
+        * 'à'/'a'/'au'/'aux' noun                   -> Attack; ! frapper à la porte
 
 Verb 'presser' 'tordre' 'comprimer' 'ecraser'
         * noun                           -> Squeeze;
 
-[VagueDoSub; "Soyez plus précis."; ];
+[VagueDoSub; 
+    L__M(##VagueDo, 1, 0);
+];
+
 Verb 'faire'
         *                                           -> VagueDo
         * 'bruler'/'cramer' noun                    -> Burn
@@ -482,17 +483,17 @@ Verb 'nouer' 'attacher' 'fixer' 'connecter' 'brancher'
 
 ! ------- Verbes de communication avec des personnages
 [ParlerIncorrectSub;
-    "Soyez plus précis dans votre communication, ou reformulez.";
+    L__M(##ParlerIncorrect, 1, 0);
 ];
 
 [CrierSansPrecisionSub;
-    "Vous criez ce qui vous passe par la tête. Cela n'a aucun effet pratique mais cela vous défoule un peu.";
+    L__M(##CrierSansPrecision, 1, 0);
 ];
 
 [ParlerSansPrecisionSub;
+    ! déporter vers French.h
     if (RunLife(noun,##ParlerSansPrecision) ~= 0) rfalse;
-    if (noun==player) "Vous ne savez pas quoi vous dire que vous ne sachiez déjà.";
-    "Pas de réponse.";
+    L__M(##ParlerSansPrecision, 1, noun);
 ];
 
 
@@ -513,17 +514,17 @@ Extend only 'crier' 'hurler' first
 Verb 'demander'
         *                                             -> ParlerIncorrect ! demander (d'accord mais quoi...)
         * creature                                    -> ParlerIncorrect ! demande-lui (d'accord mais quoi...)
-        * '->'/'à'/'a'/'au'/'aux' creature                 -> ParlerIncorrect ! demander à toto (d'accord mais quoi...)
+        * '->'/'à'/'a'/'au'/'aux' creature            -> ParlerIncorrect ! demander à toto (d'accord mais quoi...)
         * 'que'/'qu^' topic                           -> ParlerIncorrect ! (on ne gère pas "demander que toto sorte" à cause du subjonctif)
         * creature 'de'/'d^' topic                    -> AskTo           ! demande lui de faire ça
         * '->'/'à'/'a'/'au'/'aux' creature 'de'/'d^' topic -> AskTo           ! demander a toto de faire ça
 !        * 'de'/'d^' topic 'à'/'a'/'au'/'aux' creature -> AskTo reverse  ! demander de partir à toto   !x! ça plante
         * creature noun                               -> AskFor          ! demande-lui du pain
-        * noun '->'/'à'/'a'/'au'/'aux' creature            -> AskFor reverse  ! demander du pain au boulanger
-        * '->'/'à'/'a'/'au'/'aux' creature noun            -> AskFor          ! demander au boulanger du pain
+        * noun '->'/'à'/'a'/'au'/'aux' creature       -> AskFor reverse  ! demander du pain au boulanger
+        * '->'/'à'/'a'/'au'/'aux' creature noun       -> AskFor          ! demander au boulanger du pain
         * creature topic                              -> Ask             ! dis-lui bonjour
-        * topic '->'/'à'/'a'/'au'/'aux' creature           -> Ask reverse     ! demander de l'aide à toto...
-        * '->'/'à'/'a'/'au'/'aux' creature topic           -> Ask;            ! dire a toto bonjour
+        * topic '->'/'à'/'a'/'au'/'aux' creature      -> Ask reverse     ! demander de l'aide à toto...
+        * '->'/'à'/'a'/'au'/'aux' creature topic      -> Ask;            ! dire a toto bonjour
 
 Verb 'parler' 'discuter' 'causer'
         * 'avec'/'à'/'a'/'au'/'aux' creature                                              -> ParlerSansPrecision

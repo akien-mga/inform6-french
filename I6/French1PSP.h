@@ -5,11 +5,12 @@
 !
 !   Copyright Graham Nelson 1993-2004 but freely usable (see manuals)
 !
-!   Traduit en français par Jean-Luc Pontico 2001-2004
+!   Traduit en français par Jean-Luc Pontico 2001-2004. Version 2.2 du 17/02/2008
 !   L'adaptation à Glulx a été réalisée avec l'aide d'Eric Forgeot.
 !   Version 1ère personne du singulier au passé par JB.
 !   
 !   Certaines fonctions sont tirées de la traduction en espagnol de Jose Luis Diaz.
+!   Diverses modifications apportées par Samuel Verschelde (Stormi)
 !
 !   This file is automatically Included in your game file by "parserm".
 !   Strictly, "parserm" includes the file named in the "language__" variable,
@@ -17,6 +18,9 @@
 !   default of "english").
 !
 ! ==============================================================================
+
+Constant LibReleaseFR      "2.3dev";
+Message		"[Compilé avec la version 2.3dev (future 2.3 stable) de la bibliothèque francophone, version 1PSP.]";
 
 System_file;
 
@@ -29,18 +33,15 @@ System_file;
 ! Ceci dit, il est déconseillé de mettre des accents dans les mots du dictionnaire
 ! car les accents saisis par le joueur sont automatiquement enlevés pour les mots
 ! non reconnus.
-#Ifdef PAS_POUR_LA_ZPLET;
-Zcharacter "abcdefghijlmnopqrstuvyzVLé"
-           "ABCDEFGHIJKMNOPQRSTUXYZwxk"
-              "0123456.,;!?-:()èâàûùêW"; 
-
+! (fonction désactivée)
+!#Ifdef PAS_POUR_LA_ZPLET;
 !Zcharacter 'é';
 !Zcharacter 'è';
 !Zcharacter 'à';
 !Zcharacter 'ù';
 !Zcharacter 'â';
 !Zcharacter 'ê';
-#endif;
+!#endif;
 
 !*! Constant EnglishNaturalLanguage;    ! Needed to keep old pronouns mechanism
 
@@ -538,7 +539,6 @@ global enleveaccents=1;
 	        LTI_Insert(b+3, 'u');
 	        LTI_Insert(b+4, 's');
 	}
-
 	Tokenise__(buffer,parse);
 
 	! maintenant que les traitements sur l'infinitif ont été faits,
@@ -630,7 +630,8 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
 
 [ LanguageDirection d;
    switch(d)
-   {   n_to: print "nord";
+    {
+        n_to: print "nord";
        s_to: print "sud";
        e_to: print "est";
        w_to: print "ouest";
@@ -650,11 +651,15 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
   if (n==0)    { print "zéro"; rfalse; }
   if (n<0)     { print "moins "; n=-n; }
   if (n>=1000) { print (LanguageNumber) n/1000, " mille"; n=n%1000; f=1; }
-  if (n>=100)  { if (f==1) print ", ";
-                 print (LanguageNumber) n/100, " cent"; n=n%100; f=1; }
+    if (n>=100)  { 
+        if (f==1) print ", ";
+        print (LanguageNumber) n/100, " cent"; n=n%100; f=1; 
+    }
+
   if (n==0) rfalse;
   switch(n)
-  {   1:  print "un";
+    {
+        1:  print "un";
       2:  print "deux";
       3:  print "trois";
       4:  print "quatre";
@@ -675,7 +680,8 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
       19: print "dix-neuf";
       20 to 99:
           switch(n/10)
-          {  2: print "vingt";
+            {
+                2:  print "vingt";
                 if (n%10 == 1) {print " et un"; return; }
              3: print "trente";
                 if (n%10 == 1) {print " et un"; return; }
@@ -693,7 +699,8 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
              9: print "quatre-vingt-"; LanguageNumber(10+ n%10); return;
           }
           if (n%10 ~= 0)
-          {     print "-"; LanguageNumber(n%10);
+            {
+                print "-"; LanguageNumber(n%10);
           }
   }
 ];
@@ -774,7 +781,7 @@ Constant QKEY2__KY    = 'q';
 Constant SCORE__TX    = "Score : ";
 Constant MOVES__TX    = "Tours : ";
 Constant TIME__TX     = "Heure : ";
-Constant CANTGO__TX   = "Hélas, aucune issue n'était possible par là.";
+Constant CANTGO__TX   = "Je ne pouvais pas aller dans cette direction.";
 Constant FORMER__TX   = "moi - avant";
 Constant YOURSELF__TX = "moi-même";
 Constant YOU__TX        = "Je";
@@ -842,6 +849,35 @@ Constant COMMA__TX      = ", ";
   ! if ((the)obj="l'...") {print "de ", (the) obj; return;} ! ex : de l'avion
   print "du ", (name) obj; return; ! ex : du train, du Nautilus (le Nautilus ne doit donc pas être considéré comme proper !*!)
 ];
+! (Stormi) Cette fonction permet d'afficher correctement "à la" "à l'" "au" ou "aux"
+! selon le contexte.
+[ to_the obj;
+    if (obj has pluralname) {
+        print "aux ", (name) obj;
+    }
+    else if (obj has proper) {
+        print "à ", (name) obj;
+    }
+    else {
+        ! Les lignes qui suivent sont copiées de la fonction PrefaceByArticle de parserm.h
+        ! afin de connaître la valeur de LanguageContraction pour le nom affiché de l'objet
+        ! Je suis le seul à trouver cela atrocement compliqué ?
+#ifdef TARGET_ZCODE;
+        StorageForShortName-->0 = 160;
+        @output_stream 3 StorageForShortName;
+        print (PSN__) noun;
+        @output_stream -3;
+        if (obj has male && LanguageContraction(StorageForShortName + 2)==0) {
+             print "au ", (name) obj;
+        }
+        else {
+            print "à ", (the) obj;
+        }
+#ifnot; ! TARGET_GLULX;
+		print "à quelqu'un : ", (name) obj;
+#endif;
+    }
+];
 [ nt obj; ! ex: semble(nt)
   if (obj has pluralname) print "nt";
   !*! attention :  paraît, paraissent (etc)
@@ -892,6 +928,7 @@ Burn:           "Je n'avais pas d'intérêt à brûler ceci. ";
         #Endif; ! TARGET_
     }
   Consult:        "Je ne trouvai rien qui attirât mon attention dans ", (the) x1, ".";
+  CrierSansPrecision : "Je criai ce qui me passait par la tête.";
   Cut:            "Je ne voyais nul intérêt de couper cela.";
   Dig:            "Creuser... Cette idée ne me séduisait pas.";
   Disrobe: switch (n) {
@@ -922,7 +959,14 @@ Burn:           "Je n'avais pas d'intérêt à brûler ceci. ";
                1: print "Impossible, j'étais déjà ";
                   if (x1 has supporter) print "sur "; else print "dans ";
                   print_ret (the) x1, ".";
-               2: "Impossible."; !*!*!
+        2:  print "Je ne pouvais pas ";
+            switch (verb_word) {
+                'entrer':    "y entrer.";
+                'asseoir':    "m'y asseoir.";
+                'allonger':    "m'y allonger.";
+                'coucher':    "m'y coucher.";
+                default:  "y aller."; ! plutôt que "y entrer." !*!
+            }
                3: "Je ne pouvais pas entrer dans ", (the) x1, " fermé",(es) x1,".";
                4: print "Je ne pouvais pas ";
                   if (x1 has supporter) print "monter sur";
@@ -930,7 +974,7 @@ Burn:           "Je n'avais pas d'intérêt à brûler ceci. ";
                   " ceci.";
                                ! sur pieds, non encastré (freestanding)
                5: print "Je ";
-                  if (x1 has supporter) print "montais sur "; else print "pénétrai dans ";
+                  if (x1 has supporter) print "montai sur "; else print "pénétrai dans ";
                   print_ret (the) x1, ".";
                6: print "(";
                   if (x1 has supporter) print "descendant "; else print "sortant ";
@@ -957,8 +1001,8 @@ Burn:           "Je n'avais pas d'intérêt à brûler ceci. ";
             print_ret (the) x1, ".";
     }
   Fill:           "Aucun liquide ne pouvait répondre à mon idée.";
-  FullScore: switch(n)
-           {   1: if (deadflag) print "Le score était ";
+  FullScore: switch(n) {
+               1: if (deadflag) print "Le score était ";
                   else          print "Le score est ";
                   "composé comme suit :^";
                2: "trouver divers objets";
@@ -1079,7 +1123,7 @@ Burn:           "Je n'avais pas d'intérêt à brûler ceci. ";
                1: "Impossible, le noir absolu empêchant toute tentative en ce sens. ";
                2: "Hélas, mes recherches furent vaines.";
     }
-  Mild:           "Yog Sothoth vous entend, mortel.";
+  Mild:           "Assez.";
   Miscellany: switch (n) {
                1: "(affichage des seize premiers)^";
                2: "";
@@ -1103,7 +1147,7 @@ Burn:           "Je n'avais pas d'intérêt à brûler ceci. ";
                8: "^Faites un choix parmi les propositions ci-dessus.^";
                9: "^A présent, l'obscurité était totale. ";
               10: "Mes pensées étaient confuses. ";
-              11: "[Je ne peux pas annuler alors que rien n'a encore été fait !]";
+              11: "[Impossible d'annuler alors que rien n'a encore été fait !]";
               12: "[Impossible d'annuler deux fois de suite. Désolé !]";
               13: "[Action précédente annulée.]";
               14: "Désolé, impossible de corriger.";
@@ -1111,11 +1155,11 @@ Burn:           "Je n'avais pas d'intérêt à brûler ceci. ";
               16: "~Oops~ ne peut corriger qu'un seul mot.";
               17: "L'obscurité était totale. ";
               18: print "moi-même";
-              19: "Il n'est de mort qui puisse à jamais reposer, et durant d'étranges éternités même la mort peut mourir.";
+              19: "Aussi beau que d'habitude.";
               20: "Pour répéter une commande comme ~grenouille, saute~, dîtes seulement
                    ~encore~, et pas ~grenouille, encore~.";
               21: "Impossible.";
-              22: "Il n'est de mort qui puisse à jamais reposer, et durant d'étranges éternités même la mort peut mourir.";
+              22: "Vous ne pouvez pas commencer par une virgule.";
               23: "Mes pensées étaient confuses. ";
               24: "Je ne pouvais pas discuter avec ", (the) x1, ".";
                   ! "parler à" serait mieux mais délicat (ex: à l'oiseau)
@@ -1124,7 +1168,7 @@ Burn:           "Je n'avais pas d'intérêt à brûler ceci. ";
               27: "Pardon ?";
               28: print "Merci de reformuler. Je n'ai compris que : ";
               29: "Je n'ai pas compris ce nombre.";
-              30: "Nulle chose de ce nom ne se trouvait là."; ! là au lieu de ici parce qu'on est dans le passé, le passé c'est loin, donc plutôt là que ici ?
+              30: "Je ne voyais rien de tel, ou bien c'était sans grande importance.";
               31: "Il semblait en avoir dit trop peu.";
               32: "Je ne l'avais pas en main. ";
               33: "Je ne peux pas employer le mot ~tout~ avec ce verbe.";
@@ -1145,14 +1189,7 @@ Burn:           "Je n'avais pas d'intérêt à brûler ceci. ";
               45: print "Précisez : "; !*!
               46: print "Précisez : "; !*!
               47: "Désolé, vous pouvez seulement utiliser un objet à la fois dans ce contexte. Lequel voulez-vous exactement ?";
-!            48: print "Whom do you want";
-!                if (actor ~= player) print " ", (the) actor;
-!                print " to "; PrintCommand(); print "?^";
-!            49: print "What do you want";
-!                if (actor ~= player) print " ", (the) actor;
-!                print " to "; PrintCommand(); print "?^";
-!              48: print "Pouvez-vous préciser à qui ? (tapez le nom seul, sans la préposition 'à')^";
-!             49: print "Pouvez-vous préciser avec quoi ? (tapez le nom seul, sans la préposition 'avec')^";
+
               
               48: print "Pouvez-vous préciser qui est concerné par cette action ?^"; !*!
               49: print "Pouvez-vous préciser le nom de l'objet à utiliser ?^"; !*!
@@ -1205,16 +1242,19 @@ Burn:           "Je n'avais pas d'intérêt à brûler ceci. ";
   Order:          print (The) x1;
                   if (x1 has pluralname) print " avaient"; else print " a";
                   " mieux à faire.";
+    ParlerIncorrect : "Soyez plus précis dans votre communication, ou reformulez.";
+    ParlerSansPrecision :   if (noun==player) "Je ne savais pas quoi me dire que je ne sache déjà.";
+                            else "Pas de réponse.";
   Places: switch (n) {
         1:  print "J'avais visité : ";
         2:  print ".^";
     }
-  Pray:           "J'étais un homme de science, pas de foi.";
+  Pray:           "Rien de concret ne résulta de ma prière.";
   Prompt:   print "^>";
   Pronouns: switch (n) {
                1: print "En ce moment, ";
-               2: print "signifiait ";
-               3: print "était enlevé";
+               2: print "signifie ";
+               3: print "n'est pas défini";
                4: "aucun pronom n'est connu du jeu.";
         5:  ".";
     }
@@ -1264,7 +1304,7 @@ Burn:           "Je n'avais pas d'intérêt à brûler ceci. ";
                1: "Échec du chargement.";
                2: "^--- La partie a bien été restaurée ---^";
     }
-  Rub:            "Je n'arriverai à rien ainsi.";
+  Rub:            "Je n'arrivai à rien ainsi.";
   Save: switch (n) {
                1: "La sauvegarde a échoué.";
                2: "^--- La partie a bien été sauvegardée ---^";
@@ -1318,9 +1358,9 @@ Burn:           "Je n'avais pas d'intérêt à brûler ceci. ";
                1: "Inutile.";
                2: "Je n'arrivai à rien ainsi.";
     }
-  Strong:         "Azathoth vous maudira pour ceci.";
-  Swim:           "Nulle eau dans laquelle nager ici.";
-  Swing:          "Impossible.";
+  Strong:         "Les vrais aventuriers n'emploient pas un tel langage.";
+    Swim:           "Il n'y avait pas assez d'eau pour nager dedans.";
+    Swing:          "Il n'y avait rien de sensé pour se balancer là.";
   SwitchOff: switch (n) {
                1: "Je ne pouvais ni allumer, ni éteindre cela.";
                2: print_ret (ctheyreorthats) x1,
@@ -1343,7 +1383,7 @@ Burn:           "Je n'avais pas d'intérêt à brûler ceci. ";
                5: "Je l'avais déjà.";
                6: if (noun has pluralname) print "Cela semblait ";
                   else print "Cela semblait ";
-                  "appartenir à ", (the) x1, ".";
+                  "appartenir ", (to_the) x1, ".";
                7: if (noun has pluralname) print "Cela semblait ";
                   else print "Cela semblait ";
                   "faire partie ", (dedudes) x1, ".";
@@ -1356,13 +1396,12 @@ Burn:           "Je n'avais pas d'intérêt à brûler ceci. ";
               13: "(je mis ", (the) x1, " dans ", (the) SACK_OBJECT,
                   " pour faire de la place)";
            }
-  Taste:          "Je n'avais pas l'habitude de mettre n'importe quoi dans ma bouche.";
-  Tell: 
-	switch (n) {
-               1: "Impossible. ";
-               2: "Nulle réaction.";
+    Taste:          "Je ne remarquai rien de particulier.";
+    Tell: switch (n) {
+        1:  "Je discutai avec moi-même pendant un bon moment...";
+        2:  "Pas de réaction.";
     }
-  Think:          "Nous vivons tous sur de placides îlots de connaissance, entourés par l'horreur de ce que notre cerveau, par réflexe de survie, nous presse d'ignorer.";
+    Think:          "Quelle bonne idée.";
   ThrowAt: switch (n) {
                1: "Futile.";
                2: "J'hésitai au moment crucial.";
@@ -1381,19 +1420,22 @@ Burn:           "Je n'avais pas d'intérêt à brûler ceci. ";
                3: "Cela ne rentrait pas dans la serrure.";
                4: "Je déverrouillai ", (the) x1, ".";
     }
+  VagueDo: "Il me fallait être plus précis."; 
   VagueGo:  "Il me fallait peut-être préciser une direction. ";
   Verify: switch (n) {
                1: "Le fichier semble intact.";
                2: "Le fichier est certainement corrompu !";
     }
-  Wait:           "Le temps passait, mais les doutes demeuraient. ";
-  Wake:           "Mais hélas, je ne dormais pas.";
+  Wait:           "Le temps passait...";
+  Wake:           "Il ne s'agissait pas d'un rêve.";
   WakeOther:      "Cela ne semblait pas nécessaire.";
   Wave: switch (n) {
-               1: "Je n'avais pas cela. ";
-               2: "Inutile.";
+        1: "Mais je n'avais pas cela !";
+        2: "J'avais l'air ridicule en agitant ", (the) x1, ".";
     }
-  WaveHands:      "J'agitai les mains, sans résultat. ";
+    WaveHands:
+        if (x1 == 0 || x1 == player) "J'agitai mes mains devant moi.";
+        else "Je saluai ", (the) x1, ".";
   Wear: switch (n) {
                1: "Je ne pouvais pas mettre cela sur moi comme un vêtement !";
                2: "Je n'avais pas cela. ";
