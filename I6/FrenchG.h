@@ -197,7 +197,7 @@ Verb 'asseoir' 'allonger' 'coucher'
 
 Verb 'sortir'
         *                                           -> Exit
-        * 'de' 'la'                                 -> Exit
+        * 'de' 'là'/'la'                            -> Exit
         * 'd^' 'ici'                                -> Exit
         * multiinside 'de'/'du'/'des'/'d^' noun     -> Remove
         * 'de'/'du'/'des'/'d^' noun                 -> Exit;
@@ -205,7 +205,7 @@ Verb 'sortir'
 Verb 'partir'
         *                                           -> VagueGo
         * 'vers'/'à'/'a'/'au' noun=ADirection       -> Go
-        * 'de' 'la'                                 -> Exit
+        * 'de' 'là'/'la'                                 -> Exit
         * 'd^' 'ici'                                -> Exit
         * 'de'/'du'/'des' noun                      -> Exit
         * 'dans'/'par'/'vers' noun                  -> Enter;
@@ -265,10 +265,9 @@ Verb 'nager' 'plonger'
 
 ! ------- Verbes pour ouvrir et fermer
 Verb 'fermer' 'refermer'
-        * noun                              -> Close
-        * noun 'avec' held                  -> Lock
-        * noun 'à'/'a' 'cle' held           -> Lock
-        * noun 'à'/'a' 'cle' 'avec' held    -> Lock;
+        * noun                                         -> Close
+        * noun 'avec' held                             -> Lock
+        * noun 'à'/'a' 'clé'/'clef'/'cle' 'avec' held  -> Lock;
 
 Verb 'ouvrir'
         * noun                              -> Open
