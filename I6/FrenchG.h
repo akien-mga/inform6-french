@@ -353,6 +353,7 @@ Verb 'mettre' 'remettre'
 Verb 'boire' 'avaler' 'siroter'
         * noun                           -> Drink
         * 'de'/'du' noun                 -> Drink
+	* 'de'/'du' 'l^' noun                   -> Drink  ! ex : boire de l'eau
         * 'à'/'a' noun                   -> Drink;
 
 Verb 'manger' 'devorer'
