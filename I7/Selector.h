@@ -15,7 +15,7 @@
  #ifdef ForeignLanguage;
         #ifdef French;
 		Message "Inclus le français, seconde personne du pluriel au présent.";
-                Include "FrenchN11";
+                Include "French";
         #endif;
         #ifdef FrenchN11_3PSP;
 		Message "Inclus le français, troisième personne du singulier au passé.";

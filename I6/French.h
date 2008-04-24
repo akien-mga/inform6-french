@@ -2,7 +2,7 @@
 !   FRENCH:  Language Definition File
 !
 !   Supplied for use with Inform 6 -- Release 6/11 -- Serial number 040227
-!
+!   Version adaptée pour Inform 7
 !   Copyright Graham Nelson 1993-2004 but freely usable (see manuals)
 !
 !   Traduit en français par Jean-Luc Pontico 2001-2004. Version 2.2 du 17/02/2008
@@ -153,7 +153,7 @@ Constant YES3__WD     = 'oui';
 Constant AMUSING__WD  = 'amusing';
 Constant FULLSCORE1__WD = 'fullscore';
 Constant FULLSCORE2__WD = 'full';
-Constant QUIT1__WD    = 'q//';
+Constant QUIT1__WD    = 'quit'; !*! "q//" ?
 Constant QUIT2__WD    = 'quitter';
 Constant RESTART__WD  = 'recommencer';
 Constant RESTORE__WD  = 'charger';
@@ -746,6 +746,9 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
     if (w == 'purloin' or 'tree' or 'abstract'
                        or 'gonear' or 'scope' or 'showobj')
         rtrue;
+            #ifdef NI_BUILD_COUNT;
+    if (w == 'showme') rtrue;
+    #endif;
     rfalse;
 ];
 #Endif;
@@ -796,9 +799,17 @@ Constant QKEY2__KY    = 'q';
 Constant SCORE__TX    = "Score : ";
 Constant MOVES__TX    = "Tours : ";
 Constant TIME__TX     = "Heure : ";
+
+#Ifndef NI_BUILD_COUNT;
 Constant CANTGO__TX   = "Vous ne pouvez pas aller dans cette direction.";
 Constant FORMER__TX   = "votre ancien vous";
 Constant YOURSELF__TX = "vous-même";
+#Ifnot;
+Global CANTGO__TX   = "Vous ne pouvez pas aller dans cette direction.";
+Global FORMER__TX   = "votre ancien vous";
+Global YOURSELF__TX = "vous-même";
+#endif; ! NI_BUILD_COUNT
+
 Constant YOU__TX        = "Vous";
 Constant DARKNESS__TX = "L'obscurité";
 
@@ -806,11 +817,30 @@ Constant THOSET__TX   = "ces choses-là";
 Constant THAT__TX     = "cela";
 Constant OR__TX       = " ou ";
 Constant NOTHING__TX  = "rien";
+#Ifndef NI_BUILD_COUNT;
 Constant IS__TX       = "est ";   ! utilisés par WriteListFrom
 Constant ARE__TX      = "sont ";  ! 
 Constant IS2__TX      = "";  ! dans/sur lequel " est"  => contenant/supportant
 Constant ARE2__TX     = "";  ! dans/sur lequel " sont" => contenant/supportant
+
+#Ifnot;
+Global IS__TX       = "est ";   ! utilisés par WriteListFrom
+Global ARE__TX      = "sont ";  ! 
+Global IS2__TX      = "";  ! dans/sur lequel " est"  => contenant/supportant
+Global ARE2__TX     = "";  ! dans/sur lequel " sont" => contenant/supportant
+
+#endif; ! NI_BUILD_COUNT
 Constant AND__TX      = " et ";
+#ifdef NI_BUILD_COUNT;
+#ifdef I7_SERIAL_COMMA;
+Constant LISTAND__TX   = ", et ";
+Constant LISTAND2__TX  = " et ";
+#ifnot;
+Constant LISTAND__TX   = " et ";
+Constant LISTAND2__TX  = " et ";
+#endif; ! I7_SERIAL_COMMA
+#endif; ! NI_BUILD_COUNT
+
 Constant WHOM__TX     = "";  ! dans/sur "lequel " est  => contenant/supportant
 Constant WHICH__TX    = "";  ! dans/sur "lequel " est  => contenant/supportant
 Constant COMMA__TX      = ", ";
@@ -903,6 +933,7 @@ Constant COMMA__TX      = ", ";
 ];
 
 [ LanguageLM n x1;
+#ifdef NI_BUILD_COUNT; say__p = 1; #endif;
     Answer, Ask:    "Pas de réponse.";
 !    Ask:      see Answer
     Attack:         "La violence n'est pas une solution ici.";
@@ -954,7 +985,11 @@ Constant COMMA__TX      = ", ";
             else print (The) x1, " est ";
             "déjà ici.";
         2:  "Vous n'avez pas ça.";
-        3:  "(vous prenez d'abord ", (the) x1, ")";
+        #ifdef NI_BUILD_COUNT;
+        3:  print "(vous prenez d'abord ", (the) x1, "^"; say__p = 0; return;
+        #ifnot;
+        3: "(vous prenez d'abord ", (the) x1, ")";
+        #endif;
         4:  "D'accord."; ! ok
     }
     Eat: switch (n) {
@@ -989,12 +1024,21 @@ Constant COMMA__TX      = ", ";
         5:  print "Vous ";
             if (x1 has supporter) print "montez sur "; else print "entrez dans ";
             print_ret (the) x1, ".";
+ #ifdef NI_BUILD_COUNT;
+        6:  print "(";
+            if (x1 has supporter) print "descendant "; else print "sortant ";
+            print (the) x1; print ")^"; say__p = 0; return;
+        7:  say__p = 0;
+            if (x1 has supporter) "(montant sur ", (the) x1, ")^";
+            if (x1 has container) "(entrant dans ", (the) x1, ")^";
+            "(entrant dans ", (the) x1, ")^";
+        #ifnot; ! NI_BUILD_COUNT
         6:  print "(";
             if (x1 has supporter) print "descendant "; else print "sortant ";
             print (the) x1; ")";
         7:  if (x1 has supporter) "(montant sur ", (the) x1, ")^";
             if (x1 has container) "(entrant dans ", (the) x1, ")^";
-            "(entrant dans ", (the) x1, ")^";
+            "(entrant dans ", (the) x1, ")^";   #endif; ! NI_BUILD_COUNT
     }
     Examine: switch (n) {
         1:  "Vous ne pouvez rien voir.";
@@ -1074,12 +1118,18 @@ Constant COMMA__TX      = ", ";
     Listen:         "Vous n'entendez rien de particulier.";
     ListMiscellany: switch (n) {
          1: print " (allumé",(es) x1,")";
-         2: print " (qui ", (isorare) x1, " fermé",(es) x1,")";
-         3: print " (fermé",(es) x1," et allumé",(es) x1,")";
-         4: print " (qui ", (isorare) x1, " vide",(s) x1,")";
-         5: print " (vide",(s) x1," et allumé",(es) x1,")";
-         6: print " (qui ", (isorare) x1, " fermé",(es) x1," et vide",(s) x1,")";
-         7: print " (fermé",(es) x1,", vide",(s) x1," et allumé",(es) x1,")";
+		#ifdef NI_BUILD_COUNT;
+		2: print " (fermé",(es) x1,")";
+		4: print " (vide",(s) x1,")";
+		6: print " (fermé",(es) x1," et vide",(s) x1,")";
+		#ifnot; ! NI_BUILD_COUNT
+		2: print " (qui ", (isorare) x1, " fermé",(es) x1,")";
+		4: print " (qui ", (isorare) x1, " vide",(s) x1,")";
+		6: print " (qui ", (isorare) x1, " fermé",(es) x1," et vide",(s) x1,")";
+		#endif; ! NI_BUILD_COUNT
+		3: print " (fermé",(es) x1," et allumé",(es) x1,")";
+		5: print " (vide",(s) x1," et allumé",(es) x1,")";
+		7: print " (fermé",(es) x1,", vide",(s) x1," et allumé",(es) x1,")";
          8: print " (allumé",(es) x1," et porté",(es) x1;
          9: print " (allumé",(es) x1;
         10: print " (porté",(es) x1;
@@ -1369,7 +1419,9 @@ Constant COMMA__TX      = ", ";
         2:  "Vous n'arrivez à rien ainsi.";
     }
     Strong:         "Les vrais aventuriers n'emploient pas un tel langage.";
-    Swim:           "Il n'y a pas assez d'eau pour nager dedans.";
+#Ifndef NI_BUILD_COUNT;
+  Swim:           "Il n'y a pas assez d'eau pour nager dedans.";  ! swim desactive par defaut dans I7
+#endif; ! NI_BUILD_COUNT
     Swing:          "Il n'y a rien de sensé pour se balancer ici.";
     SwitchOff: switch (n) {
         1:  "Vous ne pouvez pas allumer ou éteindre cela.";

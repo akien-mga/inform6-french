@@ -45,7 +45,8 @@ read Option   # read from keyboard
 if [ -e /usr/local/share/inform7/ ]; then
 cp -fr $I7EXTENSIONSPATH/Main.i6 $I7EXTENSIONSPATH/Main.i6.bak 
 cp -fr I7/MainFR$I7VERSION.i6 	$I7EXTENSIONSPATH/Main.i6
-cp -fr I7/FrenchN11.h			$I7LIBRARYPATH/
+cp -fr I6/French.h			$I7LIBRARYPATH/
+cp -fr I7/FrenchN11_3PSP.h			$I7LIBRARYPATH/
 cp -fr I6/FrenchG.h                      $I7LIBRARYPATH/
 cp -fr I7/Selector.h			$I7LIBRARYPATH/
 fi
@@ -53,13 +54,14 @@ fi
 cp -fr $I7EXTENSIONSPATH2/Main.i6 $I7EXTENSIONSPATH2/Main.i6.bak 
 cp -fr I7/MainFR$I7VERSION.i6 	$I7EXTENSIONSPATH2/Main.i6
 
-cp -fr I7/FrenchN11.h			$I7LIBRARYPATH2/
+cp -fr I6/French.h			$I7LIBRARYPATH2/
+cp -fr I7/FrenchN11_3PSP.h			$I7LIBRARYPATH2/
 cp -fr I6/FrenchG.h                      $I7LIBRARYPATH2/
 cp -fr I7/Selector.h			$I7LIBRARYPATH2/
 
 if [ $(uname)=Linux ]; then 
 	mkdir -p ~/Inform/Extensions/Eric\ Forgeot
-	cp -fr French		~/Inform/Extensions/Eric\ Forgeot
+	cp -fr I7/French		~/Inform/Extensions/Eric\ Forgeot
 	cp -fr Locksmith-fr		~/Inform/Extensions/Eric\ Forgeot
 	cp -fr Simple\ Chat\ fr		~/Inform/Extensions/Eric\ Forgeot
 	ln -sf ~/Inform/Extensions/Eric\ Forgeot	~/Inform/Extensions/eric\ forgeot

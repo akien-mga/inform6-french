@@ -15,6 +15,9 @@
 !   default of "english").
 !
 ! ==============================================================================
+!
+! EST REMPLACÉ PAR FRENCH.H dans le dossier I6 !
+!
 
 System_file;
 
