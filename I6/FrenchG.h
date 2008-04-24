@@ -592,6 +592,8 @@ Verb 'nouer' 'attacher' 'fixer' 'connecter' 'brancher'
         * noun 'à'/'a'/'au'/'aux'/'avec'/'sur' noun   -> Tie;
 
 ! ------- Verbes de communication avec des personnages
+
+
 [ParlerIncorrectSub;
     L__M(##ParlerIncorrect, 1, 0);
 ];
@@ -606,7 +608,7 @@ Verb 'nouer' 'attacher' 'fixer' 'connecter' 'brancher'
     L__M(##ParlerSansPrecision, 1, noun);
 ];
 
-
+#ifndef NI_BUILD_COUNT;
 Verb 'repondre' 'dire' 'crier' 'hurler'
         *                                               -> ParlerIncorrect ! dire (d'accord mais quoi...)
         * creature                                      -> ParlerIncorrect ! dis-lui (d'accord mais quoi...)
@@ -666,6 +668,32 @@ Verb 'questionner' 'interroger' '?//'
         * 'au' 'sujet' 'de'/'du'/'des'/'d^' topic '->' creature       -> Ask reverse
         * 'sur' topic '->' creature                                   -> Ask reverse
         * topic '->' creature                                         -> Ask reverse;
+#endif; ! NI_BUILD_COUNT
+
+#ifdef NI_BUILD_COUNT;
+! à l'origine : 
+Verb 'repondre' 'dire' ! 'crier'
+                * creature   		              -> Answer ! "dis-lui"
+                * creature topic	              -> Answer
+                * 'à'/'a'/'au'/'aux' creature             -> Answer
+                * topic 'à'/'a'/'au'/'aux' creature       -> Answer;
+!Verb 'parler'
+!                * creature			     		    -> Tell ! "parle-lui"
+!                * 'avec'/'à'/'a'/'au'/'aux' creature		     	    -> Tell
+!                * creature 'de'/'du'/'des' topic     		    -> Tell ! "parle-lui"
+!                * 'à'/'a'/'au'/'aux' creature 'de'/'du'/'des' topic     -> Tell;
+Verb 'questionner' ! 'interroger'
+                * creature 'à'/'a' 'propos' 'de'/'du'/'des' topic   -> Ask
+                * creature 'au' 'sujet' 'de'/'du'/'des' topic   -> Ask
+                * creature 'sur' topic               -> Ask;
+Verb 'demander' 'exiger' !*! reclamer
+                * noun 'à'/'a'/'au'/'aux' creature   -> AskFor reverse             
+                * creature noun   		 -> AskFor ! "demande-lui"
+                * 'à'/'a'/'au'/'aux' creature noun   -> AskFor
+		* creature 'de' topic			-> AskTo
+		* 'à'/'a'/'au'/'aux' creature 'de' topic	-> AskTo;
+
+#endif; ! NI_BUILD_COUNT
 
 Verb 'ordonner' 
         * creature 'de'/'d^' topic                          -> AskTo ! "ordonne-lui"
