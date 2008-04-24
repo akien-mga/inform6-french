@@ -267,6 +267,7 @@ Verb 'entrer' 'rentrer'
 Verb 'asseoir' 'allonger' 'coucher'
 !       * 'vous'                                           -> GoIn  ! s'asseoir (ligne commentee car plus problématique qu'utile)
         * 'vous' 'sur'/'dans' noun                        -> Enter
+	* 'sur'/'dans' noun				-> Enter
         * 'vous' 'en' 'haut' 'de'/'du'/'des'/'d^' noun    -> Enter;
 
 Verb 'sortir'
@@ -530,7 +531,7 @@ Verb 'fouiller'
 
 Verb 'chercher'
 		* 'dans' noun			-> Search;
-#endif; ! NI_BUILD_COUNT
+
 Verb 'sentir' 'renifler'
         *                                -> Smell
         * noun                           -> Smell;
@@ -544,12 +545,12 @@ Verb 'gouter'
 
 Verb 'toucher' 'caresser' 'tater'
         * noun                           -> Touch;
-#ifndef NI_BUILD_COUNT;
+
 Verb 'lire'
         * noun                           -> Examine
         * 'sur' topic 'dans' noun        -> Consult
         * topic 'dans' noun              -> Consult;
-#endif; ! NI_BUILD_COUNT
+
 Verb 'consulter'
         * noun 'sur' topic               -> Consult
         * noun 'à'/'a' topic             -> Consult
@@ -567,7 +568,7 @@ Verb 'pousser' 'deplacer' 'bouger'
 Verb 'appuyer'
         * noun                           -> Push
         * 'sur' noun                     -> Push;
-
+#endif; ! NI_BUILD_COUNT
 Verb 'regler' 'ajuster'
         * noun                           -> Set
         * noun 'à'/'a'/'sur' special     -> SetTo;

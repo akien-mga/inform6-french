@@ -337,6 +337,20 @@ Understand "examiner [something]" or "decrire [something]" or "observer [somethi
 Understand "fouiller [something]" as searching.
 Understand "chercher dans [something]" as searching.
 
+Understand "sentir" as smelling. 
+Understand "sentir [something]" as smelling.
+
+Understand the command "renifler" as "sentir".
+
+Understand "ecouter" as listening.
+Understand "ecouter [something]" as listening.
+Understand the command "entendre" as "ecouter".
+
+Understand "gouter [something]" as tasting.
+
+Understand "toucher [something]" as touching.
+Understand the command "caresser" as "toucher".
+Understand the command "tater" as "toucher".
 
 Understand the command "read" as something new.
 Understand the command "lire" as something new.
@@ -350,6 +364,17 @@ Carry out reading:
 	if using the French Language option, say "ll n[']a rien de spécial à lire ici.";
 	if using the French 3PSP Language option, say "ll n[']avait rien de spécial à lire ici.".
 
+Understand "consulter [something] sur [text]" or "consulter [something] a [text]" or "consulter [something] a propos de [text]" as consulting it about.
+
+Understand "tirer [something]" as pulling.
+
+Understand "pousser [something]" as pushing.
+Understand "pousser [something] vers [direction]" or "pousser [something] a [direction]" or "pousser [something] au [direction]" as pushing it to.
+
+Understand the command "deplacer" as "pousser".
+Understand the command "bouger" as "pousser".
+
+Understand "appuyer [something]" or "appuyer sur [something]" as pushing.
 
 Understand the command "swim" as something new.
 Swimming is an action applying to nothing. Understand "swim" or "dive" or "nager" or "plonger" as swimming. 
