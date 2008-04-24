@@ -81,12 +81,28 @@ CompassDirection -> d_obj "bas"
                     with door_dir d_to, name 'b//' 'd//' 'bas' 'sol';
 #endif; ! WITHOUT_DIRECTIONS
 
+! Inform 6 games get in_obj and out_obj even when WITHOUT_DIRECTIONS is
+! defined. Inform 7 games do not.
+
+#Ifndef WITHOUT_DIRECTIONS;
 CompassDirection -> in_obj "intérieur"
                     with door_dir in_to, name 'dedans' 'interieur',
                     article "l'";
 CompassDirection -> out_obj "extérieur"
                     with door_dir out_to, name 'dehors' 'exterieur',
                     article "l'";
+
+#Ifnot;
+#Ifndef NI_BUILD_COUNT;
+CompassDirection -> in_obj "intérieur"
+                    with door_dir in_to, name 'dedans' 'interieur',
+		    article "l'";
+CompassDirection -> out_obj "extérieur"
+                    with door_dir out_to, name 'dehors' 'exterieur',
+		    article "l'";
+
+#endif; ! NI_BUILD_COUNT
+#endif; ! WITHOUT_DIRECTIONS
 
 ! ------------------------------------------------------------------------------
 !   Part II.   Vocabulary

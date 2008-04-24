@@ -44,18 +44,18 @@ read Option   # read from keyboard
 
 if [ -e /usr/local/share/inform7/ ]; then
 cp -fr $I7EXTENSIONSPATH/Main.i6 $I7EXTENSIONSPATH/Main.i6.bak 
-cp -fr ./MainFR$I7VERSION.i6 	$I7EXTENSIONSPATH/Main.i6
-cp -fr FrenchN11.h			$I7LIBRARYPATH/
-cp -fr ../I6/FrenchG.h                      $I7LIBRARYPATH/
-cp -fr Selector.h			$I7LIBRARYPATH/
+cp -fr I7/MainFR$I7VERSION.i6 	$I7EXTENSIONSPATH/Main.i6
+cp -fr I7/FrenchN11.h			$I7LIBRARYPATH/
+cp -fr I6/FrenchG.h                      $I7LIBRARYPATH/
+cp -fr I7/Selector.h			$I7LIBRARYPATH/
 fi
 
 cp -fr $I7EXTENSIONSPATH2/Main.i6 $I7EXTENSIONSPATH2/Main.i6.bak 
-cp -fr ./MainFR$I7VERSION.i6 	$I7EXTENSIONSPATH2/Main.i6
+cp -fr I7/MainFR$I7VERSION.i6 	$I7EXTENSIONSPATH2/Main.i6
 
-cp -fr FrenchN11.h			$I7LIBRARYPATH2/
-cp -fr ../I6/FrenchG.h                      $I7LIBRARYPATH2/
-cp -fr Selector.h			$I7LIBRARYPATH2/
+cp -fr I7/FrenchN11.h			$I7LIBRARYPATH2/
+cp -fr I6/FrenchG.h                      $I7LIBRARYPATH2/
+cp -fr I7/Selector.h			$I7LIBRARYPATH2/
 
 if [ $(uname)=Linux ]; then 
 	mkdir -p ~/Inform/Extensions/Eric\ Forgeot
