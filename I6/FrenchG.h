@@ -24,6 +24,30 @@ System_file;
 
 
 #ifndef NI_BUILD_COUNT;
+
+Verb meta 'brief' 'normal'
+    *                                           -> LMode1;
+Verb meta 'verbose' 'long'
+    *                                           -> LMode2;
+Verb meta 'superbrief' 'short'
+    *                                           -> LMode3;
+
+Verb meta 'mode'
+        * 'normal'                          -> LMode1
+        * 'long'/'bavard'/'verbeux'         -> LMode2
+        * 'court'                           -> LMode3;
+
+Verb meta 'notify' 'notification'
+	*                                   -> NotifyOn
+        * 'on'                              -> NotifyOn
+        * 'off'                             -> NotifyOff;
+
+Verb meta 'pronouns' 'nouns'
+        *                                   -> Pronouns;
+
+Verb meta  'quitter' 'quit'  'q//'
+        *                                   -> Quit;
+
 Verb meta 'recording'
         *                                   -> CommandsOn
         * 'on'                              -> CommandsOn
@@ -31,6 +55,15 @@ Verb meta 'recording'
 
 Verb meta 'replay'
         *                                   -> CommandsRead;
+
+Verb meta 'recommencer' 'restart'
+        *                                   -> Restart;
+
+Verb meta 'charger' 'restore'
+        *                                   -> Restore;
+
+Verb meta 'sauver' 'save' ' sauvegarder'
+        *                                   -> Save;
 
 Verb meta 'score'
         *                                   -> Score
@@ -40,89 +73,19 @@ Verb meta 'fullscore' 'full' 'detaille' 'complet'
         *                                   -> FullScore
         * 'score'                           -> FullScore;
 
-Verb meta  'quitter' 'quit' ! 'q//'
-        *                                   -> Quit;
-
-Verb meta 'charger' 'restore'
-        *                                   -> Restore;
-
-Verb meta 'recommencer' 'restart'
-        *                                   -> Restart;
-
-Verb meta 'verifier' 'verify'
-        *                                   -> Verify;
-
-Verb meta 'sauver' 'save' ' sauvegarder'
-        *                                   -> Save;
-
 Verb meta 'log' 'script' ! 'transcription' 'transcript' 'transcrire'
         *                                   -> ScriptOn
         * 'off'                             -> ScriptOff
         * 'on'                              -> ScriptOn;
 
+
 Verb meta 'noscript' 'unscript' 'nolog'
         *                                   -> ScriptOff;
 
-Verb meta 'mode'
-        * 'normal'                          -> LMode1
-        * 'long'/'bavard'/'verbeux'         -> LMode2
-        * 'court'                           -> LMode3;
 
-Verb meta 'pronouns' 'nouns'
-        *                                   -> Pronouns;
+Verb meta 'verifier' 'verify'
+        *                                   -> Verify;
 
-Verb meta 'notify' 'notification'
-        * 'on'                              -> NotifyOn
-        * 'off'                             -> NotifyOff;
-
-#endif;  ! NI_BUILD_COUNT
-! NE PAS UTILISER DE VERBES META ANGLAIS ICI, SEULEMENT LES MOTS FRANÇAIS SINON CELA BUGGE LES COMMANDES ANGLAISES SI ON LES TAPE
-
-! decommenter par la suite
-!      Verb meta 'recording' 'enregistrer'
-!           *                                                         -> CommandsOn
-!           * 'on'                                                  -> CommandsOn
-!           * 'off'                                                 -> CommandsOff;
-!      Verb meta 'replay' 'rejouer'
-!           *                                                         -> CommandsRead;
-!      
-!   !   Verb meta 'score'
-!    !                       *                                          -> Score
-!    !             * 'detaille'/'complet'              -> Fullscore;
-!      Verb meta 'fullscore' 'full' 'detaille' 'complet'
-!                           *                                          -> FullScore
-!                           * 'score'                                -> FullScore;
-!      Verb meta  'quitter' !'quit' ! 'q//'
-!                           *                                          -> Quit;
-!      Verb meta 'charger' ! 'restore'
-!                           *                                          -> Restore;
-!      Verb meta 'recommencer' ! 'restart'
-!                           *                                          -> Restart;
-!      Verb meta 'verifier' ! 'verify'
-!                           *                                          -> Verify;
-!      Verb meta 'sauver' ! 'save'
-!                           *                                          -> Save;
-!      Verb meta 'log' 'transcrire' ! 'script' 'transcript' 'transcription'
-!                           *                                          -> ScriptOn
-!                           * 'off'                                  -> ScriptOff
-!                           * 'on'                                    -> ScriptOn;
-!      Verb meta 'nolog' 'noscript' 'unscript'
-!                           *                                          -> ScriptOff;
-!      
-!      Verb meta 'mode'
-!                 * 'normal'			-> LMode1
-!                 * 'long'/'bavard'/'verbeux'	-> LMode2
-!                 * 'court'			-> LMode3;
-!                 
-!      Verb meta 'pronouns' 'nouns'
-!                           *                                          -> Pronouns;
-!      Verb meta 'notify' 'notification'
-!                           * 'on'                                    -> NotifyOn
-!                           * 'off'                                  -> NotifyOff;
-!      Verb meta 'version'
-!                           *                                          -> Version;
-!   
-  
 
 [VersionFRSub;
     <version>;
@@ -135,13 +98,72 @@ Verb meta 'version'
 Verb 'vf'
         *                                   -> VersionFR;
 
-#IFNDEF NO_PLACES;
-Verb meta 'places' 'endroits'
-        *                                   -> Places;
 
+
+
+#endif;  ! NI_BUILD_COUNT
+
+#IFNDEF NO_PLACES;
 Verb meta 'objects' 'objets'
         *                                   -> Objects;
+
+Verb meta 'places' 'endroits'
+        *                                   -> Places;
 #ENDIF; ! NO_PLACES
+
+
+! NE PAS UTILISER DE VERBES META ANGLAIS ICI, SEULEMENT LES MOTS FRANÇAIS SINON CELA BUGGE LES COMMANDES ANGLAISES SI ON LES TAPE
+
+#ifdef NI_BUILD_COUNT; ! pour inform 7 seulement
+
+
+     Verb meta 'recording' 'enregistrer'
+          *                                                         -> CommandsOn
+          * 'on'                                                  -> CommandsOn
+          * 'off'                                                 -> CommandsOff;
+     Verb meta 'replay' 'rejouer'
+          *                                                         -> CommandsRead;
+     
+  !   Verb meta 'score'
+   !                       *                                          -> Score
+   !             * 'detaille'/'complet'              -> Fullscore;
+     Verb meta 'fullscore' 'full' 'detaille' 'complet'
+                          *                                          -> FullScore
+                          * 'score'                                -> FullScore;
+     Verb meta  'quitter' !'quit' ! 'q//'
+                          *                                          -> Quit;
+     Verb meta 'charger' ! 'restore'
+                          *                                          -> Restore;
+     Verb meta 'recommencer' ! 'restart'
+                          *                                          -> Restart;
+     Verb meta 'verifier' ! 'verify'
+                          *                                          -> Verify;
+     Verb meta 'sauver' ! 'save'
+                          *                                          -> Save;
+     Verb meta 'log' 'transcrire' ! 'script' 'transcript' 'transcription'
+                          *                                          -> ScriptOn
+                          * 'off'                                  -> ScriptOff
+                          * 'on'                                    -> ScriptOn;
+     Verb meta 'nolog' 'noscript' 'unscript'
+                          *                                          -> ScriptOff;
+     
+     Verb meta 'mode'
+                * 'normal'			-> LMode1
+                * 'long'/'bavard'/'verbeux'	-> LMode2
+                * 'court'			-> LMode3;
+                
+     Verb meta 'pronouns' 'nouns'
+                          *                                          -> Pronouns;
+     Verb meta 'notify' 'notification'
+                          * 'on'                                    -> NotifyOn
+                          * 'off'                                  -> NotifyOff;
+     Verb meta 'version'
+                          *                                          -> Version;
+  
+  
+
+#endif;  ! NI_BUILD_COUNT
+
 
 
 ! ------------------------------------------------------------------------------
@@ -231,7 +253,7 @@ Verb meta 'glklist'
 ! ------------------------------------------------------------------------------
 !  And now the game verbs.
 ! ------------------------------------------------------------------------------
-! A terme, tout le bloc sera compris dans un gros ifnd*f NI_BUILD_COUNT
+! A terme, tout le bloc sera compris dans un gros ifndef NI_BUILD_COUNT mais il faut redéfinir chaque verbe individuellement dans French
 
 [ ADirection; if (noun in compass) rtrue; rfalse; ];
 
@@ -334,10 +356,19 @@ Verb 'deverrouiller' 'forcer'
         * noun 'avec' held                  -> Unlock;
 
 ! ------- Verbes concernant ce que le joueur possède
-Verb 'inventaire' ! 'inv' 'i//' (inv retiré car cause pb, on corrigera cela plus tard)
+#ifndef NI_BUILD_COUNT;
+Verb 'inventaire'  'inv' 'i//' 'inventoire' 
         *                                   -> Inv
         * 'haut'/'tall'                     -> InvTall
         * 'large'/'wide'                    -> InvWide;
+#endif; ! NI_BUILD_COUNT
+
+#ifdef NI_BUILD_COUNT;
+Verb 'inventaire'  'inventoire' ! (inv et i a retirer de I7 car existe en anglais)
+        *                                   -> Inv
+        * 'haut'/'tall'                     -> InvTall
+        * 'large'/'wide'                    -> InvWide;
+#endif; ! NI_BUILD_COUNT
 
 Verb 'acheter'
         * noun                              -> Buy;
@@ -460,7 +491,8 @@ Verb 'creuser'
 
 ! ------- Verbes d'observation
 
-Verb 'regarder' 'voir' 'r//' 'l//' 'v//'
+#ifndef NI_BUILD_COUNT;
+Verb 'regarder' 'voir' 'r//' 'v//' 'l//'  ! l// a désactiver de I7 lorsqu'il sera integre avec NI_BUILD_COUNT au reste des verbes dans French
         *                                       -> Look
         * 'autour'                              -> Look
         * 'autour' topic                        -> Look
@@ -471,6 +503,24 @@ Verb 'regarder' 'voir' 'r//' 'l//' 'v//'
         * 'derriere' noun                       -> Search ! à la place de Turn
         * topic 'dans' noun                     -> Consult
         * 'vers'/'à'/'a'/'au' noun=ADirection   -> Examine;
+#endif; ! NI_BUILD_COUNT
+
+#ifdef NI_BUILD_COUNT;
+Verb 'regarder' 'voir' 'r//' 'v//' ! 'l//'  ! l// a désactiver de I7 lorsqu'il sera integre avec NI_BUILD_COUNT au reste des verbes dans French
+        *                                       -> Look
+        * 'autour'                              -> Look
+        * 'autour' topic                        -> Look
+        * noun                                  -> Examine
+        * 'sur' noun                            -> Examine
+        * 'dans'/'atravers' noun                -> Search
+        * 'sous' noun                           -> LookUnder
+        * 'derriere' noun                       -> Search ! à la place de Turn
+        * topic 'dans' noun                     -> Consult
+        * 'vers'/'à'/'a'/'au' noun=ADirection   -> Examine;
+#endif; ! NI_BUILD_COUNT
+
+
+
 #ifndef NI_BUILD_COUNT;
 Verb 'examiner' 'x//' 'decrire' 'observer'
         * noun                           -> Examine;
@@ -659,8 +709,16 @@ Verb 'souffler' !*! jouer d'un instrument ?
         * held                          -> Blow;
 
 ! ------- Verbes "immobiles"
-Verb 'attendre' 'a//' 'z//' !*! patienter
+
+#ifndef NI_BUILD_COUNT;
+Verb 'attendre' 'a//' 'z//' !*! patienter  
         *                               -> Wait;
+#endif; ! NI_BUILD_COUNT
+
+#ifdef NI_BUILD_COUNT;
+Verb 'attendre' 'a//'  'patienter'   ! 'z//' a desactiver de I7
+        *                               -> Wait;
+#endif; ! NI_BUILD_COUNT
 
 Verb 'prier'
         *                               -> Pray;
@@ -745,7 +803,7 @@ Verb 'zut' 'maudit'
     if (word=='couvre') return 'couvrir';
     if (word=='crame') return 'cramer';
     if (word=='creuse') return 'creuser';
-    if (word=='crie') return 'crier';
+!    if (word=='crie') return 'crier'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
     if (word=='cueille') return 'cueillir';
     if (word=='decortique') return 'decortiquer';
     if (word=='decolle') return 'decoller';
@@ -817,7 +875,7 @@ Verb 'zut' 'maudit'
     if (word=='ordonne') return 'ordonner';
     if (word=='ote') return 'oter';
     if (word=='ouvre') return 'ouvrir';
-    if (word=='parle') return 'parler';
+!    if (word=='parle') return 'parler'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
     if (word=='pars') return 'partir';
     if (word=='passe') return 'passer';
     if (word=='paye'or'paie') return 'payer'; !*! aussi un nom
@@ -916,7 +974,7 @@ Verb 'zut' 'maudit'
     if (word=='couvrez') return 'couvrir';
     if (word=='cramez') return 'cramer';
     if (word=='creusez') return 'creuser';
-    if (word=='criez') return 'crier';
+    if (word=='criez') return 'crier'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
     if (word=='cueillez') return 'cueillir';
     if (word=='decollez') return 'decoller';
     if (word=='decortiquez') return 'decortiquer';
@@ -988,7 +1046,7 @@ Verb 'zut' 'maudit'
     if (word=='ordonnez') return 'ordonner';
     if (word=='otez') return 'oter';
     if (word=='ouvrez') return 'ouvrir';
-    if (word=='parlez') return 'parler';
+!    if (word=='parlez') return 'parler'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
     if (word=='partez') return 'partir';
     if (word=='passez') return 'passer';
     if (word=='payez') return 'payer';
@@ -1093,7 +1151,7 @@ Verb 'zut' 'maudit'
     if (word=='couvrons') return 'couvrir';
     if (word=='cramons') return 'cramer';
     if (word=='creusons') return 'creuser';
-    if (word=='crions') return 'crier';
+!    if (word=='crions') return 'crier'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
     if (word=='cueillons') return 'cueillir';
     if (word=='decollons') return 'decoller';
     if (word=='decortiquons') return 'decortiquer';
@@ -1165,7 +1223,7 @@ Verb 'zut' 'maudit'
     if (word=='ordonnons') return 'ordonner';
     if (word=='otons') return 'oter';
     if (word=='ouvrons') return 'ouvrir';
-    if (word=='parlons') return 'parler';
+!    if (word=='parlons') return 'parler'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
     if (word=='partons') return 'partir';
     if (word=='passons') return 'passer';
     if (word=='payons') return 'payer';

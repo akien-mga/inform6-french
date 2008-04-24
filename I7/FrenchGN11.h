@@ -14,6 +14,9 @@
 !       Include "VerbLib";
 !       Include "FrenchG";
 ! ==============================================================================
+!
+! EST REMPLACÉ PAR FRENCHG.H !
+!
 
 System_file;
 
@@ -615,6 +618,7 @@ Verb 'desole'
 Verb 'merde' 
                 *                                -> Strong
                 * topic                          -> Strong;
+
 Verb 'zut' 'maudit'
                 *                                -> Mild
                 * topic                          -> Mild;
