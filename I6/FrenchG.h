@@ -2,7 +2,7 @@
 !   GRAMMAR:  Grammar table entries for the standard verbs library.
 !
 !   Supplied for use with Inform 6 -- Release 6/11 -- Serial number 040227
-!
+!   Version adaptée pour Inform 7
 !   Copyright Graham Nelson 1993-2004 but freely usable (see manuals)
 !
 !   Traduit en français par Jean-Luc Pontico 2001-2004. Version 2.2 du 20/02/2008
@@ -22,6 +22,8 @@ System_file;
 !  The "meta-verbs", commands to the game rather than in the game, come first:
 ! ------------------------------------------------------------------------------
 
+
+#ifndef NI_BUILD_COUNT;
 Verb meta 'recording'
         *                                   -> CommandsOn
         * 'on'                              -> CommandsOn
@@ -38,7 +40,7 @@ Verb meta 'fullscore' 'full' 'detaille' 'complet'
         *                                   -> FullScore
         * 'score'                           -> FullScore;
 
-Verb meta 'q//' 'quitter' 'quit'
+Verb meta  'quitter' 'quit' ! 'q//'
         *                                   -> Quit;
 
 Verb meta 'charger' 'restore'
@@ -50,15 +52,15 @@ Verb meta 'recommencer' 'restart'
 Verb meta 'verifier' 'verify'
         *                                   -> Verify;
 
-Verb meta 'sauver' 'save'
+Verb meta 'sauver' 'save' ' sauvegarder'
         *                                   -> Save;
 
-Verb meta 'log' 'script' 'transcription'
+Verb meta 'log' 'script' ! 'transcription' 'transcript' 'transcrire'
         *                                   -> ScriptOn
         * 'off'                             -> ScriptOff
         * 'on'                              -> ScriptOn;
 
-Verb meta 'noscript' 'unscript'
+Verb meta 'noscript' 'unscript' 'nolog'
         *                                   -> ScriptOff;
 
 Verb meta 'mode'
@@ -72,6 +74,55 @@ Verb meta 'pronouns' 'nouns'
 Verb meta 'notify' 'notification'
         * 'on'                              -> NotifyOn
         * 'off'                             -> NotifyOff;
+
+#endif;  ! NI_BUILD_COUNT
+! NE PAS UTILISER DE VERBES META ANGLAIS ICI, SEULEMENT LES MOTS FRANÇAIS SINON CELA BUGGE LES COMMANDES ANGLAISES SI ON LES TAPE
+
+! decommenter par la suite
+!      Verb meta 'recording' 'enregistrer'
+!           *                                                         -> CommandsOn
+!           * 'on'                                                  -> CommandsOn
+!           * 'off'                                                 -> CommandsOff;
+!      Verb meta 'replay' 'rejouer'
+!           *                                                         -> CommandsRead;
+!      
+!   !   Verb meta 'score'
+!    !                       *                                          -> Score
+!    !             * 'detaille'/'complet'              -> Fullscore;
+!      Verb meta 'fullscore' 'full' 'detaille' 'complet'
+!                           *                                          -> FullScore
+!                           * 'score'                                -> FullScore;
+!      Verb meta  'quitter' !'quit' ! 'q//'
+!                           *                                          -> Quit;
+!      Verb meta 'charger' ! 'restore'
+!                           *                                          -> Restore;
+!      Verb meta 'recommencer' ! 'restart'
+!                           *                                          -> Restart;
+!      Verb meta 'verifier' ! 'verify'
+!                           *                                          -> Verify;
+!      Verb meta 'sauver' ! 'save'
+!                           *                                          -> Save;
+!      Verb meta 'log' 'transcrire' ! 'script' 'transcript' 'transcription'
+!                           *                                          -> ScriptOn
+!                           * 'off'                                  -> ScriptOff
+!                           * 'on'                                    -> ScriptOn;
+!      Verb meta 'nolog' 'noscript' 'unscript'
+!                           *                                          -> ScriptOff;
+!      
+!      Verb meta 'mode'
+!                 * 'normal'			-> LMode1
+!                 * 'long'/'bavard'/'verbeux'	-> LMode2
+!                 * 'court'			-> LMode3;
+!                 
+!      Verb meta 'pronouns' 'nouns'
+!                           *                                          -> Pronouns;
+!      Verb meta 'notify' 'notification'
+!                           * 'on'                                    -> NotifyOn
+!                           * 'off'                                  -> NotifyOff;
+!      Verb meta 'version'
+!                           *                                          -> Version;
+!   
+  
 
 [VersionFRSub;
     <version>;
@@ -180,6 +231,7 @@ Verb meta 'glklist'
 ! ------------------------------------------------------------------------------
 !  And now the game verbs.
 ! ------------------------------------------------------------------------------
+! A terme, tout le bloc sera compris dans un gros ifnd*f NI_BUILD_COUNT
 
 [ ADirection; if (noun in compass) rtrue; rfalse; ];
 
@@ -233,6 +285,7 @@ Verb 'lever' 'relever' 'soulever'
         * noun                              -> Take;
 
 [GoDownSub; <<Go d_obj>>;];      ! n'existait pas en anglais
+#ifndef NI_BUILD_COUNT;
 Verb 'descendre'
         *                                                           -> GoDown
         * 'de'/'du'/'des' noun                                      -> Exit
@@ -240,9 +293,9 @@ Verb 'descendre'
         * 'à'/'a'/'au'/'en'/'vers'/'par'/'dans'/'sur'/'sous' noun   -> Enter
         * noun=ADirection                                           -> Go
         * noun                                                      -> Enter;
-
+#endif; ! NI_BUILD_COUNT
 [GoUpSub; <<Go u_obj>>;];      ! n'existait pas en anglais
-Verb 'monter'
+Verb 'monter' 'remonter'
         *                                                           -> GoUp
         * 'à'/'a'/'au'/'en'/'vers'/'par' noun=ADirection            -> Go
         * 'à'/'a'/'au'/'en'/'vers'/'par'/'dans'/'sur'/'sous' noun   -> Enter
@@ -259,9 +312,10 @@ Verb 'sauter' 'bondir'
         * 'par'/'au' 'dessus' noun          -> JumpOver
         * 'par'/'au' 'dessus' 'de' noun     -> JumpOver
         * 'sur' noun                        -> JumpOver;
-
+#ifndef NI_BUILD_COUNT;
 Verb 'nager' 'plonger'
         *                                   -> Swim;
+#endif; ! NI_BUILD_COUNT
 
 ! ------- Verbes pour ouvrir et fermer
 Verb 'fermer' 'refermer'
@@ -280,7 +334,7 @@ Verb 'deverrouiller' 'forcer'
         * noun 'avec' held                  -> Unlock;
 
 ! ------- Verbes concernant ce que le joueur possède
-Verb 'inventaire' 'inv' 'i//'
+Verb 'inventaire' ! 'inv' 'i//' (inv retiré car cause pb, on corrigera cela plus tard)
         *                                   -> Inv
         * 'haut'/'tall'                     -> InvTall
         * 'large'/'wide'                    -> InvWide;
@@ -297,14 +351,14 @@ Verb 'nourrir'
 
 Verb 'inserer' 'introduire'
         * multiexcept 'dans' noun           -> Insert;
-
+#ifndef NI_BUILD_COUNT;
 Verb 'remplir'
         * noun                              -> Fill;
 
 Verb 'vider'
         * noun                              -> Empty
         * noun 'vers'/'dans'/'sur' noun     -> EmptyT;
-
+#endif; ! NI_BUILD_COUNT
 Verb 'transferer'
         * noun 'vers'/'à'/'a' noun          -> Transfer;
 
@@ -350,6 +404,7 @@ Verb 'mettre' 'remettre'
         * multiexcept 'sur' noun         -> PutOn;
 
 ! ------- Verbes agressifs ou destructeurs
+#ifndef NI_BUILD_COUNT;
 Verb 'boire' 'avaler' 'siroter'
         * noun                           -> Drink
         * 'de'/'du' noun                 -> Drink
@@ -369,6 +424,8 @@ Verb 'attaquer' 'casser' 'frapper' 'combattre' 'ruiner' 'briser' 'detruire'
         * noun                           -> Attack
         * noun 'avec' held               -> Attack
         * 'à'/'a'/'au'/'aux' noun                   -> Attack; ! frapper à la porte
+
+#endif; ! NI_BUILD_COUNT
 
 Verb 'presser' 'tordre' 'comprimer' 'ecraser'
         * noun                           -> Squeeze;
@@ -414,13 +471,16 @@ Verb 'regarder' 'voir' 'r//' 'l//' 'v//'
         * 'derriere' noun                       -> Search ! à la place de Turn
         * topic 'dans' noun                     -> Consult
         * 'vers'/'à'/'a'/'au' noun=ADirection   -> Examine;
-
+#ifndef NI_BUILD_COUNT;
 Verb 'examiner' 'x//' 'decrire' 'observer'
         * noun                           -> Examine;
 
 Verb 'fouiller'
         * noun                           -> Search;
 
+Verb 'chercher'
+		* 'dans' noun			-> Search;
+#endif; ! NI_BUILD_COUNT
 Verb 'sentir' 'renifler'
         *                                -> Smell
         * noun                           -> Smell;
@@ -434,12 +494,12 @@ Verb 'gouter'
 
 Verb 'toucher' 'caresser' 'tater'
         * noun                           -> Touch;
-
+#ifndef NI_BUILD_COUNT;
 Verb 'lire'
         * noun                           -> Examine
         * 'sur' topic 'dans' noun        -> Consult
         * topic 'dans' noun              -> Consult;
-
+#endif; ! NI_BUILD_COUNT
 Verb 'consulter'
         * noun 'sur' topic               -> Consult
         * noun 'à'/'a' topic             -> Consult

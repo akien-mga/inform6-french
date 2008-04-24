@@ -18,8 +18,8 @@
 ! ==============================================================================
 
 
-Constant LibReleaseFR      "2.3dev";
-Message		"[Compilé avec la version 2.3dev (future 2.3 stable) de la bibliothèque francophone.]";
+Constant LibReleaseFR      "2.3devI7";
+Message		"[Compilé avec la version 2.3devI7 (future 2.3 stable) de la bibliothèque francophone.]";
 
 System_file;
 
