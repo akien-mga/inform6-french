@@ -10,11 +10,16 @@ Use Foreign Language.
 Use ParlerSimple translates as (- Constant PARLERSIMPLE; -).
 [Use ParlerSimple.]
 
+Use DESACTIVER_IMPERATIF_DPS translates as (- DESACTIVER_IMPERATIF_DPS; -)
+Use DESACTIVER_IMPERATIF_DPS. [ne semble pas fonctionner]
+
+
 Include (- Include "FrenchG"; -).
 
 [attention pour FrenchG, pour les verbes réflexifs, c'est 'moi' et non pas 'vous' qu'il faut utiliser dans la définition des verbes] [note plus tard : et pourquoi cela ? cela semble fonctionner avec vous et plus avec moi]
 
 Use French Language translates as (- Constant French; -). 
+
 [Use French Language.]
 
 Use French 3PSP Language translates as (- Constant FrenchN11_3PSP; -).
@@ -31,9 +36,9 @@ A thing has a number called the gender.
 Gender is a kind of value. The gender are single male, single female, plural male and plural female.
 The gender translates into Inform as "gender".
 
-[The description of a player-character is always "Vous êtes comme à votre habitude." ] [doesn't work in the french lib]
+[The description of a player-character is always "Vous êtes comme à votre habitude." ] [doesn't work in the french lib, it must be set by ]
 
-[ don't remove the english verbs, they could be useful to some players ?
+[I don't remove the english verbs, they could be useful to some players ?
 Here they are anyway...
 
 Understand the command "take" as something new.
@@ -315,34 +320,31 @@ Understand "descendre des [something]" as getting off.
 [todo : descendre vers etc]
 
 Understand "boire [something]" or "boire de [something]" or "boire du [something]" or "boire a [something]" or "boire de l'[something]" as drinking.
-
-Understand the command "avaler" or "siroter" as "boire".
+Understand the command "avaler" and "siroter" as "boire".
 
 Understand "manger [something preferably held]" or "manger du [something preferably held]" as eating.
-
-Understand the command "devorer" or "grignoter" as "manger".
-
+Understand the command "devorer", "grignoter", "mastiquer" et "ingerer" as "manger".
 
 Understand "bruler [something]" as burning. [todo ? bruler [something] avec [held]]
+Understand the command "embraser", "cramer" et "incendier" as "bruler".
 
-Understand the command "embraser" or "cramer" or "incendier" as "bruler".
+Understand "attaquer [someone]" or "tuer [someone]" or "torturer [someone]" or "cogner [someone]" as attacking. [someone est redondant si on a something par ailleurs mais l'inverse n'est pas vrai]
 
-Understand "attaquer [someone]" or "frapper [someone]" or "combattre [someone]" or "briser [someone]" or "detruire [someone]" or "tuer [someone]" or "torturer [someone]" or "cogner [someone]" as attacking. [someone est redondant si on a something par ailleurs mais l'inverse n'est pas vrai]
+Understand "attaquer [something]" or "attaquer a [something]"  or  "cogner [something]" as attacking.
 
-Understand "attaquer [something]" or "casser [something]" or "frapper [something]" or "frapper a [something]"  or "combattre [something]" or "briser [something]" or "detruire [something]" or "cogner [something]" as attacking.
+Understand the command "frapper", "combattre", "briser", "detruire", or "casser" as "attaquer".
+
 [ruiner a ete retire]
-
 [vider a ete retire]
 [remplir/emplir a ete retire]
 
-Understand "examiner [something]" or "decrire [something]" or "observer [something]" as examining.
+Understand "examiner [something]", "decrire [something]" and "observer [something]" as examining.
 
 Understand "fouiller [something]" as searching.
 Understand "chercher dans [something]" as searching.
 
 Understand "sentir" as smelling. 
 Understand "sentir [something]" as smelling.
-
 Understand the command "renifler" as "sentir".
 
 Understand "ecouter" as listening.
@@ -364,20 +366,33 @@ Understand "read [something]" as reading.
 Understand "lire [something]" as reading.  
 
 Carry out reading: 
-	if using the French Language option, say "ll n[']a rien de spécial à lire ici.";
-	if using the French 3PSP Language option, say "ll n[']avait rien de spécial à lire ici.".
+	if using the French Language option, say "Il n[']y a rien de spécial à lire ici.";
+	if using the French 3PSP Language option, say "Il n[']y avait rien de spécial à lire ici.".
 
 Understand "consulter [something] sur [text]" or "consulter [something] a [text]" or "consulter [something] a propos de [text]" as consulting it about.
 
 Understand "tirer [something]" as pulling.
+Understand the command "trainer" as "tirer".
 
 Understand "pousser [something]" as pushing.
 Understand "pousser [something] vers [direction]" or "pousser [something] a [direction]" or "pousser [something] au [direction]" as pushing it to.
+Understand the command "deplacer", "bouger" as "pousser".
 
-Understand the command "deplacer" as "pousser".
-Understand the command "bouger" as "pousser".
 
 Understand "appuyer [something]" or "appuyer sur [something]" as pushing.
+
+Understand "regler" as setting it to.
+Understand "regler [something] to [text]" as setting it to.
+Understand the command "ajuster" as "regler".
+
+Understand "tourner" as turning.
+Understand the command "devisser" and "visser" as "tourner".
+
+Understand "eteindre [something]" as switching off.
+Understand the command "arreter" as "eteindre".
+
+Understand "allumer [something]" as switching on.
+Understand the command "demarrer" as "allumer".
 
 Understand the command "swim" as something new.
 Swimming is an action applying to nothing. Understand "swim" or "dive" or "nager" or "plonger" as swimming. 
@@ -387,22 +402,19 @@ Carry out swimming:
 	if using the French 3PSP Language option, say "Il n'y avait pas assez d'eau pour nager dedans.".
 
 
-
-
-
 French ends here.
 
 
 ---- DOCUMENTATION ----
 
-Inform 7 ne permet pas actuellement de changer de système de langue comme c'était le cas auparavant. Cependant, il est possible d'utiliser des versions modifiées de nos bibliothèques d'Inform 6 pour composer des jeux avec Inform 7.
+Inform 7 ne permet pas actuellement de changer facilement de système de langue comme c'était le cas auparavant. Cependant, il est possible d'utiliser des versions modifiées de nos bibliothèques d'Inform 6 pour composer des jeux avec Inform 7.
 
 Pour l'utiliser, vous utiliserez notre script d'installation disponible sur http://informfr.tuxfamily.org/, ou bien vous pouvez procéder manuellement : Entrer dans le répertoire d'installation d'Inform7, ce répertoire étant : 
 	sous windows : C:\Program Files\Inform 7\ 
 	sous mac os x : "afficher le contenu du paquet" Inform.app, puis aller dans Contents/Ressources 	(en ligne de commande : /Applications/Inform.app/Contents/Ressources )
 	sous linux : /usr/share/gnome-inform7/ ou /usr/local/share/inform7/
 
-ajouter les 3 fichiers FrenchGN11.h, FrenchN11.h et Selector.h dans le dossier Library/Natural/ (là où se trouvent déjà Grammar.h et English.h). 
+ajouter les 3 fichiers FrenchG.h, French.h et Selector.h dans le dossier Library/Natural/ (là où se trouvent déjà Grammar.h et English.h). 
 Ensuite remplacer le contenu de Main.i6 qui se trouve dans Inform7/Extensions/Reserved par le fichier MainFR.i6.
 
 Pour utiliser les bibliothèques françaises, il faudrait inclure dans la source du jeu :
@@ -429,15 +441,26 @@ Pour information, le fichier inform7/extensions/reserved/Main.i6 est modifié ai
 
         Il faudra le refaire à chaque mise à jour d'Inform7. 
 
+Bugs connus :
+
+- La définition de base du joueur n'est plus en français comme auparavant. Vous pouvez ajouter cette règle dans votre jeu pour corriger cela : Instead of examining player, say "Vous êtes comme à votre habitude.". (ou toute autre description à votre convenance).
+- Certaines rares répliques restent en anglais. Tout implémenter, cela impliquait de remplacer tous ces fichiers dans les définitions livrées avec Inform, juste pour traduire parfois une ou deux phrases, et refaire cela à chaque mise à jour d'inform : Actions.i6  ChooseObjects.i6  Lists.i6  Main.i6  Printing.i6  Relations.i6  Tables.i6  Time.i6  Verbs.i6
+- Tous les verbes français n'ont pas encore été adapté en Inform 7, ce qui veut dire que si vous voulez en remplacer la définition dans votre jeu, cela produira un bug. Cette adaptation est en cours, pour le moment vous pouvez quand même redéfinir dans votre jeu des verbes comme "descendre", "attaquer", "boire", "manger", "fouiller". Vous pouvez bien entendu utiliser tous les autres verbes non adaptés, mais il ne sera pas possible de modifier leur définition de base pour le moment. (c'est à dire le contexte dans lequel ils seront appelés par le joueur)
+
+Note :
 
 Pour utiliser Inform 7 uniquement en ligne de commande, on peut invoquer le compilateur ni avec :
                 ./ni -rules ./Inform7/Extensions -package ./Projects/project.inform -extension=z8
                 et le compilateur inform avec :
-                ./inform-6.31-biplatform -v8 +language_name=FrenchN11 -wSD +include_path=Projects/project.inform/Build/auto.info project.z8
+                ./inform-6.31-biplatform -v8 +language_name=French -wSD +include_path=Projects/project.inform/Build/auto.info project.z8
 
         
 
 Merci à Sarganar et à l'équipe de Rakontointeraktiva pour l'effort commun de nos traductions en différentes langues.
+All hails to the Sarganar and the Spanish translation team! (http://www.caad.es/informate/infsp/)
+
+Eric Forgeot - http://ifiction.free.fr - http://informfr.tuxfamily.org/
+
         
 Example: * Petit Père Noël - Un très court exemple de jeu en français.
 

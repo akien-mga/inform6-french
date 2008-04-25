@@ -437,7 +437,7 @@ Verb 'mettre' 'remettre'
 
 ! ------- Verbes agressifs ou destructeurs
 #ifndef NI_BUILD_COUNT;
-Verb 'boire' 'avaler' 'siroter'
+Verb 'boire' 'avaler' 'siroter'   ! avaler ne serait il pas mieux avec "manger" ?
         * noun                           -> Drink
         * 'de'/'du' noun                 -> Drink
 	* 'de'/'du' 'l^' noun                   -> Drink  ! ex : boire de l'eau
@@ -568,7 +568,7 @@ Verb 'pousser' 'deplacer' 'bouger'
 Verb 'appuyer'
         * noun                           -> Push
         * 'sur' noun                     -> Push;
-#endif; ! NI_BUILD_COUNT
+
 Verb 'regler' 'ajuster'
         * noun                           -> Set
         * noun 'à'/'a'/'sur' special     -> SetTo;
@@ -581,7 +581,7 @@ Verb 'eteindre' 'arreter'
 
 Verb 'allumer' 'demarrer'
         * noun                           -> Switchon;
-
+#endif; ! NI_BUILD_COUNT
 Verb 'balancer'
         * noun                           -> Swing;
 
@@ -679,7 +679,7 @@ Verb 'repondre' 'dire' ! 'crier'
                 * creature   		              -> Answer ! "dis-lui"
                 * creature topic	              -> Answer
                 * 'à'/'a'/'au'/'aux' creature             -> Answer
-                * topic 'à'/'a'/'au'/'aux' creature       -> Answer;
+                * topic 'à'/'a'/'au'/'aux' creature       -> Answer reverse;
 !Verb 'parler'
 !                * creature			     		    -> Tell ! "parle-lui"
 !                * 'avec'/'à'/'a'/'au'/'aux' creature		     	    -> Tell
@@ -706,9 +706,9 @@ Verb 'repondre' 'dire' 'crier' 'hurler'
         * 'de'/'d^' topic                               -> ParlerIncorrect ! dire de partir (d'accord mais à qui...)  
         * creature 'de'/'d^' topic                      -> AskTo           ! dis lui de faire ça
         * 'à'/'a'/'au'/'aux' creature 'de'/'d^' topic   -> AskTo           ! dire a toto de faire ça
-        * creature topic                                -> Answer reverse  ! dis-lui bonjour
-        * 'à'/'a'/'au'/'aux' creature topic             -> Answer reverse  ! dire a toto bonjour
-        * topic '->'/'à'/'a'/'au'/'aux' creature        -> Answer;         ! dire bonjour à toto
+        * creature topic                                -> Answer  ! dis-lui bonjour
+        * 'à'/'a'/'au'/'aux' creature topic             -> Answer  ! dire a toto bonjour
+        * topic '->'/'à'/'a'/'au'/'aux' creature        -> Answer reverse;         ! dire bonjour à toto
 
 Extend only 'crier' 'hurler' first
         *                                             -> CrierSansPrecision;
