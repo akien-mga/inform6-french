@@ -672,7 +672,9 @@ Verb 'questionner' 'interroger' '?//'
 #endif; ! NI_BUILD_COUNT
 
 #ifdef NI_BUILD_COUNT;
-! à l'origine : 
+#ifdef PARLERSIMPLE;
+ ! à l'origine, version simple
+
 Verb 'repondre' 'dire' ! 'crier'
                 * creature   		              -> Answer ! "dis-lui"
                 * creature topic	              -> Answer
@@ -694,6 +696,70 @@ Verb 'demander' 'exiger' !*! reclamer
 		* creature 'de' topic			-> AskTo
 		* 'à'/'a'/'au'/'aux' creature 'de' topic	-> AskTo;
 
+#ifnot; ! parler avancé
+
+
+Verb 'repondre' 'dire' 'crier' 'hurler'
+        *                                               -> ParlerIncorrect ! dire (d'accord mais quoi...)
+        * creature                                      -> ParlerIncorrect ! dis-lui (d'accord mais quoi...)
+        * 'à'/'a'/'au'/'aux' creature                   -> ParlerIncorrect ! dire à toto (d'accord mais quoi...)
+        * 'de'/'d^' topic                               -> ParlerIncorrect ! dire de partir (d'accord mais à qui...)  
+        * creature 'de'/'d^' topic                      -> AskTo           ! dis lui de faire ça
+        * 'à'/'a'/'au'/'aux' creature 'de'/'d^' topic   -> AskTo           ! dire a toto de faire ça
+        * creature topic                                -> Answer reverse  ! dis-lui bonjour
+        * 'à'/'a'/'au'/'aux' creature topic             -> Answer reverse  ! dire a toto bonjour
+        * topic '->'/'à'/'a'/'au'/'aux' creature        -> Answer;         ! dire bonjour à toto
+
+Extend only 'crier' 'hurler' first
+        *                                             -> CrierSansPrecision;
+
+Verb 'demander'
+        *                                             -> ParlerIncorrect ! demander (d'accord mais quoi...)
+        * creature                                    -> ParlerIncorrect ! demande-lui (d'accord mais quoi...)
+        * '->'/'à'/'a'/'au'/'aux' creature            -> ParlerIncorrect ! demander à toto (d'accord mais quoi...)
+        * 'que'/'qu^' topic                           -> ParlerIncorrect ! (on ne gère pas "demander que toto sorte" à cause du subjonctif)
+        * creature 'de'/'d^' topic                    -> AskTo           ! demande lui de faire ça
+        * '->'/'à'/'a'/'au'/'aux' creature 'de'/'d^' topic -> AskTo           ! demander a toto de faire ça
+!        * 'de'/'d^' topic 'à'/'a'/'au'/'aux' creature -> AskTo reverse  ! demander de partir à toto   !x! ça plante
+        * creature noun                               -> AskFor          ! demande-lui du pain
+        * noun '->'/'à'/'a'/'au'/'aux' creature       -> AskFor reverse  ! demander du pain au boulanger
+        * '->'/'à'/'a'/'au'/'aux' creature noun       -> AskFor          ! demander au boulanger du pain
+        * creature topic                              -> Ask             ! dis-lui bonjour
+        * topic '->'/'à'/'a'/'au'/'aux' creature      -> Ask reverse     ! demander de l'aide à toto...
+        * '->'/'à'/'a'/'au'/'aux' creature topic      -> Ask;            ! dire a toto bonjour
+
+Verb 'parler' 'discuter' 'causer'
+        * 'avec'/'à'/'a'/'au'/'aux' creature                                              -> ParlerSansPrecision
+        * 'avec'/'à'/'a'/'au'/'aux' creature 'de'/'du'/'des'/'d^' topic                   -> Tell
+        * 'avec'/'à'/'a'/'au'/'aux' creature 'au' 'sujet' 'de'/'du'/'des'/'d^' topic      -> Tell
+        * 'avec'/'à'/'a'/'au'/'aux' creature 'a'/'à' 'propos' 'de'/'du'/'des'/'d^' topic  -> Tell
+        * 'de'/'du'/'des'/'d^' topic 'avec'/'à'/'a'/'au'/'aux' creature                   -> Tell reverse 
+        * 'au' 'sujet' 'de'/'du'/'des'/'d^' topic 'avec'/'à'/'a'/'au'/'aux' creature      -> Tell reverse
+        * 'a'/'à' 'propos' 'de'/'du'/'des'/'d^' topic 'avec'/'à'/'a'/'au'/'aux' creature  -> Tell reverse
+        * creature                                                                        -> ParlerSansPrecision ! "parle-lui"
+        * creature 'de'/'du'/'des'/'d^' topic                                             -> Tell ! "parle-lui"
+        * creature 'au' 'sujet' 'de'/'du'/'des'/'d^' topic                                -> Tell ! "parle-lui"
+        * creature 'a'/'à' 'propos' 'de'/'du'/'des'/'d^' topic                            -> Tell;
+
+Verb '!//'
+        * topic '->' creature                                                             -> Tell reverse;
+
+Verb 'questionner' 'interroger' '?//'
+        * creature                                                    -> ParlerSansPrecision
+        * creature 'à'/'a' 'propos' 'de'/'du'/'des'/'d^' topic        -> Ask
+        * creature 'au' 'sujet' 'de'/'du'/'des'/'d^' topic            -> Ask
+        * creature 'sur' topic                                        -> Ask
+        ! Les lignes qui suivent servent à comprendre si le joueur fainéant
+        ! tape juste : 
+        ! > interroger sur le ballon
+        ! (Toto) 
+        ! "Toto ne sait rien sur le ballon."
+        * 'à'/'a' 'propos' 'de'/'du'/'des'/'d^' topic '->' creature   -> Ask reverse
+        * 'au' 'sujet' 'de'/'du'/'des'/'d^' topic '->' creature       -> Ask reverse
+        * 'sur' topic '->' creature                                   -> Ask reverse
+        * topic '->' creature                                         -> Ask reverse;
+
+#endif; ! parlersimple
 #endif; ! NI_BUILD_COUNT
 
 Verb 'ordonner' 

@@ -7,6 +7,9 @@ Part 1 - French specifics
 Use Foreign Language translates as (- Constant ForeignLanguage; -). 
 Use Foreign Language.
 
+Use ParlerSimple translates as (- Constant PARLERSIMPLE; -).
+[Use ParlerSimple.]
+
 Include (- Include "FrenchG"; -).
 
 [attention pour FrenchG, pour les verbes réflexifs, c'est 'moi' et non pas 'vous' qu'il faut utiliser dans la définition des verbes] [note plus tard : et pourquoi cela ? cela semble fonctionner avec vous et plus avec moi]
