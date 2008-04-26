@@ -4,7 +4,7 @@
 #I7VERSION=5G67
 I7VERSION=5J39
 
-if [ $(uname)=Linux ]; then 
+if [ `uname` == Linux ]; then 
 	echo "Your system should be Linux"
 	if [ -e /usr/local/share/inform7/ ]; then
 		I7EXTENSIONSPATH=/usr/local/share/inform7/Inform7/Extensions/reserved
@@ -22,10 +22,8 @@ if [ $(uname)=Linux ]; then
 	fi
 else
 	echo "Your system should be Mac OS X"
-	I7EXTENSIONSPATH=/Applications/Inform.app/Contents/Ressources/Inform7/Extensions/reserved
-	I7EXTENSIONSPATH2=/dev/null
-	I7LIBRARYPATH=/Applications/Inform.app/Contents/Ressources/Library/Natural
-	I7LIBRARYPATH2=/dev/null
+	I7EXTENSIONSPATH2=/Applications/Inform.app/Contents/Resources/Inform7/Extensions/Reserved
+	I7LIBRARYPATH2=/Applications/Inform.app/Contents/Resources/Library/Natural
 fi
 
 echo "To install you must run this script as root."
@@ -59,7 +57,7 @@ cp -fr I7/FrenchN11_3PSP.h			$I7LIBRARYPATH2/
 cp -fr I6/FrenchG.h                      $I7LIBRARYPATH2/
 cp -fr I7/Selector.h			$I7LIBRARYPATH2/
 
-if [ $(uname)=Linux ]; then 
+if [ `uname` == Linux ]; then 
 	mkdir -p ~/Inform/Extensions/Eric\ Forgeot
 	cp -fr I7/French		~/Inform/Extensions/Eric\ Forgeot
 	cp -fr Locksmith-fr		~/Inform/Extensions/Eric\ Forgeot
@@ -73,7 +71,7 @@ if [ $(uname)=Linux ]; then
 else
 	echo "On a Mac, install the French extension from the GUI please"
 fi
-echo "Done. About gnome-inform7, everything was installed into $I7EXTENSIONSPATH2 and $I7LIBRARYPATH2";;
+echo "Done. About gnome-inform7 for Linux, or Inform for Mac OS X, everything was installed into $I7EXTENSIONSPATH2 and $I7LIBRARYPATH2";;
 
  no)
 echo "Not installed !";;
