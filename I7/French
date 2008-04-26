@@ -378,7 +378,6 @@ Understand "pousser [something]" as pushing.
 Understand "pousser [something] vers [direction]" or "pousser [something] a [direction]" or "pousser [something] au [direction]" as pushing it to.
 Understand the command "deplacer", "bouger" as "pousser".
 
-
 Understand "appuyer [something]" or "appuyer sur [something]" as pushing.
 
 Understand "regler" as setting it to.
@@ -393,6 +392,23 @@ Understand the command "arreter" as "eteindre".
 
 Understand "allumer [something]" as switching on.
 Understand the command "demarrer" as "allumer".
+
+Understand "balancer [something]" as swinging.
+
+Understand "frotter [something]" as rubbing.
+Understand the command "cirer", "astiquer", "balayer", "nettoyer", "depoussierer", "essuyer" and "recurer" as "frotter".
+
+Understand ["nouer [something]" or] "nouer [something] a [something]" or "nouer [something] au [something]" or "nouer [something] aux [something]" or "nouer [something] avec [something]" or "nouer [something] sur [something]" as tying it to. 
+Understand the command "attacher", "fixer", "connecter" and "brancher" as "nouer".
+
+[TODO : faire parler, dire etc ici]
+
+Understand "agiter les mains" or "agiter la main" as waving hands.
+Understand "saluer" or "saluer avec la main" [or "saluer [someone]" or "saluer [someone] avec la main"] as waving hands. [todo: on ne peut ajouter un cod]
+
+Understand "agiter [something]" as waving.
+
+Understand the command "brandir", "secouer" as "agiter".
 
 Understand the command "swim" as something new.
 Swimming is an action applying to nothing. Understand "swim" or "dive" or "nager" or "plonger" as swimming. 

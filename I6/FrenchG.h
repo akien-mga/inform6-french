@@ -581,7 +581,7 @@ Verb 'eteindre' 'arreter'
 
 Verb 'allumer' 'demarrer'
         * noun                           -> Switchon;
-#endif; ! NI_BUILD_COUNT
+
 Verb 'balancer'
         * noun                           -> Swing;
 
@@ -591,7 +591,7 @@ Verb 'frotter' 'cirer' 'astiquer' 'balayer' 'nettoyer' 'depoussierer' 'essuyer' 
 Verb 'nouer' 'attacher' 'fixer' 'connecter' 'brancher'
         * noun                                        -> Tie
         * noun 'à'/'a'/'au'/'aux'/'avec'/'sur' noun   -> Tie;
-
+#endif; ! NI_BUILD_COUNT
 ! ------- Verbes de communication avec des personnages
 
 
@@ -766,7 +766,7 @@ Verb 'ordonner'
         * creature 'de'/'d^' topic                          -> AskTo ! "ordonne-lui"
         * 'à'/'a'/'au'/'aux' creature 'de'/'d^' topic       -> AskTo;
 
-
+#ifndef NI_BUILD_COUNT;
 Verb 'agiter'
         * 'la'/'les' 'main'/'mains'      -> WaveHands
         * noun                           -> Wave;
@@ -779,6 +779,8 @@ Verb 'saluer'
         * 'de'/'avec' 'la' 'main'                   -> WaveHands
         * creature                                  -> WaveHands
         * creature 'de'/'avec' 'la' 'main'          -> WaveHands;
+
+#endif; ! NI_BUILD_COUNT
 
 Verb 'montrer' 'presenter'
 !!        * creature held                             -> Show reverse ! "montre-leur le casque"
