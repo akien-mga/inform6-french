@@ -22,6 +22,10 @@ System_file;
 !  The "meta-verbs", commands to the game rather than in the game, come first:
 ! ------------------------------------------------------------------------------
 
+[VersionFRSub;
+    <version>;
+     print "^Compilé avec la version ", (string) LibReleaseFR, " de la bibliothèque francophone.^" ;
+];
 
 #ifndef NI_BUILD_COUNT;
 
@@ -86,11 +90,6 @@ Verb meta 'noscript' 'unscript' 'nolog'
 Verb meta 'verifier' 'verify'
         *                                   -> Verify;
 
-
-[VersionFRSub;
-    <version>;
-     print "^Compilé avec la version ", (string) LibReleaseFR, " de la bibliothèque francophone.^" ;
-];
 Verb meta 'version'
         *                                   -> Version
         * 'francaise'/'fr'/'vf'             -> VersionFR;
@@ -152,15 +151,20 @@ Verb meta 'places' 'endroits'
                 * 'long'/'bavard'/'verbeux'	-> LMode2
                 * 'court'			-> LMode3;
                 
-     Verb meta 'pronouns' 'nouns'
+
+     Verb meta 'pronoms' 'noms' ! 'pronouns' 'nouns'
                           *                                          -> Pronouns;
-     Verb meta 'notify' 'notification'
+
+     Verb meta  'notification' ! 'notify'
                           * 'on'                                    -> NotifyOn
                           * 'off'                                  -> NotifyOff;
-     Verb meta 'version'
-                          *                                          -> Version;
-  
-  
+
+! Verb meta 'version'
+!         *                                   -> Version
+!         * 'francaise'/'fr'/'vf'             -> VersionFR;
+
+Verb 'vf'
+        *                                   -> VersionFR;
 
 #endif;  ! NI_BUILD_COUNT
 
@@ -375,8 +379,8 @@ Verb 'acheter'
         * noun                              -> Buy;
 
 Verb 'payer' 'offrir' 'donner' ! 'remettre' !*!
-        * held 'à'/'a'/'au'/'aux' creature      -> Give
-        * 'à'/'a'/'au'/'aux' creature held      -> Give reverse;
+        * held '->'/'à'/'a'/'au'/'aux' creature      -> Give
+        * '->'/'à'/'a'/'au'/'aux' creature held      -> Give reverse;
 
 Verb 'nourrir'
         * creature 'avec' held              -> Give reverse;
@@ -485,7 +489,13 @@ Verb 'couper' 'trancher' 'elaguer'
 !! TODO : ajouter "couper noun avec held etc"
 ! Stormi : remarque : couper noun avec held n'existe pas dans la lib anglophone il me semble
 
+
+[VagueDigSub; 
+    L__M(##VagueDig, 1, 0);
+];
+
 Verb 'creuser'
+	* 						-> VagueDig
         * noun                                      -> Dig
         * noun 'avec' held                          -> Dig;
 ! Ajouter "creuser * -> Dig ? (inexistant dans la version anglaise)
@@ -780,8 +790,6 @@ Verb 'saluer'
         * creature                                  -> WaveHands
         * creature 'de'/'avec' 'la' 'main'          -> WaveHands;
 
-#endif; ! NI_BUILD_COUNT
-
 Verb 'montrer' 'presenter'
 !!        * creature held                             -> Show reverse ! "montre-leur le casque"
 !!        * held creature                             -> Show         ! "montre-le-leur"
@@ -800,7 +808,7 @@ Verb 'embrasser' 'etreindre'
 ! ------- Verbes musicaux
 Verb 'chanter'
         *                               -> Sing;
-
+#endif; ! NI_BUILD_COUNT
 Verb 'souffler' !*! jouer d'un instrument ?
         * 'dans' held                   -> Blow
         * held                          -> Blow;
@@ -843,6 +851,15 @@ Verb 'merde'
 Verb 'zut' 'maudit'
         *                               -> Mild
         * topic                         -> Mild;
+
+[VagueUseSub; 
+    L__M(##VagueUse, 1, 0);
+];
+
+Verb 'utiliser' 
+        *                               -> VagueUse
+        * noun                         -> VagueUse
+        * noun 'avec'/'sur' noun                        -> VagueUse;
 
 [ UnknownVerb word;
 

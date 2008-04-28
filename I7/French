@@ -330,7 +330,7 @@ Understand the command "embraser", "cramer" et "incendier" as "bruler".
 
 Understand "attaquer [someone]" or "tuer [someone]" or "torturer [someone]" or "cogner [someone]" as attacking. [someone est redondant si on a something par ailleurs mais l'inverse n'est pas vrai]
 
-Understand "attaquer [something]" or "attaquer a [something]"  or  "cogner [something]" as attacking.
+Understand "attaquer [something]" or "attaquer a [something]" or "attaquer à [something]" or  "cogner [something]" as attacking.
 
 Understand the command "frapper", "combattre", "briser", "detruire", or "casser" as "attaquer".
 
@@ -407,8 +407,22 @@ Understand "agiter les mains" or "agiter la main" as waving hands.
 Understand "saluer" or "saluer avec la main" [or "saluer [someone]" or "saluer [someone] avec la main"] as waving hands. [todo: on ne peut ajouter un cod]
 
 Understand "agiter [something]" as waving.
-
 Understand the command "brandir", "secouer" as "agiter".
+
+Understand "montrer [something] a [someone]" or "montrer [something] à [someone]" or "montrer [something] au [someone]" or "montrer [something] aux [someone]" as showing it to.
+Understand the command "presenter" as "montrer".
+
+Understand "reveiller moi" or "me reveiller" or "se reveiller" as waking up.
+Understand "reveiller [someone]" as waking.
+Understand the command "eveiller" as "reveiller".
+
+Understand "embrasser [someone]" as kissing.
+Understand the command "etreindre" as "embrasser".
+
+Understand "chanter" as singing.
+Understand the command "fredonner" as "chanter". 
+
+[TODO]
 
 Understand the command "swim" as something new.
 Swimming is an action applying to nothing. Understand "swim" or "dive" or "nager" or "plonger" as swimming. 

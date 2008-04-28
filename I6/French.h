@@ -1482,6 +1482,8 @@ Constant COMMA__TX      = ", ";
     }
     VagueDo: "Soyez plus précis."; 
     VagueGo: "Vous devez donner la direction dans laquelle aller.";
+    VagueDig: "Vous devez indiquer ce que vous souhaitez creuser, et si nécessaire, avec quoi vous voulez le faire.";
+    VagueUse: "Veuillez indiquer un verbe plus précis.";
     Verify: switch (n) {
         1: "Le fichier semble intact.";
         2: "Le fichier est certainement corrompu !";
