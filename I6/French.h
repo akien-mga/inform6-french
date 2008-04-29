@@ -731,6 +731,13 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
       'r//':   print "regarder";
       'x//':   print "examiner";
       'z//':   print "attendre";
+      'v//':   print "regarder";
+      'a//':   print "attendre";
+      '!//':   print "dire";
+      '?//':   print "demander";
+      'q//':   print "quitter";
+      'verrouiller': print "verrouiller";
+      'deverrouiller': print "deverrouiller";
       default: rfalse;
     }
     rtrue;
