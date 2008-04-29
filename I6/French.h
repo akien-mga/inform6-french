@@ -1013,6 +1013,7 @@ Constant COMMA__TX      = ", ";
                 'asseoir':    "vous y asseoir.";
                 'allonger':    "vous y allonger.";
                 'coucher':    "vous y coucher.";
+		'monter':    "y monter.";
                 default:  "y aller."; ! plutôt que "y entrer." !*!
             }
         3:  "Vous ne pouvez entrer dans ", (the) x1, " fermé",(es) x1,".";
@@ -1027,7 +1028,7 @@ Constant COMMA__TX      = ", ";
  #ifdef NI_BUILD_COUNT;
         6:  print "(";
             if (x1 has supporter) print "descendant "; else print "sortant ";
-            print (the) x1; print ")^"; say__p = 0; return;
+            print (DeDuDes) x1; print ")^"; say__p = 0; return;
         7:  say__p = 0;
             if (x1 has supporter) "(montant sur ", (the) x1, ")^";
             if (x1 has container) "(entrant dans ", (the) x1, ")^";
@@ -1035,7 +1036,7 @@ Constant COMMA__TX      = ", ";
         #ifnot; ! NI_BUILD_COUNT
         6:  print "(";
             if (x1 has supporter) print "descendant "; else print "sortant ";
-            print (the) x1; ")";
+            print (DeDuDes) x1; ")";
         7:  if (x1 has supporter) "(montant sur ", (the) x1, ")^";
             if (x1 has container) "(entrant dans ", (the) x1, ")^";
             "(entrant dans ", (the) x1, ")^";   #endif; ! NI_BUILD_COUNT

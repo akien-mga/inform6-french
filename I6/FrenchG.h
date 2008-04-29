@@ -813,21 +813,20 @@ Verb 'souffler' !*! jouer d'un instrument ?
         * 'dans' held                   -> Blow
         * held                          -> Blow;
 
+![blow non implemente dans I7...]
+
 ! ------- Verbes "immobiles"
 
 #ifndef NI_BUILD_COUNT;
 Verb 'attendre' 'a//' 'z//' !*! patienter  
         *                               -> Wait;
-#endif; ! NI_BUILD_COUNT
 
-#ifdef NI_BUILD_COUNT;
-Verb 'attendre' 'a//'  'patienter'   ! 'z//' a desactiver de I7
-        *                               -> Wait;
 #endif; ! NI_BUILD_COUNT
 
 Verb 'prier'
         *                               -> Pray;
-
+#ifndef NI_BUILD_COUNT;
+#endif; ! NI_BUILD_COUNT
 Verb 'penser' 'reflechir'
         *                               -> Think;
 
@@ -859,7 +858,7 @@ Verb 'zut' 'maudit'
 Verb 'utiliser' 
         *                               -> VagueUse
         * noun                         -> VagueUse
-        * noun 'avec'/'sur' noun                        -> VagueUse;
+        * noun topic                        -> VagueUse;
 
 [ UnknownVerb word;
 
