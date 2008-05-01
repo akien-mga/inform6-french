@@ -176,7 +176,7 @@ Understand the command "cut" as something new.
 Understand the command "jump" as something new.
 Understand the command "skip" as something new.
 Understand the command "hop" as something new.
-Understand the command "dig" as something new.
+
 Understand the command "score" as something new.
 Understand the command "full score" as something new.
 Understand the command "quit" as something new.
@@ -205,6 +205,66 @@ Understand the command "taste" as something new.
 Understand the command "fasten" as something new.
 
 ]
+
+
+
+
+
+For printing the locale description (this is the interesting locale paragraphs-french rule):
+	let the domain be the parameter-object;
+	sort the Table of Locale Priorities in locale description priority order;
+	repeat through the Table of Locale Priorities:
+		[say "[notable-object entry]...";]
+		carry out the printing a locale paragraph about activity with the notable-object entry;
+	continue the activity.
+
+For printing the locale description (this is the you-can-also-see-french rule):
+	let the domain be the parameter-object;
+	let the mentionable count be 0;
+	repeat with item running through things:
+		now the item is not marked for listing;
+	repeat through the Table of Locale Priorities:
+		[say "[notable-object entry] - [locale description priority entry].";]
+		if the locale description priority entry is greater than 0,
+			now the notable-object entry is marked for listing;
+		increase the mentionable count by 1;
+	if the mentionable count is greater than 0:
+		repeat with item running through things:
+			if the item is mentioned:
+				now the item is not marked for listing;
+		begin the listing nondescript items activity;
+		if the number of marked for listing things is 0:
+			abandon the listing nondescript items activity;
+		otherwise:
+			if handling the listing nondescript items activity:
+				if the domain is a room:
+					if the domain is the location, say "You ";
+					otherwise say "In [the domain] you ";
+				otherwise if the domain is a supporter:
+					say "On [the domain] vous ";
+				otherwise:
+					say "In [the domain] vous ";
+				say "pouvez [if the locale paragraph count is greater than 0]aussi [end if]voir ";
+				let the common holder be nothing;
+				let contents form of list be true;
+				repeat with list item running through marked for listing things:
+					if the holder of the list item is not the common holder:
+						if the common holder is nothing,
+							now the common holder is the holder of the list item;
+						otherwise now contents form of list is false;
+					if the list item is mentioned, now the list item is not marked for listing;
+				filter list recursion to unmentioned things;
+				if contents form of list is true and the common holder is not nothing,
+					list the contents of the common holder, as a sentence, including contents,
+						giving brief inventory information, tersely, not listing
+						concealed items, listing marked items only;
+				otherwise say "[a list of marked for listing things including contents]";
+				if the domain is the location, say " ici";
+				say ".[paragraph break]";
+				unfilter list recursion;
+			end the listing nondescript items activity;
+	continue the activity.
+
 
 Part 2 - French directions
 
@@ -414,12 +474,106 @@ Carry out swimming:
 	if using the French Language option, say "Il n'y a pas assez d'eau pour nager dedans.";
 	if using the French 3PSP Language option, say "Il n'y avait pas assez d'eau pour nager dedans.".
 
+Understand "fermer [something]" as closing.
+
+[Understand "fermer [something] avec [something preferably held]" or "fermer [something] a cle" or "fermer [something] a clef" as locking.
+
+Understand the command "verrouiller" as "fermer".]
+
+[Understand "ouvrir [something]" as opening.
+
+Understand "ouvrir [something] avec [something preferably held]" as unlocking.
+
+Understand the command "deverrouiller" and "forcer" as "ouvrir".]
+
+
 Part IV - Redefinition of Languages i6
 
 Include (-
 Constant LibReleaseFR      "2.3devI6+I7";
 Message		"[Compilé avec la version 2.3devI6+I7 (future 2.3 stable) de la bibliothèque francophone.]";
 !System_file;
+
+! To keep compat with some french declarations. Should be replaced later probably. Was used in the outdated verblib.h
+Default AMUSING_PROVIDED 1;
+Default MAX_CARRIED      100;
+Default MAX_SCORE        0;
+Default NUMBER_TASKS     1;
+Default OBJECT_SCORE     4;
+Default ROOM_SCORE       5;
+Default SACK_OBJECT      0;
+Default TASKS_PROVIDED   1;
+
+
+! tokenise__ has been removed too in inform 7 :
+
+#Ifdef TARGET_ZCODE;
+
+[ Tokenise__ b p; b->(2 + b->1) = 0; @tokenise b p; ];
+
+#Ifnot; ! TARGET_GLULX
+
+Array gg_tokenbuf -> DICT_WORD_SIZE;
+
+[ GGWordCompare str1 str2 ix jx;
+    for (ix=0 : ix<DICT_WORD_SIZE : ix++) {
+        jx = (str1->ix) - (str2->ix);
+        if (jx ~= 0) return jx;
+    }
+    return 0;
+];
+
+[ Tokenise__ buf tab
+    cx numwords len bx ix wx wpos wlen val res dictlen entrylen;
+    len = buf-->0;
+    buf = buf+WORDSIZE;
+
+    ! First, split the buffer up into words. We use the standard Infocom
+    ! list of word separators (comma, period, double-quote).
+
+    cx = 0;
+    numwords = 0;
+    while (cx < len) {
+        while (cx < len && buf->cx == ' ') cx++;
+        if (cx >= len) break;
+        bx = cx;
+        if (buf->cx == '.' or ',' or '"') cx++;
+        else {
+            while (cx < len && buf->cx ~= ' ' or '.' or ',' or '"') cx++;
+        }
+        tab-->(numwords*3+2) = (cx-bx);
+        tab-->(numwords*3+3) = WORDSIZE+bx;
+        numwords++;
+        if (numwords >= MAX_BUFFER_WORDS) break;
+    }
+    tab-->0 = numwords;
+
+    ! Now we look each word up in the dictionary.
+
+    dictlen = #dictionary_table-->0;
+    entrylen = DICT_WORD_SIZE + 7;
+
+    for (wx=0 : wx<numwords : wx++) {
+        wlen = tab-->(wx*3+2);
+        wpos = tab-->(wx*3+3);
+
+        ! Copy the word into the gg_tokenbuf array, clipping to DICT_WORD_SIZE
+        ! characters and lower case.
+        if (wlen > DICT_WORD_SIZE) wlen = DICT_WORD_SIZE;
+        cx = wpos - WORDSIZE;
+        for (ix=0 : ix<wlen : ix++) gg_tokenbuf->ix = glk($00A0, buf->(cx+ix));
+        for (: ix<DICT_WORD_SIZE : ix++) gg_tokenbuf->ix = 0;
+
+        val = #dictionary_table + WORDSIZE;
+        @binarysearch gg_tokenbuf DICT_WORD_SIZE val entrylen dictlen 1 1 res;
+        tab-->(wx*3+1) = res;
+    }
+];
+
+#Endif; ! TARGET_
+
+
+! not_holding, removed too
 
 -)
 
@@ -436,44 +590,19 @@ Class   CompassDirection
 
 Object Compass "compass" has concealed;
 
-#Ifndef WITHOUT_DIRECTIONS;
-CompassDirection -> n_obj "nord"
-                    with door_dir n_to, name 'n//' 'nord';
-CompassDirection -> s_obj "sud"
-                    with door_dir s_to, name 's//' 'sud';
-CompassDirection -> e_obj "est"
-                    with door_dir e_to, name 'e//' 'est',
-                    article "l'";
-CompassDirection -> w_obj "ouest"
-                    with door_dir w_to, name 'o//' 'w//' 'ouest',
-                    article "l'";
-CompassDirection -> ne_obj "nord-est"
-                    with door_dir ne_to, name 'ne' 'nordest';
-CompassDirection -> nw_obj "nord-ouest"
-                    with door_dir nw_to, name 'no' 'nw' 'nordouest';
-CompassDirection -> se_obj "sud-est"
-                    with door_dir se_to, name 'se' 'sudest';
-CompassDirection -> sw_obj "sud-ouest"
-                    with door_dir sw_to, name 'so' 'sw' 'sudouest';
-CompassDirection -> u_obj "haut"
-                    with door_dir u_to, name 'h//' 'haut' 'plafond' 'ciel';
-CompassDirection -> d_obj "bas"
-                    with door_dir d_to, name 'b//' 'd//' 'bas' 'sol';
-#endif; ! WITHOUT_DIRECTIONS
-
-! Inform 6 games get in_obj and out_obj even when WITHOUT_DIRECTIONS is
-! defined. Inform 7 games do not.
-
-#Ifndef WITHOUT_DIRECTIONS;
-CompassDirection -> in_obj "intérieur"
-                    with door_dir in_to, name 'dedans' 'interieur',
-                    article "l'";
-CompassDirection -> out_obj "extérieur"
-                    with door_dir out_to, name 'dehors' 'exterieur',
-                    article "l'";
 -) instead of "Compass" in "Output.i6t"
 
 Include (-
+Constant AGAIN1__WD     = 'again';
+Constant AGAIN2__WD     = 'g//';
+Constant AGAIN3__WD     = 'again';
+Constant OOPS1__WD      = 'oops';
+Constant OOPS2__WD      = 'o//';
+Constant OOPS3__WD      = 'oops';
+Constant UNDO1__WD      = 'undo';
+Constant UNDO2__WD      = 'undo';
+Constant UNDO3__WD      = 'undo';
+
 Constant ALL1__WD     = 'tous';
 Constant ALL2__WD     = 'toutes';
 Constant ALL3__WD     = 'tout';
@@ -547,6 +676,7 @@ Array LanguagePronouns table
 -) instead of "Pronouns" in "Language.i6t".
 
 Include (-
+Array LanguageDescriptors table
    !  word       possible GNAs   descriptor      connected
    !             to follow:      type:           to:
    !             a     i
@@ -725,7 +855,8 @@ global enleveaccents=1;
             }
 #Endif;
             for (i=at:i<at+len:i++)
-                if (buffer->i=='é') buffer->i='e'; !*! plutôt un switch ?
+                if (buffer->i=='é') buffer->i='e'; 
+                ! plutôt un switch ?
 
                 else if(buffer->i=='à') buffer->i='a';
                 else if(buffer->i=='è') buffer->i='e';
@@ -911,8 +1042,8 @@ global enleveaccents=1;
     !  insertion d'un espace avant chaque tiret et après chaque apostrophe 
     for (i=WORDSIZE:i<WORDSIZE+NbChars():i++) {
         if (buffer->i == '-') LTI_Insert(i++, ' ');
-        if (buffer->i == ''') LTI_Insert(++i, ' '); ! 
-        ! autre notation ? '\'' par exemple ?
+        if (buffer->i == ''') LTI_Insert( ++i, ' ');  
+    ! autre notation (interrogation) 'antislash'' par exemple (interrogation)
     }
     Tokenise__(buffer,parse);
 
@@ -928,12 +1059,14 @@ global enleveaccents=1;
     ! Ex : "le lui donner" devient "donner -le -lui"
     ! Etape A : "le/la/l'/les" (suivi éventuellement de "lui/leur") passe après le verbe. Ex : "lui donner -le"
     word=Mot(0); ! 1er mot
-    if ((NbMots()>=2)&&(Mot(1)=='lui'or'leur')) RangVerbe=2; else RangVerbe=1; ! verbe = 2e ou 3e mot ?
+    if ((NbMots()>=2)&&(Mot(1)=='lui'or'leur')) RangVerbe=2; else RangVerbe=1; 
+    ! verbe = 2e ou 3e mot ?
     b=PositionMot(RangVerbe)+LongueurMot(RangVerbe); 
-    ! juste après le verbe = position du verbe + longueur du verbe
-    if (~~DernierMot(RangVerbe-1)) { 
-    	! ne rien faire si la phrase ne comporte pas de verbe
-        if (word == 'le')
+    
+    ! juste après le verbe (egal) position du verbe (plus) longueur du verbe ne rien faire si la phrase ne comporte pas de verbe
+     
+     if (~~DernierMot(RangVerbe-1)) { 
+       if (word == 'le')
         {
             EcraseMot(0);
             LTI_Insert(b, ' ');
@@ -974,8 +1107,10 @@ global enleveaccents=1;
     word=Mot(0); ! 1er mot
     ! RangDernier est le rang du dernier mot du bloc : verbe + "-le/-la/-les"
     if ((NbMots()>=3)&&(Mot(2)=='-le'or'-la'or'-les' or'-lui')) RangDernier=2; else RangDernier=1; ! "-le/-la/-les" après le verbe ?
-    b=PositionMot(RangDernier)+LongueurMot(RangDernier); ! juste après bloc = position du dernier + longueur du dernier
-    if (~~DernierMot(0)) { ! ne rien faire si la phrase ne comporte pas de verbe
+    b=PositionMot(RangDernier)+LongueurMot(RangDernier); 
+    ! juste après bloc = position du dernier + longueur du dernier
+    if (~~DernierMot(0)) { 
+    	! ne rien faire si la phrase ne comporte pas de verbe
         if (word == 'lui')
         {
             EcraseMot(0);
@@ -1281,7 +1416,7 @@ Include (-
     Answer, Ask:    "Pas de réponse.";
 !    Ask:      see Answer
     Attack:         "La violence n'est pas une solution ici.";
-    Blow:           "Vous ne pouvez pas utilement souffler dedans.";
+!    Blow:           "Vous ne pouvez pas utilement souffler dedans.";
     Burn:           "Cet acte dangereux ne mènerait pas à grand-chose.";
     Buy:            "Il n'y a rien à vendre, ici.";
     Climb:          "Je ne pense pas que l'on puisse arriver à grand-chose de cette manière.";
@@ -1292,33 +1427,34 @@ Include (-
             ".";
         3:  "Vous fermez ", (the) x1, ".";
     }
-    CommandsOff: switch (n) {
-        1:  "[Enregistrement des commandes désactivé.]";
-        #Ifdef TARGET_GLULX;
-        2:  "[Enregistrement des commandes déjà désactivé.]";
-        #Endif; ! TARGET_
-    }
-    CommandsOn: switch (n) {
-        1:  "[Enregistrement des commandes activé.]";
-        #Ifdef TARGET_GLULX;
-        2:  "[Les commandes sont actuellement en train d'être rejouées.]";
-        3:  "[Enregistrement des commandes déjà activé.]";
-        4:  "[Echec d'enregistrement des commandes.]";
-        #Endif; ! TARGET_
-    }
-    CommandsRead: switch (n) {
-        1:  "[Rejouer les commandes.]";
-        #Ifdef TARGET_GLULX;
-        2:  "[Les commandes sont déjà en train d'être rejouées.]";
-        3:  "[Rejouer les commandes a échoué.  L'enregistrement des commandes est activé.]";
-        4:  "[Rejouer les commandes a échoué.]";
-        5:  "[Rejouer les commandes achevé.]";
-        #Endif; ! TARGET_
-    }
+   ! CommandsOff: switch (n) {
+   !     1:  "[Enregistrement des commandes désactivé.]";
+   !     #Ifdef TARGET_GLULX;
+   !     2:  "[Enregistrement des commandes déjà désactivé.]";
+   !     #Endif; ! TARGET_
+   ! }
+   ! CommandsOn: switch (n) {
+   !     1:  "[Enregistrement des commandes activé.]";
+   !     #Ifdef TARGET_GLULX;
+   !     2:  "[Les commandes sont actuellement en train d'être rejouées.]";
+   !     3:  "[Enregistrement des commandes déjà activé.]";
+   !     4:  "[Echec d'enregistrement des commandes.]";
+   !     #Endif; ! TARGET_
+   ! }
+   ! CommandsRead: switch (n) {
+   !     1:  "[Rejouer les commandes.]";
+   !     #Ifdef TARGET_GLULX;
+   !     2:  "[Les commandes sont déjà en train d'être rejouées.]";
+   !     3:  "[Rejouer les commandes a échoué.  L'enregistrement des commandes est activé.]";
+   !     4:  "[Rejouer les commandes a échoué.]";
+   !     5:  "[Rejouer les commandes achevé.]";
+   !     #Endif; ! TARGET_
+   ! }
+   ! suite pb compil I7
     Consult:        "Vous ne trouvez rien d'intéressant dans ", (the) x1, ".";
-    CrierSansPrecision : "Vous criez ce qui vous passe par la tête.";
+!    CrierSansPrecision : "Vous criez ce qui vous passe par la tête.";
     Cut:            "Allons, ", (itorthem) x1, " couper ne mènerait pas à grand-chose.";
-    Dig:            "Creuser ne mènerait à rien ici.";
+!    Dig:            "Creuser ne mènerait à rien ici.";
     Disrobe: switch (n) {
         1:  "Vous ne ", (itorthem) x1, " portez pas.";
         2:  "Vous enlevez ", (the) x1, ".";
@@ -1341,12 +1477,14 @@ Include (-
             " non comestible",(s) x1,", selon toute évidence.";
         2:  "Vous mangez ", (the) x1, ". Pas mauvais.";
     }
-    EmptyT: switch (n) {
-        1:  print_ret (The) x1, " ne peut rien contenir."; ! TODO risque de poser pb si pluriel ?
-        2:  print_ret (The) x1, " ", (isorare) x1, " fermé",(es) x1,".";
-        3:  print_ret (The) x1, " ", (isorare) x1, " déjà vide",(s) x1,".";
-        4:  "Ceci ne viderait rien.";
-    }
+!    EmptyT: switch (n) {
+!       1:  print_ret (The) x1, " ne peut rien contenir."; ! TODO risque de poser pb si pluriel ?
+ !       2:  print_ret (The) x1, " ", (isorare) x1, " fermé",(es) x1,".";
+ !       3:  print_ret (The) x1, " ", (isorare) x1, " déjà vide",(s) x1,".";
+ !       4:  "Ceci ne viderait rien.";
+ !  }
+ ! suite pb compil I7
+  
     Enter: switch (n) {
         1:  print "Mais vous êtes déjà ";
             if (x1 has supporter) print "sur "; else print "dans ";
@@ -1402,15 +1540,16 @@ Include (-
             if (x1 has supporter) print "sur "; else print "dans ";
             print_ret (the) x1, ".";
     }
-    Fill:           "Mais il n'y a pas d'eau à porter ici.";
-    FullScore: switch(n) {   
-        1:  if (deadflag) print "Le score était ";
-            else          print "Le score est ";
-            "composé comme suit :^";
-        2:  "trouver divers objets";
-        3:  "visiter différents endroits";
-        4:  print "total (sur ", MAX_SCORE; ")";
-    }
+!    Fill:           "Mais il n'y a pas d'eau à porter ici.";
+!    FullScore: switch(n) {   
+!        1:  if (deadflag) print "Le score était ";
+!            else          print "Le score est ";
+!            "composé comme suit :^";
+!        2:  "trouver divers objets";
+!        3:  "visiter différents endroits";
+!        4:  print "total (sur ", MAX_SCORE; ")";
+!    }
+ ! suite pb compil I7
     GetOff:         "Mais vous n'êtes pas sur ", (the) x1, " en ce moment.";
     Give: switch (n) {
         1:  "Vous n'avez pas en main ", (the) x1, ".";
@@ -1458,7 +1597,8 @@ Include (-
         4:  print ".^";
     }
     Jump:           "Vous sautez sur place, vainement.";
-    JumpOver, Tie:  "Vous n'arriverez à rien comme ça.";
+   ! JumpOver:  "Vous n'arriverez à rien comme ça.";
+    Tie:  "Vous n'arriverez à rien comme ça.";
     Kiss:           "Concentrez-vous sur le jeu.";
     Listen:         "Vous n'entendez rien de particulier.";
     ListMiscellany: switch (n) {
@@ -1571,7 +1711,8 @@ Include (-
         24: "Vous ne pouvez pas discuter avec ", (the) x1, ".";
             ! "parler à" serait mieux mais délicat (ex: à l'oiseau)
         25: "Pour parler à quelqu'un, essayez ~quelqu'un, bonjour~ ou quelque chose dans le genre.";
-        26: "(vous prenez d'abord ", (the) not_holding, ")";
+       !  26: "(vous prenez d'abord ", (the) not_holding, ")";
+        26: "(vous prenez d'abord cela.)";
         27: "Je ne comprends pas cette phrase.";
         28: print "Merci de reformuler. Je n'ai compris que : ";
         29: "Je n'ai pas compris ce nombre.";
@@ -1616,18 +1757,19 @@ Include (-
     Yes, No:        "Mmmh ?";
     NotifyOff:      "Notification du score désactivée.";
     NotifyOn:       "Notification du score activée.";
-    Objects: switch(n) {
-        1:  "Objets ayant été portés :^";
-        2:  "Aucun.";
-        3:  print "   (sur le corps)";
-        4:  print "   (dans l'inventaire)";
-        5:  print "   (abandonné",(es) x1,")";
-        6:  print "   (", (name) x1, ")";
-        7:  print "   (dans ", (the) x1, ")";
-        8:  print "   (dans ", (the) x1, ")";
-        9:  print "   (sur ", (the) x1, ")";
-        10: print "   (perdu",(es) x1,")";
-    }
+!    Objects: switch(n) {
+!        1:  "Objets ayant été portés :^";
+ !       2:  "Aucun.";
+!        3:  print "   (sur le corps)";
+!        4:  print "   (dans l'inventaire)";
+!        5:  print "   (abandonné",(es) x1,")";
+!        6:  print "   (", (name) x1, ")";
+!        7:  print "   (dans ", (the) x1, ")";
+!        8:  print "   (dans ", (the) x1, ")";
+!        9:  print "   (sur ", (the) x1, ")";
+!        10: print "   (perdu",(es) x1,")";
+ !   }
+ ! suite pb compil I7
     Open: switch (n) {
 !        1: "Vous ne pouvez pas ouvrir cela.";
         1:  print_ret "Vous ne pouvez pas ouvrir ", (the) x1,".";
@@ -1642,19 +1784,21 @@ Include (-
             ".";
         5:  "Vous ouvrez ", (the) x1, ".";
     }
-    Order:  print (The) x1;
-            if (x1 has pluralname) 
-                print " ont"; else print " a";
-                " mieux à faire.";
-    ParlerIncorrect : "Soyez plus précis dans votre communication, ou reformulez.";
-    ParlerSansPrecision :   if (noun==player) "Vous ne savez pas quoi vous dire que vous ne sachiez déjà.";
-                            else "Pas de réponse.";
-    Places: switch (n) {
-        1:  print "Vous avez visité : ";
-        2:  print ".^";
-    }
-    Pray:   "Rien de concret ne résulte de votre prière.";
-    Prompt:   print "^>";
+ !   Order:  print (The) x1;
+ !           if (x1 has pluralname) 
+ !               print " ont"; else print " a";
+ !               " mieux à faire.";
+  !  suite pb compil I7
+  !  ParlerIncorrect : "Soyez plus précis dans votre communication, ou reformulez.";
+  !  ParlerSansPrecision :   if (noun==player) "Vous ne savez pas quoi vous dire que vous ne sachiez déjà.";
+   !                         else "Pas de réponse.";
+  !  Places: switch (n) {
+  !      1:  print "Vous avez visité : ";
+  !      2:  print ".^";
+  !  }
+!    Pray:   "Rien de concret ne résulte de votre prière.";
+ !   Prompt:   print "^>";
+ ! I7
     Pronouns: switch (n) {
         1:  print "En ce moment, ";
         2:  print "signifie ";
@@ -1749,7 +1893,7 @@ Include (-
                 TERSE_BIT + ENGLISH_BIT + CONCEAL_BIT);
             ".";
     }
-    Set:            "Non, vous ne pouvez pas ", (itorthem) x1, " régler.";
+  !  Set:            "Non, vous ne pouvez pas ", (itorthem) x1, " régler.";
     SetTo:          "Non, vous ne pouvez pas ", (itorthem) x1, " régler sur rien.";
     Show: switch (n) {
         1:  "Vous n'avez pas ", (the) x1, ".";
@@ -1765,7 +1909,7 @@ Include (-
     }
     Strong:         "Les vrais aventuriers n'emploient pas un tel langage.";
 #Ifndef NI_BUILD_COUNT;
-  Swim:           "Il n'y a pas assez d'eau pour nager dedans.";  ! swim desactive par defaut dans I7
+!  Swim:           "Il n'y a pas assez d'eau pour nager dedans.";  ! swim desactive par defaut dans I7
 #endif; ! NI_BUILD_COUNT
     Swing:          "Il n'y a rien de sensé pour se balancer ici.";
     SwitchOff: switch (n) {
@@ -1825,10 +1969,10 @@ Include (-
         3:  "Cela ne rentre pas dans la serrure.";
         4:  "Vous déverrouillez ", (the) x1, ".";
     }
-    VagueDo: "Soyez plus précis."; 
-    VagueGo: "Vous devez donner la direction dans laquelle aller.";
-    VagueDig: "Vous devez indiquer ce que vous souhaitez creuser, et si nécessaire, avec quoi vous voulez le faire.";
-    VagueUse: "Veuillez indiquer un verbe plus précis.";
+!    VagueDo: "Soyez plus précis."; 
+!    VagueGo: "Vous devez donner la direction dans laquelle aller.";
+!    VagueDig: "Vous devez indiquer ce que vous souhaitez creuser, et si nécessaire, avec quoi vous voulez le faire.";
+!    VagueUse: "Veuillez indiquer un verbe plus précis.";
     Verify: switch (n) {
         1: "Le fichier semble intact.";
         2: "Le fichier est certainement corrompu !";
@@ -1906,7 +2050,7 @@ Example: * Petit Père Noël - Un très court exemple de jeu en français.
 	
 	Hotte is a player's holdall. The player is wearing hotte. Hotte is female. The printed name of hotte is "la hotte".
 
-	SurLeToit is a room. The printed name of SurLeToit is "Sur le toit". "Après avoir effectué votre travail sur l'ensemble des bâtisses de cette petite ville provinciale, vous vous trouvez enfin sur le toit de la dernière des maisons à visiter."
+	SurLeToit is a room. The printed name of SurLeToit is "Sur le toit". "Après avoir effectué votre travail sur l'ensemble des bâtisses de cette petite ville provinciale, vous vous trouvez enfin sur le toit de la dernière des maisons à visiter. Quel travail..."
 
 	East of Jardin is Jardin2. Above is SurLeToit. 
 
