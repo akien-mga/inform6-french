@@ -4,15 +4,16 @@ French by Eric Forgeot begins here.
 
 Part 1 - French specifics
 
+Use French Language translates as (- Constant French; -). [Use French Language.]Use French 3PSP Language translates as (- Constant FrenchN11_3PSP; -).[Use French 3PSP Language.][troisième personne du singulier au passé.]
 
 A thing can be female.
-A device is always an Inform library supporter.
+[ pose pb A device is always an Inform library supporter.]
 
 [ 1=masculino, 2=femenino,
   3=masculino plural, 4= femenino plural ]
 A thing has a number called the gender.
 Gender is a kind of value. The gender are single male, single female, plural male and plural female.
-The gender translates into Inform as "gender".
+[pose pb The gender translates into Inform as "gender".]
 
 [The description of a player-character is always "Vous êtes comme à votre habitude." ] [doesn't work in the french lib, it must be set by ]
 
@@ -413,7 +414,7 @@ Carry out swimming:
 	if using the French Language option, say "Il n'y a pas assez d'eau pour nager dedans.";
 	if using the French 3PSP Language option, say "Il n'y avait pas assez d'eau pour nager dedans.".
 
-Part IV - Redefinition of Languages.i6t
+Part IV - Redefinition of Languages i6
 
 Include (-
 Constant LibReleaseFR      "2.3devI6+I7";
@@ -470,7 +471,7 @@ CompassDirection -> in_obj "intérieur"
 CompassDirection -> out_obj "extérieur"
                     with door_dir out_to, name 'dehors' 'exterieur',
                     article "l'";
--) instead of "Compass" in Output.i6t
+-) instead of "Compass" in "Output.i6t"
 
 Include (-
 Constant ALL1__WD     = 'tous';
@@ -910,7 +911,8 @@ global enleveaccents=1;
     !  insertion d'un espace avant chaque tiret et après chaque apostrophe 
     for (i=WORDSIZE:i<WORDSIZE+NbChars():i++) {
         if (buffer->i == '-') LTI_Insert(i++, ' ');
-        if (buffer->i == ''') LTI_Insert(++i, ' '); ! ''' !*! autre notation ? '\'' par exemple ?
+        if (buffer->i == ''') LTI_Insert(++i, ' '); ! 
+        ! autre notation ? '\'' par exemple ?
     }
     Tokenise__(buffer,parse);
 
@@ -921,14 +923,16 @@ global enleveaccents=1;
         Tokenise__(buffer,parse); 
     }
 
-    !*! ce qui suit ne tient pas bien compte des commandes s'adressant à quelqu'un ("machin, fais ceci")
+    ! ce qui suit ne tient pas bien compte des commandes s'adressant à quelqu'un ("machin, fais ceci")
     ! Transformation de phrases à l'infinitif commençant par un ou deux pronoms suivis d'un mot (verbe, probablement)
     ! Ex : "le lui donner" devient "donner -le -lui"
     ! Etape A : "le/la/l'/les" (suivi éventuellement de "lui/leur") passe après le verbe. Ex : "lui donner -le"
     word=Mot(0); ! 1er mot
     if ((NbMots()>=2)&&(Mot(1)=='lui'or'leur')) RangVerbe=2; else RangVerbe=1; ! verbe = 2e ou 3e mot ?
-    b=PositionMot(RangVerbe)+LongueurMot(RangVerbe); ! juste après le verbe = position du verbe + longueur du verbe
-    if (~~DernierMot(RangVerbe-1)) { ! ne rien faire si la phrase ne comporte pas de verbe
+    b=PositionMot(RangVerbe)+LongueurMot(RangVerbe); 
+    ! juste après le verbe = position du verbe + longueur du verbe
+    if (~~DernierMot(RangVerbe-1)) { 
+    	! ne rien faire si la phrase ne comporte pas de verbe
         if (word == 'le')
         {
             EcraseMot(0);
@@ -1864,6 +1868,7 @@ Inform 7 permet de changer facilement de système de langue comme c'était le ca
 Pour utiliser les bibliothèques françaises, il faudrait inclure dans la source du jeu :
 
 		Include French by Eric Forgeot. 
+		Use French Language. [ceci existe pour utiliser des formes au passé etc.]
 
 En ayant bien auparavant installé cette extension via la commande >Files>Install extensions d'Inform 7.
 
@@ -1893,46 +1898,49 @@ Eric Forgeot - http://ifiction.free.fr - http://informfr.tuxfamily.org/
         
 Example: * Petit Père Noël - Un très court exemple de jeu en français.
 
-        *: "Petit Père Noël" by Otto Grimwald. 
+	*: "Petit Père Noël" by Otto Grimwald. 
+	
+	Include French by Eric Forgeot.
+	
+	Part 1 - Les lieux 
+	
+	Hotte is a player's holdall. The player is wearing hotte. Hotte is female. The printed name of hotte is "la hotte".
 
-        Include French by Eric Forgeot.
+	SurLeToit is a room. The printed name of SurLeToit is "Sur le toit". "Après avoir effectué votre travail sur l'ensemble des bâtisses de cette petite ville provinciale, vous vous trouvez enfin sur le toit de la dernière des maisons à visiter."
 
-        Hotte is a player's holdall. The player is wearing hotte. Hotte is female. The printed name of hotte is "la hotte".
+	East of Jardin is Jardin2. Above is SurLeToit. 
 
-        SurLeToit is a room. The printed name of SurLeToit is "Sur le toit". "Après avoir effectué votre travail sur l'ensemble des bâtisses de cette petite ville provinciale, vous vous trouvez enfin sur le toit de la dernière des maisons à visiter."
+	The cheminée is in SurLeToit. Cheminée is a container. Cheminée is female. Understand "cheminee" as cheminée. The description of cheminée is "Les cheminées, ça vous les connaissez !" 
 
-        East of Jardin is Jardin2. Above is SurLeToit. 
+	Instead of inserting something into Cheminée, say "Vous ne pouvez pas, il y a encore du feu là dedans, et cela détruirait ce que vous voulez y mettre".
 
-        The cheminée is in SurLeToit. Cheminée is a container. Cheminée is female. Understand "cheminee" as cheminée. The description of cheminée is "Les cheminées, ça vous les connaissez !" 
-
-        Instead of inserting something into Cheminée, say "Vous ne pouvez pas, il y a encore du feu là dedans, et cela détruirait ce que vous voulez y mettre".
-
-        When play begins:
+	When play begins:
                 move hotte to player;
                 move cadeau to hotte;
                 move carte to hotte.
 
-        The cadeau is a thing. Understand "paquet" or "cadeau" as cadeau.
+	Part 2 - Les objets 
+	
+	The cadeau is a thing. Understand "paquet" or "cadeau" as cadeau.
 
-        The carte is a female thing. Understand "carte" or "cartes" as carte. The printed name of carte is "carte de visite". The description of carte is "Un paquet de cartes de visite à votre effigie que vous laissez généralement avec les cadeaux que vous livrez.".
+	The carte is a female thing. Understand "carte" or "cartes" as carte. The printed name of carte is "carte de visite". The description of carte is "Un paquet de cartes de visite à votre effigie que vous laissez généralement avec les cadeaux que vous livrez.".
 
-        Instead of giving carte to gnome:
+	Instead of giving carte to gnome:
         say "Il prend la carte, et sursaute aussitôt.";
         say "Après avoir fait une petite révérence, il dépose sur le sol une clé, et se dirige vers la porte de la maison.";
         move gnome to jardin;
         move GnomeCle to location of the player.
 
+	Instead of giving cadeau to gnome, say "Il n'est veut pas, et il ne semble pas aimer ce genre de chose. ".
 
-        Instead of giving cadeau to gnome, say "Il n'est veut pas, et il ne semble pas aimer ce genre de chose. ".
+	Jardin is a room. The printed name of Jardin is "Un beau jardin". "Ce petit jardin propret vous fait penser au vôtre. Sans doute qu'il y a là quelques gnomes agiles qui viennent l'entretenir. Il continue à s'étendre, sur votre droite, à l'est. La maison se trouve au sud."
 
-        Jardin is a room. The printed name of Jardin is "Un beau jardin". "Ce petit jardin propret vous fait penser au vôtre. Sans doute qu'il y a là quelques gnomes agiles qui viennent l'entretenir. Il continue à s'étendre, sur votre droite, à l'est. La maison se trouve au sud."
+	The PorteMaison is a door. It is south of Jardin and north of Salon. Salon is inside from Jardin. PorteMaison is female, locked and closed. The matching key of the PorteMaison is the GnomeCle. The printed name of PorteMaison is "porte d'entrée". The description of PorteMaison is "La porte de la maison est en acier qui semble épais." 
+	Understand "portail/porte/seuil/entree" as PorteMaison.
 
-        The PorteMaison is a door. It is south of Jardin and north of Salon. Salon is inside from Jardin. PorteMaison is female, locked and closed. The matching key of the PorteMaison is the GnomeCle. The printed name of PorteMaison is "porte d'entrée". The description of PorteMaison is "La porte de la maison est en acier qui semble épais." 
-        Understand "portail/porte/seuil/entree" as PorteMaison.
+	GnomeCle is a thing. The printed name of GnomeCle is "clef". Understand "clé/clef/cle" as gnomecle.
 
-        GnomeCle is a thing. The printed name of GnomeCle is "clef". Understand "clé/clef/cle" as gnomecle.
-
-        Instead of going to salon when the player is in Jardin: 
+	Instead of going to salon when the player is in Jardin: 
         if PorteMaison is not locked
                 begin;
                         say "Vous pouvez enfin entrer et livrer votre paquet directement dans la maison. Félicitation.";
@@ -1942,27 +1950,24 @@ Example: * Petit Père Noël - Un très court exemple de jeu en français.
         end if.
                 
 
-        Instead of examining Jardin for the second time, say "Vous êtes dans le jardin, tout près de la maison. Vous pouvez remonter sur le toit depuis ici."
+	Instead of examining Jardin for the second time, say "Vous êtes dans le jardin, tout près de la maison. Vous pouvez remonter sur le toit depuis ici."
 
-        Jardin2 is a room. The printed name of Jardin2 is "Le bout du jardin". "Vous êtes près de la limite de la propriété. Au delà s'étendent les autres jardins du voisinage."
-
+	Jardin2 is a room. The printed name of Jardin2 is "Le bout du jardin". "Vous êtes près de la limite de la propriété. Au delà s'étendent les autres jardins du voisinage."
+              
+	The gnome is in jardin2.
+	The gnome is a man. Understand "gnome/troll/créature/lutin" or "petit gnome" as Gnome. The description of Gnome is "C'est un lutin à l'air espiègle. Vous vous demandez si ce n'est pas lui qui garde la maison en l'absence de ses propriétaires".
                 
-        The gnome is in jardin2.
-        The gnome is a man. Understand "gnome/troll/créature/lutin" or "petit gnome" as Gnome. The description of Gnome is "C'est un lutin à l'air espiègle. Vous vous demandez si ce n'est pas lui qui garde la maison en l'absence de ses propriétaires".
-                
-
-        Instead of pushing or pulling or attacking the PorteMaison for the first time:
+	Instead of pushing or pulling or attacking the PorteMaison for the first time:
          say "Vous n'avez pas la force pour le faire, et quand bien même cela serait immoral.".
         
-        Instead of pushing or pulling or attacking the door for the second time, say "Voudriez-vous vous reconvertir dans le braquage ? Qu'en penserait votre femme ?"
+	Instead of pushing or pulling or attacking the door for the second time, say "Voudriez-vous vous reconvertir dans le braquage ? Qu'en penserait votre femme ?"
 
-        Instead of pushing or pulling or attacking the door for the third time:
+	Instead of pushing or pulling or attacking the door for the third time:
         say "Vous voyez une voiture de police qui passe par là. Des policiers vous arrêtent et vous mettent directement en prison.";
         end the game in death.
 
 
-        Understand "talk to [someone]" as a mistake ("Le gnome ne comprend pas votre langue.").
+	Understand "talk to [someone]" as a mistake ("Le gnome ne comprend pas votre langue.").
 
-
-        Test me with "descendre / aller à droite / regarder le gnome / donner la carte au gnome / prendre la cle /  ouest / ouvrir la porte avec la clé / entrer "
+	Test me with "descendre / aller à droite / regarder le gnome / donner la carte au gnome / prendre la cle /  ouest / ouvrir la porte avec la clé / entrer "
 
