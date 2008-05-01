@@ -210,7 +210,7 @@ Understand the command "fasten" as something new.
 
 
 
-For printing the locale description (this is the interesting locale paragraphs-french rule):
+Before printing the locale description (this is the interesting locale paragraphs-french rule):
 	let the domain be the parameter-object;
 	sort the Table of Locale Priorities in locale description priority order;
 	repeat through the Table of Locale Priorities:
@@ -218,7 +218,7 @@ For printing the locale description (this is the interesting locale paragraphs-f
 		carry out the printing a locale paragraph about activity with the notable-object entry;
 	continue the activity.
 
-For printing the locale description (this is the you-can-also-see-french rule):
+Before printing the locale description (this is the you-can-also-see-french rule):
 	let the domain be the parameter-object;
 	let the mentionable count be 0;
 	repeat with item running through things:
@@ -238,12 +238,12 @@ For printing the locale description (this is the you-can-also-see-french rule):
 		otherwise:
 			if handling the listing nondescript items activity:
 				if the domain is a room:
-					if the domain is the location, say "You ";
-					otherwise say "In [the domain] you ";
+					if the domain is the location, say "Vous ";
+					otherwise say "Dans [the domain] vous ";
 				otherwise if the domain is a supporter:
-					say "On [the domain] vous ";
+					say "Sur [the domain] vous ";
 				otherwise:
-					say "In [the domain] vous ";
+					say "Dans [the domain] vous ";
 				say "pouvez [if the locale paragraph count is greater than 0]aussi [end if]voir ";
 				let the common holder be nothing;
 				let contents form of list be true;
@@ -377,6 +377,13 @@ Understand the command "frapper", "combattre", "briser", "detruire", or "casser"
 [vider a ete retire]
 [remplir/emplir a ete retire]
 
+[Understand "transferer [something] vers/dans/sur [something]" as transfering.]
+
+Understand "prendre [something]" as taking.
+Understand the command "pr", "ramasser", "decoller" and "cueillir" as "prendre".
+
+Understand "prendre [direction]" or "prendre vers [direction]" as going.
+
 Understand "examiner [something]", "decrire [something]" and "observer [something]" as examining.
 
 Understand "fouiller [something]" as searching.
@@ -467,6 +474,19 @@ Understand "attendre" or "a" as waiting.
 
 [Understand "prier" as praying. Pas dans I7]
 
+Understand "monter" as UpGoing.
+UpGoing is an action applying to nothing.
+Carry out UpGoing: try going up.
+
+
+
+Understand "grimper" or "grimper sur [something]" as climbing.
+Understand the command "gravir" and "escalader" as "grimper".
+
+[jump over not in I7]
+Understand "sauter" as jumping.
+Understand the command "bondir" as "sauter".
+
 Understand the command "swim" as something new.
 Swimming is an action applying to nothing. Understand "swim" or "dive" or "nager" or "plonger" as swimming. 
 
@@ -476,15 +496,15 @@ Carry out swimming:
 
 Understand "fermer [something]" as closing.
 
-[Understand "fermer [something] avec [something preferably held]" or "fermer [something] a cle" or "fermer [something] a clef" as locking.
+Understand "fermer [something] avec [something preferably held]" or "fermer [something] a cle" or "fermer [something] a clef" as locking it with.
 
-Understand the command "verrouiller" as "fermer".]
+Understand the command "verrouiller" as "fermer".
 
-[Understand "ouvrir [something]" as opening.
+Understand "ouvrir [something]" as opening.
 
-Understand "ouvrir [something] avec [something preferably held]" as unlocking.
+Understand "ouvrir [something] avec [something preferably held]" as unlocking it with.
 
-Understand the command "deverrouiller" and "forcer" as "ouvrir".]
+Understand the command "deverrouiller" and "forcer" as "ouvrir".
 
 
 Part IV - Redefinition of Languages i6
@@ -1753,6 +1773,25 @@ Include (-
         55: "[Commentaire NON enregistré.]";
         56: print ".^";
         57: print "?^";
+        ! TODO le reste
+                58: print (The) actor, " ", (IsOrAre) actor, " unable to do that.^";
+		59:	"You must supply a noun.";
+		60:	"You may not supply a noun.";
+		61:	"You must name an object.";
+		62:	"You may not name an object.";
+		63:	"You must name a second object.";
+		64:	"You may not name a second object.";
+		65:	"You must supply a second noun.";
+		66:	"You may not supply a second noun.";
+		67:	"You must name something more substantial.";
+		68:	print "(", (The) actor, " first taking ", (the) x1, ")^";
+        69: "(first taking ", (the) x1, ")";
+        70: "The use of UNDO is forbidden in this game.";
+        71: print (string) DARKNESS__TX;
+  		72: print (The) x1;
+            if (x1 has pluralname) print " have"; else print " has";
+            " better things to do.";
+        73: "That noun did not make sense in this context.";
     }
     Yes, No:        "Mmmh ?";
     NotifyOff:      "Notification du score désactivée.";
@@ -1811,6 +1850,10 @@ Include (-
         2:  "Vous en êtes incapable.";
         3:  "Rien d'évident ne se produit.";
         4:  "Cela serait moins que courtois.";
+        ! TODO
+        5:	print (The) actor, " pulls ", (the) x1, ".^";
+		6:	print (The) actor, " pushes ", (the) x1, ".^";
+		7:	print (The) actor, " turns ", (the) x1, ".^";
     }
 ! Push: see Pull
     PushDir: switch (n) {
@@ -1829,6 +1872,8 @@ Include (-
         6:  "Il n'y a plus assez de place sur ", (the) x1, ".";
         7:  "C'est fait.";
         8:  "Vous mettez ", (the) x1, " sur ", (the) second, ".";
+        ! TODO
+        9:  print (The) actor, " puts ", (the) x1, " on ", (the) second, ".^";
     }
     Quit: switch (n) {
         1:  print "Répondez par oui ou par non, je vous prie.";
@@ -1863,6 +1908,8 @@ Include (-
             if (turns ~= 1) print "s";
             return;
         2:  "Il n'y a pas de score dans cette histoire.";
+         ! TODO
+         3:	print ", earning you the rank of ";
     }
     ScriptOff: switch (n) {
         1:  "Aucune transcription en cours.";
@@ -2054,7 +2101,7 @@ Example: * Petit Père Noël - Un très court exemple de jeu en français.
 
 	East of Jardin is Jardin2. Above is SurLeToit. 
 
-	The cheminée is in SurLeToit. Cheminée is a container. Cheminée is female. Understand "cheminee" as cheminée. The description of cheminée is "Les cheminées, ça vous les connaissez !" 
+	The cheminée is in SurLeToit. Cheminée is a container. Cheminée is female and fixed in place. Understand "cheminee" as cheminée. The description of cheminée is "Les cheminées, ça vous les connaissez !" 
 
 	Instead of inserting something into Cheminée, say "Vous ne pouvez pas, il y a encore du feu là dedans, et cela détruirait ce que vous voulez y mettre".
 
@@ -2109,7 +2156,6 @@ Example: * Petit Père Noël - Un très court exemple de jeu en français.
 	Instead of pushing or pulling or attacking the door for the third time:
         say "Vous voyez une voiture de police qui passe par là. Des policiers vous arrêtent et vous mettent directement en prison.";
         end the game in death.
-
 
 	Understand "talk to [someone]" as a mistake ("Le gnome ne comprend pas votre langue.").
 
