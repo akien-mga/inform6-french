@@ -1,24 +1,72 @@
-French by Eric Forgeot begins here.
+Version 1/080502 of French by Eric Forgeot begins here.
 
-"Quelques modifications des regles de base pour supporter le francais. To make French the language of play, and allow the standard textual responses to commands to be changed."
+"Quelques modifications des regles de base pour supporter le francais : To make French the language of play."
 
 Part 1 - French specifics
 
-Use French Language translates as (- Constant French; -). [Use French Language.]Use French 3PSP Language translates as (- Constant FrenchN11_3PSP; -).[Use French 3PSP Language.][troisième personne du singulier au passé.]
+Use French Language translates as (- Constant French; -). [Use French Language. ]Use French 3PSP Language translates as (- Constant French3PSP; -).[Use French 3PSP Language.][troisième personne du singulier au passé. : work in progress, was used in the game "les heures du vent"]
+
+Use French 1PSP Language translates as (- Constant French1PSP; -).
+[Use French 1PSP Language.]
 
 A thing can be female.
-[ pose pb A device is always an Inform library supporter.]
+[ pose pb : A device is always an Inform library supporter.]
 
 [ 1=masculino, 2=femenino,
   3=masculino plural, 4= femenino plural ]
 A thing has a number called the gender.
 Gender is a kind of value. The gender are single male, single female, plural male and plural female.
-[pose pb The gender translates into Inform as "gender".]
+[pose pb : The gender translates into Inform as "gender".]
 
-[The description of a player-character is always "Vous êtes comme à votre habitude." ] [doesn't work in the french lib, it must be set by ]
+[The description of a player-character is always "Vous êtes comme à votre habitude." ] 
+  [doesn't work in the french lib, it must be set by the author]
 
-[I don't remove the english verbs, they could be useful to some players ?
-Here they are anyway...
+Part 2 - French directions
+
+A direction has a text called printed name.
+The printed name of north is "nord".
+The printed name of south is "sud".
+The printed name of east is "est".
+The printed name of west is "ouest".
+
+The printed name of northeast is "nord-est".
+The printed name of southwest is "sud-ouest".
+The printed name of southeast is "sud-est".
+The printed name of northwest is "nord-ouest".
+
+The printed name of inside is "dedans".
+The printed name of outside is "dehors".
+The printed name of up is "en haut".
+the printed name of down is "en bas".
+
+
+Understand "gauche" as west.
+Understand "ouest" as west.
+Understand "o" as west.
+Understand "droite" as east.
+Understand "est" as east.
+
+Understand "sud" as south.
+Understand "nord" as north.	
+Understand "bas" as down.
+Understand "haut" as up.
+Understand "remonter" as up.
+
+Understand "nord-est/nordest" as northeast.
+Understand "nord-ouest/nordouest" or "no" as northwest. [toujours problème de 'saying no']
+Understand "sud-ouest/sudouest" or "so" as southwest.
+Understand "sud-est/sudest" as southeast.
+
+Include (- has proper, -) when defining up. [para evitar 'el arriba']
+Include (- has proper, -) when defining down.
+Include (- has proper, -) when defining inside.
+Include (- has proper, -) when defining outside.
+
+Part 3 - Replacing English verbs
+
+[I don't remove the english verbs yet, they could be useful to some players ?
+I'll create a way to desactive them later anyway, when all the verbs in French will be working correctly.
+Here is the list anyway...
 
 Understand the command "take" as something new.
 Understand the command "carry" as something new.
@@ -207,126 +255,11 @@ Understand the command "fasten" as something new.
 ]
 
 
+Part 4 - Grammar
 
 
-
-Before printing the locale description (this is the interesting locale paragraphs-french rule):
-	let the domain be the parameter-object;
-	sort the Table of Locale Priorities in locale description priority order;
-	repeat through the Table of Locale Priorities:
-		[say "[notable-object entry]...";]
-		carry out the printing a locale paragraph about activity with the notable-object entry;
-	continue the activity.
-
-Before printing the locale description (this is the you-can-also-see-french rule):
-	let the domain be the parameter-object;
-	let the mentionable count be 0;
-	repeat with item running through things:
-		now the item is not marked for listing;
-	repeat through the Table of Locale Priorities:
-		[say "[notable-object entry] - [locale description priority entry].";]
-		if the locale description priority entry is greater than 0,
-			now the notable-object entry is marked for listing;
-		increase the mentionable count by 1;
-	if the mentionable count is greater than 0:
-		repeat with item running through things:
-			if the item is mentioned:
-				now the item is not marked for listing;
-		begin the listing nondescript items activity;
-		if the number of marked for listing things is 0:
-			abandon the listing nondescript items activity;
-		otherwise:
-			if handling the listing nondescript items activity:
-				if the domain is a room:
-					if the domain is the location, say "Vous ";
-					otherwise say "Dans [the domain] vous ";
-				otherwise if the domain is a supporter:
-					say "Sur [the domain] vous ";
-				otherwise:
-					say "Dans [the domain] vous ";
-				say "pouvez [if the locale paragraph count is greater than 0]aussi [end if]voir ";
-				let the common holder be nothing;
-				let contents form of list be true;
-				repeat with list item running through marked for listing things:
-					if the holder of the list item is not the common holder:
-						if the common holder is nothing,
-							now the common holder is the holder of the list item;
-						otherwise now contents form of list is false;
-					if the list item is mentioned, now the list item is not marked for listing;
-				filter list recursion to unmentioned things;
-				if contents form of list is true and the common holder is not nothing,
-					list the contents of the common holder, as a sentence, including contents,
-						giving brief inventory information, tersely, not listing
-						concealed items, listing marked items only;
-				otherwise say "[a list of marked for listing things including contents]";
-				if the domain is the location, say " ici";
-				say ".[paragraph break]";
-				unfilter list recursion;
-			end the listing nondescript items activity;
-	continue the activity.
-
-
-Part 2 - French directions
-
-A direction has a text called printed name.
-The printed name of north is "nord".
-The printed name of south is "sud".
-The printed name of east is "est".
-The printed name of west is "ouest".
-
-The printed name of northeast is "nord-est".
-The printed name of southwest is "sud-ouest".
-The printed name of southeast is "sud-est".
-The printed name of northwest is "nord-ouest".
-
-The printed name of inside is "dedans".
-The printed name of outside is "dehors".
-The printed name of up is "en haut".
-the printed name of down is "en bas".
-
-
-Understand "gauche" as west.
-Understand "ouest" as west.
-Understand "o" as west.
-Understand "droite" as east.
-Understand "est" as east.
-
-Understand "sud" as south.
-Understand "nord" as north.	
-Understand "bas" as down.
-Understand "haut" as up.
-Understand "remonter" as up.
-
-Understand "nord-est/nordest" as northeast.
-Understand "nord-ouest/nordouest" or "no" as northwest. [toujours problème de 'saying no']
-Understand "sud-ouest/sudouest" or "so" as southwest.
-Understand "sud-est/sudest" as southeast.
-
-Include (- has proper, -) when defining up. [para evitar 'el arriba']
-Include (- has proper, -) when defining down.
-Include (- has proper, -) when defining inside.
-Include (- has proper, -) when defining outside.
-
-
-Part 3 - Grammar
-
-[is it needed with our french libraries ? (cf. the spanish extension) for ex : 
-
-Understand "porter [something preferably held]" as wearing.
-
-To be checked when the final release of inform 7 will be out...
-
-(edit :)
-Because of the impossibility to derive some verbs into Inform 7, it's necessary to shortcut the reference to french verbs into FrenchGN11.h, and define the new relations into this Extension. We'll add new verbs when it's necessary.
-
-]
-
-
-[
-
-note : 
+[ note : 
 blowing' action, intended for woodwind instruments and perhaps the occasional siphon, has been withdrawn from the built-in set: it no longer seems to us part of the essential core of actions. We have similarly removed praying, digging, jumping over, filling and swimming
-
 
 à implémenter par la suite : 
 
@@ -346,17 +279,50 @@ topic   specified action
 
 ]
 
-Understand "descendre" as descending.
-Descending is an action applying to nothing.
-Carry out descending: try going down.
+Understand "entrer" as InGoing.
+InGoing is an action applying to nothing.
+Carry out InGoing: try going inside.
+
+Understand "entrer dans [something]" or  "entrer [something]"  as entering.
+Understand the command "rentrer" as "entrer".
+
+
+
+Understand "asseoir [something]" or "asseoir vous dans/sur [something]" as entering.
+Understand the command "allonger" or "coucher" as "asseoir".
+
+Understand "descendre" as DownGoing.
+DownGoing is an action applying to nothing.
+Carry out DownGoing: try going down.
 
 
 Understand "descendre de [something]" as getting off.
 Understand "descendre du [something]" as getting off.
 Understand "descendre des [something]" as getting off.
 
-
 [todo : descendre vers etc]
+
+Understand "sortir" or "sortir de la" or "sortir d'ici"  as exiting.
+
+Understand "sortir vers/a/au/de/du/des/d' [something]" as OutGoing.
+OutGoing is an action applying to one thing.
+Carry out OutGoing: try going outside.
+
+
+Understand the command "partir" as "sortir".
+
+Understand "aller vers/a/à/en [direction]" or "aller [direction]" as going.
+Understand "aller vers le bas" or "aller en bas" as DownGoing.
+
+Understand "aller [something]" as entering.
+
+Understand the command "marcher", "courir" or "passer" as "aller".
+
+Understand "debout" as exiting.
+Understand "lever vous" or "se lever" as exiting.
+
+Understand "lever [something]" as taking.
+Understand the command "relever" or "soulever" as "lever".
 
 Understand "boire [something]" or "boire de [something]" or "boire du [something]" or "boire a [something]" or "boire de l'[something]" as drinking.
 Understand the command "avaler" and "siroter" as "boire".
@@ -379,12 +345,25 @@ Understand the command "frapper", "combattre", "briser", "detruire", or "casser"
 
 [Understand "transferer [something] vers/dans/sur [something]" as transfering.]
 
-Understand "prendre [something]" as taking.
+Understand "prendre [things]" as taking.
 Understand the command "pr", "ramasser", "decoller" and "cueillir" as "prendre".
 
 Understand "prendre [direction]" or "prendre vers [direction]" as going.
 
+Understand "deposer [things preferably held]" as dropping.
+Understand "deposer [other things] dans [something]" or "mettre [other things] dans [something]" as inserting it into.
+Understand "deposer [other things] sur [something]" or "mettre [other things] sur [something]" as putting it on.
+
+Understand the command "poser" and "abandonner" and "lacher" and as "deposer". 
+
+Understand "enlever [something preferably held]" as taking off.
+
+Understand "revetir [something preferably held]"or "mettre [something preferably held]" as wearing. 
+
+
 Understand "examiner [something]", "decrire [something]" and "observer [something]" as examining.
+
+Understand the command "regarder" as "examiner".
 
 Understand "fouiller [something]" as searching.
 Understand "chercher dans [something]" as searching.
@@ -404,16 +383,16 @@ Understand the command "caresser" as "toucher".
 Understand the command "tater" as "toucher".
 
 Understand the command "read" as something new.
-Understand the command "lire" as something new.
+[Understand the command "lire" as something new.]
 
 Reading is an action applying to one thing.
+[will we keep this difference in the future ? TODO]
 
-Understand "read [something]" as reading.
-Understand "lire [something]" as reading.  
+Understand "read [something]" or "lire [something]" as reading.
+ 
 
 Carry out reading: 
-	if using the French Language option, say "Il n[']y a rien de spécial à lire ici.";
-	if using the French 3PSP Language option, say "Il n[']y avait rien de spécial à lire ici.".
+	say "[if using the French 3PSP Language option]Il n[']y avait rien de spécial à lire ici.[otherwise if using the French 1PSP Language option]Je n'avais rien de spécial à lire ici.[otherwise]Il n[']y a rien de spécial à lire ici.[end if]".
 
 Understand "consulter [something] sur [text]" or "consulter [something] a [text]" or "consulter [something] a propos de [text]" as consulting it about.
 
@@ -506,12 +485,114 @@ Understand "ouvrir [something] avec [something preferably held]" as unlocking it
 
 Understand the command "deverrouiller" and "forcer" as "ouvrir".
 
+Understand "inventaire" as taking inventory.          [todo : invtall et invwide]
 
-Part IV - Redefinition of Languages i6
+Understand "acheter [something]" as buying.
+
+Understand "donner [something preferably held] a/au/aux [someone]" as giving it to. 
+Understand "donner [someone] [something preferably held]" as giving it to (with nouns reversed).
+
+Understand the commands "payer" and "offrir" and "remettre" as "donner".
+
+Understand "nourrir [someone] avec [something preferably held]" as giving it to (with nouns reversed).
+
+
+
+Part 5 - Redefinition and replacement of some sensitive parts in the default rules
+
+[ I hope it won't mess with future releases of Inform.]
+
+Before printing the locale description (this is the interesting locale paragraphs-french rule):
+	let the domain be the parameter-object;
+	sort the Table of Locale Priorities in locale description priority order;
+	repeat through the Table of Locale Priorities:
+		[say "[notable-object entry]...";]
+		carry out the printing a locale paragraph about activity with the notable-object entry;
+	continue the activity.
+
+Before printing the locale description (this is the you-can-also-see-french rule):
+	let the domain be the parameter-object;
+	let the mentionable count be 0;
+	repeat with item running through things:
+		now the item is not marked for listing;
+	repeat through the Table of Locale Priorities:
+		[say "[notable-object entry] - [locale description priority entry].";]
+		if the locale description priority entry is greater than 0,
+			now the notable-object entry is marked for listing;
+		increase the mentionable count by 1;
+	if the mentionable count is greater than 0:
+		repeat with item running through things:
+			if the item is mentioned:
+				now the item is not marked for listing;
+		begin the listing nondescript items activity;
+		if the number of marked for listing things is 0:
+			abandon the listing nondescript items activity;
+		otherwise:
+			if handling the listing nondescript items activity:
+				if the domain is a room:
+					if the domain is the location, say "Vous ";
+					otherwise say "Dans [the domain] vous ";
+				otherwise if the domain is a supporter:
+					say "Sur [the domain] vous ";
+				otherwise:
+					say "Dans [the domain] vous ";
+				say "pouvez [if the locale paragraph count is greater than 0]aussi [end if]voir ";
+				let the common holder be nothing;
+				let contents form of list be true;
+				repeat with list item running through marked for listing things:
+					if the holder of the list item is not the common holder:
+						if the common holder is nothing,
+							now the common holder is the holder of the list item;
+						otherwise now contents form of list is false;
+					if the list item is mentioned, now the list item is not marked for listing;
+				filter list recursion to unmentioned things;
+				if contents form of list is true and the common holder is not nothing,
+					list the contents of the common holder, as a sentence, including contents,
+						giving brief inventory information, tersely, not listing
+						concealed items, listing marked items only;
+				otherwise say "[a list of marked for listing things including contents]";
+				if the domain is the location, say " ici";
+				say ".[paragraph break]";
+				unfilter list recursion;
+			end the listing nondescript items activity;
+	continue the activity.
 
 Include (-
-Constant LibReleaseFR      "2.3devI6+I7";
-Message		"[Compilé avec la version 2.3devI6+I7 (future 2.3 stable) de la bibliothèque francophone.]";
+
+[ Banner;
+   BeginActivity(PRINTING_BANNER_TEXT_ACT);
+   if (ForActivity(PRINTING_BANNER_TEXT_ACT) == false) {
+	   	VM_Style(HEADER_VMSTY);
+		print (string) Story;
+		VM_Style(NORMAL_VMSTY);
+		new_line;
+		print (string) Headline;
+		#ifdef Story_Author;
+		print " par ", (string) Story_Author;
+		#endif; ! Story_Author
+		new_line;
+		VM_Describe_Release();
+		print " / Inform 7 build ", (string) NI_BUILD_COUNT, " ";
+		print "(I6/v"; inversion;
+		print " lib ", (string) LibRelease, ") ";
+		#Ifdef STRICT_MODE;
+		print "S";
+		#Endif; ! STRICT_MODE
+		#Ifdef DEBUG;
+		print "D";
+		#Endif; ! DEBUG
+		new_line;
+    }
+    EndActivity(PRINTING_BANNER_TEXT_ACT);
+];
+-) instead of "Banner" in "Printing.i6t".
+
+
+Part 6 - Redefinition of Languages_i6_t
+
+Include (-
+Constant LibReleaseFR      "2.3dev";
+Message		"[Compilé avec la version 2.3dev (future 2.3 stable) de la bibliothèque francophone.]";
 !System_file;
 
 ! To keep compat with some french declarations. Should be replaced later probably. Was used in the outdated verblib.h
@@ -1486,7 +1567,7 @@ Include (-
             "déjà ici.";
         2:  "Vous n'avez pas ça.";
         #ifdef NI_BUILD_COUNT;
-        3:  print "(vous prenez d'abord ", (the) x1, "^"; say__p = 0; return;
+        3:  print "(vous prenez d'abord en main ", (the) x1, ")^"; say__p = 0; return;
         #ifnot;
         3: "(vous prenez d'abord ", (the) x1, ")";
         #endif;
@@ -1774,7 +1855,7 @@ Include (-
         56: print ".^";
         57: print "?^";
         ! TODO le reste
-                58: print (The) actor, " ", (IsOrAre) actor, " unable to do that.^";
+        58: print (The) actor, " ", (IsOrAre) actor, " incapable de faire cela.^";
 		59:	"You must supply a noun.";
 		60:	"You may not supply a noun.";
 		61:	"You must name an object.";
@@ -1784,9 +1865,9 @@ Include (-
 		65:	"You must supply a second noun.";
 		66:	"You may not supply a second noun.";
 		67:	"You must name something more substantial.";
-		68:	print "(", (The) actor, " first taking ", (the) x1, ")^";
-        69: "(first taking ", (the) x1, ")";
-        70: "The use of UNDO is forbidden in this game.";
+		68:	print "(", (The) actor, " prenant d'abord ", (the) x1, ")^";
+        69: "(prenand d'abord ", (the) x1, ")";
+        70: "L'utilisation de UNDO n'est pas autorisée dans ce jeu.";
         71: print (string) DARKNESS__TX;
   		72: print (The) x1;
             if (x1 has pluralname) print " have"; else print " has";
@@ -2059,7 +2140,7 @@ Inform 7 permet de changer facilement de système de langue comme c'était le ca
 Pour utiliser les bibliothèques françaises, il faudrait inclure dans la source du jeu :
 
 		Include French by Eric Forgeot. 
-		Use French Language. [ceci existe pour utiliser des formes au passé etc.]
+		[optional : Use French Language. : ceci existe pour utiliser des formes au passé etc., par exemple Use French 3PSP language pour la 3ème personne du singulier passé, mais n'est pas encore implémenté]
 
 En ayant bien auparavant installé cette extension via la commande >Files>Install extensions d'Inform 7.
 
@@ -2080,9 +2161,9 @@ Pour utiliser Inform 7 uniquement en ligne de commande, on peut invoquer le comp
                 ]
 
         
-
 Merci à Sarganar et à l'équipe de Rakontointeraktiva pour l'effort commun de nos traductions en différentes langues.
-All hails to the Sarganar and the Spanish translation team! (http://www.caad.es/informate/infsp/)
+All hails to Sarganar and the Spanish translation team! (http://www.caad.es/informate/infsp/).
+
 
 Eric Forgeot - http://ifiction.free.fr - http://informfr.tuxfamily.org/
 
@@ -2103,7 +2184,7 @@ Example: * Petit Père Noël - Un très court exemple de jeu en français.
 
 	The cheminée is in SurLeToit. Cheminée is a container. Cheminée is female and fixed in place. Understand "cheminee" as cheminée. The description of cheminée is "Les cheminées, ça vous les connaissez !" 
 
-	Instead of inserting something into Cheminée, say "Vous ne pouvez pas, il y a encore du feu là dedans, et cela détruirait ce que vous voulez y mettre".
+	Instead of inserting something into Cheminée, say "Vous ne pouvez pas, il y a encore du feu là dedans, et cela détruirait ce que vous voulez y mettre.".
 
 	When play begins:
                 move hotte to player;
@@ -2146,10 +2227,10 @@ Example: * Petit Père Noël - Un très court exemple de jeu en français.
 	Jardin2 is a room. The printed name of Jardin2 is "Le bout du jardin". "Vous êtes près de la limite de la propriété. Au delà s'étendent les autres jardins du voisinage."
               
 	The gnome is in jardin2.
-	The gnome is a man. Understand "gnome/troll/créature/lutin" or "petit gnome" as Gnome. The description of Gnome is "C'est un lutin à l'air espiègle. Vous vous demandez si ce n'est pas lui qui garde la maison en l'absence de ses propriétaires".
+	The gnome is a man. Understand "gnome/troll/créature/lutin" or "petit gnome" as Gnome. The description of Gnome is "C'est un lutin à l'air espiègle. Vous vous demandez si ce n'est pas lui qui garde la maison en l'absence de ses propriétaires.".
                 
 	Instead of pushing or pulling or attacking the PorteMaison for the first time:
-         say "Vous n'avez pas la force pour le faire, et quand bien même cela serait immoral.".
+         say "Vous frapper vigoureusement à la porte, manquant de la faire céder sous vos coups. Mais on dirait qu'il n'y a personne pour répondre.".
         
 	Instead of pushing or pulling or attacking the door for the second time, say "Voudriez-vous vous reconvertir dans le braquage ? Qu'en penserait votre femme ?"
 
@@ -2157,7 +2238,7 @@ Example: * Petit Père Noël - Un très court exemple de jeu en français.
         say "Vous voyez une voiture de police qui passe par là. Des policiers vous arrêtent et vous mettent directement en prison.";
         end the game in death.
 
-	Understand "talk to [someone]" as a mistake ("Le gnome ne comprend pas votre langue.").
+	Understand "parler avec [someone]" as a mistake ("Le gnome ne comprend pas votre langue.").
 
-	Test me with "descendre / aller à droite / regarder le gnome / donner la carte au gnome / prendre la cle /  ouest / ouvrir la porte avec la clé / entrer "
+	Test me with "lire la carte / examiner la carte / mettre le cadeau dans la cheminée / poser la hotte / mettre la hotte / enlever la hotte / descendre / frapper à la porte / aller à droite / regarder le gnome / donner le cadeau au gnome / parler avec le gnome / donner la carte au gnome / prendre la cle /  ouest / ouvrir la porte avec la clé  "
 
