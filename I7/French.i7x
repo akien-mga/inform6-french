@@ -1,10 +1,17 @@
-Version 1/080502 of French by Eric Forgeot begins here.
+Version 1/080503 of French by Eric Forgeot begins here.
 
 "Quelques modifications des regles de base pour supporter le francais : To make French the language of play."
 
+[designed for Inform7 5T18]
+
 Part 1 - French specifics
 
-Use French Language translates as (- Constant French; -). [Use French Language. ]Use French 3PSP Language translates as (- Constant French3PSP; -).[Use French 3PSP Language.][troisième personne du singulier au passé. : work in progress, was used in the game "les heures du vent"]
+Use French Language translates as (- Constant French; -). 
+[Use French Language. ]
+
+Use French 3PSP Language translates as (- Constant French3PSP; -).
+[Use French 3PSP Language.]
+[troisième personne du singulier au passé. : work in progress, was used in the game "les heures du vent"]
 
 Use French 1PSP Language translates as (- Constant French1PSP; -).
 [Use French 1PSP Language.]
@@ -279,6 +286,13 @@ topic   specified action
 
 ]
 
+
+Understand "quitter" as quitting the game.
+Understand "sauver" or "sauvegarder" as saving the game.
+Understand "recommencer" as restarting the game.
+Understand "charger" or "restaure" as restoring the game.
+
+
 Understand "entrer" as InGoing.
 InGoing is an action applying to nothing.
 Carry out InGoing: try going inside.
@@ -302,7 +316,7 @@ Understand "descendre des [something]" as getting off.
 
 [todo : descendre vers etc]
 
-Understand "sortir" or "sortir de la" or "sortir d'ici"  as exiting.
+Understand "sortir" or "sortir de la" or "sortir d'ici" as exiting.
 
 Understand "sortir vers/a/au/de/du/des/d' [something]" as OutGoing.
 OutGoing is an action applying to one thing.
@@ -311,7 +325,7 @@ Carry out OutGoing: try going outside.
 
 Understand the command "partir" as "sortir".
 
-Understand "aller vers/a/à/en [direction]" or "aller [direction]" as going.
+Understand "aller vers/a/à/en/au [direction]" or "aller [direction]" as going.
 Understand "aller vers le bas" or "aller en bas" as DownGoing.
 
 Understand "aller [something]" as entering.
@@ -354,9 +368,11 @@ Understand "deposer [things preferably held]" as dropping.
 Understand "deposer [other things] dans [something]" or "mettre [other things] dans [something]" as inserting it into.
 Understand "deposer [other things] sur [something]" or "mettre [other things] sur [something]" as putting it on.
 
-Understand the command "poser" and "abandonner" and "lacher" and as "deposer". 
+Understand the command "poser" and "abandonner" and "lacher" and "laisser" and "laisser tomber" and as "deposer". 
 
 Understand "enlever [something preferably held]" as taking off.
+
+Understand "lancer [something preferably held] sur/vers [something]" or "lancer [something preferably held] en direction de [something]" or "lancer [something preferably held] en direction du [something]" as throwing it at.
 
 Understand "revetir [something preferably held]"or "mettre [something preferably held]" as wearing. 
 
@@ -428,6 +444,9 @@ Understand the command "attacher", "fixer", "connecter" and "brancher" as "nouer
 
 [TODO : faire parler, dire etc ici]
 
+Understand "questionner [someone] a propos de [text]" or "questionner [someone] à propos de [text]" or "questionner [someone] au sujet de [text]" or "questionner [someone] au sujet du/des [text]" or "questionner [someone] sur [text]" as asking it about.
+Understand "demander [something] à [someone]" as asking it for (with nouns reversed).  [todo : check reversed]
+
 Understand "agiter les mains" or "agiter la main" as waving hands.
 Understand "saluer" or "saluer avec la main" [or "saluer [someone]" or "saluer [someone] avec la main"] as waving hands. [todo: on ne peut ajouter un cod]
 
@@ -452,6 +471,12 @@ Understand the command "fredonner" as "chanter".
 Understand "attendre" or "a" as waiting.
 
 [Understand "prier" as praying. Pas dans I7]
+
+Understand "penser" as thinking.
+Understand the command "reflechir" as "penser".
+
+Understand "dormir" as sleeping.
+
 
 Understand "monter" as UpGoing.
 UpGoing is an action applying to nothing.
@@ -586,6 +611,55 @@ Include (-
     EndActivity(PRINTING_BANNER_TEXT_ACT);
 ];
 -) instead of "Banner" in "Printing.i6t".
+
+
+Section 1 - Option pour la fin de jeu (in place of Section SR2/12 - Final question options in Standard Rules by Graham Nelson)
+
+[the string with 'would you like to' should be in language for easy replacement]
+
+
+The print the final question french rule is listed in before handling the final question.
+The print the final prompt french rule is listed in before handling the final question.
+
+The print the final question rule is not listed in any rulebook.
+The print the final prompt rule is not listed in any rulebook.
+
+This is the print the final prompt french rule: say "> [run paragraph on]".
+
+This is the print the final question french rule:
+	let named options count be 0;
+	repeat through the Table of Final Question Options:
+		if the only if victorious entry is false or the game ended in victory:
+			if there is a final response rule entry
+				or the final response activity entry activity is not empty:
+				if there is a final question wording entry, increase named options count by 1;
+	if the named options count is less than 1, abide by the immediately quit rule;
+	say "Voulez-vous  ";
+	repeat through the Table of Final Question Options:
+		if the only if victorious entry is false or the game ended in victory:
+			if there is a final response rule entry
+				or the final response activity entry activity is not empty:
+				if there is a final question wording entry:
+					say final question wording entry;
+					decrease named options count by 1;
+					if the named options count is 0:
+						say "?[line break]";
+					otherwise if the named options count is 1:
+						if using the serial comma option, say ",";
+						say " ou ";
+					otherwise:
+						say ", ".
+
+
+[-- end of this part-- ]
+
+Table of Final Question Options
+final question wording	only if victorious	topic		final response rule		final response activity
+"RECOMMENCER"				false				"recommencer"	immediately restart the VM rule	--
+"CHARGER une partie sauvegardée"	false				"charger"	immediately restore saved game rule	--
+"lire quelques suggestions amusantes (AMUSING)"	true	"amusing"	--	amusing a victorious player
+"QUITTER"					false				"quitter"		immediately quit rule	--
+--						false				"undo"		immediately undo rule	--
 
 
 Part 6 - Redefinition of Languages_i6_t

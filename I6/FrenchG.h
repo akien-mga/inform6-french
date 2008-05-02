@@ -414,12 +414,12 @@ Verb 'deposer' 'poser' 'abandonner' 'lacher'
         * multiheld                         -> Drop
         * multiexcept 'dans' noun           -> Insert
         * multiexcept 'sur' noun            -> PutOn;
-#endif; ! NI_BUILD_COUNT
+
 Verb 'jeter' 'lancer'
         * multiheld                         -> Drop
         * multiexcept 'dans' noun           -> Insert
         * held 'sur' noun                   -> ThrowAt;
-
+#endif; ! NI_BUILD_COUNT
 Verb 'laisser'
         * held                              -> Drop
         * 'tomber' held                     -> Drop;
@@ -827,13 +827,13 @@ Verb 'attendre' 'a//' 'z//' !*! patienter
 Verb 'prier'
         *                               -> Pray;
 #ifndef NI_BUILD_COUNT;
-#endif; ! NI_BUILD_COUNT
+
 Verb 'penser' 'reflechir'
         *                               -> Think;
 
 Verb 'dormir' 'somnoler'
         *                               -> Sleep;
-
+#endif; ! NI_BUILD_COUNT
 ! ------- Verbes de communication avec le narrateur
 Verb 'oui' 
         *                               -> Yes;
