@@ -2,13 +2,13 @@
 !   FRENCH:  Language Definition File
 !
 !   Supplied for use with Inform 6 -- Release 6/11 -- Serial number 040227
-!   Version adaptÃ©e pour Inform 7
+!   Version adaptée pour Inform 7
 !   Copyright Graham Nelson 1993-2004 but freely usable (see manuals)
 !
-!   Traduit en franÃ§ais par Jean-Luc Pontico 2001-2004. Version 2.2 du 17/02/2008
-!   L'adaptation Ã  Glulx a Ã©tÃ© rÃ©alisÃ©e avec l'aide d'Eric Forgeot.
-!   Certaines fonctions sont tirÃ©es de la traduction en espagnol de Jose Luis Diaz.
-!   Diverses modifications apportÃ©es par Samuel Verschelde (Stormi)
+!   Traduit en français par Jean-Luc Pontico 2001-2004. Version 2.2 du 17/02/2008
+!   L'adaptation à Glulx a été réalisée avec l'aide d'Eric Forgeot.
+!   Certaines fonctions sont tirées de la traduction en espagnol de Jose Luis Diaz.
+!   Diverses modifications apportées par Samuel Verschelde (Stormi)
 !
 !   This file is automatically Included in your game file by "parserm".
 !   Strictly, "parserm" includes the file named in the "language__" variable,
@@ -19,7 +19,7 @@
 
 
 Constant LibReleaseFR      "2.3devI6+I7";
-Message		"[CompilÃ© avec la version 2.3devI6+I7 (future 2.3 stable) de la bibliothÃ¨que francophone.]";
+Message		"[Compilé avec la version 2.3devI6+I7 (future 2.3 stable) de la bibliothèque francophone.]";
 
 System_file;
 
@@ -27,19 +27,19 @@ System_file;
 !   Part I.   Preliminaries
 ! ------------------------------------------------------------------------------
 
-! Zplet n'affiche pas bien certains accents si les lignes suivantes sont activÃ©es.
+! Zplet n'affiche pas bien certains accents si les lignes suivantes sont activées.
 ! (voir le Designer's Manual paragraphe 36)
-! Ceci dit, il est dÃ©conseillÃ© de mettre des accents dans les mots du dictionnaire
-! car les accents saisis par le joueur sont automatiquement enlevÃ©s pour les mots
+! Ceci dit, il est déconseillé de mettre des accents dans les mots du dictionnaire
+! car les accents saisis par le joueur sont automatiquement enlevés pour les mots
 ! non reconnus.
-! (fonction dÃ©sactivÃ©e)
+! (fonction désactivée)
 !#Ifdef PAS_POUR_LA_ZPLET;
-!Zcharacter 'Ã©';
-!Zcharacter 'Ã¨';
-!Zcharacter 'Ã ';
-!Zcharacter 'Ã¹';
-!Zcharacter 'Ã¢';
-!Zcharacter 'Ãª';
+!Zcharacter 'é';
+!Zcharacter 'è';
+!Zcharacter 'à';
+!Zcharacter 'ù';
+!Zcharacter 'â';
+!Zcharacter 'ê';
 !#endif;
 
 !*! Constant EnglishNaturalLanguage;    ! Needed to keep old pronouns mechanism
@@ -85,19 +85,19 @@ CompassDirection -> d_obj "bas"
 ! defined. Inform 7 games do not.
 
 #Ifndef WITHOUT_DIRECTIONS;
-CompassDirection -> in_obj "intÃ©rieur"
+CompassDirection -> in_obj "intérieur"
                     with door_dir in_to, name 'dedans' 'interieur',
                     article "l'";
-CompassDirection -> out_obj "extÃ©rieur"
+CompassDirection -> out_obj "extérieur"
                     with door_dir out_to, name 'dehors' 'exterieur',
                     article "l'";
 
 #Ifnot;
 #Ifndef NI_BUILD_COUNT;
-CompassDirection -> in_obj "intÃ©rieur"
+CompassDirection -> in_obj "intérieur"
                     with door_dir in_to, name 'dedans' 'interieur',
 		    article "l'";
-CompassDirection -> out_obj "extÃ©rieur"
+CompassDirection -> out_obj "extérieur"
                     with door_dir out_to, name 'dehors' 'exterieur',
 		    article "l'";
 
@@ -130,7 +130,7 @@ Constant BUT1__WD     = 'mais pas';
 Constant BUT2__WD     = 'excepte';
 Constant BUT3__WD     = 'sauf';
 Constant ME1__WD      = 'moi';
-Constant ME2__WD      = 'toi'; !*! nous ? moi-mÃªme ?
+Constant ME2__WD      = 'toi'; !*! nous ? moi-même ?
 Constant ME3__WD      = 'vous';
 Constant OF1__WD      = 'de';
 Constant OF2__WD      = 'de';
@@ -172,16 +172,16 @@ Array LanguagePronouns table
       '-les'   $$000110000110                    NULL
       '-lui'   $$110000110000                    NULL
       '-leur'  $$000110000110                    NULL        ! tirets remis
-!      'le'    $$100000100000                    NULL        ! car l'article le/la/les vient parfois interfÃ©rer
-!      'la'    $$010000010000                    NULL        ! par exemple "mange la pomme" est compris comme "mange-la" si "pomme" est inconnu, d'oÃ¹ des messages d'erreur troublants pour le joueur
+!      'le'    $$100000100000                    NULL        ! car l'article le/la/les vient parfois interférer
+!      'la'    $$010000010000                    NULL        ! par exemple "mange la pomme" est compris comme "mange-la" si "pomme" est inconnu, d'où des messages d'erreur troublants pour le joueur
 !      'les'   $$000110000110                    NULL
 !      'lui'   $$110000110000                    NULL ! dans "donne-lui", "lui" est m ou f
 !      'leur'  $$000110000110                    NULL
       
       ! Disjunctive pronouns
-!*! ! fÃ©minin acceptÃ© pour 'luy' (mot bidon) pour traiter les cas 'dedans', 'dessus', 'l^'... (genre inconnu)
-!   en fait, '-lui' pourrait jouer le mÃªme rÃ´le
-      'luy'    $$110000110000                    NULL ! "l'ouvrir" devient "ouvrir luy", "luy" Ã©tant m ou f
+!*! ! féminin accepté pour 'luy' (mot bidon) pour traiter les cas 'dedans', 'dessus', 'l^'... (genre inconnu)
+!   en fait, '-lui' pourrait jouer le même rôle
+      'luy'    $$110000110000                    NULL ! "l'ouvrir" devient "ouvrir luy", "luy" étant m ou f
       'lui'    $$100000100000                    NULL
       'elle'   $$010000010000                    NULL
       'eux'    $$000110000110                    NULL
@@ -196,10 +196,10 @@ Array LanguageDescriptors table
    !             mfnmfnmfnmfn                 
 
       'mon'    $$100000100000    POSSESS_PK      0  !*! ce qui suit ne doit pas fonctionner souvent
-      'ma'     $$010000010000    POSSESS_PK      0  !*! du moins je l'espÃ¨re car mon/ma/mes devrait
+      'ma'     $$010000010000    POSSESS_PK      0  !*! du moins je l'espère car mon/ma/mes devrait
       'mes'    $$000110000110    POSSESS_PK      0  !*! changer en fonction du type de parole
       'ton'    $$100000100000    POSSESS_PK      0  !*!
-      'ta'     $$010000010000    POSSESS_PK      0  !*! (quoique Ã§a a l'air tres tolerant)
+      'ta'     $$010000010000    POSSESS_PK      0  !*! (quoique ça a l'air tres tolerant)
       'tes'    $$000110000110    POSSESS_PK      0  !*!
       'notre'  $$110000110000    POSSESS_PK      0  !*!
       'nos'    $$000110000110    POSSESS_PK      0  !*!
@@ -224,10 +224,10 @@ Array LanguageDescriptors table
       'une'    $$010000010000    INDEFART_PK     NULL
       'des'    $$000110000110    INDEFART_PK     NULL
 
-     'allumÃ©'  $$100000100000    light           NULL
-     'allumÃ©e' $$010000010000    light           NULL
-     'Ã©teint'  $$100000100000    (-light)        NULL
-     'Ã©teinte' $$010000010000    (-light)        NULL;
+     'allumé'  $$100000100000    light           NULL
+     'allumée' $$010000010000    light           NULL
+     'éteint'  $$100000100000    (-light)        NULL
+     'éteinte' $$010000010000    (-light)        NULL;
 
 Array LanguageNumbers table
     'un' 1 'une' 1 'deux' 2 'trois' 3 'quatre' 4 'cinq' 5
@@ -239,24 +239,24 @@ Array LanguageNumbers table
 !   Part III.   Translation
 ! ------------------------------------------------------------------------------
 
-! La fonction enleve_accents enlÃ¨ve les accents des mots qui n'ont pu Ãªtre
-! interprÃ©tÃ©s. De cette maniÃ¨re, le joueur peut utiliser les accents ou non.
-! Pour cela le jeu doit dÃ©finir les mots sans accent, par exemple :
-! object set_of_keys "trousseau de clÃ©s"
+! La fonction enleve_accents enlève les accents des mots qui n'ont pu être
+! interprétés. De cette manière, le joueur peut utiliser les accents ou non.
+! Pour cela le jeu doit définir les mots sans accent, par exemple :
+! object set_of_keys "trousseau de clés"
 ! with name 'trousseau' 'cles'
 !
 ! Si le joueur demande : "examiner cles", le mot est compris directement.
-! S'il demande : "examiner clÃ©s" le mot n'est pas compris, ce qui dÃ©clenche 
+! S'il demande : "examiner clés" le mot n'est pas compris, ce qui déclenche 
 ! la suppression des accents et une nouvelle analyse.
 
-! L'appel de cette fonction peut Ãªtre dÃ©sactivÃ© avec la commande de
-! deboguage "accents on" pour que les accents soient conservÃ©s.
+! L'appel de cette fonction peut être désactivé avec la commande de
+! deboguage "accents on" pour que les accents soient conservés.
 
 global enleveaccents=1;
 
 [ enleve_accents x i word at len;
 
-    #Ifdef DEBUG; affiche_buffer(buffer, "  [ enleve_accents :^  - Buffer reÃ§u : "); #Endif;
+    #Ifdef DEBUG; affiche_buffer(buffer, "  [ enleve_accents :^  - Buffer reçu : "); #Endif;
 
     for (x=0:x<NbMots():x++) ! pour chaque mot
     {
@@ -274,25 +274,25 @@ global enleveaccents=1;
             }
 #Endif;
             for (i=at:i<at+len:i++)
-                if (buffer->i=='Ã©') buffer->i='e'; !*! plutÃ´t un switch ?
+                if (buffer->i=='é') buffer->i='e'; !*! plutôt un switch ?
 
-                else if(buffer->i=='Ã ') buffer->i='a';
-                else if(buffer->i=='Ã¨') buffer->i='e';
-                else if(buffer->i=='Ã¹') buffer->i='u';
+                else if(buffer->i=='à') buffer->i='a';
+                else if(buffer->i=='è') buffer->i='e';
+                else if(buffer->i=='ù') buffer->i='u';
 
-                else if(buffer->i=='Ã¢') buffer->i='a';
-                else if(buffer->i=='Ãª') buffer->i='e';
-                else if(buffer->i=='Ã®') buffer->i='i';
-                else if(buffer->i=='Ã´') buffer->i='o';
-                else if(buffer->i=='Ã»') buffer->i='u';
+                else if(buffer->i=='â') buffer->i='a';
+                else if(buffer->i=='ê') buffer->i='e';
+                else if(buffer->i=='î') buffer->i='i';
+                else if(buffer->i=='ô') buffer->i='o';
+                else if(buffer->i=='û') buffer->i='u';
 
-                else if(buffer->i=='Ã¤') buffer->i='a';
-                else if(buffer->i=='Ã«') buffer->i='e';
-                else if(buffer->i=='Ã¯') buffer->i='i';
-                else if(buffer->i=='Ã¶') buffer->i='o';
-                else if(buffer->i=='Ã¼') buffer->i='u';
+                else if(buffer->i=='ä') buffer->i='a';
+                else if(buffer->i=='ë') buffer->i='e';
+                else if(buffer->i=='ï') buffer->i='i';
+                else if(buffer->i=='ö') buffer->i='o';
+                else if(buffer->i=='ü') buffer->i='u';
 
-                else if(buffer->i=='Ã§') buffer->i='c';
+                else if(buffer->i=='ç') buffer->i='c';
 
             Tokenise__(buffer,parse);
         }
@@ -301,11 +301,11 @@ global enleveaccents=1;
     #Ifdef DEBUG; affiche_buffer(buffer, "  - Buffer sans accents : "); #Endif;
 ];
 
-! enlÃ¨ve le tiret de dÃ©part des mots qui ne sont pas dans le dictionnaire
+! enlève le tiret de départ des mots qui ne sont pas dans le dictionnaire
 [ enleve_tirets x i word at len;
     i=NULL; ! pour retirer warning a la compilation glulxe
 
-    #Ifdef DEBUG; affiche_buffer(buffer, "  [ enleve_tirets :^  - Buffer reÃ§u : "); #Endif;
+    #Ifdef DEBUG; affiche_buffer(buffer, "  [ enleve_tirets :^  - Buffer reçu : "); #Endif;
 
     for (x=0:x<NbMots():x++) ! pour chaque mot
     {
@@ -347,7 +347,7 @@ global enleveaccents=1;
 #Endif; ! TARGET_
 ];
 
-[ Mot n; ! valeur (dictionnaire) du mot numÃ©ro n de parse
+[ Mot n; ! valeur (dictionnaire) du mot numéro n de parse
 #Ifdef TARGET_ZCODE;
     return parse-->(n*2 + 1);
 #Ifnot; ! TARGET_GLULX
@@ -355,7 +355,7 @@ global enleveaccents=1;
 #Endif; ! TARGET_
 ];
 
-[ PositionMot n; ! position dans buffer du mot numÃ©ro n de parse
+[ PositionMot n; ! position dans buffer du mot numéro n de parse
 #Ifdef TARGET_ZCODE;
     return parse->(n*4 + 5);
 #Ifnot; ! TARGET_GLULX
@@ -363,7 +363,7 @@ global enleveaccents=1;
 #Endif; ! TARGET_
 ];
 
-[ LongueurMot n;   ! longueur (en chars) dans buffer du mot numÃ©ro n de parse
+[ LongueurMot n;   ! longueur (en chars) dans buffer du mot numéro n de parse
 #Ifdef TARGET_ZCODE;
     return parse->(n*4 + 4);
 #Ifnot; ! TARGET_GLULX
@@ -371,13 +371,13 @@ global enleveaccents=1;
 #Endif; ! TARGET_
 ];
 
-[ EcraseMot n i;        ! Ã©crase avec des espaces dans buffer le mot numÃ©ro n
+[ EcraseMot n i;        ! écrase avec des espaces dans buffer le mot numéro n
     for(i=0:i<LongueurMot(n):i++)
         buffer->(PositionMot(n)+i) = ' ';
 ];
 
-[ DernierMot n; ! vrai si le mot numÃ©ro n est le dernier ou suivi d'un "point" (THEN1__WD, ...)
-    if (n==NbMots()-1) ! le mot numÃ©ro n est-il le dernier ?
+[ DernierMot n; ! vrai si le mot numéro n est le dernier ou suivi d'un "point" (THEN1__WD, ...)
+    if (n==NbMots()-1) ! le mot numéro n est-il le dernier ?
         return true;
     else        ! est-il suivi d'un "point" ?
         return (Mot(n+1) == THEN1__WD or THEN2__WD or THEN3__WD);
@@ -386,19 +386,19 @@ global enleveaccents=1;
 [ LanguageToInformese i word wordsuiv at b RangVerbe RangDernier;
 
     Tokenise__(buffer,parse);
-    #Ifdef DEBUG; affiche_buffer(buffer, "[ LanguageToInformese:^* Buffer reÃ§u : "); #Endif;
+    #Ifdef DEBUG; affiche_buffer(buffer, "[ LanguageToInformese:^* Buffer reçu : "); #Endif;
 
     for (i=0:i<NbMots():i++) ! balayer toute la phrase
     {
          word = Mot(i);
          if (DernierMot(i)) wordsuiv=THEN1__WD; else wordsuiv=Mot(i+1);
-         at = PositionMot(i); ! position du mot numÃ©ro i dans buffer
+         at = PositionMot(i); ! position du mot numéro i dans buffer
          if (word == 'dessus')
          {   LTI_Insert(at, ' '); ! remplace
              buffer->at     = 's';
              buffer->(at+1) = 'u';
              buffer->(at+2) = 'r';
-             buffer->(at+3) = '-'; ! contrairement Ã  'lui', '-lui' peut Ãªtre fÃ©minin !*! mais pas pluriel...
+             buffer->(at+3) = '-'; ! contrairement à 'lui', '-lui' peut être féminin !*! mais pas pluriel...
              buffer->(at+4) = 'l';
              buffer->(at+5) = 'u';
              buffer->(at+6) = 'i';
@@ -411,14 +411,14 @@ global enleveaccents=1;
              buffer->(at+1) = 'o';
              buffer->(at+2) = 'u';
              buffer->(at+3) = 's';
-             buffer->(at+4) = '-'; ! contrairement Ã  'lui', '-lui' peut Ãªtre fÃ©minin !*! mais pas pluriel...
+             buffer->(at+4) = '-'; ! contrairement à 'lui', '-lui' peut être féminin !*! mais pas pluriel...
              buffer->(at+5) = 'l';
              buffer->(at+6) = 'u';
              buffer->(at+7) = 'i';
              Tokenise__(buffer,parse);
              i = 0; continue;
          }
-!*! pas forcÃ©ment une bonne idÃ©e car "dedans" est aussi une direction !*! mais "mets-le dedans" ?
+!*! pas forcément une bonne idée car "dedans" est aussi une direction !*! mais "mets-le dedans" ?
 !         if (word == 'dedans') !*! dehors ?
 !         {   LTI_Insert(at, ' '); ! remplace
 !             LTI_Insert(at, ' ');
@@ -437,7 +437,7 @@ global enleveaccents=1;
          ! "nord-est" ou "nord est" devient "nordest"
          if ( (word=='nord-est'or'nord-ouest') || ((word=='nord')&&(wordsuiv=='est'or'ouest')) )
          {
-             buffer->at     = ' '; ! dÃ©cale
+             buffer->at     = ' '; ! décale
              buffer->(at+1) = 'n';
              buffer->(at+2) = 'o';
              buffer->(at+3) = 'r';
@@ -448,7 +448,7 @@ global enleveaccents=1;
          ! "sud-est" ou "sud est" devient "sudest"
          if ( (word=='sud-est'or'sud-ouest') || ((word=='sud')&&(wordsuiv=='est'or'ouest')) )
          {
-             buffer->at     = ' '; ! dÃ©cale
+             buffer->at     = ' '; ! décale
              buffer->(at+1) = 's';
              buffer->(at+2) = 'u';
              buffer->(at+3) = 'd';
@@ -457,27 +457,27 @@ global enleveaccents=1;
          }
      }
 
-    !  insertion d'un espace avant chaque tiret et aprÃ¨s chaque apostrophe 
+    !  insertion d'un espace avant chaque tiret et après chaque apostrophe 
     for (i=WORDSIZE:i<WORDSIZE+NbChars():i++) {
         if (buffer->i == '-') LTI_Insert(i++, ' ');
         if (buffer->i == ''') LTI_Insert(++i, ' '); ! ''' !*! autre notation ? '\'' par exemple ?
     }
     Tokenise__(buffer,parse);
 
-    ! Suppression de 'je' ou 'j^' en dÃ©but de phrase.
+    ! Suppression de 'je' ou 'j^' en début de phrase.
     ! Par exemple, "je vais au nord" devient "vais au nord".
     if (Mot(0) == 'je' or 'j^') {
         EcraseMot(0);
         Tokenise__(buffer,parse); 
     }
 
-    !*! ce qui suit ne tient pas bien compte des commandes s'adressant Ã  quelqu'un ("machin, fais ceci")
-    ! Transformation de phrases Ã  l'infinitif commenÃ§ant par un ou deux pronoms suivis d'un mot (verbe, probablement)
+    !*! ce qui suit ne tient pas bien compte des commandes s'adressant à quelqu'un ("machin, fais ceci")
+    ! Transformation de phrases à l'infinitif commençant par un ou deux pronoms suivis d'un mot (verbe, probablement)
     ! Ex : "le lui donner" devient "donner -le -lui"
-    ! Etape A : "le/la/l'/les" (suivi Ã©ventuellement de "lui/leur") passe aprÃ¨s le verbe. Ex : "lui donner -le"
+    ! Etape A : "le/la/l'/les" (suivi éventuellement de "lui/leur") passe après le verbe. Ex : "lui donner -le"
     word=Mot(0); ! 1er mot
     if ((NbMots()>=2)&&(Mot(1)=='lui'or'leur')) RangVerbe=2; else RangVerbe=1; ! verbe = 2e ou 3e mot ?
-    b=PositionMot(RangVerbe)+LongueurMot(RangVerbe); ! juste aprÃ¨s le verbe = position du verbe + longueur du verbe
+    b=PositionMot(RangVerbe)+LongueurMot(RangVerbe); ! juste après le verbe = position du verbe + longueur du verbe
     if (~~DernierMot(RangVerbe-1)) { ! ne rien faire si la phrase ne comporte pas de verbe
         if (word == 'le')
         {
@@ -495,10 +495,10 @@ global enleveaccents=1;
             LTI_Insert(b+2, 'l');
             LTI_Insert(b+3, 'a');
         }
-        if (word == 'l^' or 'y//') ! exemple : "y aller" !*! 'y' Ã  dÃ©placer ?
+        if (word == 'l^' or 'y//') ! exemple : "y aller" !*! 'y' à déplacer ?
         {
-            EcraseMot(0); !*! imprÃ©cision : en fait 'l^' est Ã©quivalent Ã  '-le' ou '-la'
-            LTI_Insert(b, ' '); ! '-lui' est masculin ou fÃ©minin
+            EcraseMot(0); !*! imprécision : en fait 'l^' est équivalent à '-le' ou '-la'
+            LTI_Insert(b, ' '); ! '-lui' est masculin ou féminin
             LTI_Insert(b+1, '-');
             LTI_Insert(b+2, 'l'); !*! 'y' donne '-y' ? et 'en' ?
             LTI_Insert(b+3, 'u');
@@ -516,11 +516,11 @@ global enleveaccents=1;
     }
     Tokenise__(buffer,parse);
 
-    ! Etape B : "lui/leur" passe aprÃ¨s le verbe. Ex : "lui donner -le" devient "donner -le -lui"
+    ! Etape B : "lui/leur" passe après le verbe. Ex : "lui donner -le" devient "donner -le -lui"
     word=Mot(0); ! 1er mot
     ! RangDernier est le rang du dernier mot du bloc : verbe + "-le/-la/-les"
-    if ((NbMots()>=3)&&(Mot(2)=='-le'or'-la'or'-les' or'-lui')) RangDernier=2; else RangDernier=1; ! "-le/-la/-les" aprÃ¨s le verbe ?
-    b=PositionMot(RangDernier)+LongueurMot(RangDernier); ! juste aprÃ¨s bloc = position du dernier + longueur du dernier
+    if ((NbMots()>=3)&&(Mot(2)=='-le'or'-la'or'-les' or'-lui')) RangDernier=2; else RangDernier=1; ! "-le/-la/-les" après le verbe ?
+    b=PositionMot(RangDernier)+LongueurMot(RangDernier); ! juste après bloc = position du dernier + longueur du dernier
     if (~~DernierMot(0)) { ! ne rien faire si la phrase ne comporte pas de verbe
         if (word == 'lui')
         {
@@ -545,7 +545,7 @@ global enleveaccents=1;
     Tokenise__(buffer,parse);
 
     if ( (word == 'me' or 'm^' or 'te' or 't^' or 'se' or 's^' or 'nous' or 'vous')
-            && ~~DernierMot(0) ) ! sinon gÃ¨nerait "se", abrÃ©viation de "sud-est"
+            && ~~DernierMot(0) ) ! sinon gènerait "se", abréviation de "sud-est"
     {
         EcraseMot(0);
         LTI_Insert(b, ' ');
@@ -556,31 +556,31 @@ global enleveaccents=1;
     }
     Tokenise__(buffer,parse);
 
-    ! maintenant que les traitements sur l'infinitif ont Ã©tÃ© faits,
-    ! enlever le tiret en dÃ©but de mot pour ceux qui n'existent pas dans le dictionnaire
-    ! (conserve '-lui','-le','-la'... et les mots prÃ©vus par le joueur)
+    ! maintenant que les traitements sur l'infinitif ont été faits,
+    ! enlever le tiret en début de mot pour ceux qui n'existent pas dans le dictionnaire
+    ! (conserve '-lui','-le','-la'... et les mots prévus par le joueur)
     enleve_tirets();
 
     ! Avertir ceux qui oublient de mettre des traits d'union entre les pronons et le verbe
-    ! Ã  l'impÃ©ratif et corriger les cas les plus simples : !*! le plus possible
-    enleve_accents(); ! sinon "Ã " n'est pas reconnu !*! placer cette fonction encore plus en amont ?
+    ! à l'impératif et corriger les cas les plus simples : !*! le plus possible
+    enleve_accents(); ! sinon "à" n'est pas reconnu !*! placer cette fonction encore plus en amont ?
     if ( ((NbMots()==2)&&(Mot(1)=='le'or'la'or'les'or'lui'or'leur')) || ! "parle lui" devient "parle-lui"
             ((NbMots()>=2)&&(Mot(1)=='lui')) || ! "donne lui la pomme" devient "donne-lui la pomme" (pas de confusion possible avec l'article)
             ((NbMots()>=4)&&(Mot(1)=='le'or'la'or'les'or'lui'or'leur')&&(Mot(2)=='a//'or'au'or'aux'or'de'or'du'or'des'or'dans'or'sur')) ) ! "donne le aux moutons" devient "donne-le aux moutons"
     {
         LTI_Insert(PositionMot(1), '-');
-        print "[Mettez toujours un trait d'union entre le pronom et le verbe Ã  l'impÃ©ratif !]^";
+        print "[Mettez toujours un trait d'union entre le pronom et le verbe à l'impératif !]^";
     }
     if ((NbMots()==3)&&(Mot(1)=='le'or'la'or'les'or'-le'or'-la'or'-les')&&(Mot(2)=='lui'or'leur')) { ! "donne le lui" ou "donne-le lui" devient "donne-le-lui"
         if (Mot(1)=='le'or'la'or'les') LTI_Insert(PositionMot(1), '-');
         LTI_Insert(PositionMot(2), '-');
-        print "[Mettez toujours un trait d'union entre chaque pronom et le verbe Ã  l'impÃ©ratif !]^";
+        print "[Mettez toujours un trait d'union entre chaque pronom et le verbe à l'impératif !]^";
     }
 
     ! remplacer "toi/vous/nous" en 2e position par "vous"
-    if ((Mot(1) == 'moi' or 'toi' or 'nous')) !*! pas sÃ»r encore, sert Ã  gÃ©rer "rÃ©veillons nous" -> "rÃ©veillons vous"
+    if ((Mot(1) == 'moi' or 'toi' or 'nous')) !*! pas sûr encore, sert à gérer "réveillons nous" -> "réveillons vous"
     {
-        EcraseMot(1); !*! fiable mais le buffer est agrandi de 3 ou 4 caractÃ¨res : pas grave ?
+        EcraseMot(1); !*! fiable mais le buffer est agrandi de 3 ou 4 caractères : pas grave ?
         LTI_Insert(PositionMot(1)  , 'v');
         LTI_Insert(PositionMot(1)+1, 'o');
         LTI_Insert(PositionMot(1)+2, 'u');
@@ -589,7 +589,7 @@ global enleveaccents=1;
 
     Tokenise__(buffer,parse);
 
-    enleve_accents(); !*! dÃ©jÃ  fait plus haut ? on ne sait jamais avec enleve_tirets() !*! rendre la suppression des accents systÃ©matique ? (dictionnaire ou pas)
+    enleve_accents(); !*! déjà fait plus haut ? on ne sait jamais avec enleve_tirets() !*! rendre la suppression des accents systématique ? (dictionnaire ou pas)
 
     #Ifdef DEBUG; affiche_buffer(buffer, "* Buffer traduit en informese : "); #Endif;
 ];
@@ -621,9 +621,9 @@ Constant LanguageContractionForms = 2;     ! French has two:
                                            ! 0 = starting with a consonant
                                            ! 1 = starting with a vowel
                                            !     or mute h
-!*! ajouter d'autres voyelles (Ã  accents) ?
+!*! ajouter d'autres voyelles (à accents) ?
 [ LanguageContraction text;
-    if (text->0 == 'a' or 'e' or 'Ã©' or 'Ã¨' or 'i' or 'o' or 'u' or 'h'
+    if (text->0 == 'a' or 'e' or 'é' or 'è' or 'i' or 'o' or 'u' or 'h'
                     or 'A' or 'E' or 'I' or 'O' or 'U' or 'H') return 1;
     return 0;
 ];
@@ -663,7 +663,7 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
 ];
 
 [ LanguageNumber n f;
-    if (n==0)    { print "zÃ©ro"; rfalse; }
+    if (n==0)    { print "zéro"; rfalse; }
     if (n<0)     { print "moins "; n=-n; }
     if (n>=1000) { print (LanguageNumber) n/1000, " mille"; n=n%1000; f=1; }
     if (n>=100)  { 
@@ -791,9 +791,9 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
 ];
 
 Constant NKEY__TX     = "S = suivant";
-Constant PKEY__TX     = "P = prÃ©cÃ©dent";
-Constant QKEY1__TX    = "        Q = retour"; !huit espaces pour aligner Ã  droite
-Constant QKEY2__TX    = "Q = menu prÃ©cÃ©dent";
+Constant PKEY__TX     = "P = précédent";
+Constant QKEY1__TX    = "        Q = retour"; !huit espaces pour aligner à droite
+Constant QKEY2__TX    = "Q = menu précédent";
 Constant RKEY__TX     = "ENTREE = lire sujet";
 
 Constant NKEY1__KY    = 'S';
@@ -810,28 +810,28 @@ Constant TIME__TX     = "Heure : ";
 #Ifndef NI_BUILD_COUNT;
 Constant CANTGO__TX   = "Vous ne pouvez pas aller dans cette direction.";
 Constant FORMER__TX   = "votre ancien vous";
-Constant YOURSELF__TX = "vous-mÃªme";
+Constant YOURSELF__TX = "vous-même";
 #Ifnot;
 Global CANTGO__TX   = "Vous ne pouvez pas aller dans cette direction.";
 Global FORMER__TX   = "votre ancien vous";
-Global YOURSELF__TX = "vous-mÃªme";
+Global YOURSELF__TX = "vous-même";
 #endif; ! NI_BUILD_COUNT
 
 Constant YOU__TX        = "Vous";
-Constant DARKNESS__TX = "L'obscuritÃ©";
+Constant DARKNESS__TX = "L'obscurité";
 
-Constant THOSET__TX   = "ces choses-lÃ ";
+Constant THOSET__TX   = "ces choses-là";
 Constant THAT__TX     = "cela";
 Constant OR__TX       = " ou ";
 Constant NOTHING__TX  = "rien";
 #Ifndef NI_BUILD_COUNT;
-Constant IS__TX       = "est ";   ! utilisÃ©s par WriteListFrom
+Constant IS__TX       = "est ";   ! utilisés par WriteListFrom
 Constant ARE__TX      = "sont ";  ! 
 Constant IS2__TX      = "";  ! dans/sur lequel " est"  => contenant/supportant
 Constant ARE2__TX     = "";  ! dans/sur lequel " sont" => contenant/supportant
 
 #Ifnot;
-Global IS__TX       = "est ";   ! utilisÃ©s par WriteListFrom
+Global IS__TX       = "est ";   ! utilisés par WriteListFrom
 Global ARE__TX      = "sont ";  ! 
 Global IS2__TX      = "";  ! dans/sur lequel " est"  => contenant/supportant
 Global ARE2__TX     = "";  ! dans/sur lequel " sont" => contenant/supportant
@@ -853,8 +853,8 @@ Constant WHICH__TX    = "";  ! dans/sur "lequel " est  => contenant/supportant
 Constant COMMA__TX      = ", ";
 
 
-![ ThatorThose obj;   ! ex : vous n'allez pas manger Ã§a (accusatif) (utile ?)
-!  print "Ã§a";
+![ ThatorThose obj;   ! ex : vous n'allez pas manger ça (accusatif) (utile ?)
+!  print "ça";
 !];
 [ ItorThem obj; ! ex : avant de pouvoir vous/le/la/les poser... (accusatif ?)
     if (obj == player) { print "vous"; return; }
@@ -875,7 +875,7 @@ Constant COMMA__TX      = ", ";
     else { print "Il"; return; }
     ];
 [ CTheyreorThats obj;
-    if (obj == player) { print "Vous Ãªtes"; return; }
+    if (obj == player) { print "Vous êtes"; return; }
     if (obj has pluralname) {
         if (obj has female) { print "Elles sont"; return; }
         else { print "Ils sont"; return; }
@@ -885,7 +885,7 @@ Constant COMMA__TX      = ", ";
 ];
 
 ! Quelques fonctions additionnelles...
-[ es obj; ! ex: fermÃ©(es), ouvert(es)
+[ es obj; ! ex: fermé(es), ouvert(es)
     if (obj has female) print "e";
     if (obj has pluralname) print "s";
     !*! attention : pris, prise, pris, prises
@@ -897,23 +897,23 @@ Constant COMMA__TX      = ", ";
     if (obj == player) { print "de vous"; return; }
     if (obj has pluralname)  { print "des ", (name) obj; return;}
     if (obj has female or proper) { print "de ", (the) obj; return;} ! ex : de la voiture, de Paris
-    !*! test ci-dessous Ã  effectuer avec @output_stream (ZCode) et avec PrintAnyToArray (Glulx) ?
+    !*! test ci-dessous à effectuer avec @output_stream (ZCode) et avec PrintAnyToArray (Glulx) ?
     ! if ((the)obj="l'...") {print "de ", (the) obj; return;} ! ex : de l'avion
-    print "du ", (name) obj; return; ! ex : du train, du Nautilus (le Nautilus ne doit donc pas Ãªtre considÃ©rÃ© comme proper !*!)
+    print "du ", (name) obj; return; ! ex : du train, du Nautilus (le Nautilus ne doit donc pas être considéré comme proper !*!)
 ];
-! (Stormi) Cette fonction permet d'afficher correctement "Ã  la" "Ã  l'" "au" ou "aux"
+! (Stormi) Cette fonction permet d'afficher correctement "à la" "à l'" "au" ou "aux"
 ! selon le contexte.
 [ to_the obj;
     if (obj has pluralname) {
         print "aux ", (name) obj;
     }
     else if (obj has proper) {
-        print "Ã  ", (name) obj;
+        print "à ", (name) obj;
     }
     else {
-        ! Les lignes qui suivent sont copiÃ©es de la fonction PrefaceByArticle de parserm.h
-        ! afin de connaÃ®tre la valeur de LanguageContraction pour le nom affichÃ© de l'objet
-        ! Je suis le seul Ã  trouver cela atrocement compliquÃ© ?
+        ! Les lignes qui suivent sont copiées de la fonction PrefaceByArticle de parserm.h
+        ! afin de connaître la valeur de LanguageContraction pour le nom affiché de l'objet
+        ! Je suis le seul à trouver cela atrocement compliqué ?
 #ifdef TARGET_ZCODE;
         StorageForShortName-->0 = 160;
         @output_stream 3 StorageForShortName;
@@ -923,16 +923,16 @@ Constant COMMA__TX      = ", ";
              print "au ", (name) obj;
         }
         else {
-            print "Ã  ", (the) obj;
+            print "à ", (the) obj;
         }
 #ifnot; ! TARGET_GLULX;
-		print "Ã  quelqu'un : ", (name) obj;
+		print "à quelqu'un : ", (name) obj;
 #endif;
     }
 ];
 [ nt obj; ! ex: semble(nt)
     if (obj has pluralname) print "nt";
-    !*! attention :  paraÃ®t, paraissent (etc)
+    !*! attention :  paraît, paraissent (etc)
 ];
 [ IsorAreNot obj;
     if (obj has pluralname || obj == player) print "ne sont pas";
@@ -941,47 +941,47 @@ Constant COMMA__TX      = ", ";
 
 [ LanguageLM n x1;
 #ifdef NI_BUILD_COUNT; say__p = 1; #endif;
-    Answer, Ask:    "Pas de rÃ©ponse.";
+    Answer, Ask:    "Pas de réponse.";
 !    Ask:      see Answer
     Attack:         "La violence n'est pas une solution ici.";
     Blow:           "Vous ne pouvez pas utilement souffler dedans.";
-    Burn:           "Cet acte dangereux ne mÃ¨nerait pas Ã  grand-chose.";
-    Buy:            "Il n'y a rien Ã  vendre, ici.";
-    Climb:          "Je ne pense pas que l'on puisse arriver Ã  grand-chose de cette maniÃ¨re.";
+    Burn:           "Cet acte dangereux ne mènerait pas à grand-chose.";
+    Buy:            "Il n'y a rien à vendre, ici.";
+    Climb:          "Je ne pense pas que l'on puisse arriver à grand-chose de cette manière.";
     Close: switch (n) {
         1:  "Vous ne pouvez pas fermer cela.";
-        2:  print (ctheyreorthats) x1, " dÃ©jÃ  fermÃ©";
+        2:  print (ctheyreorthats) x1, " déjà fermé";
             if (x1 has female) "e.";
             ".";
         3:  "Vous fermez ", (the) x1, ".";
     }
     CommandsOff: switch (n) {
-        1:  "[Enregistrement des commandes dÃ©sactivÃ©.]";
+        1:  "[Enregistrement des commandes désactivé.]";
         #Ifdef TARGET_GLULX;
-        2:  "[Enregistrement des commandes dÃ©jÃ  dÃ©sactivÃ©.]";
+        2:  "[Enregistrement des commandes déjà désactivé.]";
         #Endif; ! TARGET_
     }
     CommandsOn: switch (n) {
-        1:  "[Enregistrement des commandes activÃ©.]";
+        1:  "[Enregistrement des commandes activé.]";
         #Ifdef TARGET_GLULX;
-        2:  "[Les commandes sont actuellement en train d'Ãªtre rejouÃ©es.]";
-        3:  "[Enregistrement des commandes dÃ©jÃ  activÃ©.]";
+        2:  "[Les commandes sont actuellement en train d'être rejouées.]";
+        3:  "[Enregistrement des commandes déjà activé.]";
         4:  "[Echec d'enregistrement des commandes.]";
         #Endif; ! TARGET_
     }
     CommandsRead: switch (n) {
         1:  "[Rejouer les commandes.]";
         #Ifdef TARGET_GLULX;
-        2:  "[Les commandes sont dÃ©jÃ  en train d'Ãªtre rejouÃ©es.]";
-        3:  "[Rejouer les commandes a Ã©chouÃ©.  L'enregistrement des commandes est activÃ©.]";
-        4:  "[Rejouer les commandes a Ã©chouÃ©.]";
-        5:  "[Rejouer les commandes achevÃ©.]";
+        2:  "[Les commandes sont déjà en train d'être rejouées.]";
+        3:  "[Rejouer les commandes a échoué.  L'enregistrement des commandes est activé.]";
+        4:  "[Rejouer les commandes a échoué.]";
+        5:  "[Rejouer les commandes achevé.]";
         #Endif; ! TARGET_
     }
-    Consult:        "Vous ne trouvez rien d'intÃ©ressant dans ", (the) x1, ".";
-    CrierSansPrecision : "Vous criez ce qui vous passe par la tÃªte.";
-    Cut:            "Allons, ", (itorthem) x1, " couper ne mÃ¨nerait pas Ã  grand-chose.";
-    Dig:            "Creuser ne mÃ¨nerait Ã  rien ici.";
+    Consult:        "Vous ne trouvez rien d'intéressant dans ", (the) x1, ".";
+    CrierSansPrecision : "Vous criez ce qui vous passe par la tête.";
+    Cut:            "Allons, ", (itorthem) x1, " couper ne mènerait pas à grand-chose.";
+    Dig:            "Creuser ne mènerait à rien ici.";
     Disrobe: switch (n) {
         1:  "Vous ne ", (itorthem) x1, " portez pas.";
         2:  "Vous enlevez ", (the) x1, ".";
@@ -990,8 +990,8 @@ Constant COMMA__TX      = ", ";
     Drop: switch (n) {
         1:  if (x1 has pluralname) print (The) x1, " sont ";
             else print (The) x1, " est ";
-            "dÃ©jÃ  ici.";
-        2:  "Vous n'avez pas Ã§a.";
+            "déjà ici.";
+        2:  "Vous n'avez pas ça.";
         #ifdef NI_BUILD_COUNT;
         3:  print "(vous prenez d'abord ", (the) x1, "^"; say__p = 0; return;
         #ifnot;
@@ -1001,17 +1001,17 @@ Constant COMMA__TX      = ", ";
     }
     Eat: switch (n) {
         1:  print_ret (ctheyreorthats) x1,
-            " non comestible",(s) x1,", selon toute Ã©vidence.";
+            " non comestible",(s) x1,", selon toute évidence.";
         2:  "Vous mangez ", (the) x1, ". Pas mauvais.";
     }
     EmptyT: switch (n) {
         1:  print_ret (The) x1, " ne peut rien contenir."; ! TODO risque de poser pb si pluriel ?
-        2:  print_ret (The) x1, " ", (isorare) x1, " fermÃ©",(es) x1,".";
-        3:  print_ret (The) x1, " ", (isorare) x1, " dÃ©jÃ  vide",(s) x1,".";
+        2:  print_ret (The) x1, " ", (isorare) x1, " fermé",(es) x1,".";
+        3:  print_ret (The) x1, " ", (isorare) x1, " déjà vide",(s) x1,".";
         4:  "Ceci ne viderait rien.";
     }
     Enter: switch (n) {
-        1:  print "Mais vous Ãªtes dÃ©jÃ  ";
+        1:  print "Mais vous êtes déjà ";
             if (x1 has supporter) print "sur "; else print "dans ";
             print_ret (the) x1, ".";
         2:  print "Vous ne pouvez pas ";
@@ -1021,14 +1021,14 @@ Constant COMMA__TX      = ", ";
                 'allonger':    "vous y allonger.";
                 'coucher':    "vous y coucher.";
 		'monter':    "y monter.";
-                default:  "y aller."; ! plutÃ´t que "y entrer." !*!
+                default:  "y aller."; ! plutôt que "y entrer." !*!
             }
-        3:  "Vous ne pouvez entrer dans ", (the) x1, " fermÃ©",(es) x1,".";
+        3:  "Vous ne pouvez entrer dans ", (the) x1, " fermé",(es) x1,".";
         4:  print "Vous ne pouvez pas ";                  
             if (x1 has supporter) print "y monter";
                              else print "y entrer";
-            " si ce n'est pas posÃ©."; 
-                        ! sur pieds, non encastrÃ© (freestanding)
+            " si ce n'est pas posé."; 
+                        ! sur pieds, non encastré (freestanding)
         5:  print "Vous ";
             if (x1 has supporter) print "montez sur "; else print "entrez dans ";
             print_ret (the) x1, ".";
@@ -1052,51 +1052,51 @@ Constant COMMA__TX      = ", ";
         1:  "Vous ne pouvez rien voir.";
         2:  "Rien de particulier concernant ", (the) x1, ".";
         3:  print (The) x1, " ", (isorare) x1, " actuellement ";
-            if (x1 has on) "allumÃ©",(es) x1,"."; else "Ã©teint",(es) x1,".";
+            if (x1 has on) "allumé",(es) x1,"."; else "éteint",(es) x1,".";
     }
     Exit: switch (n) {
-        1:  "Sortir d'oÃ¹ ?!";
+        1:  "Sortir d'où ?!";
         2:  print "Vous ne pouvez pas sortir ";
-            print_ret (dedudes) x1, " fermÃ©", (es) x1, ".";
+            print_ret (dedudes) x1, " fermé", (es) x1, ".";
         3:  print "Vous ";
             if (x1 has supporter) print "descendez "; else print "sortez ";
             print_ret (dedudes) x1, ".";
-        4:  print "Mais vous n'Ãªtes pas ";
+        4:  print "Mais vous n'êtes pas ";
             if (x1 has supporter) print "sur "; else print "dans ";
             print_ret (the) x1, ".";
     }
-    Fill:           "Mais il n'y a pas d'eau Ã  porter ici.";
+    Fill:           "Mais il n'y a pas d'eau à porter ici.";
     FullScore: switch(n) {   
-        1:  if (deadflag) print "Le score Ã©tait ";
+        1:  if (deadflag) print "Le score était ";
             else          print "Le score est ";
-            "composÃ© comme suit :^";
+            "composé comme suit :^";
         2:  "trouver divers objets";
-        3:  "visiter diffÃ©rents endroits";
+        3:  "visiter différents endroits";
         4:  print "total (sur ", MAX_SCORE; ")";
     }
-    GetOff:         "Mais vous n'Ãªtes pas sur ", (the) x1, " en ce moment.";
+    GetOff:         "Mais vous n'êtes pas sur ", (the) x1, " en ce moment.";
     Give: switch (n) {
         1:  "Vous n'avez pas en main ", (the) x1, ".";
         2:  "Vous jonglez avec ", (the) x1,
-            " pendant un moment, mais vous n'arrivez pas Ã  grand-chose.";
+            " pendant un moment, mais vous n'arrivez pas à grand-chose.";
         3:  print (The) x1;
             if (x1 has pluralname)
-                print " n'ont pas l'air intÃ©ressÃ©";
-            else print " n'a pas l'air intÃ©ressÃ©";
+                print " n'ont pas l'air intéressé";
+            else print " n'a pas l'air intéressé";
             ".";
     }
     Go: switch (n) {
         1:  print "Vous devez d'abord ";
             if (x1 has supporter) print "descendre "; else print "sortir ";
             print_ret (dedudes) x1, ".";
-        2:  "Vous ne pouvez pas aller par lÃ .";
-        3:  "Vous Ãªtes incapable de gravir ", (the) x1, ".";
-        4:  "Vous Ãªtes incapable de descendre par ", (the) x1, ".";
+        2:  "Vous ne pouvez pas aller par là.";
+        3:  "Vous êtes incapable de gravir ", (the) x1, ".";
+        4:  "Vous êtes incapable de descendre par ", (the) x1, ".";
         5:  "Vous ne pouvez pas, puisque ", (the) x1, " ", (isorare) x1,
             " sur votre chemin.";
         6:  print "Vous ne pouvez pas, puisque ", (the) x1;
-            if (x1 has pluralname) " ne mÃ¨nent nulle part.";
-            " ne mÃ¨ne nulle part.";
+            if (x1 has pluralname) " ne mènent nulle part.";
+            " ne mène nulle part.";
     }
     Insert: switch (n) {
         1: "Vous devez avoir en main ", (the) x1,
@@ -1106,9 +1106,9 @@ Constant COMMA__TX      = ", ";
             print_ret (The) x1, " ne peuvent pas contenir d'objet.";
             else  
             print_ret (The) x1, " ne peut pas contenir d'objet.";
-        3:  print_ret (The) x1, " ", (isorare) x1, " fermÃ©",(es) x1,".";
+        3:  print_ret (The) x1, " ", (isorare) x1, " fermé",(es) x1,".";
         4:  "Vous avez besoin de ", (itorthem) x1, " prendre d'abord.";
-        5:  "Vous ne pouvez pas mettre un objet Ã  l'intÃ©rieur de lui-mÃªme.";
+        5:  "Vous ne pouvez pas mettre un objet à l'intérieur de lui-même.";
         6:  "(", (itorthem) x1, " prenant d'abord)^";
         7:  "Il n'y a plus de place dans ", (the) x1, ".";
         8:  "Fait.";
@@ -1121,31 +1121,31 @@ Constant COMMA__TX      = ", ";
         4:  print ".^";
     }
     Jump:           "Vous sautez sur place, vainement.";
-    JumpOver, Tie:  "Vous n'arriverez Ã  rien comme Ã§a.";
+    JumpOver, Tie:  "Vous n'arriverez à rien comme ça.";
     Kiss:           "Concentrez-vous sur le jeu.";
     Listen:         "Vous n'entendez rien de particulier.";
     ListMiscellany: switch (n) {
-         1: print " (allumÃ©",(es) x1,")";
+         1: print " (allumé",(es) x1,")";
 		#ifdef NI_BUILD_COUNT;
-		2: print " (fermÃ©",(es) x1,")";
+		2: print " (fermé",(es) x1,")";
 		4: print " (vide",(s) x1,")";
-		6: print " (fermÃ©",(es) x1," et vide",(s) x1,")";
+		6: print " (fermé",(es) x1," et vide",(s) x1,")";
 		#ifnot; ! NI_BUILD_COUNT
-		2: print " (qui ", (isorare) x1, " fermÃ©",(es) x1,")";
+		2: print " (qui ", (isorare) x1, " fermé",(es) x1,")";
 		4: print " (qui ", (isorare) x1, " vide",(s) x1,")";
-		6: print " (qui ", (isorare) x1, " fermÃ©",(es) x1," et vide",(s) x1,")";
+		6: print " (qui ", (isorare) x1, " fermé",(es) x1," et vide",(s) x1,")";
 		#endif; ! NI_BUILD_COUNT
-		3: print " (fermÃ©",(es) x1," et allumÃ©",(es) x1,")";
-		5: print " (vide",(s) x1," et allumÃ©",(es) x1,")";
-		7: print " (fermÃ©",(es) x1,", vide",(s) x1," et allumÃ©",(es) x1,")";
-         8: print " (allumÃ©",(es) x1," et portÃ©",(es) x1;
-         9: print " (allumÃ©",(es) x1;
-        10: print " (portÃ©",(es) x1;
+		3: print " (fermé",(es) x1," et allumé",(es) x1,")";
+		5: print " (vide",(s) x1," et allumé",(es) x1,")";
+		7: print " (fermé",(es) x1,", vide",(s) x1," et allumé",(es) x1,")";
+         8: print " (allumé",(es) x1," et porté",(es) x1;
+         9: print " (allumé",(es) x1;
+        10: print " (porté",(es) x1;
         11: print " (qui ", (isorare) x1, " ";
         12: print "ouvert",(es) x1;
         13: print "ouvert",(es) x1," mais vide",(s) x1;
-        14: print "fermÃ©",(es) x1;
-        15: print "fermÃ©",(es) x1," et verrouillÃ©",(es) x1;
+        14: print "fermé",(es) x1;
+        15: print "fermé",(es) x1," et verrouillé",(es) x1;
         16: print " et vide",(s) x1;
         17: print " (qui ", (isorare) x1, " vide",(s) x1,")";
         18: print " contenant ";
@@ -1154,15 +1154,15 @@ Constant COMMA__TX      = ", ";
         21: print " (contenant ";  ! " (dans ";
         22: print " contenant ";   ! " dans ";
     }
-    LMode1:         " est passÃ© en mode description normale ; seuls les lieux 
-                      visitÃ©s pour la premiÃ¨re fois sont dÃ©crits en dÃ©tail.";
-    LMode2:         " est passÃ© en mode description longue ; tous les lieux,
-                      mÃªme dÃ©jÃ  visitÃ©s, sont dÃ©crits en dÃ©tail.";
-    LMode3:         " est passÃ© en mode description courte ; tous les lieux,
-                      mÃªme non visitÃ©s, sont dÃ©crits briÃ¨vement.";
+    LMode1:         " est passé en mode description normale ; seuls les lieux 
+                      visités pour la première fois sont décrits en détail.";
+    LMode2:         " est passé en mode description longue ; tous les lieux,
+                      même déjà visités, sont décrits en détail.";
+    LMode3:         " est passé en mode description courte ; tous les lieux,
+                      même non visités, sont décrits brièvement.";
     Lock: switch (n) {
         1:  "Vous ne pouvez pas verrouiller cela.";
-        2:  print_ret (ctheyreorthats) x1, " verrouillÃ© en ce moment.";
+        2:  print_ret (ctheyreorthats) x1, " verrouillé en ce moment.";
         3:  "Vous devez fermer ", (the) x1, " d'abord.";
         4:  "Cela ne rentre pas dans la serrure.";
         5:  "Vous verrouillez ", (the) x1, ".";
@@ -1191,100 +1191,100 @@ Constant COMMA__TX      = ", ";
     }
     LookUnder: switch (n) {
         1:  "Mais il fait noir !";
-        2:  "Vous ne trouvez rien d'intÃ©ressant.";
+        2:  "Vous ne trouvez rien d'intéressant.";
     }
     Mild:           "Assez.";
     Miscellany: switch (n) {
         1:  "(affichage des seize premiers)^";
-        2:  "Rien Ã  faire !";
-        3:  print " Vous Ãªtes mort ";
-        4:  print " Vous avez gagnÃ© ";
-        5:  print "^Voulez-vous RECOMMENCER, CHARGER une partie sauvegardÃ©e";
+        2:  "Rien à faire !";
+        3:  print " Vous êtes mort ";
+        4:  print " Vous avez gagné ";
+        5:  print "^Voulez-vous RECOMMENCER, CHARGER une partie sauvegardée";
             #IFDEF DEATH_MENTION_UNDO;
-            print ", ANNULER votre derniÃ¨re action";
+            print ", ANNULER votre dernière action";
             #ENDIF;
             if (TASKS_PROVIDED==0)
-                print ", obtenir le score dÃ©taillÃ© pour cette partie (FULLSCORE)";
+                print ", obtenir le score détaillé pour cette partie (FULLSCORE)";
             if (deadflag==2 && AMUSING_PROVIDED==0)
                 print ", lire quelques suggestions amusantes (AMUSING)";
             " ou quitter (QUITTER) ?"; !*!
-        6:  "[Votre interprÃ©teur ne permet pas d' ~annuler~. DÃ©solÃ© !]";
+        6:  "[Votre interpréteur ne permet pas d' ~annuler~. Désolé !]";
         #Ifdef TARGET_ZCODE;
-        7:  "~Annuler~ a Ã©chouÃ©.  [Tous les interprÃ©teurs ne le permettent pas.]";
+        7:  "~Annuler~ a échoué.  [Tous les interpréteurs ne le permettent pas.]";
         #Ifnot; ! TARGET_GLULX
         7:  "[Vous ne pouvez pas ~Annuler~ plus loin.]";
         #Endif; ! TARGET_
         8:  "Faites un choix parmi les propositions ci-dessus.";
-        9:  "^Vous Ãªtes Ã  prÃ©sent plongÃ© dans l'obscuritÃ© !";
+        9:  "^Vous êtes à présent plongé dans l'obscurité !";
         10: "Je vous demande pardon ?";
-        11: "[Vous ne pouvez pas annuler alors que rien n'a encore Ã©tÃ© fait !]";
-        12: "[Impossible d'annuler deux fois de suite. DÃ©solÃ© !]";
-        13: "[Action prÃ©cÃ©dente annulÃ©e.]";
-        14: "DÃ©solÃ©, impossible de corriger.";
-        15: "N'y pensez mÃªme pas."; !*! "Think nothing of it."; !*!
+        11: "[Vous ne pouvez pas annuler alors que rien n'a encore été fait !]";
+        12: "[Impossible d'annuler deux fois de suite. Désolé !]";
+        13: "[Action précédente annulée.]";
+        14: "Désolé, impossible de corriger.";
+        15: "N'y pensez même pas."; !*! "Think nothing of it."; !*!
         16: "~Oops~ ne peut corriger qu'un seul mot.";
         17: "Il fait noir, et vous ne pouvez rien voir.";
-        18: print "vous-mÃªme";
+        18: print "vous-même";
         19: "Aussi beau que d'habitude.";
-        20: "Pour rÃ©pÃ©ter une commande comme ~grenouille, saute~, dÃ®tes seulement
+        20: "Pour répéter une commande comme ~grenouille, saute~, dîtes seulement
             ~encore~, et pas ~grenouille, encore~.";
-        21: "Vous pouvez difficilement rÃ©pÃ©ter cela.";
+        21: "Vous pouvez difficilement répéter cela.";
         22: "Vous ne pouvez pas commencer par une virgule.";
-        23: "Vous semblez vouloir parler Ã  quelqu'un, mais je ne vois pas Ã  qui.";
+        23: "Vous semblez vouloir parler à quelqu'un, mais je ne vois pas à qui.";
         24: "Vous ne pouvez pas discuter avec ", (the) x1, ".";
-            ! "parler Ã " serait mieux mais dÃ©licat (ex: Ã  l'oiseau)
-        25: "Pour parler Ã  quelqu'un, essayez ~quelqu'un, bonjour~ ou quelque chose dans le genre.";
+            ! "parler à" serait mieux mais délicat (ex: à l'oiseau)
+        25: "Pour parler à quelqu'un, essayez ~quelqu'un, bonjour~ ou quelque chose dans le genre.";
         26: "(vous prenez d'abord ", (the) not_holding, ")";
         27: "Je ne comprends pas cette phrase.";
         28: print "Merci de reformuler. Je n'ai compris que : ";
         29: "Je n'ai pas compris ce nombre.";
-        30: "Vous ne voyez rien de tel, Ã  moins que cela ne soit sans grande importance.";
+        30: "Vous ne voyez rien de tel, à moins que cela ne soit sans grande importance.";
         31: "Vous semblez en avoir dit trop peu !";
         32: "Vous ne l'avez pas dans vos mains !";
         33: "Vous ne pouvez pas employer le mot ~tout~ (ou une liste) avec ce verbe.";
         34: "Vous ne pouvez utiliser le mot ~tout~ (ou une liste) qu'une fois par ligne.";
-        35: "Je ne suis pas sÃ»r de ce Ã  quoi ~", (address) pronoun_word,
-            "~ se rÃ©fÃ¨re.";
-        36: "Vous avez exclu quelque chose qui n'Ã©tait de toute faÃ§on pas compris dans la liste !";
-        37: "Vous ne pouvez agir ainsi qu'avec une chose animÃ©e.";
+        35: "Je ne suis pas sûr de ce à quoi ~", (address) pronoun_word,
+            "~ se réfère.";
+        36: "Vous avez exclu quelque chose qui n'était de toute façon pas compris dans la liste !";
+        37: "Vous ne pouvez agir ainsi qu'avec une chose animée.";
         38: "Je ne connais pas ce verbe.";
-        39: "Ce n'est pas une chose Ã  laquelle vous aurez Ã  vous rÃ©fÃ©rer
+        39: "Ce n'est pas une chose à laquelle vous aurez à vous référer
             au cours du jeu.";
         40: "Vous ne pouvez voir ~", (address) pronoun_word,
             "~ (", (the) pronoun_obj, ") pour l'instant.";
         41: "Impossible de comprendre la fin de la phrase.";
         42: if (x1==0) print "Aucun de disponible.";
             else print "Il en reste seulement ", (number) x1, ".";
-        43: "Rien Ã  faire !";
+        43: "Rien à faire !";
         44: "Rien n'est disponible !";
-        45: print "PrÃ©cisez : "; !*!
-        46: print "PrÃ©cisez : "; !*!
-        47: "DÃ©solÃ©, vous pouvez seulement avoir un objet ici. Lequel voulez-vous exactement ?";
-        48: print "Pouvez-vous prÃ©ciser qui est concernÃ© par cette action ?^"; !*!
-        49: print "Pouvez-vous prÃ©ciser le nom de l'objet Ã  utiliser ?^"; !*!
+        45: print "Précisez : "; !*!
+        46: print "Précisez : "; !*!
+        47: "Désolé, vous pouvez seulement avoir un objet ici. Lequel voulez-vous exactement ?";
+        48: print "Pouvez-vous préciser qui est concerné par cette action ?^"; !*!
+        49: print "Pouvez-vous préciser le nom de l'objet à utiliser ?^"; !*!
         50: print "Votre score vient ";
             if (x1 > 0) print "d'augmenter"; else { x1 = -x1; print "de diminuer"; }
             print " de ", (number) x1, " point";
             if (x1 > 1) print "s";
         51: "(Comme quelque chose de dramatique vient de se produire,
-            votre liste de commandes a Ã©tÃ© raccourcie.)";
+            votre liste de commandes a été raccourcie.)";
         52: "^Tapez un nombre entre 1 et ", x1,
-            ", 0 pour rÃ©afficher ou appuyez sur ENTREE.^";
+            ", 0 pour réafficher ou appuyez sur ENTREE.^";
         53: "^[Appuyez sur ESPACE.]"; !*! SVP
-        54: "[Commentaire enregistrÃ©.]";
-        55: "[Commentaire NON enregistrÃ©.]";
+        54: "[Commentaire enregistré.]";
+        55: "[Commentaire NON enregistré.]";
         56: print ".^";
         57: print "?^";
     }
     Yes, No:        "Mmmh ?";
-    NotifyOff:      "Notification du score dÃ©sactivÃ©e.";
-    NotifyOn:       "Notification du score activÃ©e.";
+    NotifyOff:      "Notification du score désactivée.";
+    NotifyOn:       "Notification du score activée.";
     Objects: switch(n) {
-        1:  "Objets ayant Ã©tÃ© portÃ©s :^";
+        1:  "Objets ayant été portés :^";
         2:  "Aucun.";
         3:  print "   (sur le corps)";
         4:  print "   (dans l'inventaire)";
-        5:  print "   (abandonnÃ©",(es) x1,")";
+        5:  print "   (abandonné",(es) x1,")";
         6:  print "   (", (name) x1, ")";
         7:  print "   (dans ", (the) x1, ")";
         8:  print "   (dans ", (the) x1, ")";
@@ -1295,11 +1295,11 @@ Constant COMMA__TX      = ", ";
 !        1: "Vous ne pouvez pas ouvrir cela.";
         1:  print_ret "Vous ne pouvez pas ouvrir ", (the) x1,".";
         2:  print_ret (cthatorthose) x1," semble",(nt) x1,
-            " Ãªtre fermÃ©",(es) x1," Ã  clÃ©.";
-        3:  print (ctheyreorthats) x1, " dÃ©jÃ  ouvert";
+            " être fermé",(es) x1," à clé.";
+        3:  print (ctheyreorthats) x1, " déjà ouvert";
             if (x1 has female) "e.";
             ".";
-        4:  print "Vous ouvrez ", (the) x1, ", rÃ©vÃ©lant ";
+        4:  print "Vous ouvrez ", (the) x1, ", révélant ";
             if (WriteListFrom(child(x1),
                 ENGLISH_BIT + TERSE_BIT + CONCEAL_BIT)==0) "rien du tout.";
             ".";
@@ -1308,27 +1308,27 @@ Constant COMMA__TX      = ", ";
     Order:  print (The) x1;
             if (x1 has pluralname) 
                 print " ont"; else print " a";
-                " mieux Ã  faire.";
-    ParlerIncorrect : "Soyez plus prÃ©cis dans votre communication, ou reformulez.";
-    ParlerSansPrecision :   if (noun==player) "Vous ne savez pas quoi vous dire que vous ne sachiez dÃ©jÃ .";
-                            else "Pas de rÃ©ponse.";
+                " mieux à faire.";
+    ParlerIncorrect : "Soyez plus précis dans votre communication, ou reformulez.";
+    ParlerSansPrecision :   if (noun==player) "Vous ne savez pas quoi vous dire que vous ne sachiez déjà.";
+                            else "Pas de réponse.";
     Places: switch (n) {
-        1:  print "Vous avez visitÃ© : ";
+        1:  print "Vous avez visité : ";
         2:  print ".^";
     }
-    Pray:   "Rien de concret ne rÃ©sulte de votre priÃ¨re.";
+    Pray:   "Rien de concret ne résulte de votre prière.";
     Prompt:   print "^>";
     Pronouns: switch (n) {
         1:  print "En ce moment, ";
         2:  print "signifie ";
-        3:  print "n'est pas dÃ©fini";
+        3:  print "n'est pas défini";
         4:  "aucun pronom n'est connu du jeu.";
         5:  ".";
     }
     Pull,Push,Turn: switch (n) {
-        1:  "C'est fixÃ© sur place.";
-        2:  "Vous en Ãªtes incapable.";
-        3:  "Rien d'Ã©vident ne se produit.";
+        1:  "C'est fixé sur place.";
+        2:  "Vous en êtes incapable.";
+        3:  "Rien d'évident ne se produit.";
         4:  "Cela serait moins que courtois.";
     }
 ! Push: see Pull
@@ -1341,22 +1341,22 @@ Constant COMMA__TX      = ", ";
         1: "Vous devez avoir en main ", (the) x1,
             " avant de pouvoir ", (itorthem) x1,
             " mettre sur quelque chose d'autre.";
-        2:  "Vous ne pouvez pas poser un objet sur lui-mÃªme.";
-        3:  "Poser des objets sur ", (the) x1, " ne mÃ¨nerait Ã  rien.";
-        4:  "Vous manquez de dextÃ©ritÃ©.";
+        2:  "Vous ne pouvez pas poser un objet sur lui-même.";
+        3:  "Poser des objets sur ", (the) x1, " ne mènerait à rien.";
+        4:  "Vous manquez de dextérité.";
         5:  "(", (itorthem) x1, " prenant d'abord)^";
         6:  "Il n'y a plus assez de place sur ", (the) x1, ".";
         7:  "C'est fait.";
         8:  "Vous mettez ", (the) x1, " sur ", (the) second, ".";
     }
     Quit: switch (n) {
-        1:  print "RÃ©pondez par oui ou par non, je vous prie.";
-        2:  print "ÃŠtes-vous sÃ»r de vouloir quitter ? (O/N) ";
+        1:  print "Répondez par oui ou par non, je vous prie.";
+        2:  print "Êtes-vous sûr de vouloir quitter ? (O/N) ";
     }
     Remove: switch (n) {
         1:  if (x1 has pluralname)
-                print "Ils sont malheureusement fermÃ©s."; !*! elle(s)
-                else print "Il est malheureusement fermÃ©."; !*!
+                print "Ils sont malheureusement fermés."; !*! elle(s)
+                else print "Il est malheureusement fermé."; !*!
         2:  if (x1 has pluralname)
                 print "Mais ils ne sont pas";
             else print "Mais ce n'est pas";
@@ -1364,20 +1364,20 @@ Constant COMMA__TX      = ", ";
         3:  "D'accord."; ! Ok
     }
     Restart: switch (n) {
-        1: print "ÃŠtes-vous sÃ»r de vouloir recommencer ? (O/N) ";
-        2: "RatÃ©.";
+        1: print "Êtes-vous sûr de vouloir recommencer ? (O/N) ";
+        2: "Raté.";
     }
     Restore: switch (n) {
-        1: "Ã‰chec du chargement.";
-        2: "^--- La partie a bien Ã©tÃ© restaurÃ©e ---^"; ! ok.
+        1: "Échec du chargement.";
+        2: "^--- La partie a bien été restaurée ---^"; ! ok.
     }
-    Rub:            "Vous n'arrivez Ã  rien comme Ã§a.";
+    Rub:            "Vous n'arrivez à rien comme ça.";
     Save: switch (n) {
-        1: "La sauvegarde a Ã©chouÃ©.";
-        2: "^--- La partie a bien Ã©tÃ© sauvegardÃ©e ---^"; ! ok.
+        1: "La sauvegarde a échoué.";
+        2: "^--- La partie a bien été sauvegardée ---^"; ! ok.
     }
     Score: switch (n) {
-        1:  if (deadflag) print "Dans cette partie vous avez obtenu "; else print "Vous avez jusqu'Ã  prÃ©sent obtenu ";
+        1:  if (deadflag) print "Dans cette partie vous avez obtenu "; else print "Vous avez jusqu'à présent obtenu ";
             print score, " sur un score possible de ", MAX_SCORE, ", en ", turns, " tour";
             if (turns ~= 1) print "s";
             return;
@@ -1389,8 +1389,8 @@ Constant COMMA__TX      = ", ";
         3:  "Impossible de terminer la transcription.";
     }
     ScriptOn: switch (n) {
-        1:  "Transcription dÃ©jÃ  en cours.";
-        2:  "DÃ©but d'une transcription de...";
+        1:  "Transcription déjà en cours.";
+        2:  "Début d'une transcription de...";
         3:  "Impossible de commencer la transcription.";
     }
     Search: switch (n) {
@@ -1401,9 +1401,9 @@ Constant COMMA__TX      = ", ";
                 TERSE_BIT + ENGLISH_BIT + CONCEAL_BIT);
             ".";
         4:  if (x1 has animate) "Tenez donc vos mains tranquilles.";
-            else "Vous ne trouvez rien d'intÃ©ressant.";
-        5:  "Vous ne pouvez pas voir Ã  l'intÃ©rieur, puisque ", (the) x1, " ",
-            (isorare) x1, " fermÃ©",(es) x1,".";
+            else "Vous ne trouvez rien d'intéressant.";
+        5:  "Vous ne pouvez pas voir à l'intérieur, puisque ", (the) x1, " ",
+            (isorare) x1, " fermé",(es) x1,".";
         6:  print_ret (The) x1, " ", (isorare) x1, " vide",(s) x1,".";
         7:  print (The) x1;
             if (x1 has pluralname) print " contiennent ";
@@ -1412,45 +1412,45 @@ Constant COMMA__TX      = ", ";
                 TERSE_BIT + ENGLISH_BIT + CONCEAL_BIT);
             ".";
     }
-    Set:            "Non, vous ne pouvez pas ", (itorthem) x1, " rÃ©gler.";
-    SetTo:          "Non, vous ne pouvez pas ", (itorthem) x1, " rÃ©gler sur rien.";
+    Set:            "Non, vous ne pouvez pas ", (itorthem) x1, " régler.";
+    SetTo:          "Non, vous ne pouvez pas ", (itorthem) x1, " régler sur rien.";
     Show: switch (n) {
         1:  "Vous n'avez pas ", (the) x1, ".";
-        2:  print_ret (The) x1, " ", (isorare) x1, " peu impressionnÃ©",(es) x1,".";
+        2:  print_ret (The) x1, " ", (isorare) x1, " peu impressionné",(es) x1,".";
     }
-    Sing:           "Vous chantez un morceau de la premiÃ¨re chanson qui vous vient Ã  l'esprit.";
-    Sleep:          "Vous n'avez pas particuliÃ¨rement sommeil.";
+    Sing:           "Vous chantez un morceau de la première chanson qui vous vient à l'esprit.";
+    Sleep:          "Vous n'avez pas particulièrement sommeil.";
     Smell:          "Vous ne sentez rien de particulier.";
     Sorry:          "Pas grave.";
     Squeeze: switch (n) {
         1:  "Surveillez vos mains.";
-        2:  "Vous n'arrivez Ã  rien ainsi.";
+        2:  "Vous n'arrivez à rien ainsi.";
     }
     Strong:         "Les vrais aventuriers n'emploient pas un tel langage.";
 #Ifndef NI_BUILD_COUNT;
   Swim:           "Il n'y a pas assez d'eau pour nager dedans.";  ! swim desactive par defaut dans I7
 #endif; ! NI_BUILD_COUNT
-    Swing:          "Il n'y a rien de sensÃ© pour se balancer ici.";
+    Swing:          "Il n'y a rien de sensé pour se balancer ici.";
     SwitchOff: switch (n) {
-        1:  "Vous ne pouvez pas allumer ou Ã©teindre cela.";
+        1:  "Vous ne pouvez pas allumer ou éteindre cela.";
         2:  print_ret (ctheyreorthats) x1,
-            " dÃ©jÃ  Ã©teint",(es) x1,".";
-        3:  "Vous Ã©teignez ", (the) x1, ".";
+            " déjà éteint",(es) x1,".";
+        3:  "Vous éteignez ", (the) x1, ".";
     }
     SwitchOn: switch (n) {
         1:  "Vous ne pouvez pas allumer cela.";
         2:  print_ret (ctheyreorthats) x1,
-            " dÃ©jÃ  allumÃ©",(es) x1,".";
+            " déjà allumé",(es) x1,".";
         3:  "Vous allumez ", (the) x1, ".";
     }
     Take:    switch(n) {
         1:  "D'accord."; ! ok.
-        2:  "Vous vous possÃ©dez vous-mÃªme. VoilÃ  une problÃ©matique relevant de la physique quantique.";
-        3:  "Cela ne semble pas Ãªtre une bonne idÃ©e.";
+        2:  "Vous vous possédez vous-même. Voilà une problématique relevant de la physique quantique.";
+        3:  "Cela ne semble pas être une bonne idée.";
         4:  print "Vous devez d'abord ";
             if (x1 has supporter) print "descendre "; else print "sortir ";
             print_ret (dedudes) x1, ".";
-        5:  "Vous l'avez dÃ©jÃ .";
+        5:  "Vous l'avez déjà.";
         6:  "Cela semble appartenir ", (to_the) x1, ".";
         7:  if (noun has pluralname) print "Cela semble ";
             else print "Cela semble ";
@@ -1458,47 +1458,47 @@ Constant COMMA__TX      = ", ";
         8:  print_ret (Cthatorthose) x1, " ", (isorarenot) x1,
             " disponible", (s) x1, ".";
         9:  print_ret (The) x1, " ", (isorarenot) x1, " ouvert",(es) x1,".";
-        10: "Trop difficile Ã  transporter.";
-        11: "C'est fixÃ© sur place.";
-        12: "Vous transportez dÃ©jÃ  trop d'objets.";
+        10: "Trop difficile à transporter.";
+        11: "C'est fixé sur place.";
+        12: "Vous transportez déjà trop d'objets.";
         13: "(vous mettez ", (the) x1, " dans ", (the) SACK_OBJECT,
             " pour faire de la place)";
     }
     Taste:          "Vous ne remarquez rien de particulier.";
     Tell: switch (n) {
-        1:  "Vous discutez avec vous-mÃªme pendant un bon moment...";
-        2:  "Pas de rÃ©action.";
+        1:  "Vous discutez avec vous-même pendant un bon moment...";
+        2:  "Pas de réaction.";
     }
-    Think:          "Quelle bonne idÃ©e.";
+    Think:          "Quelle bonne idée.";
     ThrowAt: switch (n) {
         1:  "Futile.";
-        2:  "Vous hÃ©sitez au moment crucial.";
+        2:  "Vous hésitez au moment crucial.";
     }
 !    Tie:  see JumpOver.
     Touch: switch (n) {
         1:  "Tenez vos mains tranquilles !";
         2:  "Vous ne sentez rien de particulier.";
-        3:  "Si vous pensez que Ã§a peut aider.";
+        3:  "Si vous pensez que ça peut aider.";
     }
 !    Turn: see Pull.
     Unlock:  switch (n) {
-        1:  "Vous ne pouvez pas dÃ©verrouiller cela.";
+        1:  "Vous ne pouvez pas déverrouiller cela.";
         2:  print_ret (ctheyreorthats) x1,
-            " dÃ©jÃ  dÃ©verrouillÃ©", (es) x1, ".";
+            " déjà déverrouillé", (es) x1, ".";
         3:  "Cela ne rentre pas dans la serrure.";
-        4:  "Vous dÃ©verrouillez ", (the) x1, ".";
+        4:  "Vous déverrouillez ", (the) x1, ".";
     }
-    VagueDo: "Soyez plus prÃ©cis."; 
+    VagueDo: "Soyez plus précis."; 
     VagueGo: "Vous devez donner la direction dans laquelle aller.";
-    VagueDig: "Vous devez indiquer ce que vous souhaitez creuser, et si nÃ©cessaire, avec quoi vous voulez le faire.";
-    VagueUse: "Veuillez indiquer un verbe plus prÃ©cis.";
+    VagueDig: "Vous devez indiquer ce que vous souhaitez creuser, et si nécessaire, avec quoi vous voulez le faire.";
+    VagueUse: "Veuillez indiquer un verbe plus précis.";
     Verify: switch (n) {
         1: "Le fichier semble intact.";
         2: "Le fichier est certainement corrompu !";
     }
     Wait:           "Le temps passe...";
-    Wake:           "Il ne s'agit pas d'un rÃªve."; !plus neutre que la formule prÃ©cÃ©dente
-    WakeOther:      "Cela ne semble pas nÃ©cessaire.";
+    Wake:           "Il ne s'agit pas d'un rêve."; !plus neutre que la formule précédente
+    WakeOther:      "Cela ne semble pas nécessaire.";
     Wave: switch (n) {
         1: "Mais vous n'avez pas cela !";
         2: "Vous avez l'air ridicule en agitant ", (the) x1, ".";
@@ -1509,7 +1509,7 @@ Constant COMMA__TX      = ", ";
     Wear: switch (n) {
         1: "Vous ne pouvez pas porter cela !";
         2: "Vous n'avez pas cela !";
-        3: "Vous ", (itorthem) x1, " portez dÃ©jÃ  !";
+        3: "Vous ", (itorthem) x1, " portez déjà !";
         4: "Vous mettez ", (the) x1, ".";
     }
 !    Yes:  see No.
