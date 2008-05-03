@@ -1,8 +1,14 @@
-Version 1/080503 of French by Eric Forgeot begins here.
+Version 2/080503 of French by Eric Forgeot begins here.
 
 "Quelques modifications des regles de base pour supporter le francais : To make French the language of play."
 
 [designed for Inform7 5T18]
+
+[problèmes connus :
+
+- se (pour sud-est) ne fonctionne pas
+- pb avec se coucher (comprend se coucher dans lui-même)
+]
 
 Part 1 - French specifics
 
@@ -15,6 +21,18 @@ Use French 3PSP Language translates as (- Constant French3PSP; -).
 
 Use French 1PSP Language translates as (- Constant French1PSP; -).
 [Use French 1PSP Language.]
+
+
+[utilisé pour : vous pouvez voir etc...]
+To say personne du joueur:
+	say "[if using the French 3PSP Language option]il[otherwise if using the French 1PSP Language option]je[otherwise]vous[end if]". 
+
+To say personne du joueur en capital: [I don't use ''in title case'' because it takes too much memory just for this...]
+	say "[if using the French 3PSP Language option]Il[otherwise if using the French 1PSP Language option]Je[otherwise]Vous[end if]". 
+
+To say verbe pouvoir du joueur:
+	say "[if using the French 3PSP Language option]pouvait[otherwise if using the French 1PSP Language option]pouvais[otherwise]pouvez[end if]".
+
 
 A thing can be female.
 [ pose pb : A device is always an Inform library supporter.]
@@ -62,7 +80,8 @@ Understand "remonter" as up.
 Understand "nord-est/nordest" as northeast.
 Understand "nord-ouest/nordouest" or "no" as northwest. [toujours problème de 'saying no']
 Understand "sud-ouest/sudouest" or "so" as southwest.
-Understand "sud-est/sudest" as southeast.
+Understand "sud-est/sudest" [or "se"] as southeast.
+
 
 Include (- has proper, -) when defining up. [para evitar 'el arriba']
 Include (- has proper, -) when defining down.
@@ -313,7 +332,7 @@ Understand the command "rentrer" as "entrer".
 
 
 
-Understand "asseoir [something]" or "asseoir vous dans/sur [something]" or "asseoir vous en haut de/du/des [something]" as entering.
+Understand "asseoir [something]" or "asseoir dans/sur [something]" or "asseoir vous dans/sur [something]" or "asseoir vous en haut de/du/des [something]" as entering.
 Understand the command "allonger" or "coucher" as "asseoir".
 
 Understand "descendre" as DownGoing.
@@ -407,7 +426,7 @@ Understand "regarder sous [something]" as looking under.
 Understand the command "examiner", "decrire", "observer" and "voir" as "regarder".
 
 
-Understand "chercher dans/sur [something]" as searching.
+Understand "chercher [something]" or "chercher dans/sur [something]" as searching.
 Understand the command "fouiller" as "chercher".
 
 Understand "consulter [text] dans [something]" as consulting it about (with nouns reversed).
@@ -473,6 +492,11 @@ Understand ["nouer [something]" or] "nouer [something] ->/à/a/au/aux/avec/sur [
 Understand the command "attacher", "fixer", "connecter" and "brancher" as "nouer".
 
 [TODO : faire parler, dire etc ici]
+
+Understand "repondre [text] ->/à/a [someone]" as answering it that (with nouns reversed).
+[Understand the commands "say", "shout" and "speak" as "answer".]
+
+[todo : Understand "raconter ->/à/a [someone] a propos de [text]" as telling it about.]
 
 Understand "questionner [someone] a propos de [text]" or "questionner [someone] à propos de [text]" or "questionner [someone] au sujet de [text]" or "questionner [someone] au sujet du/des [text]" or "questionner [someone] sur [text]" as asking it about.
 Understand "demander [something] à [someone]" as asking it for (with nouns reversed).  [todo : check reversed]
@@ -600,13 +624,13 @@ Before printing the locale description (this is the you-can-also-see-french rule
 		otherwise:
 			if handling the listing nondescript items activity:
 				if the domain is a room:
-					if the domain is the location, say "Vous ";
-					otherwise say "Dans [the domain] vous ";
+					if the domain is the location, say "[personne du joueur en capital] ";
+					otherwise say "Dans [the domain] [personne du joueur] ";
 				otherwise if the domain is a supporter:
-					say "Sur [the domain] vous ";
+					say "Sur [the domain] [personne du joueur] ";
 				otherwise:
-					say "Dans [the domain] vous ";
-				say "pouvez [if the locale paragraph count is greater than 0]aussi [end if]voir ";
+					say "Dans [the domain] [personne du joueur] ";
+				say "[verbe pouvoir du joueur] [if the locale paragraph count is greater than 0]aussi [end if]voir ";
 				let the common holder be nothing;
 				let contents form of list be true;
 				repeat with list item running through marked for listing things:
@@ -813,15 +837,15 @@ Object Compass "compass" has concealed;
 -) instead of "Compass" in "Output.i6t"
 
 Include (-
-Constant AGAIN1__WD     = 'again';
+Constant AGAIN1__WD     = 'encore';
 Constant AGAIN2__WD     = 'g//';
-Constant AGAIN3__WD     = 'again';
+Constant AGAIN3__WD     = 'encore';
 Constant OOPS1__WD      = 'oops';
 Constant OOPS2__WD      = 'o//';
-Constant OOPS3__WD      = 'oops';
+Constant OOPS3__WD      = 'euh';
 Constant UNDO1__WD      = 'undo';
-Constant UNDO2__WD      = 'undo';
-Constant UNDO3__WD      = 'undo';
+Constant UNDO2__WD      = 'annule';
+Constant UNDO3__WD      = 'annuler';
 
 Constant ALL1__WD     = 'tous';
 Constant ALL2__WD     = 'toutes';
@@ -1491,7 +1515,7 @@ Include (-
 
 Include (-
 
-#Ifdef French3PSP; ! Pour la 3ème personne du singulier passé
+#Ifdef French1PSP; ! Pour la 1ère personne du singulier passé
 
 Constant NKEY__TX     = "S = suivant";
 Constant PKEY__TX     = "P = précédent";
@@ -1519,14 +1543,89 @@ Constant THOSET__TX   = "ces choses-là";
 Constant THAT__TX     = "cela";
 Constant OR__TX       = " ou ";
 Constant NOTHING__TX  = "rien";
-Constant IS__TX       = "était ";   ! utilisés par WriteListFrom
-Constant ARE__TX      = "étaient ";  !
-Constant IS2__TX      = "";  ! dans/sur lequel " était"  => contenant/supportant
-Constant ARE2__TX     = "";  ! dans/sur lequel " étaient" => contenant/supportant
-Constant AND__TX      = " et ";
+
+Global IS__TX       = "était ";   ! utilisés par WriteListFrom
+Global ARE__TX      = "étaient ";  ! 
+Global IS2__TX      = "";  ! dans/sur lequel " est"  => contenant/supportant
+Global ARE2__TX     = "";  ! dans/sur lequel " sont" => contenant/supportant
+Global IS3__TX       = "était ";  
+Global ARE3__TX      = "étaient ";  ! 
+
+Constant AND__TX        = " et ";
+#ifdef I7_SERIAL_COMMA;
+Constant LISTAND__TX   = ", et ";
+Constant LISTAND2__TX  = " et ";
+#ifnot;
+Constant LISTAND__TX   = " et ";
+Constant LISTAND2__TX  = " et ";
+#endif; ! I7_SERIAL_COMMA
 Constant WHOM__TX     = "";  ! dans/sur "lequel " est  => contenant/supportant
 Constant WHICH__TX    = "";  ! dans/sur "lequel " est  => contenant/supportant
 Constant COMMA__TX      = ", ";
+
+#Endif; ! Fin test French1PSP
+
+#Ifdef French3PSP; ! Pour la 3ème personne du singulier passé
+
+Constant NKEY__TX     = "S = suivant";
+Constant PKEY__TX     = "P = précédent";
+Constant QKEY1__TX    = "        Q = retour"; !huit espaces pour aligner à droite
+Constant QKEY2__TX    = "Q = menu précédent";
+Constant RKEY__TX     = "ENTREE = lire sujet";
+
+Constant NKEY1__KY    = 'S';
+Constant NKEY2__KY    = 's';
+Constant PKEY1__KY    = 'P';
+Constant PKEY2__KY    = 'p';
+Constant QKEY1__KY    = 'Q';
+Constant QKEY2__KY    = 'q';
+
+Constant SCORE__TX    = "Score : ";
+Constant MOVES__TX    = "Tours : ";
+Constant TIME__TX     = "Heure : ";
+
+
+Global CANTGO__TX   = "Il ne put aller dans cette direction.";
+Global FORMER__TX   = "son ancien lui";
+Global YOURSELF__TX = "lui-même";
+
+
+
+Constant YOU__TX        = "Il";
+Constant DARKNESS__TX = "L'obscurité";
+
+Constant THOSET__TX   = "ces choses-là";
+Constant THAT__TX     = "ça";
+Constant OR__TX       = " ou ";
+Constant NOTHING__TX  = "rien";
+
+Global IS__TX       = "était ";   ! utilisés par WriteListFrom
+Global ARE__TX      = "étaient ";  ! 
+Global IS2__TX      = "";  ! dans/sur lequel " est"  => contenant/supportant
+Global ARE2__TX     = "";  ! dans/sur lequel " sont" => contenant/supportant
+Global IS3__TX       = "était ";  
+Global ARE3__TX      = "étaient ";  ! 
+
+
+Constant AND__TX      = " et ";
+
+
+#ifdef I7_SERIAL_COMMA;
+Constant LISTAND__TX   = ", et ";
+Constant LISTAND2__TX  = " et ";
+#ifnot;
+Constant LISTAND__TX   = " et ";
+Constant LISTAND2__TX  = " et ";
+#endif; ! I7_SERIAL_COMMA
+
+
+
+
+Constant WHOM__TX     = "";  ! dans/sur "lequel " est  => contenant/supportant
+Constant WHICH__TX    = "";  ! dans/sur "lequel " est  => contenant/supportant
+Constant COMMA__TX      = ", ";
+
+! fin test French3PSP
 #Ifnot; ! Pour la version 'normale' (2ème personne pluriel (vous) au présent)
 
 Constant NKEY__TX     = "S = suivant";
@@ -1580,7 +1679,7 @@ Constant COMMA__TX      = ", ";
 -) instead of "Short Texts" in "Language.i6t".
 
 Include (-
-#Ifdef French3PSP; ! Pour la 3ème personne du singulier passé
+#Ifdef French1PSP; ! Pour la 1ère personne du singulier passé
 
 ![ ThatorThose obj;   ! ex : vous n'allez pas manger ça (accusatif) (utile ?)
 !  print "ça";
@@ -1668,7 +1767,68 @@ Include (-
                                       else print "n'était pas";
 ];
 
+#Endif; ! Fin test French1PSP
 
+#ifdef French3PSP; ! Pour la 3ème personne du singulier passé
+![ ThatorThose obj;   ! ex : vous n'allez pas manger ça (accusatif) (utile ?)
+!  print "ça";
+!];
+[ ItorThem obj; ! ex : avant de pouvoir vous/le/la/les poser... (accusatif ?)
+  if (obj == player) { print "il"; return; }
+  if (obj has pluralname)  { print "les"; return;}
+  if (obj has female) { print "la"; return; }
+  else { print "le"; return; }
+];
+[ IsorAre obj;
+  if (obj has pluralname || obj == player) print "étaient"; else print "était";
+  ! if (obj has pluralname || obj == player) print "furent"; else print "fut";
+];
+[ CThatorThose obj;   ! il/ils/elle/elles semble(nt) ouvert(e) (nominatif)
+  ! if (obj == player) { print "Il"; return; } !*! utile ?
+  if (obj has pluralname) {
+    if (obj has female) {print "Elles"; return; }
+    else { print "Ils"; return; }
+  }
+  if (obj has female) { print "Elle"; return; }
+  else { print "Il"; return; }
+];
+[ CTheyreorThats obj;
+  if (obj == player) { print "Il était"; return; }
+  if (obj has pluralname) {
+     if (obj has female) { print "Elles étaient"; return; }
+     else { print "Ils étaient"; return; }
+  }
+  if (obj has female) { print "Elle était"; return; }
+  else { print "Il était"; return; }
+];
+
+! Quelques fonctions additionnelles...
+[ es obj; ! ex: fermé(es), ouvert(es)
+  if (obj has female) print "e";
+  if (obj has pluralname) print "s";
+  !*! attention : pris, prise, pris, prises
+];
+[ s obj; ! ex: vide(s)
+  if (obj has pluralname) print "s";
+];
+[ DeDuDes obj; ! ex : descendre... sortir...
+  if (obj == player) { print "de lui"; return; }
+  if (obj has pluralname)  { print "des ", (name) obj; return;}
+  if (obj has female or proper) { print "de ", (the) obj; return;} ! ex : de la voiture, de Paris
+  !*! test ci-dessous à effectuer avec @output_stream (ZCode) et avec PrintAnyToArray (Glulx) ?
+  ! if ((the)obj="l'...") {print "de ", (the) obj; return;} ! ex : de l'avion
+  print "du ", (name) obj; return; ! ex : du train, du Nautilus (le Nautilus ne doit donc pas être considéré comme proper !*!)
+];
+[ nt obj; ! ex: semble(nt)
+  if (obj has pluralname) print "nt";
+  !*! attention :  paraît, paraissent (etc)
+];
+[ IsorAreNot obj;
+  if (obj has pluralname || obj == player) print "n'étaient pas";
+                                      else print "n'était pas";
+];
+
+! fin test French3PSP
 #Ifnot; ! Pour la version 'normale' (2ème personne pluriel (vous) au présent)
 
 ![ ThatorThose obj;   ! ex : vous n'allez pas manger ça (accusatif) (utile ?)
@@ -1763,7 +1923,7 @@ Include (-
 ! The standard messages are (will be) implemented in I7 source text, not here in
 ! I6 code. (for now)
 
-#Ifdef French3PSP; ! Pour la 3ème personne du singulier passé
+#Ifdef French1PSP; ! Pour la 1ère personne du singulier passé
 
 [ LanguageLM n x1;
   Answer, Ask:    "Mes tentatives ne lui arrachaient aucune parole. ";
@@ -2043,7 +2203,8 @@ Tie:  "Cette idée incongrue me désespéra. ";
               24: "Je ne pouvais pas discuter avec ", (the) x1, ".";
                   ! "parler à" serait mieux mais délicat (ex: à l'oiseau)
               25: "Pour parler à quelqu'un, essayez ~quelqu'un, bonjour~ ou quelque chose dans le genre.";
-              26: "(je tentai d'abord de prendre ", (the) not_holding, ")";
+             ! 26: "(je tentai d'abord de prendre ", (the) not_holding, ")";
+ 		26: "(je tentai d'abord de prendre cela.)";
               27: "Pardon ?";
               28: print "Merci de reformuler. Je n'ai compris que : ";
               29: "Je n'ai pas compris ce nombre.";
@@ -2324,7 +2485,570 @@ Tie:  "Cette idée incongrue me désespéra. ";
 ! Yes:  see No.
 ];
 
+#Endif; ! Fin test French1PSP
 
+#Ifdef French3PSP; ! Pour la 3ème personne du singulier passé
+
+[ LanguageLM n x1;
+ say__p = 1; 
+  Answer, Ask:    "Pas de réponse.";
+! Ask:      see Answer
+  Attack:         "La violence n'était pas forcément une solution.";
+!  Blow:           "Il ne pouvait pas utilement souffler dedans.";
+  Burn:           "Cet acte dangereux n'aurait pas mené à grand-chose.";
+  Buy:            "Il n'y avait rien à vendre, ici.";
+  Climb:          "Il n'y avait aucun possibilité d'escalade ici.";
+  Close: switch (n) {
+               1: "Il ne put fermer cela.";
+               2: print (ctheyreorthats) x1, " déjà fermé";
+                  if (x1 has female) "e.";
+                  ".";
+               3: "Il ferma ", (the) x1, ".";
+    }
+!   CommandsOff: switch (n) {
+!         1: "[Enregistrement des commandes désactivé.]";
+!         #Ifdef TARGET_GLULX;
+!         2: "[Enregistrement des commandes déjà désactivé.]";
+!         #Endif; ! TARGET_
+!     }
+!   CommandsOn: switch (n) {
+!         1: "[Enregistrement des commandes activé.]";
+!         #Ifdef TARGET_GLULX;
+!         2: "[Les commandes sont actuellement en train d'être rejouées.]";
+!         3: "[Enregistrement des commandes déjà activé.]";
+!         4: "[Echec d'enregistrement des commandes.]";
+!         #Endif; ! TARGET_
+!     }
+!   CommandsRead: switch (n) {
+!         1: "[Rejouer les commandes.]";
+!         #Ifdef TARGET_GLULX;
+!         2: "[Les commandes sont déjà en train d'être rejouées.]";
+!         3: "[Rejouer les commandes a échoué.  L'enregistrement des commandes est activé.]";
+!         4: "[Rejouer les commandes a échoué.]";
+!         5: "[Rejouer les commandes achevé.]";
+!         #Endif; ! TARGET_
+!     }
+  Consult:        "Il ne trouva rien d'intéressant dans ", (the) x1, ".";
+  Cut:            "Couper cela n'aurait pas mené à grand-chose.";
+!  Dig:            "Creuser n'aurait mené à rien ici.";
+  Disrobe: switch (n) {
+               1: "Il ne ", (itorthem) x1, " portait pas.";
+               2: "Il enleva ", (the) x1, ".";
+    }
+  Drink:          "Il n'y avait rien de buvable ici.";
+  Drop: switch (n) {
+               1: if (x1 has pluralname) print (The) x1, " étaient ";
+                  else print (The) x1, " était ";
+                  "déjà ici.";
+               2: "Il n'avait pas ça.";
+               
+        3:  print "(il prit d'abord ", (the) x1, "^"; say__p = 0; return;
+
+              
+               4: "D'accord."; ! ok.
+    }
+  Eat: switch (n) {
+              1: print_ret (ctheyreorthats) x1,
+                  " non-comestible",(s) x1,", selon toute évidence.";
+               2: "Il mangea ", (the) x1, ". Pas mauvais.";
+    }
+!   EmptyT: switch (n) {
+!                1: print_ret (The) x1, " ne pouvait rien contenir.";
+!                2: print_ret (The) x1, " ", (isorare) x1, " fermé",(es) x1,".";
+!                3: print_ret (The) x1, " ", (isorare) x1, " déjà vide",(s) x1,".";
+!                4: "Ceci n'aurait rien vidé.";
+!     }
+  Enter: switch (n) {
+               1: print "Mais il était déjà ";
+                  if (x1 has supporter) print "sur "; else print "dans ";
+                  print_ret (the) x1, ".";
+               2: print "Il ne put ";
+                  switch (verb_word) {
+                      'entrer':    "y entrer.";
+                      'asseoir':    "s'y asseoir.";
+                      'allonger':    "s'y allonger.";
+                      'coucher':    "s'y coucher.";
+                      default:  "y aller."; ! plutôt que "y entrer." !*!
+                  }
+               3: "Il ne put entrer dans ", (the) x1, " fermé",(es) x1,".";
+               4: print "Il ne put ";                  
+                  if (x1 has supporter) print "y monter";
+                                   else print "y entrer";
+                  " si ce n'était pas posé."; 
+                               ! sur pieds, non encastré (freestanding)
+               5: print "Il ";
+                  if (x1 has supporter) print "monta sur "; else print "entra dans ";
+                  print_ret (the) x1, ".";
+                  
+                  
+        6:  print "(getting ";
+            if (x1 has supporter) print "descendant "; else print "sortant ";
+            print (the) x1; print ")^"; say__p = 0; return;
+        7:  say__p = 0;
+            if (x1 has supporter) "(montant sur ", (the) x1, ")^";
+            if (x1 has container) "(entrant dans ", (the) x1, ")^";
+            "(entrant dans ", (the) x1, ")^";
+        
+        
+                  
+              
+    }
+  Examine: switch (n) {
+               1: "Il ne put rien voir.";
+               2: "Rien de particulier concernant ", (the) x1, ".";
+               3: print (The) x1, " ", (isorare) x1, " alors ";
+                  if (x1 has on) "allumé",(es) x1,"."; else "éteint",(es) x1,".";
+    }
+  Exit: switch (n) {
+              1: "Sortir d'où ?!";
+               2: print "Il ne put sortir ";
+                  print_ret (dedudes) x1, " fermé", (es) x1, ".";
+               3: print "Il ";
+                  if (x1 has supporter) print "descendit "; else print "sortit ";
+                  print_ret (dedudes) x1, ".";
+        4:  print "Mais il n'était pas ";
+            if (x1 has supporter) print "sur "; else print "dans ";
+            print_ret (the) x1, ".";
+    }
+!   Fill:           "Mais il n'y avait pas d'eau à porter ici.";
+!   FullScore: switch(n)
+!            {   1: if (deadflag) print "Le score était ";
+!                   else          print "Le score était ";
+!                   "composé comme suit :^";
+!                2: "trouver divers objets";
+!                3: "visiter différents endroits";
+!                4: print "total (sur ", MAX_SCORE; ")";
+!            }
+  GetOff:         "Mais il n'était pas sur ", (the) x1, " à ce moment.";
+  Give: switch (n) {
+               1: "Il n'avait pas en main ", (the) x1, ".";
+               2: "Il jongla avec ", (the) x1,
+                  " pendant un moment, mais n'arriva pas à grand-chose.";
+               3: print (The) x1;
+                  if (x1 has pluralname)
+	             print " n'avaient pas l'air intéressé";
+                  else print " n'avait pas l'air intéressé";
+                  ".";
+    }
+  Go: switch (n) {
+               1: print "Il dut d'abord ";
+                  if (x1 has supporter) print "descendre "; else print "sortir ";
+                  print_ret (dedudes) x1, ".";
+               2: "Il ne put aller par là.";
+               3: "Il fut incapable de gravir ", (the) x1, ".";
+               4: "Il fut incapable de descendre par ", (the) x1, ".";
+               5: "Il en fut incapable, puisque ", (the) x1, " ", (isorare) x1,
+                  " sur son chemin.";
+               6: print "Il en fut incapable, puisque ", (the) x1;
+                  if (x1 has pluralname) " ne menaient nulle part.";
+                  " ne menait nulle part.";
+    }
+  Insert: switch (n) {
+               1: "Il devait avoir en main ", (the) x1,
+                  " avant de pouvoir ", (itorthem) x1,
+                  " mettre dans autre chose.";
+               2: print_ret (Cthatorthose) x1, " ne pouvait pas contenir d'objet.";
+               3: print_ret (The) x1, " ", (isorare) x1, " fermé",(es) x1,".";
+               4: "Il avait besoin de ", (itorthem) x1, " prendre d'abord.";
+               5: "Il n'était pas possible de mettre un objet à l'intérieur de lui-même.";
+               6: "(", (itorthem) x1, " prenant d'abord)^";
+               7: "Il n'y avait plus de place dans ", (the) x1, ".";
+               8: "Fait.";
+               9: "Il mit ", (the) x1, " dans ", (the) second, ".";
+    }
+  Inv: switch (n) {
+               1: "Il n'avait rien.";
+               2: print "Il avait";
+        3:  print ":^";
+        4:  print ".^";
+    }
+  Jump:           "Il sauta sur place, vainement.";
+  ! JumpOver:  "Il n'arriverait à rien comme ça.";
+  Tie:  "Il n'arriverait à rien comme ça.";
+  Kiss:           "Il devrait plutôt se concentrer sur le jeu.";
+  Listen:         "Il n'entendit rien de particulier.";
+  ListMiscellany: switch (n) {
+               1: print " (allumé",(es) x1,")";
+               2: print " (qui ", (isorare) x1, " fermé",(es) x1,")";
+               3: print " (fermé",(es) x1," et allumé",(es) x1,")";
+               4: print " (qui ", (isorare) x1, " vide",(s) x1,")";
+               5: print " (vide",(s) x1," et allumé",(es) x1,")";
+               6: print " (qui ", (isorare) x1, " fermé",(es) x1," et vide",(s) x1,")";
+               7: print " (fermé",(es) x1,", vide",(s) x1," et allumé",(es) x1,")";
+               8: print " (allumé",(es) x1," et porté",(es) x1;
+               9: print " (allumé",(es) x1;
+              10: print " (porté",(es) x1;
+              11: print " (qui ", (isorare) x1, " ";
+              12: print "ouvert",(es) x1;
+              13: print "ouvert",(es) x1," mais vide",(s) x1;
+              14: print "fermé",(es) x1;
+              15: print "fermé",(es) x1," et verrouillé",(es) x1;
+              16: print " et vide",(s) x1;
+              17: print " (qui ", (isorare) x1, " vide",(s) x1,")";
+              18: print " contenant ";
+              19: print " (supportant "; ! " (sur ";
+              20: print " supportant ";  ! " sur "; 
+              21: print " (contenant ";  ! " (dans ";
+              22: print " contenant ";   ! " dans ";
+    }
+  LMode1:         " est passé en mode description normale ; seuls les lieux 
+                   visités pour la première fois sont décrits en détail.";
+  LMode2:         " est passé en mode description longue ; tous les lieux,
+                   même déjà visités, sont décrits en détail.";
+  LMode3:         " est passé en mode description courte ; tous les lieux,
+                   même non visités, sont décrits brièvement.";
+  Lock: switch (n) {
+               1: "Il ne pouvait pas verrouiller cela.";
+               2: print_ret (ctheyreorthats) x1, " verrouillé en ce moment.";
+               3: "Il devait fermer ", (the) x1, " auparavant.";
+               4: "Cela ne rentrait pas dans la serrure.";
+               5: "Il verrouilla ", (the) x1, ".";
+    }
+  Look: switch (n) {
+               1: print " (sur ", (the) x1, ")";
+               2: print " (dans ", (the) x1, ")";
+               3: print " (comme ", (object) x1, ")";
+               4: print "^Sur ", (the) x1, ", ";
+                  WriteListFrom(child(x1),
+                      ENGLISH_BIT + RECURSE_BIT + PARTINV_BIT
+                      + TERSE_BIT + CONCEAL_BIT);
+                  ".";
+        5,6:
+            if (x1 ~= location) {
+                if (x1 has supporter) print "^Sur "; else print "^Dans ";
+                print (the) x1, " il";
+            }
+            else print "^Il";
+            print " pouvait voir ";
+            if (n == 5) print "aussi ";
+            WriteListFrom(child(x1),
+              ENGLISH_BIT+RECURSE_BIT+PARTINV_BIT+TERSE_BIT+CONCEAL_BIT+WORKFLAG_BIT);
+            ".";
+        7:  "Il ne vit rien de particulier dans cette direction.";
+    }
+  LookUnder: switch (n) {
+               1: "Mais il faisait noir !";
+               2: "Il ne trouva rien d'intéressant.";
+    }
+  Mild:           "Assez.";
+  Miscellany: switch (n) {
+               1: "(affichage des seize premiers)^";
+               2: "Rien à faire !";
+               3: print " C'était la fin. ";
+               4: print " Il avait gagné ";
+               5: print "^Voulez-vous RECOMMENCER,
+                          CHARGER une partie sauvegardée";
+                  #IFDEF DEATH_MENTION_UNDO;
+                  print ", ANNULER votre dernière action";
+                  #ENDIF;
+                  if (TASKS_PROVIDED==0)
+                      print ", obtenir le score détaillé pour cette partie (FULLSCORE)";
+                  if (deadflag==2 && AMUSING_PROVIDED==0)
+                      print ", lire quelques suggestions amusantes (AMUSING)";
+                  " ou quitter (QUIT) ?"; !*!
+               6: "[Votre interpréteur ne permet pas d' ~annuler~. Désolé !]";
+            #Ifdef TARGET_ZCODE;
+               7: "~Annuler~ a échoué.  [Tous les interpréteurs ne le permettent pas.]";
+            #Ifnot; ! TARGET_GLULX
+               7:  "[Vous ne pouvez pas ~Annuler~ plus loin.]";
+            #Endif; ! TARGET_
+               8: "Faites un choix parmi les propositions ci-dessus.";
+               9: "^L'obscurité devint alors totale !";
+              10: "Ses pensées étaient confuses.";
+              11: "[Vous ne pouvez pas annuler alors que rien n'a encore été fait !]";
+              12: "[Impossible d'annuler deux fois de suite. Désolé !]";
+              13: "[Action précédente annulée.]";
+              14: "Désolé, impossible de corriger.";
+              15: "Impossible à envisager."; !*! "Think nothing of it."; !*!
+              16: "~Oops~ ne peut corriger qu'un seul mot.";
+              17: "L'obscurité était totale.";
+              18: print "lui-même";
+              19: "Aussi beau que d'habitude.";           
+              20: "Pour répéter une commande comme ~grenouille, saute~, dîtes seulement
+                   ~encore~, et pas ~grenouille, encore~.";
+              21: "Impossible.";
+              22: "Vous ne pouvez pas commencer une phrase par une virgule.";
+              23: "Ses pensées étaient confuses.";
+              24: "Il ne pouvait pas discuter avec ", (the) x1, ".";
+                  ! "parler à" serait mieux mais délicat (ex: à l'oiseau)
+              25: "Pour parler à quelqu'un, essayez ~quelqu'un, bonjour~ ou quelque chose dans le genre.";
+!              26: "(il prit d'abord ", (the) not_holding, ")";
+              26: "(il prit d'abord cela.)";
+              27: "Je ne comprends pas cette phrase.";
+!              28: print "Je n'ai compris que : ";
+		28: "Merci de reformuler (éventuellement en retirant les articles). Je ne connais que : ";
+              29: "Je n'ai pas compris ce nombre.";
+              30: "Il ne vit rien de tel, à moins que cela ne fût sans grande importance."; ! Vous ne pouvez voir une telle chose
+              31: "Il semblait en avoir dit trop peu !";
+              32: "Il ne l'avait pas en mains !";
+              33: "Vous ne pouvez pas employer le mot ~tout~ avec ce verbe.";
+              34: "Vous ne pouvez utiliser le mot ~tout~ qu'une fois par ligne."; !*!
+              35: "Je ne suis pas certain de ce à quoi ~", (address) pronoun_word,
+                  "~ se réfère.";
+              36: "Vous avez exclu quelque chose qui n'était de toute façon pas compris dans la liste !";
+              37: "Il ne pouvait faire cela qu'à une chose animée.";
+              38: "Je ne connais pas ce verbe.";
+              39: "Cela n'avait pas la moindre importance.";
+              40: "Il ne pouvait pas voir ~", (address) pronoun_word,
+                  "~ (", (the) pronoun_obj, ") à ce moment.";
+              41: "Impossible de comprendre la fin de la phrase.";
+              42: if (x1==0) print "Aucun de disponible.";
+                  else print "Il en restait seulement ", (number) x1, ".";
+              43: "Rien à faire !";
+              44: "Rien n'était disponible !";
+              45: print "Il faudrait préciser : "; !*!
+              46: print "Il faudrait préciser : "; !*!
+              47: "Désolé, vous pouvez seulement avoir un objet ici. Lequel voulez-vous exactement ?";
+!              48: print "Pouvez-vous préciser qui est concerné par cette action ?^";
+              48: print "Pouvez-vous préciser le nom de l'objet à utiliser ?^"; !*!
+!              49: print "Pouvez-vous préciser avec quoi ? (tapez le nom seul, sans la préposition 'avec')^";
+              49: print "Pouvez-vous préciser ?^"; !*!
+              50: print "Le score venait ";
+                  if (x1 > 0) print "d'augmenter"; else { x1 = -x1; print "de diminuer"; }
+                  print " de ", (number) x1, " point";
+                  if (x1 > 1) print "s";
+              51: "(Comme quelque chose de dramatique venait de se produire,
+                   cette liste de commandes a été raccourcie.)";
+              52: "^Tapez un nombre entre 1 et ", x1,
+                  ", 0 pour réafficher ou appuyez sur ENTREE.";
+              53: "^[Appuyez sur ESPACE.]"; !*! SVP
+        54: "[Commentaire enregistré.]";
+        55: "[Commentaire NON enregistré.]";
+        56: print ".^";
+        57: print "?^";
+    }
+  Yes, No:        "Mmmh ?";
+  NotifyOff:      "Notification du score désactivée.";
+  NotifyOn:       "Notification du score activée.";
+!   Objects: switch(n)
+!            {   1: "Objets ayant été portés :^";
+!                2: "Aucun.";
+!                3: print "   (sur le corps)";
+!                4: print "   (dans l'inventaire)";
+!                5: print "   (abandonné",(es) x1,")";
+!                6: print "   (", (name) x1, ")";
+!                7: print "   (dans ", (the) x1, ")";
+!                8: print "   (dans ", (the) x1, ")";
+!                9: print "   (sur ", (the) x1, ")";
+!               10: print "   (perdu",(es) x1,")";
+!            }
+  Open: switch (n) {
+               1: "Il ne pouvait pas ouvrir cela.";
+               2: print_ret (cthatorthose) x1," semblait",(nt) x1,
+                  " être fermé",(es) x1," à clé.";
+               3: print (ctheyreorthats) x1, " déjà ouvert";
+                  if (x1 has female) "e.";
+                  ".";
+               4: print "Il ouvrit ", (the) x1, ", révélant ";
+                  if (WriteListFrom(child(x1),
+                      ENGLISH_BIT + TERSE_BIT + CONCEAL_BIT)==0) "rien du tout.";
+                  ".";
+               5: "Il ouvrit ", (the) x1, ".";
+    }
+!   Order:          print (The) x1;
+!                   if (x1 has pluralname) print " avaient"; else print " a";
+!                   " mieux à faire.";
+!   Places: switch (n) {
+!         1:  print "Il avait visité : ";
+!         2:  print ".^";
+!     }
+!   Pray:           "Rien de pratique ne résulta de cette prière.";
+!   Prompt:   print "^>";
+  Pronouns: switch (n) {
+               1: print "En ce moment, ";
+               2: print "signifiait ";
+               3: print "était enlevé";
+               4: "aucun pronom n'est connu du jeu.";
+        5:  ".";
+    }
+  Pull,Push,Turn: switch (n) {
+               1: "C'était fixé sur place.";
+               2: "Il en était incapable.";
+               3: "Rien d'évident ne se produisit.";
+               4: "Cela aurait été moins que courtois.";
+    }
+! Push: see Pull
+  PushDir: switch (n) {
+               1: "Cette idée fantasque disparut rapidement";
+               2: "Ce n'était pas une direction.";
+               3: "Il ne pouvait pas dans cette direction.";
+    }
+  PutOn: switch (n) {
+               1: "Il devait avoir en main ", (the) x1,
+                  " avant de pouvoir ", (itorthem) x1,
+                  " mettre sur quelque chose d'autre.";
+               2: "Il ne pouvait pas poser un objet sur lui-même.";
+               3: "Poser des objets sur ", (the) x1, " n'aurait mené à rien.";
+               4: "Il manquait de dextérité.";
+               5: "(", (itorthem) x1, " prenant d'abord)^";
+               6: "Il n'y avait plus assez de place sur ", (the) x1, ".";
+               7: "Cela fut fait.";
+               8: "Il mit ", (the) x1, " sur ", (the) second, ".";
+    }
+  Quit: switch (n) {
+               1: print "Répondez par oui ou par non, je vous prie.";
+               2: print "Êtes-vous certain de vouloir quitter ? ";
+    }
+  Remove: switch (n) {
+               1: if (x1 has pluralname)
+		      print "Ils étaient malheureusement fermés."; !*! elle(s)
+		      else print "Il était malheureusement fermé."; !*!
+               2: if (x1 has pluralname)
+                      print "Mais ils n'étaient pas";
+                  else print "Mais ce n'étaient pas";
+                  " ici maintenant.";
+               3: "Très bien.";
+    }
+  Restart: switch (n) {
+               1: print "Êtes-vous sûr de vouloir recommencer ? ";
+               2: "Raté.";
+    }
+  Restore: switch (n) {
+               1: "Échec du chargement.";
+               2: "^--- La partie a bien été restaurée ---^";
+    }
+  Rub:            "Il n'arrivera à rien ainsi.";
+  Save: switch (n) {
+               1: "La sauvegarde a échoué.";
+               2: "^--- La partie a bien été sauvegardée ---^";
+    }
+  Score: switch (n) {
+        1:  if (deadflag) print "Dans cette histoire il avait obtenu "; else print "Dans cette histoire il avait jusqu'à présent obtenu ";
+            print score, " sur un score possible de ", MAX_SCORE, ", en ", turns, " tour";
+            if (turns ~= 1) print "s";
+            return;
+        2:  "Il n'y avait pas de score dans cette histoire.";
+    }
+  ScriptOff: switch (n) {
+               1: "Aucune transcription en cours.";
+               2: "^Fin de transcription.";
+               3: "Impossible de terminer la transcription.";
+    }
+  ScriptOn: switch (n) {
+               1: "Transcription déjà en cours.";
+               2: "Début d'une transcription de...";
+               3: "Impossible de commencer la transcription.";
+    }
+  Search: switch (n) {
+               1: "Mais il faisait noir !";
+               2: "Il n'y avait rien sur ", (the) x1, ".";
+               3: print "Sur ", (the) x1, ", il vit "; 
+                  WriteListFrom(child(x1),
+                      TERSE_BIT + ENGLISH_BIT + CONCEAL_BIT);
+                  ".";
+               4: if (x1 has animate) "Il savait tenir ses mains tranquilles !.";
+                  else "Il ne trouva rien d'intéressant.";
+               5: "Il ne put voir à l'intérieur, puisque ", (the) x1, " ",
+                  (isorare) x1, " fermé",(es) x1,".";
+               6: print_ret (The) x1, " ", (isorare) x1, " vide",(s) x1,".";
+               7: print (The) x1;
+                  if (x1 has pluralname) print " contenaient ";
+                  else print " contenait ";
+                  WriteListFrom(child(x1),
+                      TERSE_BIT + ENGLISH_BIT + CONCEAL_BIT);
+                  ".";
+    }
+!  Set:            "Non, il ne pouvait pas ", (itorthem) x1, " régler.";
+  SetTo:          "Non, il ne pouvait pas ", (itorthem) x1, " régler sur rien.";
+  Show: switch (n) {
+               1: "Il n'avait pas ", (the) x1, ".";
+               2: print_ret (The) x1, " ", (isorare) x1, " peu impressionné",(es) x1,".";
+    }
+  Sing:           "Il ne savait pas chanter.";
+  Sleep:          "Il n'avait pas particulièrement sommeil.";
+  Smell:          "Il ne sentit rien de particulier.";
+  Sorry:          "Faute avouée est à moitié pardonnée.";
+  Squeeze: switch (n) {
+               1: "Inutile.";
+               2: "Il n'arriverait à rien ainsi.";
+    }
+  Strong:         "Les vrais aventuriers n'emploient pas un tel langage.";
+
+!  Swim:           "Il n'y avait pas assez d'eau pour nager dedans.";  ! swim desactive par defaut dans I7
+
+  Swing:          "Impossible.";
+  SwitchOff: switch (n) {
+               1: "Il ne pouvait pas allumer ou éteindre cela.";
+               2: print_ret (ctheyreorthats) x1,
+                  " déjà éteint",(es) x1,".";
+               3: "Il éteignit ", (the) x1, ".";
+    }
+  SwitchOn: switch (n) {
+               1: "Il ne pouvait pas allumer cela.";
+               2: print_ret (ctheyreorthats) x1,
+                  " déjà allumé",(es) x1,".";
+               3: "Il alluma ", (the) x1, ".";
+    }
+	  Take:    switch(n)
+           {   1: "D'accord."; ! ok
+               2: "Il était déjà lui-même.";
+               3: "Cela ne semblait pas être une bonne idée.";
+               4: print "Il devait d'abord ";
+                  if (x1 has supporter) print "descendre "; else print "sortir ";
+                  print_ret (dedudes) x1, ".";
+               5: "Il l'avait déjà.";
+               6: if (noun has pluralname) print "Cela semblait ";
+                  else print "Cela semblait ";
+                  "appartenir à ", (the) x1, ".";
+               7: if (noun has pluralname) print "Cela semblait ";
+                  else print "Cela semblait ";
+                  "faire partie ", (dedudes) x1, ".";
+               8: print_ret (Cthatorthose) x1, " ", (isorarenot) x1,
+                  " disponible", (s) x1, ".";
+               9: print_ret (The) x1, " ", (isorarenot) x1, " ouvert",(es) x1,".";
+              10: "Trop difficile à transporter.";
+              11: "C'était fixé sur place.";
+              12: "Il transportait déjà trop d'objets.";
+              13: "(il mit ", (the) x1, " dans ", (the) SACK_OBJECT,
+                  " pour faire de la place)";
+           }
+  Taste:          "Il ne remarqua rien de particulier.";
+  Tell: switch (n) {
+               1: "Il discuta avec lui-même pendant un moment...";
+               2: "Pas de réaction.";
+    }
+  Think:          "Quelle bonne idée.";
+  ThrowAt: switch (n) {
+               1: "Futile.";
+               2: "Il hésita au moment crucial.";
+    }
+! Tie:  see JumpOver.
+  Touch: switch (n) {
+               1: "Il savait tenir ses mains tranquilles !";
+               2: "Il ne sentit rien de particulier.";
+               3: "Il n'y voyait aucune utilité.";
+    }
+! Turn: see Pull.
+  Unlock:  switch (n) {
+               1: "Il ne pouvait pas déverrouiller cela.";
+               2: print_ret (ctheyreorthats) x1,
+                  " déjà déverrouillé", (es) x1, ".";
+               3: "Cela ne rentrait pas dans la serrure.";
+               4: "Il déverrouilla ", (the) x1, ".";
+    }
+!  VagueGo:  "Il fallait donner une direction plus précise.";
+  Verify: switch (n) {
+               1: "Le fichier semble intact.";
+               2: "Le fichier est certainement corrompu !";
+    }
+  Wait:           "Le temps passait...";
+  Wake:           "Il ne dormait pas.";
+  WakeOther:      "Cela ne semblait pas nécessaire.";
+  Wave: switch (n) {
+               1: "Mais il n'avait pas cela !";
+               2: "Inutile.";
+    }
+  WaveHands:      "Il agita ses mains, sans résultat.";
+  Wear: switch (n) {
+               1: "Il ne pouvait pas porter cela !";
+               2: "Il n'avait pas cela !";
+               3: "Il ", (itorthem) x1, " portait déjà !";
+               4: "Il mit ", (the) x1, ".";
+    }
+! Yes:  see No.
+];
+
+! fin test French3PSP
 #Ifnot; ! Pour la version 'normale' (2ème personne pluriel (vous) au présent)
 
 [ LanguageLM n x1;
@@ -2381,11 +3105,9 @@ Tie:  "Cette idée incongrue me désespéra. ";
             else print (The) x1, " est ";
             "déjà ici.";
         2:  "Vous n'avez pas ça.";
-        #ifdef NI_BUILD_COUNT;
+        
         3:  print "(vous prenez d'abord en main ", (the) x1, ")^"; say__p = 0; return;
-        #ifnot;
-        3: "(vous prenez d'abord ", (the) x1, ")";
-        #endif;
+       
         4:  "D'accord."; ! ok
     }
     Eat: switch (n) {
@@ -2423,7 +3145,7 @@ Tie:  "Cette idée incongrue me désespéra. ";
         5:  print "Vous ";
             if (x1 has supporter) print "montez sur "; else print "entrez dans ";
             print_ret (the) x1, ".";
- #ifdef NI_BUILD_COUNT;
+
         6:  print "(";
             if (x1 has supporter) print "descendant "; else print "sortant ";
             print (DeDuDes) x1; print ")^"; say__p = 0; return;
@@ -2431,13 +3153,6 @@ Tie:  "Cette idée incongrue me désespéra. ";
             if (x1 has supporter) "(montant sur ", (the) x1, ")^";
             if (x1 has container) "(entrant dans ", (the) x1, ")^";
             "(entrant dans ", (the) x1, ")^";
-        #ifnot; ! NI_BUILD_COUNT
-        6:  print "(";
-            if (x1 has supporter) print "descendant "; else print "sortant ";
-            print (DeDuDes) x1; ")";
-        7:  if (x1 has supporter) "(montant sur ", (the) x1, ")^";
-            if (x1 has container) "(entrant dans ", (the) x1, ")^";
-            "(entrant dans ", (the) x1, ")^";   #endif; ! NI_BUILD_COUNT
     }
     Examine: switch (n) {
         1:  "Vous ne pouvez rien voir.";
@@ -2519,15 +3234,11 @@ Tie:  "Cette idée incongrue me désespéra. ";
     Listen:         "Vous n'entendez rien de particulier.";
     ListMiscellany: switch (n) {
          1: print " (allumé",(es) x1,")";
-		#ifdef NI_BUILD_COUNT;
+
 		2: print " (fermé",(es) x1,")";
 		4: print " (vide",(s) x1,")";
 		6: print " (fermé",(es) x1," et vide",(s) x1,")";
-		#ifnot; ! NI_BUILD_COUNT
-		2: print " (qui ", (isorare) x1, " fermé",(es) x1,")";
-		4: print " (qui ", (isorare) x1, " vide",(s) x1,")";
-		6: print " (qui ", (isorare) x1, " fermé",(es) x1," et vide",(s) x1,")";
-		#endif; ! NI_BUILD_COUNT
+
 		3: print " (fermé",(es) x1," et allumé",(es) x1,")";
 		5: print " (vide",(s) x1," et allumé",(es) x1,")";
 		7: print " (fermé",(es) x1,", vide",(s) x1," et allumé",(es) x1,")";
@@ -2851,9 +3562,9 @@ Tie:  "Cette idée incongrue me désespéra. ";
         2:  "Vous n'arrivez à rien ainsi.";
     }
     Strong:         "Les vrais aventuriers n'emploient pas un tel langage.";
-#Ifndef NI_BUILD_COUNT;
+
 !  Swim:           "Il n'y a pas assez d'eau pour nager dedans.";  ! swim desactive par defaut dans I7
-#endif; ! NI_BUILD_COUNT
+
     Swing:          "Il n'y a rien de sensé pour se balancer ici.";
     SwitchOff: switch (n) {
         1:  "Vous ne pouvez pas allumer ou éteindre cela.";
