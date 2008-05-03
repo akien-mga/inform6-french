@@ -462,11 +462,12 @@ Verb 'attaquer' 'casser' 'frapper' 'combattre' 'ruiner' 'briser' 'detruire'
         * noun 'avec' held               -> Attack
         * 'à'/'a'/'au'/'aux' noun                   -> Attack; ! frapper à la porte
 
-#endif; ! NI_BUILD_COUNT
+
 
 Verb 'presser' 'tordre' 'comprimer' 'ecraser'
+	* switchable  -> Push
         * noun                           -> Squeeze;
-
+#endif; ! NI_BUILD_COUNT
 [VagueDoSub; 
     L__M(##VagueDo, 1, 0);
 ];
@@ -601,7 +602,7 @@ Verb 'frotter' 'cirer' 'astiquer' 'balayer' 'nettoyer' 'depoussierer' 'essuyer' 
 
 Verb 'nouer' 'attacher' 'fixer' 'connecter' 'brancher'
         * noun                                        -> Tie
-        * noun 'à'/'a'/'au'/'aux'/'avec'/'sur' noun   -> Tie;
+        * noun '->'/'à'/'a'/'au'/'aux'/'avec'/'sur' noun   -> Tie;
 #endif; ! NI_BUILD_COUNT
 ! ------- Verbes de communication avec des personnages
 
@@ -791,12 +792,12 @@ Verb 'saluer'
         * creature                                  -> WaveHands
         * creature 'de'/'avec' 'la' 'main'          -> WaveHands;
 
-Verb 'montrer' 'presenter'
+Verb 'montrer' 'pointer' 'presenter'
 !!        * creature held                             -> Show reverse ! "montre-leur le casque"
 !!        * held creature                             -> Show         ! "montre-le-leur"
 !!        * held 'a'/'au'/'aux' creature              -> Show;
-        * noun 'à'/'a'/'au'/'aux' creature      -> Show
-        * creature 'à'/'a'/'au'/'aux' creature  -> Show; ! ???
+        * noun '->'/'à'/'a'/'au'/'aux' creature      -> Show
+        * creature '->'/'à'/'a'/'au'/'aux' creature  -> Show; ! ???
 
 
 Verb 'reveiller' 'eveiller'
