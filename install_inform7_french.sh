@@ -2,7 +2,7 @@
 
 #I7VERSION=4X60
 #I7VERSION=5G67
-I7VERSION=5J39
+#I7VERSION=5J39
 
 if [ `uname` == Linux ]; then 
 	echo "Your system should be Linux"
@@ -26,6 +26,8 @@ else
 	I7LIBRARYPATH2=/Applications/Inform.app/Contents/Resources/Library/Natural
 fi
 
+echo "THIS SCRIPT IS NO LONGER USEFUL AFTER Inform 7 build 5T18 ! JUST INSTALL THE EXTENSION THE NORMAL WAY !"
+echo " "
 echo "To install you must run this script as root."
 echo " "
 echo "Be sure to check that your Inform 7 version is $I7VERSION"
