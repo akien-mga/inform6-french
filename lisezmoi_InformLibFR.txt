@@ -1,4 +1,4 @@
-Ces bibliothèques sont destinées à être utilisées avec Inform 6 et Inform 7;
+Ces bibliothèques sont destinées à être utilisées avec Inform 6
 pour la réalisation de jeux d'aventures textuels.
 
 http://informfr.tuxfamily.org
@@ -14,25 +14,4 @@ FrenchG.h	: Inform 6 + I7, seconde personne du pluriel, présent
 Vous devrez utiliser en plus  linklpa.h  parserm.h   V6Defs.h  VerbLib.h
 infix.h   Parser.h    V6.h  verblibm.h et éventuellement Infglk.h, scenic5sens.h  
 
-French1PSP.h	: Inform 6, variante première personne du singulier, passé
-FrenchG1PSP.h	: Inform 6, variante première personne du singulier, passé
-
-
-I7
-==
-
-French.h	: Se trouve dans la version de I6.
-FrenchG.h 	: Se trouve dans la version de I6.
-French	: extension à installer pour Inform 
-
-MainFR4X60.i6	: Inform 7, fichier à remplacer dans les bibliothèques officielles. Version obsolète
-MainFR5J39.i6	: Inform 7, fichier à remplacer dans les bibliothèques officielles. 
-MainFR.i6		: Inform 7, lien vers la version courante (fichier à remplacer dans Infor7/Extensions/Reserved)
-
-FrenchN11_3PSP.h	: Inform 7, variante troisième personne du singulier, passé
-Selector.h	: Inform 7, pour choisir la version à compiler.
-
-
-
-
-
+French1PSP.h	: Inform 6, variante première personne du singulier, passé, à utiliser à la place de French.h
