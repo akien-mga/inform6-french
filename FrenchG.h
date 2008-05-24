@@ -542,6 +542,7 @@ Verb 'fouiller'
         * noun                           -> Search;
 
 Verb 'chercher'
+        *                                           -> VagueDo
 		* 'dans' noun			-> Search;
 
 Verb 'sentir' 'renifler'
