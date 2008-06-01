@@ -77,7 +77,7 @@ Verb meta 'fullscore' 'full' 'detaille' 'complet'
         *                                   -> FullScore
         * 'score'                           -> FullScore;
 
-Verb meta 'log' 'script' ! 'transcription' 'transcript' 'transcrire'
+Verb meta 'log' 'script' 'transcription' 'transcript' 'transcrire'
         *                                   -> ScriptOn
         * 'off'                             -> ScriptOff
         * 'on'                              -> ScriptOn;
