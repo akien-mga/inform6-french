@@ -986,7 +986,7 @@ Constant COMMA__TX      = ", ";
         1:  "Vous ne ", (itorthem) x1, " portez pas.";
         2:  "Vous enlevez ", (the) x1, ".";
     }
-    Drink:          "Il n'y a rien de buvable ici.";
+    Drink:          "Ceci n'a rien de buvable.";
     Drop: switch (n) {
         1:  if (x1 has pluralname) print (The) x1, " sont ";
             else print (The) x1, " est ";
@@ -1464,7 +1464,8 @@ Constant COMMA__TX      = ", ";
         13: "(vous mettez ", (the) x1, " dans ", (the) SACK_OBJECT,
             " pour faire de la place)";
     }
-    Taste:          "Vous ne remarquez rien de particulier.";
+    Taste: if (noun has animate) "Cela ne serait pas très convenable.";
+           else "Vous ne remarquez rien de particulier.";
     Tell: switch (n) {
         1:  "Vous discutez avec vous-même pendant un bon moment...";
         2:  "Pas de réaction.";
