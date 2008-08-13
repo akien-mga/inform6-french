@@ -332,7 +332,7 @@ Verb 'monter' 'remonter'
 
 Verb 'grimper' 'gravir' 'escalader'
         * noun                              -> Climb
-        * 'sur' noun                        -> Climb;
+        * 'à'/'a'/'au'/'par'/'sur' noun     -> Climb;
 
 Verb 'sauter' 'bondir'
         *                                   -> Jump
