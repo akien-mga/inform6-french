@@ -539,11 +539,14 @@ Verb 'examiner' 'x//' 'decrire' 'observer'
         * noun                           -> Examine;
 
 Verb 'fouiller'
-        * noun                           -> Search;
+        * noun                           -> Search
+        * 'dans' noun                    -> Search;
 
+[VagueSearchSub;
+    L__M(##VagueSearch, 1, 0);
+];
 Verb 'chercher'
-        *                                           -> VagueDo
-		* 'dans' noun			-> Search;
+        * topic                          -> VagueSearch;
 
 Verb 'sentir' 'renifler'
         *                                -> Smell
