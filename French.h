@@ -1261,7 +1261,7 @@ Constant COMMA__TX      = ", ";
         46: print "Précisez : "; !*!
         47: "Désolé, vous pouvez seulement avoir un objet ici. Lequel voulez-vous exactement ?";
         48: print "Pouvez-vous préciser qui est concerné par cette action ?^"; !*!
-        49: print "Pouvez-vous préciser l'objet concerné par cette action ?^"; !*!
+        49: print "Pouvez-vous préciser l'objet concerné par cette action, ou à utiliser ?^"; !*!
         50: print "Votre score vient ";
             if (x1 > 0) print "d'augmenter"; else { x1 = -x1; print "de diminuer"; }
             print " de ", (number) x1, " point";

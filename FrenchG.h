@@ -546,6 +546,7 @@ Verb 'fouiller'
     L__M(##VagueSearch, 1, 0);
 ];
 Verb 'chercher'
+        *                                -> VagueSearch
         * topic                          -> VagueSearch;
 
 Verb 'sentir' 'renifler'
