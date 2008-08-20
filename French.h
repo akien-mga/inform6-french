@@ -1372,7 +1372,7 @@ Constant COMMA__TX      = ", ";
         2: "^--- La partie a bien été restaurée ---^"; ! ok.
     }
     Rub: if (x1 has animate) "Tenez donc vos mains tranquilles.";
-         else "Vous n'arrivez à rien comme ça.";
+         else "Vous n'arriverez à rien comme ça.";
     Save: switch (n) {
         1: "La sauvegarde a échoué.";
         2: "^--- La partie a bien été sauvegardée ---^"; ! ok.
