@@ -5,9 +5,11 @@
 !   Version adaptée pour Inform 7
 !   Copyright Graham Nelson 1993-2004 but freely usable (see manuals)
 !
-!   Traduit en français par Jean-Luc Pontico 2001-2004. Version 2.2 du 20/02/2008
+!   Traduit en français par Jean-Luc Pontico 2001-2004.
 !   Certaines fonctions sont tirées de la traduction en espagnol de Jose Luis Diaz.
 !   Diverses modifications apportées par Samuel Verschelde (Stormi)
+!
+!   Version 2.3 du 05/09/2008
 !
 !   Dans votre fichier de jeu, incluez les trois bibliothèques dans l'ordre suivant :
 !       Include "Parser";
@@ -271,7 +273,7 @@ Verb 'entrer' 'rentrer'
 Verb 'asseoir' 'allonger' 'coucher'
 !       * 'vous'                                           -> GoIn  ! s'asseoir (ligne commentee car plus problématique qu'utile)
         * 'vous' 'sur'/'dans' noun                        -> Enter
-	* 'sur'/'dans' noun				-> Enter
+        * 'sur'/'dans' noun                               -> Enter
         * 'vous' 'en' 'haut' 'de'/'du'/'des'/'d^' noun    -> Enter;
 
 Verb 'sortir'
@@ -284,7 +286,7 @@ Verb 'sortir'
 Verb 'partir'
         *                                           -> VagueGo
         * 'vers'/'à'/'a'/'au' noun=ADirection       -> Go
-        * 'de' 'là'/'la'                                 -> Exit
+        * 'de' 'là'/'la'                            -> Exit
         * 'd^' 'ici'                                -> Exit
         * 'de'/'du'/'des' noun                      -> Exit
         * 'dans'/'par'/'vers' noun                  -> Enter;
@@ -331,7 +333,7 @@ Verb 'monter' 'remonter'
 #ifndef NI_BUILD_COUNT;
 
 Verb 'grimper' 'gravir' 'escalader'
-        * noun                              -> Climb
+        * noun                                    -> Climb
         * 'à'/'a'/'au'/'aux'/'par'/'sur' noun     -> Climb;
 
 Verb 'sauter' 'bondir'

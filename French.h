@@ -5,7 +5,7 @@
 !   Version adaptée pour Inform 7
 !   Copyright Graham Nelson 1993-2004 but freely usable (see manuals)
 !
-!   Traduit en français par Jean-Luc Pontico 2001-2004. Version 2.2 du 17/02/2008
+!   Traduit en français par Jean-Luc Pontico 2001-2004.
 !   L'adaptation à Glulx a été réalisée avec l'aide d'Eric Forgeot.
 !   Certaines fonctions sont tirées de la traduction en espagnol de Jose Luis Diaz.
 !   Diverses modifications apportées par Samuel Verschelde (Stormi)
@@ -17,9 +17,9 @@
 !
 ! ==============================================================================
 
-
-Constant LibReleaseFR      "2.3devI6+I7";
-Message		"[Compilé avec la version 2.3devI6+I7 (future 2.3 stable) de la bibliothèque francophone.]";
+! Version 2.3 du 05/09/2008
+Constant LibReleaseFR      "2.3";
+Message		"[Compilé avec la version 2.3 de la bibliothèque francophone.]";
 
 System_file;
 
@@ -153,7 +153,7 @@ Constant YES3__WD     = 'oui';
 Constant AMUSING__WD  = 'amusing';
 Constant FULLSCORE1__WD = 'fullscore';
 Constant FULLSCORE2__WD = 'full';
-Constant QUIT1__WD    = 'quit'; !*! "q//" ?
+Constant QUIT1__WD    = 'q//';
 Constant QUIT2__WD    = 'quitter';
 Constant RESTART__WD  = 'recommencer';
 Constant RESTORE__WD  = 'charger';
@@ -164,7 +164,7 @@ Array LanguagePronouns table
    !             to follow:                      to:
    !             a     i
    !             s  p  s  p
-   !             mfnmfnmfnmfn                 
+   !             mfnmfnmfnmfn
 
       ! Object pronouns
       '-le'    $$100000100000                    NULL
@@ -193,7 +193,7 @@ Array LanguageDescriptors table
    !             to follow:      type:           to:
    !             a     i
    !             s  p  s  p
-   !             mfnmfnmfnmfn                 
+   !             mfnmfnmfnmfn
 
       'mon'    $$100000100000    POSSESS_PK      0  !*! ce qui suit ne doit pas fonctionner souvent
       'ma'     $$010000010000    POSSESS_PK      0  !*! du moins je l'espère car mon/ma/mes devrait
@@ -753,9 +753,9 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
     if (w == 'purloin' or 'tree' or 'abstract'
                        or 'gonear' or 'scope' or 'showobj')
         rtrue;
-            #ifdef NI_BUILD_COUNT;
+#ifdef NI_BUILD_COUNT;
     if (w == 'showme') rtrue;
-    #endif;
+#endif;
     rfalse;
 ];
 #Endif;
@@ -815,7 +815,7 @@ Constant YOURSELF__TX = "vous-même";
 Global CANTGO__TX   = "Vous ne pouvez pas aller dans cette direction.";
 Global FORMER__TX   = "votre ancien vous";
 Global YOURSELF__TX = "vous-même";
-#endif; ! NI_BUILD_COUNT
+#Endif; ! NI_BUILD_COUNT
 
 Constant YOU__TX        = "Vous";
 Constant DARKNESS__TX = "L'obscurité";
@@ -829,14 +829,13 @@ Constant IS__TX       = "est ";   ! utilisés par WriteListFrom
 Constant ARE__TX      = "sont ";  ! 
 Constant IS2__TX      = "";  ! dans/sur lequel " est"  => contenant/supportant
 Constant ARE2__TX     = "";  ! dans/sur lequel " sont" => contenant/supportant
-
 #Ifnot;
 Global IS__TX       = "est ";   ! utilisés par WriteListFrom
 Global ARE__TX      = "sont ";  ! 
 Global IS2__TX      = "";  ! dans/sur lequel " est"  => contenant/supportant
 Global ARE2__TX     = "";  ! dans/sur lequel " sont" => contenant/supportant
+#Endif; ! NI_BUILD_COUNT
 
-#endif; ! NI_BUILD_COUNT
 Constant AND__TX      = " et ";
 #ifdef NI_BUILD_COUNT;
 #ifdef I7_SERIAL_COMMA;
@@ -1020,7 +1019,7 @@ Constant COMMA__TX      = ", ";
                 'asseoir':    "vous y asseoir.";
                 'allonger':    "vous y allonger.";
                 'coucher':    "vous y coucher.";
-		'monter':    "y monter.";
+                'monter':    "y monter.";
                 default:  "y aller."; ! plutôt que "y entrer." !*!
             }
         3:  "Vous ne pouvez entrer dans ", (the) x1, " fermé",(es) x1,".";
@@ -1032,7 +1031,7 @@ Constant COMMA__TX      = ", ";
         5:  print "Vous ";
             if (x1 has supporter) print "montez sur "; else print "entrez dans ";
             print_ret (the) x1, ".";
- #ifdef NI_BUILD_COUNT;
+#ifdef NI_BUILD_COUNT;
         6:  print "(";
             if (x1 has supporter) print "descendant "; else print "sortant ";
             print (DeDuDes) x1; print ")^"; say__p = 0; return;
@@ -1040,13 +1039,14 @@ Constant COMMA__TX      = ", ";
             if (x1 has supporter) "(montant sur ", (the) x1, ")^";
             if (x1 has container) "(entrant dans ", (the) x1, ")^";
             "(entrant dans ", (the) x1, ")^";
-        #ifnot; ! NI_BUILD_COUNT
+#ifnot; ! NI_BUILD_COUNT
         6:  print "(";
             if (x1 has supporter) print "descendant "; else print "sortant ";
             print (DeDuDes) x1; ")";
         7:  if (x1 has supporter) "(montant sur ", (the) x1, ")^";
             if (x1 has container) "(entrant dans ", (the) x1, ")^";
-            "(entrant dans ", (the) x1, ")^";   #endif; ! NI_BUILD_COUNT
+            "(entrant dans ", (the) x1, ")^";
+#endif; ! NI_BUILD_COUNT
     }
     Examine: switch (n) {
         1:  "Vous ne pouvez rien voir.";
@@ -1099,7 +1099,7 @@ Constant COMMA__TX      = ", ";
             " ne mène nulle part.";
     }
     Insert: switch (n) {
-        1: "Vous devez avoir en main ", (the) x1,
+        1:  "Vous devez avoir en main ", (the) x1,
             " avant de pouvoir ", (itorthem) x1,
             " mettre dans autre chose.";
         2:  if (x1 has pluralname) 
@@ -1126,18 +1126,18 @@ Constant COMMA__TX      = ", ";
     Listen:         "Vous n'entendez rien de particulier.";
     ListMiscellany: switch (n) {
          1: print " (allumé",(es) x1,")";
-		#ifdef NI_BUILD_COUNT;
-		2: print " (fermé",(es) x1,")";
-		4: print " (vide",(s) x1,")";
-		6: print " (fermé",(es) x1," et vide",(s) x1,")";
-		#ifnot; ! NI_BUILD_COUNT
-		2: print " (qui ", (isorare) x1, " fermé",(es) x1,")";
-		4: print " (qui ", (isorare) x1, " vide",(s) x1,")";
-		6: print " (qui ", (isorare) x1, " fermé",(es) x1," et vide",(s) x1,")";
-		#endif; ! NI_BUILD_COUNT
-		3: print " (fermé",(es) x1," et allumé",(es) x1,")";
-		5: print " (vide",(s) x1," et allumé",(es) x1,")";
-		7: print " (fermé",(es) x1,", vide",(s) x1," et allumé",(es) x1,")";
+         #ifdef NI_BUILD_COUNT;
+         2: print " (fermé",(es) x1,")";
+         4: print " (vide",(s) x1,")";
+         6: print " (fermé",(es) x1," et vide",(s) x1,")";
+         #ifnot; ! NI_BUILD_COUNT
+         2: print " (qui ", (isorare) x1, " fermé",(es) x1,")";
+         4: print " (qui ", (isorare) x1, " vide",(s) x1,")";
+         6: print " (qui ", (isorare) x1, " fermé",(es) x1," et vide",(s) x1,")";
+         #endif; ! NI_BUILD_COUNT
+         3: print " (fermé",(es) x1," et allumé",(es) x1,")";
+         5: print " (vide",(s) x1," et allumé",(es) x1,")";
+         7: print " (fermé",(es) x1,", vide",(s) x1," et allumé",(es) x1,")";
          8: print " (allumé",(es) x1," et porté",(es) x1;
          9: print " (allumé",(es) x1;
         10: print " (porté",(es) x1;
@@ -1248,8 +1248,7 @@ Constant COMMA__TX      = ", ";
         36: "Vous avez exclu quelque chose qui n'était de toute façon pas compris dans la liste !";
         37: "Vous ne pouvez agir ainsi qu'avec une chose animée.";
         38: "Je ne connais pas ce verbe.";
-        39: "Ce n'est pas une chose à laquelle vous aurez à vous référer
-            au cours du jeu.";
+        39: "Ce n'est pas une chose à laquelle vous aurez à vous référer au cours du jeu.";
         40: "Vous ne pouvez voir ~", (address) pronoun_word,
             "~ (", (the) pronoun_obj, ") pour l'instant.";
         41: "Impossible de comprendre la fin de la phrase.";
@@ -1292,7 +1291,6 @@ Constant COMMA__TX      = ", ";
         10: print "   (perdu",(es) x1,")";
     }
     Open: switch (n) {
-!        1: "Vous ne pouvez pas ouvrir cela.";
         1:  print_ret "Vous ne pouvez pas ouvrir ", (the) x1,".";
         2:  print_ret (cthatorthose) x1," semble",(nt) x1,
             " être fermé",(es) x1," à clé.";
@@ -1302,13 +1300,13 @@ Constant COMMA__TX      = ", ";
         4:  print "Vous ouvrez ", (the) x1, ", révélant ";
             if (WriteListFrom(child(x1),
                 ENGLISH_BIT + TERSE_BIT + CONCEAL_BIT)==0) "rien du tout.";
-            ".";
+                ".";
         5:  "Vous ouvrez ", (the) x1, ".";
     }
     Order:  print (The) x1;
-            if (x1 has pluralname) 
-                print " ont"; else print " a";
-                " mieux à faire.";
+            if (x1 has pluralname) print " ont";
+            else print " a";
+            " mieux à faire.";
     ParlerIncorrect : "Soyez plus précis dans votre communication, ou reformulez.";
     ParlerSansPrecision :   if (noun==player) "Vous ne savez pas quoi vous dire que vous ne sachiez déjà.";
                             else "Pas de réponse.";
@@ -1338,7 +1336,7 @@ Constant COMMA__TX      = ", ";
         3:  "Vous ne pouvez pas dans cette direction.";
     }
     PutOn: switch (n) {
-        1: "Vous devez avoir en main ", (the) x1,
+        1:  "Vous devez avoir en main ", (the) x1,
             " avant de pouvoir ", (itorthem) x1,
             " mettre sur quelque chose d'autre.";
         2:  "Vous ne pouvez pas poser un objet sur lui-même.";
@@ -1356,7 +1354,7 @@ Constant COMMA__TX      = ", ";
     Remove: switch (n) {
         1:  if (x1 has pluralname)
                 print "Ils sont malheureusement fermés."; !*! elle(s)
-                else print "Il est malheureusement fermé."; !*!
+            else print "Il est malheureusement fermé."; !*!
         2:  if (x1 has pluralname)
                 print "Mais ils ne sont pas";
             else print "Mais ce n'est pas";
@@ -1429,7 +1427,7 @@ Constant COMMA__TX      = ", ";
     }
     Strong:         "Les vrais aventuriers n'emploient pas un tel langage.";
 #Ifndef NI_BUILD_COUNT;
-  Swim:           "Il n'y a pas assez d'eau pour nager dedans.";  ! swim desactive par defaut dans I7
+    Swim:           "Il n'y a pas assez d'eau pour nager dedans.";  ! swim desactive par defaut dans I7
 #endif; ! NI_BUILD_COUNT
     Swing:          "Il n'y a rien de sensé pour se balancer ici.";
     SwitchOff: switch (n) {
@@ -1506,7 +1504,7 @@ Constant COMMA__TX      = ", ";
         1: "Mais vous n'avez pas cela !";
         2: "Vous avez l'air ridicule en agitant ", (the) x1, ".";
     }
-    WaveHands:    
+    WaveHands:
         if (x1 == 0 || x1 == player) "Vous agitez vos mains devant vous.";
         else "Vous saluez ", (the) x1, ".";
     Wear: switch (n) {
