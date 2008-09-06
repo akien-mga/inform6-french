@@ -29,8 +29,6 @@ System_file;
      print "^Compilé avec la version ", (string) LibReleaseFR, " de la bibliothèque francophone.^" ;
 ];
 
-#ifndef NI_BUILD_COUNT;
-
 Verb meta 'brief' 'normal'
     *                                           -> LMode1;
 Verb meta 'verbose' 'long'
@@ -100,10 +98,6 @@ Verb 'vf'
         *                                   -> VersionFR;
 
 
-
-
-#endif;  ! NI_BUILD_COUNT
-
 #IFNDEF NO_PLACES;
 Verb meta 'objects' 'objets'
         *                                   -> Objects;
@@ -111,65 +105,6 @@ Verb meta 'objects' 'objets'
 Verb meta 'places' 'endroits'
         *                                   -> Places;
 #ENDIF; ! NO_PLACES
-
-
-! NE PAS UTILISER DE VERBES META ANGLAIS ICI, SEULEMENT LES MOTS FRANÇAIS SINON CELA BUGGE LES COMMANDES ANGLAISES SI ON LES TAPE
-
-#ifdef NI_BUILD_COUNT; ! pour inform 7 seulement
-
-
-     Verb meta 'recording' 'enregistrer'
-          *                                                         -> CommandsOn
-          * 'on'                                                  -> CommandsOn
-          * 'off'                                                 -> CommandsOff;
-     Verb meta 'replay' 'rejouer'
-          *                                                         -> CommandsRead;
-     
-  !   Verb meta 'score'
-   !                       *                                          -> Score
-   !             * 'detaille'/'complet'              -> Fullscore;
-     Verb meta 'fullscore' 'full' 'detaille' 'complet'
-                          *                                          -> FullScore
-                          * 'score'                                -> FullScore;
-     Verb meta  'quitter' !'quit' ! 'q//'
-                          *                                          -> Quit;
-     Verb meta 'charger' ! 'restore'
-                          *                                          -> Restore;
-     Verb meta 'recommencer' ! 'restart'
-                          *                                          -> Restart;
-     Verb meta 'verifier' ! 'verify'
-                          *                                          -> Verify;
-     Verb meta 'sauver' ! 'save'
-                          *                                          -> Save;
-     Verb meta 'log' 'transcrire' ! 'script' 'transcript' 'transcription'
-                          *                                          -> ScriptOn
-                          * 'off'                                  -> ScriptOff
-                          * 'on'                                    -> ScriptOn;
-     Verb meta 'nolog' 'noscript' 'unscript'
-                          *                                          -> ScriptOff;
-     
-     Verb meta 'mode'
-                * 'normal'			-> LMode1
-                * 'long'/'bavard'/'verbeux'	-> LMode2
-                * 'court'			-> LMode3;
-                
-
-     Verb meta 'pronoms' 'noms' ! 'pronouns' 'nouns'
-                          *                                          -> Pronouns;
-
-     Verb meta  'notification' ! 'notify'
-                          * 'on'                                    -> NotifyOn
-                          * 'off'                                  -> NotifyOff;
-
-! Verb meta 'version'
-!         *                                   -> Version
-!         * 'francaise'/'fr'/'vf'             -> VersionFR;
-
-Verb 'vf'
-        *                                   -> VersionFR;
-
-#endif;  ! NI_BUILD_COUNT
-
 
 
 ! ------------------------------------------------------------------------------
@@ -264,7 +199,6 @@ Verb meta 'glklist'
 [ ADirection; if (noun in compass) rtrue; rfalse; ];
 
 ! ------- Verbes de déplacement du joueur
-#ifndef NI_BUILD_COUNT;
 Verb 'entrer' 'rentrer'
         *                                           -> GoIn
         * 'dans'/'par' noun                         -> Enter
@@ -322,7 +256,7 @@ Verb 'descendre'
         * 'à'/'a'/'au'/'en'/'vers'/'par'/'dans'/'sur'/'sous' noun   -> Enter
         * noun=ADirection                                           -> Go
         * noun                                                      -> Enter;
-#endif; ! NI_BUILD_COUNT
+
 [GoUpSub; <<Go u_obj>>;];      ! n'existait pas en anglais
 Verb 'monter' 'remonter'
         *                                                           -> GoUp
@@ -330,7 +264,6 @@ Verb 'monter' 'remonter'
         * 'à'/'a'/'au'/'en'/'vers'/'par'/'dans'/'sur'/'sous' noun   -> Enter
         * noun=ADirection                                           -> Go
         * noun                                                      -> Enter;
-#ifndef NI_BUILD_COUNT;
 
 Verb 'grimper' 'gravir' 'escalader'
         * noun                                    -> Climb
@@ -345,7 +278,6 @@ Verb 'sauter' 'bondir'
 
 Verb 'nager' 'plonger'
         *                                   -> Swim;
-#endif; ! NI_BUILD_COUNT
 
 ! ------- Verbes pour ouvrir et fermer
 Verb 'fermer' 'refermer'
@@ -364,19 +296,10 @@ Verb 'deverrouiller' 'forcer'
         * noun 'avec' held                  -> Unlock;
 
 ! ------- Verbes concernant ce que le joueur possède
-#ifndef NI_BUILD_COUNT;
 Verb 'inventaire'  'inv' 'i//' 'inventoire' 
         *                                   -> Inv
         * 'haut'/'tall'                     -> InvTall
         * 'large'/'wide'                    -> InvWide;
-#endif; ! NI_BUILD_COUNT
-
-#ifdef NI_BUILD_COUNT;
-Verb 'inventaire'  'inventoire' ! (inv et i a retirer de I7 car existe en anglais)
-        *                                   -> Inv
-        * 'haut'/'tall'                     -> InvTall
-        * 'large'/'wide'                    -> InvWide;
-#endif; ! NI_BUILD_COUNT
 
 Verb 'acheter'
         * noun                              -> Buy;
@@ -390,7 +313,7 @@ Verb 'nourrir'
 
 Verb 'inserer' 'introduire'
         * multiexcept 'dans' noun           -> Insert;
-#ifndef NI_BUILD_COUNT;
+
 Verb 'remplir'
         * noun                              -> Fill;
 
@@ -421,7 +344,7 @@ Verb 'jeter' 'lancer'
         * multiheld                         -> Drop
         * multiexcept 'dans' noun           -> Insert
         * held 'sur' noun                   -> ThrowAt;
-#endif; ! NI_BUILD_COUNT
+
 Verb 'laisser'
         * held                              -> Drop
         * 'tomber' held                     -> Drop;
@@ -443,11 +366,10 @@ Verb 'mettre' 'remettre'
         * multiexcept 'sur' noun         -> PutOn;
 
 ! ------- Verbes agressifs ou destructeurs
-#ifndef NI_BUILD_COUNT;
 Verb 'boire' 'avaler' 'siroter'   ! avaler ne serait il pas mieux avec "manger" ?
         * noun                           -> Drink
         * 'de'/'du' noun                 -> Drink
-	* 'de'/'du' 'l^' noun                   -> Drink  ! ex : boire de l'eau
+        * 'de'/'du' 'l^' noun            -> Drink  ! ex : boire de l'eau
         * 'à'/'a' noun                   -> Drink;
 
 Verb 'manger' 'devorer'
@@ -469,8 +391,8 @@ Verb 'attaquer' 'casser' 'frapper' 'combattre' 'ruiner' 'briser' 'detruire'
 Verb 'presser' 'tordre' 'comprimer' 'ecraser'
 	* switchable  -> Push
         * noun                           -> Squeeze;
-#endif; ! NI_BUILD_COUNT
-[VagueDoSub; 
+
+[VagueDoSub;
     L__M(##VagueDo, 1, 0);
 ];
 
@@ -506,7 +428,6 @@ Verb 'creuser'
 
 ! ------- Verbes d'observation
 
-#ifndef NI_BUILD_COUNT;
 Verb 'regarder' 'voir' 'r//' 'v//' 'l//'  ! l// a désactiver de I7 lorsqu'il sera integre avec NI_BUILD_COUNT au reste des verbes dans French
         *                                       -> Look
         * 'autour'                              -> Look
@@ -518,25 +439,7 @@ Verb 'regarder' 'voir' 'r//' 'v//' 'l//'  ! l// a désactiver de I7 lorsqu'il ser
         * 'derriere' noun                       -> Search ! à la place de Turn
         * topic 'dans' noun                     -> Consult
         * 'vers'/'à'/'a'/'au' noun=ADirection   -> Examine;
-#endif; ! NI_BUILD_COUNT
 
-#ifdef NI_BUILD_COUNT;
-Verb 'regarder' 'voir' 'r//' 'v//' ! 'l//'  ! l// a désactiver de I7 lorsqu'il sera integre avec NI_BUILD_COUNT au reste des verbes dans French
-        *                                       -> Look
-        * 'autour'                              -> Look
-        * 'autour' topic                        -> Look
-        * noun                                  -> Examine
-        * 'sur' noun                            -> Examine
-        * 'dans'/'atravers' noun                -> Search
-        * 'sous' noun                           -> LookUnder
-        * 'derriere' noun                       -> Search ! à la place de Turn
-        * topic 'dans' noun                     -> Consult
-        * 'vers'/'à'/'a'/'au' noun=ADirection   -> Examine;
-#endif; ! NI_BUILD_COUNT
-
-
-
-#ifndef NI_BUILD_COUNT;
 Verb 'examiner' 'x//' 'decrire' 'observer'
         * noun                           -> Examine;
 
@@ -610,9 +513,10 @@ Verb 'frotter' 'cirer' 'astiquer' 'balayer' 'nettoyer' 'depoussierer' 'essuyer' 
 Verb 'nouer' 'attacher' 'fixer' 'connecter' 'brancher'
         * noun                                        -> Tie
         * noun '->'/'à'/'a'/'au'/'aux'/'avec'/'sur' noun   -> Tie;
-#endif; ! NI_BUILD_COUNT
-! ------- Verbes de communication avec des personnages
 
+
+
+! ------- Verbes de communication avec des personnages
 
 [ParlerIncorrectSub;
     L__M(##ParlerIncorrect, 1, 0);
@@ -628,7 +532,6 @@ Verb 'nouer' 'attacher' 'fixer' 'connecter' 'brancher'
     L__M(##ParlerSansPrecision, 1, noun);
 ];
 
-#ifndef NI_BUILD_COUNT;
 Verb 'repondre' 'dire' 'crier' 'hurler'
         *                                               -> ParlerIncorrect ! dire (d'accord mais quoi...)
         * creature                                      -> ParlerIncorrect ! dis-lui (d'accord mais quoi...)
@@ -688,104 +591,11 @@ Verb 'questionner' 'interroger' '?//'
         * 'au' 'sujet' 'de'/'du'/'des'/'d^' topic '->' creature       -> Ask reverse
         * 'sur' topic '->' creature                                   -> Ask reverse
         * topic '->' creature                                         -> Ask reverse;
-#endif; ! NI_BUILD_COUNT
-
-#ifdef NI_BUILD_COUNT;
-#ifdef PARLERSIMPLE;
- ! à l'origine, version simple
-
-Verb 'repondre' 'dire' ! 'crier'
-                * creature   		              -> Answer ! "dis-lui"
-                * creature topic	              -> Answer
-                * 'à'/'a'/'au'/'aux' creature             -> Answer
-                * topic 'à'/'a'/'au'/'aux' creature       -> Answer reverse;
-!Verb 'parler'
-!                * creature			     		    -> Tell ! "parle-lui"
-!                * 'avec'/'à'/'a'/'au'/'aux' creature		     	    -> Tell
-!                * creature 'de'/'du'/'des' topic     		    -> Tell ! "parle-lui"
-!                * 'à'/'a'/'au'/'aux' creature 'de'/'du'/'des' topic     -> Tell;
-Verb 'questionner' ! 'interroger'
-                * creature 'à'/'a' 'propos' 'de'/'du'/'des' topic   -> Ask
-                * creature 'au' 'sujet' 'de'/'du'/'des' topic   -> Ask
-                * creature 'sur' topic               -> Ask;
-Verb 'demander' 'exiger' !*! reclamer
-                * noun 'à'/'a'/'au'/'aux' creature   -> AskFor reverse             
-                * creature noun   		 -> AskFor ! "demande-lui"
-                * 'à'/'a'/'au'/'aux' creature noun   -> AskFor
-		* creature 'de' topic			-> AskTo
-		* 'à'/'a'/'au'/'aux' creature 'de' topic	-> AskTo;
-
-#ifnot; ! parler avancé
-
-
-Verb 'repondre' 'dire' 'crier' 'hurler'
-        *                                               -> ParlerIncorrect ! dire (d'accord mais quoi...)
-        * creature                                      -> ParlerIncorrect ! dis-lui (d'accord mais quoi...)
-        * 'à'/'a'/'au'/'aux' creature                   -> ParlerIncorrect ! dire à toto (d'accord mais quoi...)
-        * 'de'/'d^' topic                               -> ParlerIncorrect ! dire de partir (d'accord mais à qui...)  
-        * creature 'de'/'d^' topic                      -> AskTo           ! dis lui de faire ça
-        * 'à'/'a'/'au'/'aux' creature 'de'/'d^' topic   -> AskTo           ! dire a toto de faire ça
-        * creature topic                                -> Answer  ! dis-lui bonjour
-        * 'à'/'a'/'au'/'aux' creature topic             -> Answer  ! dire a toto bonjour
-        * topic '->'/'à'/'a'/'au'/'aux' creature        -> Answer reverse;         ! dire bonjour à toto
-
-Extend only 'crier' 'hurler' first
-        *                                             -> CrierSansPrecision;
-
-Verb 'demander'
-        *                                             -> ParlerIncorrect ! demander (d'accord mais quoi...)
-        * creature                                    -> ParlerIncorrect ! demande-lui (d'accord mais quoi...)
-        * '->'/'à'/'a'/'au'/'aux' creature            -> ParlerIncorrect ! demander à toto (d'accord mais quoi...)
-        * 'que'/'qu^' topic                           -> ParlerIncorrect ! (on ne gère pas "demander que toto sorte" à cause du subjonctif)
-        * creature 'de'/'d^' topic                    -> AskTo           ! demande lui de faire ça
-        * '->'/'à'/'a'/'au'/'aux' creature 'de'/'d^' topic -> AskTo           ! demander a toto de faire ça
-!        * 'de'/'d^' topic 'à'/'a'/'au'/'aux' creature -> AskTo reverse  ! demander de partir à toto   !x! ça plante
-        * creature noun                               -> AskFor          ! demande-lui du pain
-        * noun '->'/'à'/'a'/'au'/'aux' creature       -> AskFor reverse  ! demander du pain au boulanger
-        * '->'/'à'/'a'/'au'/'aux' creature noun       -> AskFor          ! demander au boulanger du pain
-        * creature topic                              -> Ask             ! dis-lui bonjour
-        * topic '->'/'à'/'a'/'au'/'aux' creature      -> Ask reverse     ! demander de l'aide à toto...
-        * '->'/'à'/'a'/'au'/'aux' creature topic      -> Ask;            ! dire a toto bonjour
-
-Verb 'parler' 'discuter' 'causer'
-        * 'avec'/'à'/'a'/'au'/'aux' creature                                              -> ParlerSansPrecision
-        * 'avec'/'à'/'a'/'au'/'aux' creature 'de'/'du'/'des'/'d^' topic                   -> Tell
-        * 'avec'/'à'/'a'/'au'/'aux' creature 'au' 'sujet' 'de'/'du'/'des'/'d^' topic      -> Tell
-        * 'avec'/'à'/'a'/'au'/'aux' creature 'a'/'à' 'propos' 'de'/'du'/'des'/'d^' topic  -> Tell
-        * 'de'/'du'/'des'/'d^' topic 'avec'/'à'/'a'/'au'/'aux' creature                   -> Tell reverse 
-        * 'au' 'sujet' 'de'/'du'/'des'/'d^' topic 'avec'/'à'/'a'/'au'/'aux' creature      -> Tell reverse
-        * 'a'/'à' 'propos' 'de'/'du'/'des'/'d^' topic 'avec'/'à'/'a'/'au'/'aux' creature  -> Tell reverse
-        * creature                                                                        -> ParlerSansPrecision ! "parle-lui"
-        * creature 'de'/'du'/'des'/'d^' topic                                             -> Tell ! "parle-lui"
-        * creature 'au' 'sujet' 'de'/'du'/'des'/'d^' topic                                -> Tell ! "parle-lui"
-        * creature 'a'/'à' 'propos' 'de'/'du'/'des'/'d^' topic                            -> Tell;
-
-Verb '!//'
-        * topic '->' creature                                                             -> Tell reverse;
-
-Verb 'questionner' 'interroger' '?//'
-        * creature                                                    -> ParlerSansPrecision
-        * creature 'à'/'a' 'propos' 'de'/'du'/'des'/'d^' topic        -> Ask
-        * creature 'au' 'sujet' 'de'/'du'/'des'/'d^' topic            -> Ask
-        * creature 'sur' topic                                        -> Ask
-        ! Les lignes qui suivent servent à comprendre si le joueur fainéant
-        ! tape juste : 
-        ! > interroger sur le ballon
-        ! (Toto) 
-        ! "Toto ne sait rien sur le ballon."
-        * 'à'/'a' 'propos' 'de'/'du'/'des'/'d^' topic '->' creature   -> Ask reverse
-        * 'au' 'sujet' 'de'/'du'/'des'/'d^' topic '->' creature       -> Ask reverse
-        * 'sur' topic '->' creature                                   -> Ask reverse
-        * topic '->' creature                                         -> Ask reverse;
-
-#endif; ! parlersimple
-#endif; ! NI_BUILD_COUNT
 
 Verb 'ordonner' 
         * creature 'de'/'d^' topic                          -> AskTo ! "ordonne-lui"
         * 'à'/'a'/'au'/'aux' creature 'de'/'d^' topic       -> AskTo;
 
-#ifndef NI_BUILD_COUNT;
 Verb 'agiter'
         * 'la'/'les' 'main'/'mains'      -> WaveHands
         * noun                           -> Wave;
@@ -814,34 +624,31 @@ Verb 'reveiller' 'eveiller'
 Verb 'embrasser' 'etreindre'
         * creature                      -> Kiss;
 
+
 ! ------- Verbes musicaux
 Verb 'chanter'
         *                               -> Sing;
-#endif; ! NI_BUILD_COUNT
+
 Verb 'souffler' !*! jouer d'un instrument ?
         * 'dans' held                   -> Blow
         * held                          -> Blow;
 
-![blow non implemente dans I7...]
 
 ! ------- Verbes "immobiles"
 
-#ifndef NI_BUILD_COUNT;
 Verb 'attendre' 'a//' 'z//' !*! patienter  
         *                               -> Wait;
 
-#endif; ! NI_BUILD_COUNT
-
 Verb 'prier'
         *                               -> Pray;
-#ifndef NI_BUILD_COUNT;
 
 Verb 'penser' 'reflechir'
         *                               -> Think;
 
 Verb 'dormir' 'somnoler'
         *                               -> Sleep;
-#endif; ! NI_BUILD_COUNT
+
+
 ! ------- Verbes de communication avec le narrateur
 Verb 'oui' 
         *                               -> Yes;
@@ -925,7 +732,7 @@ Verb 'utiliser'
     if (word=='couvre') return 'couvrir';
     if (word=='crame') return 'cramer';
     if (word=='creuse') return 'creuser';
-!    if (word=='crie') return 'crier'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
+    if (word=='crie') return 'crier'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
     if (word=='cueille') return 'cueillir';
     if (word=='decortique') return 'decortiquer';
     if (word=='decolle') return 'decoller';
@@ -997,7 +804,7 @@ Verb 'utiliser'
     if (word=='ordonne') return 'ordonner';
     if (word=='ote') return 'oter';
     if (word=='ouvre') return 'ouvrir';
-!    if (word=='parle') return 'parler'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
+    if (word=='parle') return 'parler'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
     if (word=='pars') return 'partir';
     if (word=='passe') return 'passer';
     if (word=='paye'or'paie') return 'payer'; !*! aussi un nom
@@ -1168,7 +975,7 @@ Verb 'utiliser'
     if (word=='ordonnez') return 'ordonner';
     if (word=='otez') return 'oter';
     if (word=='ouvrez') return 'ouvrir';
-!    if (word=='parlez') return 'parler'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
+    if (word=='parlez') return 'parler'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
     if (word=='partez') return 'partir';
     if (word=='passez') return 'passer';
     if (word=='payez') return 'payer';
@@ -1273,7 +1080,7 @@ Verb 'utiliser'
     if (word=='couvrons') return 'couvrir';
     if (word=='cramons') return 'cramer';
     if (word=='creusons') return 'creuser';
-!    if (word=='crions') return 'crier'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
+    if (word=='crions') return 'crier'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
     if (word=='cueillons') return 'cueillir';
     if (word=='decollons') return 'decoller';
     if (word=='decortiquons') return 'decortiquer';
@@ -1345,7 +1152,7 @@ Verb 'utiliser'
     if (word=='ordonnons') return 'ordonner';
     if (word=='otons') return 'oter';
     if (word=='ouvrons') return 'ouvrir';
-!    if (word=='parlons') return 'parler'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
+    if (word=='parlons') return 'parler'; ! je ne sais plus pourquoi j'ai commenté cela... (OTTO)
     if (word=='partons') return 'partir';
     if (word=='passons') return 'passer';
     if (word=='payons') return 'payer';
@@ -1522,6 +1329,7 @@ Verb 'utiliser'
     }
         return n;
 ];
+
 [ IsAWordIn nom o prop k l m;
     k=o.&prop; l=(o.#prop)/WORDSIZE;
     for (m=0:m<l:m++) if (nom==k-->m) rtrue;

@@ -19,8 +19,8 @@
 ! ==============================================================================
 
 ! Version 2.3 du 05/09/2008
-Constant LibReleaseFR      "2.3";
-Message		"[Compilé avec la version 2.3 de la bibliothèque francophone, version 1PSP.]";
+Constant LibReleaseFR      "2.4dev";
+Message		"[Compilé avec la version ", (string) LibReleaseFR, " de la bibliothèque francophone, version 1PSP.]";
 
 System_file;
 
@@ -82,28 +82,12 @@ CompassDirection -> d_obj "bas"
                     with door_dir d_to, name 'b//' 'd//' 'bas' 'sol';
 #endif; ! WITHOUT_DIRECTIONS
 
-! Inform 6 games get in_obj and out_obj even when WITHOUT_DIRECTIONS is
-! defined. Inform 7 games do not.
-
-#Ifndef WITHOUT_DIRECTIONS;
 CompassDirection -> in_obj "intérieur"
                     with door_dir in_to, name 'dedans' 'interieur',
                     article "l'";
 CompassDirection -> out_obj "extérieur"
                     with door_dir out_to, name 'dehors' 'exterieur',
                     article "l'";
-
-#Ifnot;
-#Ifndef NI_BUILD_COUNT;
-CompassDirection -> in_obj "intérieur"
-                    with door_dir in_to, name 'dedans' 'interieur',
-		    article "l'";
-CompassDirection -> out_obj "extérieur"
-                    with door_dir out_to, name 'dehors' 'exterieur',
-		    article "l'";
-
-#endif; ! NI_BUILD_COUNT
-#endif; ! WITHOUT_DIRECTIONS
 
 ! ------------------------------------------------------------------------------
 !   Part II.   Vocabulary
@@ -754,9 +738,6 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
     if (w == 'purloin' or 'tree' or 'abstract'
                        or 'gonear' or 'scope' or 'showobj')
         rtrue;
-#ifdef NI_BUILD_COUNT;
-    if (w == 'showme') rtrue;
-#endif;
     rfalse;
 ];
 #Endif;
@@ -808,16 +789,9 @@ Constant SCORE__TX    = "Score : ";
 Constant MOVES__TX    = "Tours : ";
 Constant TIME__TX     = "Heure : ";
 
-#Ifndef NI_BUILD_COUNT;
 Constant CANTGO__TX   = "Je ne pouvais pas aller dans cette direction.";
 Constant FORMER__TX   = "moi - avant";
 Constant YOURSELF__TX = "moi-même";
-#Ifnot;
-Global CANTGO__TX   = "Je ne pouvais pas aller dans cette direction.";
-Global FORMER__TX   = "moi - avant";
-Global YOURSELF__TX = "moi-même";
-#Endif; ! NI_BUILD_COUNT
-
 Constant YOU__TX        = "Je";
 Constant DARKNESS__TX = "L'obscurité";
 
@@ -825,29 +799,11 @@ Constant THOSET__TX   = "ces choses-là";
 Constant THAT__TX     = "cela";
 Constant OR__TX       = " ou ";
 Constant NOTHING__TX  = "rien";
-#Ifndef NI_BUILD_COUNT;
 Constant IS__TX       = "était ";   ! utilisés par WriteListFrom
 Constant ARE__TX      = "étaient ";  !
 Constant IS2__TX      = "";  ! dans/sur lequel " était"  => contenant/supportant
 Constant ARE2__TX     = "";  ! dans/sur lequel " étaient" => contenant/supportant
-#Ifnot;
-Global IS__TX       = "était ";   ! utilisés par WriteListFrom
-Global ARE__TX      = "étaient ";  !
-Global IS2__TX      = "";  ! dans/sur lequel " était"  => contenant/supportant
-Global ARE2__TX     = "";  ! dans/sur lequel " étaient" => contenant/supportant
-#Endif; ! NI_BUILD_COUNT
-
 Constant AND__TX      = " et ";
-#ifdef NI_BUILD_COUNT;
-#ifdef I7_SERIAL_COMMA;
-Constant LISTAND__TX   = ", et ";
-Constant LISTAND2__TX  = " et ";
-#ifnot;
-Constant LISTAND__TX   = " et ";
-Constant LISTAND2__TX  = " et ";
-#endif; ! I7_SERIAL_COMMA
-#endif; ! NI_BUILD_COUNT
-
 Constant WHOM__TX     = "";  ! dans/sur "lequel " est  => contenant/supportant
 Constant WHICH__TX    = "";  ! dans/sur "lequel " est  => contenant/supportant
 Constant COMMA__TX      = ", ";
@@ -940,7 +896,6 @@ Constant COMMA__TX      = ", ";
 ];
 
 [ LanguageLM n x1;
-#ifdef NI_BUILD_COUNT; say__p = 1; #endif;
     Answer, Ask:    "Mes tentatives ne lui arrachaient aucune parole. ";
 !    Ask:      see Answer
     Attack:         "La violence n'était pas forcément une solution. ";
@@ -992,11 +947,7 @@ Constant COMMA__TX      = ", ";
             else print (The) x1, " était ";
                 "déjà ici.";
         2: "Je n'avais pas cela.";
-        #ifdef NI_BUILD_COUNT;
-        3:  print "(Je pris ", (the) x1, "^"; say__p = 0; return;
-        #ifnot;
         3: "(Je pris ", (the) x1, ")";
-        #endif;
         4: "Voilà qui était fait.";
     }
     Eat: switch (n) {
@@ -1032,22 +983,12 @@ Constant COMMA__TX      = ", ";
         5:  print "Je ";
             if (x1 has supporter) print "montai sur "; else print "pénétrai dans ";
             print_ret (the) x1, ".";
-#ifdef NI_BUILD_COUNT;
-        6:  print "(";
-            if (x1 has supporter) print "descendant "; else print "sortant ";
-            print (DeDuDes) x1; print ")^"; say__p = 0; return;
-        7:  say__p = 0;
-            if (x1 has supporter) "(montant sur ", (the) x1, ")^";
-            if (x1 has container) "(entrant dans ", (the) x1, ")^";
-            "(entrant dans ", (the) x1, ")^";
-#ifnot; ! NI_BUILD_COUNT
         6:  print "(";
             if (x1 has supporter) print "descendant "; else print "sortant ";
             print (DeDuDes) x1; ")";
         7:  if (x1 has supporter) "(montant sur ", (the) x1, ")^";
             if (x1 has container) "(entrant dans ", (the) x1, ")^";
             "(entrant dans ", (the) x1, ")^";
-#endif; ! NI_BUILD_COUNT
     }
     Examine: switch (n) {
         1:  "L'obscurité m'enveloppait de son linceul impénétrable.";
@@ -1105,7 +1046,7 @@ Constant COMMA__TX      = ", ";
             " mettre dans autre chose.";
         2:  if (x1 has pluralname)
             print_ret (The) x1, " ne pouvaient hélas pas contenir d'objet.";
-            else
+            else  
             print_ret (The) x1, " ne pouvait hélas pas contenir d'objet.";
         3:  print_ret (The) x1, " ", (isorare) x1, " fermé",(es) x1,".";
         4:  "J'avais besoin de ", (itorthem) x1, " prendre d'abord.";
@@ -1127,17 +1068,11 @@ Constant COMMA__TX      = ", ";
     Listen:         "Par milliers, des cris torturés, des bourdonnements, des murmures emplissaient mon esprit dérangé et brisaient ma concentration, mais au-dehors, rien de notable selon toute apparence. ";
     ListMiscellany: switch (n) {
          1: print " (allumé",(es) x1,")";
-         #ifdef NI_BUILD_COUNT;
-         2: print " (fermé",(es) x1,")";
-         4: print " (vide",(s) x1,")";
-         6: print " (fermé",(es) x1," et vide",(s) x1,")";
-         #ifnot; ! NI_BUILD_COUNT
          2: print " (qui ", (isorare) x1, " fermé",(es) x1,")";
-         4: print " (qui ", (isorare) x1, " vide",(s) x1,")";
-         6: print " (qui ", (isorare) x1, " fermé",(es) x1," et vide",(s) x1,")";
-         #endif; ! NI_BUILD_COUNT
          3: print " (fermé",(es) x1," et allumé",(es) x1,")";
+         4: print " (qui ", (isorare) x1, " vide",(s) x1,")";
          5: print " (vide",(s) x1," et allumé",(es) x1,")";
+         6: print " (qui ", (isorare) x1, " fermé",(es) x1," et vide",(s) x1,")";
          7: print " (fermé",(es) x1,", vide",(s) x1," et allumé",(es) x1,")";
          8: print " (allumé",(es) x1," et porté",(es) x1;
          9: print " (allumé",(es) x1;
@@ -1151,16 +1086,16 @@ Constant COMMA__TX      = ", ";
         17: print " (qui ", (isorare) x1, " vide",(s) x1,")";
         18: print " contenant ";
         19: print " (supportant "; ! " (sur ";
-        20: print " supportant ";  ! " sur ";
+        20: print " supportant ";  ! " sur "; 
         21: print " (contenant ";  ! " (dans ";
         22: print " contenant ";   ! " dans ";
     }
-    LMode1:         " est passé en mode description normale ; seuls les lieux
-                    visités pour la première fois sont décrits en détail.";
+    LMode1:         " est passé en mode description normale ; seuls les lieux 
+                      visités pour la première fois sont décrits en détail.";
     LMode2:         " est passé en mode description longue ; tous les lieux,
-                    même déjà visités, sont décrits en détail.";
+                      même déjà visités, sont décrits en détail.";
     LMode3:         " est passé en mode description courte ; tous les lieux,
-                    même non visités, sont décrits brièvement.";
+                      même non visités, sont décrits brièvement.";
     Lock: switch (n) {
         1:  "Je ne pouvais verrouiller cela.";
         2:  print_ret (ctheyreorthats) x1, " verrouillé en ce moment.";
@@ -1313,7 +1248,7 @@ Constant COMMA__TX      = ", ";
             else print " a";
             " mieux à faire.";
     ParlerIncorrect : "Soyez plus précis dans votre communication, ou reformulez.";
-    ParlerSansPrecision :   if (noun==player) "Je ne savais pas quoi me dire que je ne sache déjà.";
+    ParlerSansPrecision :   if (x1==player) "Je ne savais pas quoi me dire que je ne sache déjà.";
                             else "Pas de réponse.";
     Places: switch (n) {
         1:  print "J'avais visité : ";
@@ -1353,8 +1288,8 @@ Constant COMMA__TX      = ", ";
         8:  "Je plaçai ", (the) x1, " sur ", (the) second, ".";
     }
     Quit: switch (n) {
-        1: print "Répondez par oui ou par non, je vous prie.";
-        2: print "Était-ce vraiment la fin ? (O/N) ";
+        1:  print "Répondez par oui ou par non, je vous prie.";
+        2:  print "Était-ce vraiment la fin ? (O/N) ";
     }
     Remove: switch (n) {
         1:  if (x1 has pluralname)
@@ -1431,9 +1366,7 @@ Constant COMMA__TX      = ", ";
         2:  "Je n'arrivai à rien ainsi.";
     }
     Strong:         "Les vrais aventuriers n'emploient pas un tel langage.";
-#Ifndef NI_BUILD_COUNT;
     Swim:           "Il n'y avait pas assez d'eau pour nager dedans.";  ! swim desactive par defaut dans I7
-#endif; ! NI_BUILD_COUNT
     Swing:          "Il n'y avait rien de sensé pour se balancer là.";
     SwitchOff: switch (n) {
         1:  "Je ne pouvais ni allumer, ni éteindre cela.";
@@ -1468,7 +1401,7 @@ Constant COMMA__TX      = ", ";
         13: "(je mis ", (the) x1, " dans ", (the) SACK_OBJECT,
             " pour faire de la place)";
     }
-    Taste: if (noun has animate) "Cela n'aurait pas été convenable.";
+    Taste: if (x1 has animate) "Cela n'aurait pas été convenable.";
            else "Je ne remarquai rien de particulier.";
     Tell: switch (n) {
         1:  "Je discutai avec moi-même pendant un bon moment...";
