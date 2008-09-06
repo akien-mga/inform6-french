@@ -1,17 +1,38 @@
 Ces bibliothèques sont destinées à être utilisées avec Inform 6
-pour la réalisation de jeux d'aventures textuels.
+pour la réalisation de jeux d'aventures textuels en français.
 
-http://informfr.tuxfamily.org
-http://ifiction.free.fr/
+http://informfr.tuxfamily.org : téléchargement de la dernière version stable
+http://ifiction.free.fr : le carrefour francophone de la fiction interactive (jeux, articles, forum...). Si vous ignorez comment compiler un jeu avec inform, la rubrique Articles contient de nombreuses informations ainsi qu'un kit de démarrage rapide, et notre forum est réactif.
 
 
-I6
-==
+== Fichiers ==
 
-French.h	: Inform 6 + I7, seconde personne du pluriel, présent
-FrenchG.h	: Inform 6 + I7, seconde personne du pluriel, présent
-
-Vous devrez utiliser en plus  linklpa.h  parserm.h   V6Defs.h  VerbLib.h
-infix.h   Parser.h    V6.h  verblibm.h et éventuellement Infglk.h, scenic5sens.h  
+French.h	: Inform 6, seconde personne du pluriel, présent
+FrenchG.h	: Inform 6, seconde personne du pluriel, présent
 
 French1PSP.h	: Inform 6, variante première personne du singulier, passé, à utiliser à la place de French.h
+(cette version a été réalisée au départ pour un jeu inspiré des travaux de Lovecraft, elle n'est donc pas aussi neutre que la version à la seconde personne du pluriel, présent).
+
+== Liste des modifications ==
+
+*** Version 2.3 ***
+- Modification de la réponse standard pour fouiller, selon qu'on tente de fouiller un animé ou un inanimé.
+- Correction de crashs liés aux verbes parler, demander et interroger.
+- Amélioration et modification des verbes de communication avec les personnages :
+-- Création de l'action "ParlerSansPrecision" permettant des formulations telles que : "parler à personnage". C'est une spécificité de la lib francophone car une telle action n'existe pas en anglais par défaut. Il est INDISPENSABLE de gérer cette action pour les personnages non joueurs, en plus des actions traditionnelles Ask, Tell et Answer. Y penser en cas de compilation d'un jeu ancien avec cette version (ou ultérieure) de la bibliothèque francophone.
+-- ajout des équivalents ? et ! pour interroger et parler, ainsi que compréhension des commandes "? sujet" et "! sujet", signifiant respectivement "interroger sur sujet" et "parler de sujet"
+-- Comme dans la version anglaise le verbe demander renvoie l'action AskFor si suivi d'un nom (noun) reconnu par le jeu, en revanche s'il est suivi d'un texte non reconnu (topic), cela devient l'action Answer, comme pour le verbe dire.
+- Saluer est maintenant un verbe transitif : "saluer personnage" est maintenant une formulation reconnue, avec un message par défaut ("Vous saluez le personnage.").
+- suppression des verbes peler, éplucher, décortiquer, qui renvoyaient Take, en tant que traduction de "peel off". Remplacés par le verbe "décoller" (un post-it, un chewing gum...).
+- ajout d'un verbe : version fr / vf / version francaise indiquant quelle version de la bibliothèque francophone est utilisée.
+- Pour le verbe dire et quelques autres, lorsque le destinataire est déterminé automatiquement, affichage de la préposition "->" au lieu de "à" qui pose problème pour "à le barman" ou "à le conducteur".
+- Ajout de "regarder autour" équivalent à "regarder"
+- Version passé à la première personne du singulier (1PSP, issue du jeu lieux communs) : la version French1PSP.h est maintenant à peu près au niveau de la version standard, même si elle n'est pas aussi neutre dans les formulations. SSuppression de FrenchG1PSP.h, fusionné avec FrenchG.h. Pour utiliser la forme 1PSP, il suffit d'inclure French1PSP.h au lieu de French.h
+- ajout des verbes utiliser et creuser sans rien preciser (actions VagueDo et VagueDig) : ils ne font que demander au joueur d'utiliser une formulation plus précise.
+- Correction du message par défaut pour l'action Drink : l'action demande toujours un objet, le message "Il n'y a rien de buvable ici" n'était donc pas adapté et souvent faux. Remplacé par "Ceci n'a rien de buvable".
+- Lorsqu'on tente de "goûter" un objet ayant l'attribut 'animate', on a maintenant le message "Cela ne serait pas très convenable." plutôt que "Vous ne remarquez rien de particulier" qui suggère qu'on l'a effectivement goûté.
+- message misc 49 : "Pouvez-vous préciser le nom de l'objet à utiliser ?^" changé en "Pouvez-vous préciser l'objet concerné par cette action, ou à utiliser ?^" 
+- action "Rub" (frotter) : différenciation entre l'action selon qu'elle est sur un animate ou un objet, et passage du message au futur pour ce dernier (vous n'arriverez à rien comme ça) pour éviter de suggérer que l'action a réussi.
+- Modification du verbe "chercher" qui était équivalent à "fouiller" dans la pratique. Comme on peut vouloir utiliser le verbe chercher un peu différemment (exemple : chercher des puces dans le chien) et que chercher est un verbe pas assez terre à terre (un peu comme "trouver" ou "résoudre"), il renvoie maintenant VagueSearch qui dit "utilisez plutôt 'fouiller'"
+- amélioration de la grammaire du verbe "grimper/escalader/gravir" avec ajout des prépositions suivantes en plus de 'sur' : à, a, au, aux, par (exemple : grimper aux arbres, grimper à l'échelle. La préposition par n'est pas indispensable mais ne fait pas de mal au cas où on pourrait la rencontrer)
+- modification de la grammaire du verbe "fouiller" pour qu'on puisse "fouiller dans" quelque chose
