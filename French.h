@@ -19,7 +19,9 @@
 
 ! Version 2.3 du 05/09/2008
 Constant LibReleaseFR      "2.4dev";
-Message		"[Compilé avec la version ", (string) LibReleaseFR, " de la bibliothèque francophone.]";
+Message		"[Compilé avec la version 2.4dev de la bibliothèque francophone.]";
+! note : "message" ne permet pas d'inclure une constante, cela doit être d'un seul bloc 
+! sinon cela ne compile pas. C'est dommage cela aurait été pratique...
 
 System_file;
 
