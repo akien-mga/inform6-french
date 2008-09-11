@@ -42,7 +42,7 @@ Verb meta 'mode'
         * 'court'                           -> LMode3;
 
 Verb meta 'notify' 'notification'
-	*                                   -> NotifyOn
+        *                                   -> NotifyOn
         * 'on'                              -> NotifyOn
         * 'off'                             -> NotifyOff;
 
@@ -194,7 +194,7 @@ Verb meta 'glklist'
 ! ------------------------------------------------------------------------------
 !  And now the game verbs.
 ! ------------------------------------------------------------------------------
-! A terme, tout le bloc sera compris dans un gros ifndef NI_BUILD_COUNT mais il faut redéfinir chaque verbe individuellement dans French
+
 
 [ ADirection; if (noun in compass) rtrue; rfalse; ];
 
@@ -274,7 +274,8 @@ Verb 'sauter' 'bondir'
         * noun                              -> JumpOver
         * 'par'/'au' 'dessus' noun          -> JumpOver
         * 'par'/'au' 'dessus' 'de' noun     -> JumpOver
-        * 'sur' noun                        -> JumpOver;
+        * 'sur' noun                        -> JumpOver
+        * 'dans' noun                       -> Enter;
 
 Verb 'nager' 'plonger'
         *                                   -> Swim;
@@ -389,7 +390,7 @@ Verb 'attaquer' 'casser' 'frapper' 'combattre' 'ruiner' 'briser' 'detruire'
 
 
 Verb 'presser' 'tordre' 'comprimer' 'ecraser'
-	* switchable  -> Push
+        * switchable  -> Push
         * noun                           -> Squeeze;
 
 [VagueDoSub;
@@ -421,7 +422,7 @@ Verb 'couper' 'trancher' 'elaguer'
 ];
 
 Verb 'creuser'
-	* 						-> VagueDig
+        *                                           -> VagueDig
         * noun                                      -> Dig
         * noun 'avec' held                          -> Dig;
 ! Ajouter "creuser * -> Dig ? (inexistant dans la version anglaise)
@@ -445,7 +446,8 @@ Verb 'examiner' 'x//' 'decrire' 'observer'
 
 Verb 'fouiller'
         * noun                           -> Search
-        * 'dans' noun                    -> Search;
+        * 'dans' noun                    -> Search
+        * 'sous' noun                    -> LookUnder;
 
 [VagueSearchSub;
     L__M(##VagueSearch, 1, 0);
@@ -468,19 +470,11 @@ Verb 'gouter'
 Verb 'toucher' 'caresser' 'tater'
         * noun                           -> Touch;
 
-Verb 'lire'
-        * noun                           -> Examine
-        * 'sur' topic 'dans' noun        -> Consult
-        * topic 'dans' noun              -> Consult;
-
-Verb 'consulter'
-        * noun 'sur' topic               -> Consult
-        * noun 'à'/'a' topic             -> Consult
-        * noun 'à'/'a' 'propos de' topic -> Consult;
 
 ! ------- Verbes de manipulation non agressive d'objets
 Verb 'tirer' 'trainer'
-        * noun                           -> Pull;
+        * noun                           -> Pull
+        * noun 'vers'/'à'/'a'/'au' noun  -> PushDir;
 
 Verb 'pousser' 'deplacer' 'bouger'
         * noun                           -> Push
@@ -511,10 +505,44 @@ Verb 'frotter' 'cirer' 'astiquer' 'balayer' 'nettoyer' 'depoussierer' 'essuyer' 
         * noun                           -> Rub;
 
 Verb 'nouer' 'attacher' 'fixer' 'connecter' 'brancher'
-        * noun                                        -> Tie
-        * noun '->'/'à'/'a'/'au'/'aux'/'avec'/'sur' noun   -> Tie;
+        * noun                                              -> Tie
+        * noun '->'/'à'/'a'/'au'/'aux'/'avec'/'sur' noun    -> Tie;
 
 
+! ------- Consultation
+Verb 'lire'
+        * noun                                              -> Examine
+        * noun 'sur' topic                                  -> Consult
+        * noun 'à'/'a' 'propos' 'de'/'du'/'des'/'d^' topic  -> Consult
+        * noun 'au' 'sujet' 'de'/'du'/'des'/'d^' topic      -> Consult
+        * noun 'à'/'a' topic                                -> Consult
+        * 'sur' topic 'dans' noun                           -> Consult
+        * 'à'/'a' 'propos' 'de'/'du'/'des'/'d^' topic       -> Consult
+        * 'au' 'sujet' 'de'/'du'/'des'/'d^' topic           -> Consult
+        * 'à'/'a' topic 'dans' noun                         -> Consult
+        * topic 'dans' noun                                 -> Consult;
+
+[ VagueConsultSub;
+    L__M(##VagueConsult, 1, noun);
+];
+
+Verb 'consulter'
+        * noun                                                        -> VagueConsult
+        * creature 'à'/'a' 'propos' 'de'/'du'/'des'/'d^' topic        -> Ask
+        * creature 'au' 'sujet' 'de'/'du'/'des'/'d^' topic            -> Ask
+        * creature 'sur' topic                                        -> Ask
+        ! Les lignes qui suivent servent à comprendre si le joueur fainéant
+        ! tape juste :
+        ! > consulter sur le ballon
+        ! (Toto)
+        ! "Toto ne sait rien sur le ballon."
+        * 'à'/'a' 'propos' 'de'/'du'/'des'/'d^' topic '->' creature   -> Ask reverse
+        * 'au' 'sujet' 'de'/'du'/'des'/'d^' topic '->' creature       -> Ask reverse
+        * 'sur' topic '->' creature                                   -> Ask reverse
+        * noun 'sur' topic                                            -> Consult
+        * noun 'à'/'a' 'propos' 'de'/'du'/'des'/'d^' topic            -> Consult
+        * noun 'au' 'sujet' 'de'/'du'/'des'/'d^' topic                -> Consult
+        * noun 'à'/'a' topic                                          -> Consult;
 
 ! ------- Verbes de communication avec des personnages
 
@@ -590,6 +618,7 @@ Verb 'questionner' 'interroger' '?//'
         * 'à'/'a' 'propos' 'de'/'du'/'des'/'d^' topic '->' creature   -> Ask reverse
         * 'au' 'sujet' 'de'/'du'/'des'/'d^' topic '->' creature       -> Ask reverse
         * 'sur' topic '->' creature                                   -> Ask reverse
+        ! ce dernier est pour la syntaxe "? sujet"
         * topic '->' creature                                         -> Ask reverse;
 
 Verb 'ordonner' 

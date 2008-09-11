@@ -933,7 +933,17 @@ Constant COMMA__TX      = ", ";
         5:  "[Rejouer les commandes achevé.]";
         #Endif; ! TARGET_
     }
-    Consult:        "Vous ne trouvez rien d'intéressant dans ", (the) x1, ".";
+!    Consult:        "Vous ne découvrez rien d'intéressant dans ", (the) x1, ".";
+    Consult:        if (x1 has animate || x1 has talkable) {
+                        if (x1 has pluralname) print (The) x1, " ne sont pas consultables de cette manière.^";
+                        else print (The) x1, " n'est pas consultable de cette manière.^";
+                    }
+                    else {
+                        print "Vous ne découvrez rien. Soit ", (the) x1;
+                        if (x1 has pluralname) print " ne sont pas consultables ";
+                        else print " n'est pas consultable ";
+                        "ainsi, soit vous tentez de consulter sur le mauvais sujet.";
+                    }
     CrierSansPrecision : "Vous criez ce qui vous passe par la tête.";
     Cut:            "Allons, ", (itorthem) x1, " couper ne mènerait pas à grand-chose.";
     Dig:            "Creuser ne mènerait à rien ici.";
@@ -1422,6 +1432,7 @@ Constant COMMA__TX      = ", ";
         3:  "Cela ne rentre pas dans la serrure.";
         4:  "Vous déverrouillez ", (the) x1, ".";
     }
+    VagueConsult :  "Précisez sur quel sujet vous souhaitez consulter ", (the) x1, ".";
     VagueDo: "Soyez plus précis."; 
     VagueGo: "Vous devez donner la direction dans laquelle aller.";
     VagueDig: "Vous devez indiquer ce que vous souhaitez creuser, et si nécessaire, avec quoi vous voulez le faire.";
