@@ -1381,7 +1381,7 @@ Constant COMMA__TX      = ", ";
     }
     Strong:         "Les vrais aventuriers n'emploient pas un tel langage.";
     Swim:           "Il n'y a pas assez d'eau pour nager dedans.";  ! swim desactive par defaut dans I7
-    Swing:          "Ce n'est une chose à laquelle il est utile de se balancer.";
+    Swing:          "Ce n'est pas une chose à laquelle il est utile de se balancer.";
     SwitchOff: switch (n) {
         1:  "Vous ne pouvez pas allumer ou éteindre cela.";
         2:  print_ret (ctheyreorthats) x1,
