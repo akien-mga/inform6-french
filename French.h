@@ -901,7 +901,10 @@ Constant COMMA__TX      = ", ";
     Attack:         "La violence n'est pas une solution ici.";
     Blow:           "Vous ne pouvez pas utilement souffler dedans.";
     Burn:           "Cet acte dangereux ne mènerait pas à grand-chose.";
-    Buy:            "Il n'y a rien à vendre, ici.";
+    Buy:            print (The) x1;
+                    if (x1 has pluralname) print " ne sont ";
+                    else print " n'est ";
+                    "pas à vendre.";
     Climb:          "Je ne pense pas que l'on puisse arriver à grand-chose de cette manière.";
     Close: switch (n) {
         1:  "Vous ne pouvez pas fermer cela.";
@@ -945,8 +948,9 @@ Constant COMMA__TX      = ", ";
                         "ainsi, soit vous tentez de consulter sur le mauvais sujet.";
                     }
     CrierSansPrecision : "Vous criez ce qui vous passe par la tête.";
-    Cut:            "Allons, ", (itorthem) x1, " couper ne mènerait pas à grand-chose.";
-    Dig:            "Creuser ne mènerait à rien ici.";
+    Cut:            "Allons, couper ", (the) x1, " ne mènerait pas à grand-chose.";
+    Dig:            if (noun==0) "Creuser ne mènerait à rien ici.";
+                    else "Creuser cela ne mènerait à rien.";
     Disrobe: switch (n) {
         1:  "Vous ne ", (itorthem) x1, " portez pas.";
         2:  "Vous enlevez ", (the) x1, ".";
@@ -961,12 +965,16 @@ Constant COMMA__TX      = ", ";
         4:  "D'accord."; ! ok
     }
     Eat: switch (n) {
-        1:  print_ret (ctheyreorthats) x1,
+        1:  print_ret (The) x1, " ", (isorare) x1,
             " non comestible",(s) x1,", selon toute évidence.";
         2:  "Vous mangez ", (the) x1, ". Pas mauvais.";
     }
     EmptyT: switch (n) {
-        1:  print_ret (The) x1, " ne peut rien contenir."; ! TODO risque de poser pb si pluriel ?
+        1:  if (x1==player) print_ret "En voilà une idée.";
+            print (The) x1;
+            if (x1 has pluralname) print " ne sont pas ";
+            else print " n'est pas ";
+            print_ret "un récipient que l'on peut vider.";
         2:  print_ret (The) x1, " ", (isorare) x1, " fermé",(es) x1,".";
         3:  print_ret (The) x1, " ", (isorare) x1, " déjà vide",(s) x1,".";
         4:  "Ceci ne viderait rien.";
@@ -1017,7 +1025,7 @@ Constant COMMA__TX      = ", ";
             if (x1 has supporter) print "sur "; else print "dans ";
             print_ret (the) x1, ".";
     }
-    Fill:           "Mais il n'y a pas d'eau à porter ici.";
+    Fill:   "Cela ne vous avancerait pas.";
     FullScore: switch(n) {   
         1:  if (deadflag) print "Le score était ";
             else          print "Le score est ";
@@ -1358,7 +1366,7 @@ Constant COMMA__TX      = ", ";
             ".";
     }
     Set:            "Non, vous ne pouvez pas ", (itorthem) x1, " régler.";
-    SetTo:          "Non, vous ne pouvez pas ", (itorthem) x1, " régler sur rien.";
+    SetTo:          "Non, vous ne pouvez ", (itorthem) x1, " régler sur rien.";
     Show: switch (n) {
         1:  "Vous n'avez pas ", (the) x1, ".";
         2:  print_ret (The) x1, " ", (isorare) x1, " peu impressionné",(es) x1,".";
@@ -1369,11 +1377,11 @@ Constant COMMA__TX      = ", ";
     Sorry:          "Pas grave.";
     Squeeze: switch (n) {
         1:  "Surveillez vos mains.";
-        2:  "Vous n'arrivez à rien ainsi.";
+        2:  "Vous n'arriverez à rien ainsi.";
     }
     Strong:         "Les vrais aventuriers n'emploient pas un tel langage.";
     Swim:           "Il n'y a pas assez d'eau pour nager dedans.";  ! swim desactive par defaut dans I7
-    Swing:          "Il n'y a rien de sensé pour se balancer ici.";
+    Swing:          "Ce n'est une chose à laquelle il est utile de se balancer.";
     SwitchOff: switch (n) {
         1:  "Vous ne pouvez pas allumer ou éteindre cela.";
         2:  print_ret (ctheyreorthats) x1,
@@ -1435,7 +1443,6 @@ Constant COMMA__TX      = ", ";
     VagueConsult :  "Précisez sur quel sujet vous souhaitez consulter ", (the) x1, ".";
     VagueDo: "Soyez plus précis."; 
     VagueGo: "Vous devez donner la direction dans laquelle aller.";
-    VagueDig: "Vous devez indiquer ce que vous souhaitez creuser, et si nécessaire, avec quoi vous voulez le faire.";
     VagueSearch: "Utilisez plutôt 'fouiller'.";
     VagueUse: "Veuillez indiquer un verbe plus précis.";
     Verify: switch (n) {

@@ -277,8 +277,39 @@ Verb 'sauter' 'bondir'
         * 'sur' noun                        -> JumpOver
         * 'dans' noun                       -> Enter;
 
-Verb 'nager' 'plonger'
-        *                                   -> Swim;
+[NagerDansSub lieu parentdirect;
+    if (noun==player) <<Enter noun>>;
+    if (IndirectlyContains(noun, player)) <<Swim>>;
+    else {
+        if (noun ofclass CompassDirection) {
+            L__M(##Miscellany, 10, 0);
+            return;
+        }
+        print "(Entrer dans ", (the) noun, " pour y nager)^";
+        ! Tenter d'entrer dans l'objet
+        ! Puis si ça a réussi nager
+        ! Attention, ça ne marchera pas tout à fait si le joueur est DANS un objet
+        ! et va nager en restant dans cet objet
+        parentdirect = parent(player); ! on garde le nom du parent direct
+        lieu = real_location; ! on garde aussi le nom du lieu
+        <Enter noun>;
+        if (parent(player)~=parentdirect||real_location~=lieu) {
+            print "^";
+            <<Swim>>;
+        }
+    }
+];
+
+Verb 'nager'
+        *                                   -> Swim
+        * 'dans' noun                       -> NagerDans;
+
+Verb 'plonger'
+        *                                   -> Swim
+        * 'par'/'au' 'dessus' noun          -> JumpOver
+        * 'par'/'au' 'dessus' 'de' noun     -> JumpOver
+        * 'sur' noun                        -> JumpOver
+        * 'dans' noun                       -> Enter;
 
 ! ------- Verbes pour ouvrir et fermer
 Verb 'fermer' 'refermer'
@@ -363,6 +394,7 @@ Verb 'habiller' 'vetir' 'deguiser' 'couvrir'
 Verb 'mettre' 'remettre'
         * 'vous' 'debout'                -> Exit ! se lever
         * held                           -> Wear
+        * held 'sur' 'vous'              -> Wear
         * multiexcept 'dans' noun        -> Insert
         * multiexcept 'sur' noun         -> PutOn;
 
@@ -416,20 +448,14 @@ Verb 'couper' 'trancher' 'elaguer'
 !! TODO : ajouter "couper noun avec held etc"
 ! Stormi : remarque : couper noun avec held n'existe pas dans la lib anglophone il me semble
 
-
-[VagueDigSub; 
-    L__M(##VagueDig, 1, 0);
-];
-
 Verb 'creuser'
-        *                                           -> VagueDig
+        *                                           -> Dig
         * noun                                      -> Dig
         * noun 'avec' held                          -> Dig;
-! Ajouter "creuser * -> Dig ? (inexistant dans la version anglaise)
 
 ! ------- Verbes d'observation
 
-Verb 'regarder' 'voir' 'r//' 'v//' 'l//'  ! l// a désactiver de I7 lorsqu'il sera integre avec NI_BUILD_COUNT au reste des verbes dans French
+Verb 'regarder' 'voir' 'r//' 'v//' 'l//'
         *                                       -> Look
         * 'autour'                              -> Look
         * 'autour' topic                        -> Look
@@ -442,12 +468,15 @@ Verb 'regarder' 'voir' 'r//' 'v//' 'l//'  ! l// a désactiver de I7 lorsqu'il ser
         * 'vers'/'à'/'a'/'au' noun=ADirection   -> Examine;
 
 Verb 'examiner' 'x//' 'decrire' 'observer'
-        * noun                           -> Examine;
+        * noun                           -> Examine
+        * 'sous' noun                    -> LookUnder
+        * 'derriere' noun                -> Search;
 
 Verb 'fouiller'
         * noun                           -> Search
         * 'dans' noun                    -> Search
-        * 'sous' noun                    -> LookUnder;
+        * 'sous' noun                    -> LookUnder
+        * 'derriere' noun                -> Search;
 
 [VagueSearchSub;
     L__M(##VagueSearch, 1, 0);
@@ -478,7 +507,6 @@ Verb 'tirer' 'trainer'
 
 Verb 'pousser' 'deplacer' 'bouger'
         * noun                           -> Push
-!        * creature                       -> Push
         * noun 'vers'/'à'/'a'/'au' noun  -> PushDir;
 
 Verb 'appuyer'
@@ -498,10 +526,11 @@ Verb 'eteindre' 'arreter'
 Verb 'allumer' 'demarrer'
         * noun                           -> Switchon;
 
-Verb 'balancer'
-        * noun                           -> Swing;
+Verb 'balancer' 'pendre' 'suspendre' 'osciller'
+    * 'vous' 'à'/'a'/'au'/'aux'/'sur' noun      -> Swing
+    * 'à'/'a'/'au'/'aux'/'sur' noun             -> Swing;
 
-Verb 'frotter' 'cirer' 'astiquer' 'balayer' 'nettoyer' 'depoussierer' 'essuyer' 'recurer'
+Verb 'frotter' 'gratter' 'cirer' 'astiquer' 'balayer' 'nettoyer' 'depoussierer' 'essuyer' 'recurer'
         * noun                           -> Rub;
 
 Verb 'nouer' 'attacher' 'fixer' 'connecter' 'brancher'
@@ -639,12 +668,9 @@ Verb 'saluer'
         * creature 'de'/'avec' 'la' 'main'          -> WaveHands;
 
 Verb 'montrer' 'pointer' 'presenter'
-!!        * creature held                             -> Show reverse ! "montre-leur le casque"
-!!        * held creature                             -> Show         ! "montre-le-leur"
-!!        * held 'a'/'au'/'aux' creature              -> Show;
-        * noun '->'/'à'/'a'/'au'/'aux' creature      -> Show
-        * creature '->'/'à'/'a'/'au'/'aux' creature  -> Show; ! ???
-
+        * held '->'/'à'/'a'/'au'/'aux' creature     -> Show
+        * creature held                             -> Show reverse; ! "montre-leur le casque"
+!        * held creature                             -> Show         ! "montre-le-leur"
 
 Verb 'reveiller' 'eveiller'
         * 'vous'                        -> Wake
@@ -658,7 +684,7 @@ Verb 'embrasser' 'etreindre'
 Verb 'chanter'
         *                               -> Sing;
 
-Verb 'souffler' !*! jouer d'un instrument ?
+Verb 'souffler' !*! jouer d'un instrument
         * 'dans' held                   -> Blow
         * held                          -> Blow;
 
@@ -701,8 +727,8 @@ Verb 'zut' 'maudit'
 ];
 
 Verb 'utiliser' 
-        *                               -> VagueUse
-        * noun                         -> VagueUse
+        *                                   -> VagueUse
+        * noun                              -> VagueUse
         * noun topic                        -> VagueUse;
 
 [ UnknownVerb word;
