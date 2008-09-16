@@ -215,7 +215,8 @@ Verb 'sortir'
         * 'de' 'là'/'la'                            -> Exit
         * 'd^' 'ici'                                -> Exit
         * multiinside 'de'/'du'/'des'/'d^' noun     -> Remove
-        * 'de'/'du'/'des'/'d^' noun                 -> Exit;
+        * 'de'/'du'/'des'/'d^' noun                 -> Exit
+        * 'par' noun                                -> Enter;
 
 Verb 'partir'
         *                                           -> VagueGo
@@ -266,8 +267,8 @@ Verb 'monter' 'remonter'
         * noun                                                      -> Enter;
 
 Verb 'grimper' 'gravir' 'escalader'
-        * noun                                    -> Climb
-        * 'à'/'a'/'au'/'aux'/'par'/'sur' noun     -> Climb;
+        * noun                                          -> Climb
+        * 'à'/'a'/'au'/'aux'/'par'/'sur'/'dans' noun    -> Climb;
 
 Verb 'sauter' 'bondir'
         *                                   -> Jump
@@ -275,7 +276,7 @@ Verb 'sauter' 'bondir'
         * 'par'/'au' 'dessus' noun          -> JumpOver
         * 'par'/'au' 'dessus' 'de' noun     -> JumpOver
         * 'sur' noun                        -> JumpOver
-        * 'dans' noun                       -> Enter;
+        * 'dans'/'par' noun                 -> Enter;
 
 [NagerDansSub lieu parentdirect;
     if (noun==player) <<Enter noun>>;
@@ -369,8 +370,9 @@ Verb 'decoller'
 
 Verb 'deposer' 'poser' 'abandonner' 'lacher'
         * multiheld                         -> Drop
+        * multiheld  'par' 'terre'          -> Drop 
         * multiexcept 'dans' noun           -> Insert
-        * multiexcept 'sur' noun            -> PutOn;
+        * multiexcept 'sur'/'au' noun       -> PutOn; ! 'au' pour "au sol".
 
 Verb 'jeter' 'lancer'
         * multiheld                         -> Drop
@@ -392,18 +394,23 @@ Verb 'habiller' 'vetir' 'deguiser' 'couvrir'
         * 'vous' 'de'/'d^'/'du'/'des'/'avec' held   -> Wear;
 
 Verb 'mettre' 'remettre'
-        * 'vous' 'debout'                -> Exit ! se lever
-        * held                           -> Wear
-        * held 'sur' 'vous'              -> Wear
-        * multiexcept 'dans' noun        -> Insert
-        * multiexcept 'sur' noun         -> PutOn;
+        * 'feu' 'à'/'a'/'au'/'aux' noun         -> Burn
+        * 'le' 'feu' 'à'/'a'/'au'/'aux' noun    -> Burn
+        * 'vous' 'debout'                       -> Exit ! se lever
+        * held                                  -> Wear
+        * held 'sur' 'vous'                     -> Wear
+        * multiheld 'par' 'terre'               -> Drop
+        * multiexcept 'dans' noun               -> Insert
+        * multiexcept 'sur'/'au' noun           -> PutOn
+        * noun 'en' 'marche'/'route'            -> SwitchOn
+        * 'en' 'marche'/'route' noun            -> SwitchOn;
 
 ! ------- Verbes agressifs ou destructeurs
 Verb 'boire' 'avaler' 'siroter'   ! avaler ne serait il pas mieux avec "manger" ?
         * noun                           -> Drink
         * 'de'/'du' noun                 -> Drink
         * 'de'/'du' 'l^' noun            -> Drink  ! ex : boire de l'eau
-        * 'à'/'a' noun                   -> Drink;
+        * 'à'/'a'/'au'/'aux' noun        -> Drink;
 
 Verb 'manger' 'devorer'
         * held                           -> Eat
@@ -417,8 +424,7 @@ Verb 'attaquer' 'casser' 'frapper' 'combattre' 'ruiner' 'briser' 'detruire'
      'tuer' 'torturer' 'cogner'
         * noun                           -> Attack
         * noun 'avec' held               -> Attack
-        * 'à'/'a'/'au'/'aux' noun                   -> Attack; ! frapper à la porte
-
+        * 'à'/'a'/'au'/'aux' noun        -> Attack; ! frapper à la porte
 
 
 Verb 'presser' 'tordre' 'comprimer' 'ecraser'
@@ -726,7 +732,7 @@ Verb 'zut' 'maudit'
     L__M(##VagueUse, 1, 0);
 ];
 
-Verb 'utiliser' 
+Verb 'utiliser' 'actionner'
         *                                   -> VagueUse
         * noun                              -> VagueUse
         * noun topic                        -> VagueUse;
