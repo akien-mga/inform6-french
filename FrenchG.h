@@ -199,9 +199,15 @@ Verb meta 'glklist'
 [ ADirection; if (noun in compass) rtrue; rfalse; ];
 
 ! ------- Verbes de déplacement du joueur
+[PasserParSub;
+    print "(passer par ", (the) noun, ")^";
+    <<Enter noun>>;
+];
+
 Verb 'entrer' 'rentrer'
         *                                           -> GoIn
-        * 'dans'/'par' noun                         -> Enter
+        * 'dans' noun                               -> Enter
+        * 'par' noun                                -> PasserPar
         * noun                                      -> Enter;
 
 Verb 'asseoir' 'allonger' 'coucher'
@@ -216,7 +222,7 @@ Verb 'sortir'
         * 'd^' 'ici'                                -> Exit
         * multiinside 'de'/'du'/'des'/'d^' noun     -> Remove
         * 'de'/'du'/'des'/'d^' noun                 -> Exit
-        * 'par' noun                                -> Enter;
+        * 'par' noun                                -> PasserPar;
 
 Verb 'partir'
         *                                           -> VagueGo
@@ -407,10 +413,10 @@ Verb 'mettre' 'remettre'
 
 ! ------- Verbes agressifs ou destructeurs
 Verb 'boire' 'avaler' 'siroter'   ! avaler ne serait il pas mieux avec "manger" ?
-        * noun                           -> Drink
-        * 'de'/'du' noun                 -> Drink
-        * 'de'/'du' 'l^' noun            -> Drink  ! ex : boire de l'eau
-        * 'à'/'a'/'au'/'aux' noun        -> Drink;
+        * noun                              -> Drink
+        * 'de'/'du' noun                    -> Drink
+        * 'de'/'du' 'l^' noun               -> Drink  ! ex : boire de l'eau
+        * 'à'/'a'/'au'/'aux'/'dans' noun    -> Drink;
 
 Verb 'manger' 'devorer'
         * held                           -> Eat
