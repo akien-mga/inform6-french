@@ -463,7 +463,9 @@ Verb 'couper' 'trancher' 'elaguer'
 Verb 'creuser'
         *                                           -> Dig
         * noun                                      -> Dig
-        * noun 'avec' held                          -> Dig;
+        * noun 'avec' held                          -> Dig
+        * 'dans' noun                               -> Dig
+        * 'dans' noun 'avec' held                   -> Dig;
 
 ! ------- Verbes d'observation
 
@@ -472,7 +474,7 @@ Verb 'regarder' 'voir' 'r//' 'v//' 'l//'
         * 'autour'                              -> Look
         * 'autour' topic                        -> Look
         * noun                                  -> Examine
-        * 'sur' noun                            -> Examine
+        * 'sur' noun                            -> Search
         * 'dans'/'atravers' noun                -> Search
         * 'sous' noun                           -> LookUnder
         * 'derriere' noun                       -> Search ! à la place de Turn
