@@ -6,9 +6,13 @@
 !   Copyright Graham Nelson 1993-2004 but freely usable (see manuals)
 !
 !   Traduit en français par Jean-Luc Pontico 2001-2004.
-!   L'adaptation à Glulx a été réalisée avec l'aide d'Eric Forgeot.
+!   Adaptation initiale à Glulx réalisée avec l'aide d'Eric Forgeot.
+!   Diverses modifications et améliorations apportées par Samuel Verschelde (Stormi) 
+!   avec l'aide et les réflexions de la communauté des joueurs et auteurs 
+!   francophones de fictions interactives.
+!
 !   Certaines fonctions sont tirées de la traduction en espagnol de Jose Luis Diaz.
-!   Diverses modifications apportées par Samuel Verschelde (Stormi)
+!
 !
 !   This file is automatically Included in your game file by "parserm".
 !   Strictly, "parserm" includes the file named in the "language__" variable,
