@@ -1019,7 +1019,7 @@ Constant COMMA__TX      = ", ";
             if (x1 has on) "allumé",(es) x1,"."; else "éteint",(es) x1,".";
     }
     Exit: switch (n) {
-        1:  "Sortir d'où ?!";
+        1:  "Vous n'êtes à l'intérieur de rien pour le moment.";
         2:  print "Vous ne pouvez pas sortir ";
             print_ret (dedudes) x1, " fermé", (es) x1, ".";
         3:  print "Vous ";

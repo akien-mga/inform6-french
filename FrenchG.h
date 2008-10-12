@@ -221,8 +221,8 @@ Verb 'sortir'
         * 'de' 'là'/'la'                            -> Exit
         * 'd^' 'ici'                                -> Exit
         * multiinside 'de'/'du'/'des'/'d^' noun     -> Remove
-        * 'de'/'du'/'des'/'d^' noun                 -> Exit
-        * 'par' noun                                -> PasserPar;
+        * 'par' noun                                -> PasserPar
+        * 'de'/'du'/'des'/'d^' noun                 -> Exit;
 
 Verb 'partir'
         *                                           -> VagueGo
