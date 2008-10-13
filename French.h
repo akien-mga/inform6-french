@@ -1149,7 +1149,7 @@ Constant COMMA__TX      = ", ";
     }
     LookUnder: switch (n) {
         1:  "Mais il fait noir !";
-        2:  "Vous ne trouvez rien d'intéressant.";
+        2:  "Votre action ne produit aucune découverte notable.";
     }
     Mild:           "Assez.";
     Miscellany: switch (n) {

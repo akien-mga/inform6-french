@@ -211,7 +211,6 @@ Verb 'entrer' 'rentrer'
         * noun                                      -> Enter;
 
 Verb 'asseoir' 'allonger' 'coucher'
-!       * 'vous'                                           -> GoIn  ! s'asseoir (ligne commentee car plus problématique qu'utile)
         * 'vous' 'sur'/'dans' noun                        -> Enter
         * 'sur'/'dans' noun                               -> Enter
         * 'vous' 'en' 'haut' 'de'/'du'/'des'/'d^' noun    -> Enter;
@@ -278,11 +277,10 @@ Verb 'grimper' 'gravir' 'escalader'
 
 Verb 'sauter' 'bondir'
         *                                   -> Jump
-        * noun                              -> JumpOver
-        * 'par'/'au' 'dessus' noun          -> JumpOver
-        * 'par'/'au' 'dessus' 'de' noun     -> JumpOver
+        * 'par'/'au' 'sur' '-lui' noun      -> JumpOver ! 'sur' '-lui' est la traduction de 'dessus' par LanguageToInformese
         * 'sur' noun                        -> JumpOver
-        * 'dans'/'par' noun                 -> Enter;
+        * 'dans'/'par' noun                 -> Enter
+        * noun                              -> JumpOver;
 
 [NagerDansSub lieu parentdirect;
     if (noun==player) <<Enter noun>>;
