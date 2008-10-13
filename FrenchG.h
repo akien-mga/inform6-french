@@ -545,9 +545,14 @@ Verb 'balancer' 'pendre' 'suspendre' 'osciller'
 Verb 'frotter' 'gratter' 'cirer' 'astiquer' 'balayer' 'nettoyer' 'depoussierer' 'essuyer' 'recurer'
         * noun                           -> Rub;
 
+[VagueTieSub;
+    L__M(##VagueTie, 1, 0);
+];
+
 Verb 'nouer' 'attacher' 'fixer' 'connecter' 'brancher'
-        * noun                                              -> Tie
-        * noun '->'/'à'/'a'/'au'/'aux'/'avec'/'sur' noun    -> Tie;
+        * noun                                                -> Tie
+        * noun '->'/'à'/'a'/'au'/'aux'/'avec'/'sur' noun      -> Tie
+        * topic                                               -> VagueTie;
 
 
 ! ------- Consultation

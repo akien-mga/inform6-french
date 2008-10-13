@@ -1085,7 +1085,7 @@ Constant COMMA__TX      = ", ";
         4:  print ".^";
     }
     Jump:           "Vous sautez sur place, vainement.";
-    JumpOver, Tie:  "Vous n'arriverez à rien comme ça.";
+    JumpOver:       "Vous n'arriverez à rien comme ça.";
     Kiss:           "Concentrez-vous sur le jeu.";
     Listen:         "Vous n'entendez rien de particulier.";
     ListMiscellany: switch (n) {
@@ -1430,7 +1430,7 @@ Constant COMMA__TX      = ", ";
         1:  "Futile.";
         2:  "Vous hésitez au moment crucial.";
     }
-!    Tie:  see JumpOver.
+    Tie:  "Vous n'arriverez à rien comme ça.";
     Touch: switch (n) {
         1:  "Tenez vos mains tranquilles !";
         2:  "Vous ne sentez rien de particulier.";
@@ -1448,6 +1448,7 @@ Constant COMMA__TX      = ", ";
     VagueDo: "Soyez plus précis."; 
     VagueGo: "Vous devez donner la direction dans laquelle aller.";
     VagueSearch: "Utilisez plutôt 'fouiller'.";
+    VagueTie:  "[Reformulez : ", (address) verb_word, " ... avec ...]";
     VagueUse: "Veuillez indiquer un verbe plus précis.";
     Verify: switch (n) {
         1: "Le fichier semble intact.";
