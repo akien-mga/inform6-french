@@ -198,6 +198,18 @@ Verb meta 'glklist'
 
 [ ADirection; if (noun in compass) rtrue; rfalse; ];
 
+[ TexteComprenantEt mot ok; 
+    ok = false;
+    do
+    {
+        mot = NextWordStopped();
+        if (mot == 'et') ok = true;
+    }
+    until (mot == -1);
+    if (ok) return GPR_PREPOSITION;
+    else return GPR_FAIL;
+];
+
 ! ------- Verbes de déplacement du joueur
 [PasserParSub;
     print "(passer par ", (the) noun, ")^";
@@ -552,7 +564,7 @@ Verb 'frotter' 'gratter' 'cirer' 'astiquer' 'balayer' 'nettoyer' 'depoussierer' 
 Verb 'nouer' 'attacher' 'fixer' 'connecter' 'brancher'
         * noun                                                -> Tie
         * noun '->'/'à'/'a'/'au'/'aux'/'avec'/'sur' noun      -> Tie
-        * topic                                               -> VagueTie;
+        * TexteComprenantEt                                   -> VagueTie;
 
 
 ! ------- Consultation
