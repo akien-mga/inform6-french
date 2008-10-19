@@ -258,11 +258,22 @@ Verb 'en' !*! du travail pour LanguageToInformese ?
 !        *                                   -> VagueDo
         * 'vous' 'aller'/'vais'             -> Exit; ! "s'en aller" "je m'en vais"
 
+[ SeLeverSub;
+    if (player in location) { ! si le joueur n'est contenu dans aucun objet autre que le lieu
+        L__M(##SeLever, 1, 0);
+    }
+    else {
+        print "(sortir ", (DeDuDes) parent(player), ")^";
+        <<Exit>>;
+    }
+];
+
 Verb 'debout'
-        *                                   -> Exit;
+        *                                   -> SeLever;
 
 Verb 'lever' 'relever' 'soulever'
-        * 'vous'                            -> Exit        ! se lever
+        * 'vous'                            -> SeLever        ! se lever
+        * 'vous' noun                       -> SeLever        ! se lever de
         * noun                              -> Take;
 
 [GoDownSub; <<Go d_obj>>;];      ! n'existait pas en anglais

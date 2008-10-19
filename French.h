@@ -1369,6 +1369,7 @@ Constant COMMA__TX      = ", ";
                 TERSE_BIT + ENGLISH_BIT + CONCEAL_BIT);
             ".";
     }
+    SeLever:        "Inutile.";
     Set:            "Non, vous ne pouvez pas ", (itorthem) x1, " régler.";
     SetTo:          "Non, vous ne pouvez ", (itorthem) x1, " régler sur rien.";
     Show: switch (n) {
