@@ -613,7 +613,7 @@ Constant LanguageContractionForms = 2;     ! French has two:
                                            !     or mute h
 !*! ajouter d'autres voyelles (à accents) ?
 [ LanguageContraction text;
-    if (text->0 == 'a' or 'e' or 'é' or 'è' or 'i' or 'o' or 'u' or 'h'
+    if (text->0 == 'a' or 'e' or 'é' or 'è' or 'ê' or 'i' or 'ï' or 'o' or 'u' or 'h'
                     or 'A' or 'E' or 'I' or 'O' or 'U' or 'H') return 1;
     return 0;
 ];
@@ -781,7 +781,7 @@ Constant NKEY__TX     = "S = suivant";
 Constant PKEY__TX     = "P = précédent";
 Constant QKEY1__TX    = "        Q = retour"; !huit espaces pour aligner à droite
 Constant QKEY2__TX    = "Q = menu précédent";
-Constant RKEY__TX     = "ENTREE = lire sujet";
+Constant RKEY__TX     = "ENTRÉE = lire sujet";
 
 Constant NKEY1__KY    = 'S';
 Constant NKEY2__KY    = 's';

@@ -404,11 +404,13 @@ Verb 'deposer' 'poser' 'abandonner' 'lacher'
 Verb 'jeter' 'lancer'
         * multiheld                         -> Drop
         * multiexcept 'dans' noun           -> Insert
-        * held 'sur' noun                   -> ThrowAt;
+        * held 'sur'/'contre' noun                   -> ThrowAt
+		;
 
 Verb 'laisser'
         * held                              -> Drop
-        * 'tomber' held                     -> Drop;
+        * 'tomber' held                     -> Drop
+		;
 
 Verb 'enlever' 'oter' 'retirer'
         * held                                      -> Disrobe
@@ -451,7 +453,7 @@ Verb 'attaquer' 'casser' 'frapper' 'combattre' 'ruiner' 'briser' 'detruire'
      'tuer' 'torturer' 'cogner'
         * noun                           -> Attack
         * noun 'avec' held               -> Attack
-        * 'à'/'a'/'au'/'aux' noun        -> Attack; ! frapper à la porte
+        * 'à'/'a'/'au'/'aux'/'contre' noun        -> Attack; ! frapper à la porte
 
 
 Verb 'presser' 'tordre' 'comprimer' 'ecraser'
@@ -542,7 +544,8 @@ Verb 'tirer' 'trainer'
 
 Verb 'pousser' 'deplacer' 'bouger'
         * noun                           -> Push
-        * noun 'vers'/'à'/'a'/'au' noun  -> PushDir;
+        * noun 'vers'/'à'/'a'/'au'/'contre' noun  -> PushDir
+		;
 
 Verb 'appuyer'
         * noun                           -> Push
