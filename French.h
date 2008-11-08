@@ -116,7 +116,7 @@ Constant ALL5__WD     = 'tout';
 Constant AND1__WD     = 'et';
 Constant AND2__WD     = 'et';
 Constant AND3__WD     = 'et';
-Constant BUT1__WD     = 'mais pas';
+Constant BUT1__WD     = 'mais pas'; ! FIXME : ne fonctionne pas
 Constant BUT2__WD     = 'excepte';
 Constant BUT3__WD     = 'sauf';
 Constant ME1__WD      = 'moi';
@@ -796,7 +796,7 @@ Constant TIME__TX     = "Heure : ";
 Constant CANTGO__TX   = "Vous ne pouvez pas aller dans cette direction.";
 Constant FORMER__TX   = "votre ancien vous";
 Constant YOURSELF__TX = "vous-même";
-Constant YOU__TX        = "Vous";
+Constant YOU__TX      = "Vous";
 Constant DARKNESS__TX = "L'obscurité";
 
 Constant THOSET__TX   = "ces choses-là";

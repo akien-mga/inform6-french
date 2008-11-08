@@ -387,7 +387,8 @@ Verb 'transferer'
 Verb 'prendre' 'pr' 'ramasser' 'cueillir'
         * noun=ADirection                   -> Go!*!
         * 'vers' noun                       -> Go!*!
-        * multi                             -> Take;
+        * multi                             -> Take
+        * multiinside 'dans'/'de'/'du'/'des'/'d^' noun  -> Remove;
 
 ! Verb 'peler' 'eplucher' 'decortiquer' ! (traduction de peel)
 !        * noun                          -> Take; !* ? *!
