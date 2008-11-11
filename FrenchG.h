@@ -1393,17 +1393,26 @@ Verb 'utiliser' 'actionner'
 !
 ! [JLP : "bois de l'eau" est également rendu possible]
 !
-[ ParseNoun obj n doute continuer p;
+[ ParseNoun obj n doute continuer p dict_flags_of_noun;
 
     n=0;   ! nombre de mots reconnus pour le moment
 ! doute=0;      !*! facultatif ? 
     continuer=1;  ! continuer à regarder les mots pour voir si les suivants
                   ! se réfèrent à ce même objet
+    dict_flags_of_noun = 0;
+
     while(continuer)
     {
         p=NextWord();
         if (IsAWordIn(p, obj, name))  ! Un mot qui se réfère à l'objet
         {
+            dict_flags_of_noun = ((p->#dict_par1) & $$01110100);
+            if (dict_flags_of_noun & 4) ! si c'est un pluriel (//p)
+            {
+                parser_action = ##PluralFound; ! notifier qu'un pluriel pouvant désigner
+                                               ! plusieurs objets a été trouvé
+            }
+
             n++;                ! nous le comptabilisons
             n=n+doute;          ! nous ajoutons tous les "de" "la"...
                                 ! qui ne comptaient pas
