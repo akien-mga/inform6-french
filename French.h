@@ -1165,7 +1165,7 @@ Constant COMMA__TX      = ", ";
                 print ", obtenir le score détaillé pour cette partie (FULLSCORE)";
             if (deadflag==2 && AMUSING_PROVIDED==0)
                 print ", lire quelques suggestions amusantes (AMUSING)";
-            " ou quitter (QUITTER) ?"; !*!
+            " ou QUITTER ?"; !*!
         6:  "[Votre interpréteur ne permet pas d' ~annuler~. Désolé !]";
         #Ifdef TARGET_ZCODE;
         7:  "~Annuler~ a échoué.  [Tous les interpréteurs ne le permettent pas.]";
