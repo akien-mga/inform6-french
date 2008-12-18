@@ -1081,7 +1081,7 @@ Constant COMMA__TX      = ", ";
     Inv: switch (n) {
         1:  "Vous n'avez rien.";
         2:  print "Vous avez";
-        3:  print ":^";
+        3:  print " :^";
         4:  print ".^";
     }
     Jump:           "Vous sautez sur place, vainement.";
