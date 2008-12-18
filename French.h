@@ -1231,7 +1231,7 @@ Constant COMMA__TX      = ", ";
         54: "[Commentaire enregistré.]";
         55: "[Commentaire NON enregistré.]";
         56: print ".^";
-        57: print "?^";
+        57: print " ?^"; ! espace rajouté pour éviter l'espace manquant.
     }
     Yes, No:        "Mmmh ?";
     NotifyOff:      "Notification du score désactivée.";
