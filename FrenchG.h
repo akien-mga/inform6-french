@@ -384,7 +384,7 @@ Verb 'vider'
 Verb 'transferer'
         * noun 'vers'/'à'/'a' noun          -> Transfer;
 
-Verb 'prendre' 'pr' 'ramasser' 'cueillir'
+Verb 'prendre' 'pr' 'ramasser' 'cueillir' 'attraper'
         * noun=ADirection                   -> Go!*!
         * 'vers' noun                       -> Go!*!
         * multi                             -> Take
