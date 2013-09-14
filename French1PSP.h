@@ -1293,8 +1293,8 @@ Constant COMMA__TX      = ", ";
     }
     Remove: switch (n) {
         1:  if (x1 has pluralname)
-                print "Ils étaient malheureusement fermés."; !*! elle(s)
-            else print "Il était malheureusement fermé."; !*!
+                "Ils étaient malheureusement fermés."; !*! elle(s)
+            else "Il était malheureusement fermé."; !*!
         2:  if (x1 has pluralname)
                 print "Mais ils n'étaient pas";
             else print "Mais ce n'était pas";
