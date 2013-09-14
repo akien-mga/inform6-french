@@ -26,7 +26,7 @@ System_file;
 
 [VersionFRSub;
     <version>;
-     print "^Compilé avec la version ", (string) LibReleaseFR, " de la bibliothèque francophone.^" ;
+     "^Compilé avec la version ", (string) LibReleaseFR, " de la bibliothèque francophone." ;
 ];
 
 Verb meta 'brief' 'normal'
@@ -94,7 +94,7 @@ Verb meta 'version'
         *                                   -> Version
         * 'francaise'/'fr'/'vf'             -> VersionFR;
 
-Verb 'vf'
+Verb meta 'vf'
         *                                   -> VersionFR;
 
 
