@@ -393,7 +393,7 @@ global enleveaccents=1;
              buffer->(at+5) = 'u';
              buffer->(at+6) = 'i';
              Tokenise__(buffer,parse);
-             i = 0; continue;
+             i = -1; continue; ! on reprend la passe au début de la phrase
          }
          if (word == 'dessous')
          {   LTI_Insert(at, ' '); ! remplace
@@ -406,7 +406,7 @@ global enleveaccents=1;
              buffer->(at+6) = 'u';
              buffer->(at+7) = 'i';
              Tokenise__(buffer,parse);
-             i = 0; continue;
+             i = -1; continue; ! on reprend la passe au début de la phrase
          }
 !*! pas forcément une bonne idée car "dedans" est aussi une direction !*! mais "mets-le dedans" ?
 !         if (word == 'dedans') !*! dehors ?
@@ -421,7 +421,7 @@ global enleveaccents=1;
 !             buffer->(at+6) = 'u';
 !             buffer->(at+7) = 'y';
 !             Tokenise__(buffer,parse);
-!             i = 0; continue;
+!             i = -1; continue; ! on reprend la passe au début de la phrase
 !         }
 
          ! "nord-est" ou "nord est" devient "nordest"
@@ -433,7 +433,7 @@ global enleveaccents=1;
              buffer->(at+3) = 'r';
              buffer->(at+4) = 'd';
              Tokenise__(buffer,parse);
-             i = 0; continue;
+             i = -1; continue; ! on reprend la passe au début de la phrase
          }
          ! "sud-est" ou "sud est" devient "sudest"
          if ( (word=='sud-est'or'sud-ouest') || ((word=='sud')&&(wordsuiv=='est'or'ouest')) )
@@ -443,7 +443,7 @@ global enleveaccents=1;
              buffer->(at+2) = 'u';
              buffer->(at+3) = 'd';
              Tokenise__(buffer,parse);
-             i = 0; continue;
+             i = -1; continue; ! on reprend la passe au début de la phrase
          }
      }
 
