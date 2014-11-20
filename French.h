@@ -7,8 +7,8 @@
 !
 !   Traduit en français par Jean-Luc Pontico 2001-2004.
 !   Adaptation initiale à Glulx réalisée avec l'aide d'Eric Forgeot.
-!   Diverses modifications et améliorations apportées par Samuel Verschelde (Stormi) 
-!   avec l'aide et les réflexions de la communauté des joueurs et auteurs 
+!   Diverses modifications et améliorations apportées par Samuel Verschelde (Stormi)
+!   avec l'aide et les réflexions de la communauté des joueurs et auteurs
 !   francophones de fictions interactives.
 !
 !   Certaines fonctions sont tirées de la traduction en espagnol de Jose Luis Diaz.
@@ -24,7 +24,7 @@
 ! Version 2.3 du 05/09/2008
 Constant LibReleaseFR      "2.4dev";
 Message		"[Compilé avec la version 2.4dev de la bibliothèque francophone.]";
-! note : "message" ne permet pas d'inclure une constante, cela doit être d'un seul bloc 
+! note : "message" ne permet pas d'inclure une constante, cela doit être d'un seul bloc
 ! sinon cela ne compile pas. C'est dommage cela aurait été pratique...
 
 System_file;
@@ -167,7 +167,7 @@ Array LanguagePronouns table
 !      'les'   $$000110000110                    NULL
 !      'lui'   $$110000110000                    NULL ! dans "donne-lui", "lui" est m ou f
 !      'leur'  $$000110000110                    NULL
-      
+
       ! Disjunctive pronouns
 !*! ! féminin accepté pour 'luy' (mot bidon) pour traiter les cas 'dedans', 'dessus', 'l^'... (genre inconnu)
 !   en fait, '-lui' pourrait jouer le même rôle
@@ -200,11 +200,11 @@ Array LanguageDescriptors table
       'ses'    $$000110000110    POSSESS_PK      '-lui'
       'leur'   $$110000110000    POSSESS_PK      '-les'
       'leurs'  $$000110000110    POSSESS_PK      '-les'
-!      'son'    $$100000100000    POSSESS_PK      'lui' 
+!      'son'    $$100000100000    POSSESS_PK      'lui'
 !      'sa'     $$010000010000    POSSESS_PK      'lui'
 !      'ses'    $$000110000110    POSSESS_PK      'lui'
 !      'leur'   $$110000110000    POSSESS_PK      'les'
-!      'leurs'  $$000110000110    POSSESS_PK      'les' 
+!      'leurs'  $$000110000110    POSSESS_PK      'les'
 
       'le'     $$100000100000    DEFART_PK       NULL
       'la'     $$010000010000    DEFART_PK       NULL
@@ -236,7 +236,7 @@ Array LanguageNumbers table
 ! with name 'trousseau' 'cles'
 !
 ! Si le joueur demande : "examiner cles", le mot est compris directement.
-! S'il demande : "examiner clés" le mot n'est pas compris, ce qui déclenche 
+! S'il demande : "examiner clés" le mot n'est pas compris, ce qui déclenche
 ! la suppression des accents et une nouvelle analyse.
 
 ! L'appel de cette fonction peut être désactivé avec la commande de
@@ -447,7 +447,7 @@ global enleveaccents=1;
          }
      }
 
-    !  insertion d'un espace avant chaque tiret et après chaque apostrophe 
+    !  insertion d'un espace avant chaque tiret et après chaque apostrophe
     for (i=WORDSIZE:i<WORDSIZE+NbChars():i++) {
         if (buffer->i == '-') LTI_Insert(i++, ' ');
         if (buffer->i == ''') LTI_Insert(++i, ' '); ! ''' !*! autre notation ? '\'' par exemple ?
@@ -458,7 +458,7 @@ global enleveaccents=1;
     ! Par exemple, "je vais au nord" devient "vais au nord".
     if (Mot(0) == 'je' or 'j^') {
         EcraseMot(0);
-        Tokenise__(buffer,parse); 
+        Tokenise__(buffer,parse);
     }
 
     !*! ce qui suit ne tient pas bien compte des commandes s'adressant à quelqu'un ("machin, fais ceci")
@@ -629,7 +629,7 @@ Array LanguageArticles -->
 
                    !             a           i
                    !             s     p     s     p
-                   !             m f n m f n m f n m f n                 
+                   !             m f n m f n m f n m f n
 
 Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
 
@@ -656,9 +656,9 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
     if (n==0)    { print "zéro"; rfalse; }
     if (n<0)     { print "moins "; n=-n; }
     if (n>=1000) { print (LanguageNumber) n/1000, " mille"; n=n%1000; f=1; }
-    if (n>=100)  { 
+    if (n>=100)  {
         if (f==1) print ", ";
-        print (LanguageNumber) n/100, " cent"; n=n%100; f=1; 
+        print (LanguageNumber) n/100, " cent"; n=n%100; f=1;
     }
 
     if (n==0) rfalse;
@@ -734,7 +734,7 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
 ];
 
 ! ----------------------------------------------------------------------------
-!  LanguageVerbIsDebugging is called by SearchScope.  It should return true 
+!  LanguageVerbIsDebugging is called by SearchScope.  It should return true
 !  if word w is a debugging verb which needs all objects to be in scope.
 ! ----------------------------------------------------------------------------
 
@@ -762,7 +762,7 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
 ];
 
 ! ----------------------------------------------------------------------------
-!  LanguageVerbMayBeName is called by NounDomain when dealing with the 
+!  LanguageVerbMayBeName is called by NounDomain when dealing with the
 !  player's reply to a "Which do you mean, the short stick or the long
 !  stick?" prompt from the parser. If the reply is another verb (for example,
 !  LOOK) then then previous ambiguous command is discarded /unless/
@@ -804,7 +804,7 @@ Constant THAT__TX     = "cela";
 Constant OR__TX       = " ou ";
 Constant NOTHING__TX  = "rien";
 Constant IS__TX       = "est ";   ! utilisés par WriteListFrom
-Constant ARE__TX      = "sont ";  ! 
+Constant ARE__TX      = "sont ";  !
 Constant IS2__TX      = "";  ! dans/sur lequel " est"  => contenant/supportant
 Constant ARE2__TX     = "";  ! dans/sur lequel " sont" => contenant/supportant
 Constant AND__TX      = " et ";
@@ -997,10 +997,10 @@ Constant COMMA__TX      = ", ";
                 default:  "y aller."; ! plutôt que "y entrer." !*!
             }
         3:  "Vous ne pouvez entrer dans ", (the) x1, " fermé",(es) x1,".";
-        4:  print "Vous ne pouvez pas ";                  
+        4:  print "Vous ne pouvez pas ";
             if (x1 has supporter) print "y monter";
                              else print "y entrer";
-            " si ce n'est pas posé."; 
+            " si ce n'est pas posé.";
                         ! sur pieds, non encastré (freestanding)
         5:  print "Vous ";
             if (x1 has supporter) print "montez sur "; else print "entrez dans ";
@@ -1030,7 +1030,7 @@ Constant COMMA__TX      = ", ";
             print_ret (the) x1, ".";
     }
     Fill:   "Cela ne vous avancerait pas.";
-    FullScore: switch(n) {   
+    FullScore: switch(n) {
         1:  if (deadflag) print "Le score était ";
             else          print "Le score est ";
             "composé comme suit :^";
@@ -1066,9 +1066,9 @@ Constant COMMA__TX      = ", ";
         1:  "Vous devez avoir en main ", (the) x1,
             " avant de pouvoir ", (itorthem) x1,
             " mettre dans autre chose.";
-        2:  if (x1 has pluralname) 
+        2:  if (x1 has pluralname)
             print_ret (The) x1, " ne peuvent pas contenir d'objet.";
-            else  
+            else
             print_ret (The) x1, " ne peut pas contenir d'objet.";
         3:  print_ret (The) x1, " ", (isorare) x1, " fermé",(es) x1,".";
         4:  "Vous avez besoin de ", (itorthem) x1, " prendre d'abord.";
@@ -1108,11 +1108,11 @@ Constant COMMA__TX      = ", ";
         17: print " (qui ", (isorare) x1, " vide",(s) x1,")";
         18: print " contenant ";
         19: print " (supportant "; ! " (sur ";
-        20: print " supportant ";  ! " sur "; 
+        20: print " supportant ";  ! " sur ";
         21: print " (contenant ";  ! " (dans ";
         22: print " contenant ";   ! " dans ";
     }
-    LMode1:         " est passé en mode description normale ; seuls les lieux 
+    LMode1:         " est passé en mode description normale ; seuls les lieux
                       visités pour la première fois sont décrits en détail.";
     LMode2:         " est passé en mode description longue ; tous les lieux,
                       même déjà visités, sont décrits en détail.";
@@ -1353,7 +1353,7 @@ Constant COMMA__TX      = ", ";
     Search: switch (n) {
         1:  "Mais il fait noir !";
         2:  "Il n'y a rien sur ", (the) x1, ".";
-        3:  print "Sur ", (the) x1, ", vous voyez "; 
+        3:  print "Sur ", (the) x1, ", vous voyez ";
             WriteListFrom(child(x1),
                 TERSE_BIT + ENGLISH_BIT + CONCEAL_BIT);
             ".";
@@ -1446,7 +1446,7 @@ Constant COMMA__TX      = ", ";
         4:  "Vous déverrouillez ", (the) x1, ".";
     }
     VagueConsult :  "Précisez sur quel sujet vous souhaitez consulter ", (the) x1, ".";
-    VagueDo: "Soyez plus précis."; 
+    VagueDo: "Soyez plus précis.";
     VagueGo: "Vous devez donner la direction dans laquelle aller.";
     VagueSearch: "Utilisez plutôt 'fouiller'.";
     VagueTie:  "[Reformulez : ", (address) verb_word, " ... avec ...]";

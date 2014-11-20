@@ -198,7 +198,7 @@ Verb meta 'glklist'
 
 [ ADirection; if (noun in compass) rtrue; rfalse; ];
 
-[ TexteComprenantEt mot ok; 
+[ TexteComprenantEt mot ok;
     ok = false;
     do
     {
@@ -356,7 +356,7 @@ Verb 'deverrouiller' 'forcer'
         * noun 'avec' held                  -> Unlock;
 
 ! ------- Verbes concernant ce que le joueur possède
-Verb 'inventaire'  'inv' 'i//' 'inventoire' 
+Verb 'inventaire'  'inv' 'i//' 'inventoire'
         *                                   -> Inv
         * 'haut'/'tall'                     -> InvTall
         * 'large'/'wide'                    -> InvWide;
@@ -398,7 +398,7 @@ Verb 'decoller'
 
 Verb 'deposer' 'poser' 'abandonner' 'lacher'
         * multiheld                         -> Drop
-        * multiheld  'par' 'terre'          -> Drop 
+        * multiheld  'par' 'terre'          -> Drop
         * multiexcept 'dans' noun           -> Insert
         * multiexcept 'sur'/'au' noun       -> PutOn; ! 'au' pour "au sol".
 
@@ -637,7 +637,7 @@ Verb 'repondre' 'dire' 'crier' 'hurler'
         *                                               -> ParlerIncorrect ! dire (d'accord mais quoi...)
         * creature                                      -> ParlerIncorrect ! dis-lui (d'accord mais quoi...)
         * 'à'/'a'/'au'/'aux' creature                   -> ParlerIncorrect ! dire à toto (d'accord mais quoi...)
-        * 'de'/'d^' topic                               -> ParlerIncorrect ! dire de partir (d'accord mais à qui...)  
+        * 'de'/'d^' topic                               -> ParlerIncorrect ! dire de partir (d'accord mais à qui...)
         * creature 'de'/'d^' topic                      -> AskTo           ! dis lui de faire ça
         * 'à'/'a'/'au'/'aux' creature 'de'/'d^' topic   -> AskTo           ! dire a toto de faire ça
         * creature topic                                -> Answer reverse  ! dis-lui bonjour
@@ -667,7 +667,7 @@ Verb 'parler' 'discuter' 'causer'
         * 'avec'/'à'/'a'/'au'/'aux' creature 'de'/'du'/'des'/'d^' topic                   -> Tell
         * 'avec'/'à'/'a'/'au'/'aux' creature 'au' 'sujet' 'de'/'du'/'des'/'d^' topic      -> Tell
         * 'avec'/'à'/'a'/'au'/'aux' creature 'a'/'à' 'propos' 'de'/'du'/'des'/'d^' topic  -> Tell
-        * 'de'/'du'/'des'/'d^' topic 'avec'/'à'/'a'/'au'/'aux' creature                   -> Tell reverse 
+        * 'de'/'du'/'des'/'d^' topic 'avec'/'à'/'a'/'au'/'aux' creature                   -> Tell reverse
         * 'au' 'sujet' 'de'/'du'/'des'/'d^' topic 'avec'/'à'/'a'/'au'/'aux' creature      -> Tell reverse
         * 'a'/'à' 'propos' 'de'/'du'/'des'/'d^' topic 'avec'/'à'/'a'/'au'/'aux' creature  -> Tell reverse
         * creature                                                                        -> ParlerSansPrecision ! "parle-lui"
@@ -684,9 +684,9 @@ Verb 'questionner' 'interroger' '?//'
         * creature 'au' 'sujet' 'de'/'du'/'des'/'d^' topic            -> Ask
         * creature 'sur' topic                                        -> Ask
         ! Les lignes qui suivent servent à comprendre si le joueur fainéant
-        ! tape juste : 
+        ! tape juste :
         ! > interroger sur le ballon
-        ! (Toto) 
+        ! (Toto)
         ! "Toto ne sait rien sur le ballon."
         * 'à'/'a' 'propos' 'de'/'du'/'des'/'d^' topic '->' creature   -> Ask reverse
         * 'au' 'sujet' 'de'/'du'/'des'/'d^' topic '->' creature       -> Ask reverse
@@ -694,7 +694,7 @@ Verb 'questionner' 'interroger' '?//'
         ! ce dernier est pour la syntaxe "? sujet"
         * topic '->' creature                                         -> Ask reverse;
 
-Verb 'ordonner' 
+Verb 'ordonner'
         * creature 'de'/'d^' topic                          -> AskTo ! "ordonne-lui"
         * 'à'/'a'/'au'/'aux' creature 'de'/'d^' topic       -> AskTo;
 
@@ -735,7 +735,7 @@ Verb 'souffler' !*! jouer d'un instrument
 
 ! ------- Verbes "immobiles"
 
-Verb 'attendre' 'a//' 'z//' !*! patienter  
+Verb 'attendre' 'a//' 'z//' !*! patienter
         *                               -> Wait;
 
 Verb 'prier'
@@ -749,7 +749,7 @@ Verb 'dormir' 'somnoler'
 
 
 ! ------- Verbes de communication avec le narrateur
-Verb 'oui' 
+Verb 'oui'
         *                               -> Yes;
 
 Verb 'non'
@@ -758,7 +758,7 @@ Verb 'non'
 Verb 'desole'
         *                               -> Sorry;
 
-Verb 'merde' 
+Verb 'merde'
         *                               -> Strong
         * topic                         -> Strong;
 
@@ -766,7 +766,7 @@ Verb 'zut' 'maudit'
         *                               -> Mild
         * topic                         -> Mild;
 
-[VagueUseSub; 
+[VagueUseSub;
     L__M(##VagueUse, 1, 0);
 ];
 
@@ -1396,7 +1396,7 @@ Verb 'utiliser' 'actionner'
 [ ParseNoun obj n doute continuer p dict_flags_of_noun;
 
     n=0;   ! nombre de mots reconnus pour le moment
-! doute=0;      !*! facultatif ? 
+! doute=0;      !*! facultatif ?
     continuer=1;  ! continuer à regarder les mots pour voir si les suivants
                   ! se réfèrent à ce même objet
     dict_flags_of_noun = 0;
