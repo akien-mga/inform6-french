@@ -873,9 +873,22 @@ Constant COMMA__TX      = ", ";
     if (obj has female) { print "la"; return; }
     else { print "le"; return; }
 ];
+
 [ IsorAre obj;
-    if (obj has pluralname || obj == player) print "sont"; else print "est";
+    if (obj has pluralname) print "sont";
+    else {
+         if (obj == player) print "êtes";
+         else print "est";
+    }
 ];
+[ IsorAreNot obj;
+    if (obj has pluralname) print "ne sont pas";
+    else {
+         if (obj == player) print "n'êtes pas";
+         else print "n'est pas";
+    }
+];
+
 [ CThatorThose obj;   ! il/ils/elle/elles semble(nt) ouvert(e) (nominatif)
     ! if (obj == player) { print "Vous"; return; } !*! utile ?
     if (obj has pluralname) {
@@ -944,10 +957,6 @@ Constant COMMA__TX      = ", ";
 [ nt obj; ! ex: semble(nt)
     if (obj has pluralname) print "nt";
     !*! attention :  paraît, paraissent (etc)
-];
-[ IsorAreNot obj;
-    if (obj has pluralname || obj == player) print "ne sont pas";
-                                        else print "n'est pas";
 ];
 
 [ LanguageLM n x1;
@@ -1236,7 +1245,7 @@ Constant COMMA__TX      = ", ";
         17: "Il fait noir, et vous ne pouvez rien voir.";
         18: print "vous-même";
         19: "Votre apparence est aussi agréable qu'à l'accoutumée.";
-        20: "Pour répéter une commande comme ~grenouille, saute~, dîtes seulement
+        20: "Pour répéter une commande comme ~grenouille, saute~, dites seulement
             ~encore~, et pas ~grenouille, encore~.";
         21: "Vous pouvez difficilement répéter cela.";
         22: "Vous ne pouvez pas commencer par une virgule.";
