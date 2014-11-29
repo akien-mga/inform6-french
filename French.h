@@ -10,6 +10,7 @@
 !   Diverses modifications et améliorations apportées par Samuel Verschelde (Stormi)
 !   avec l'aide et les réflexions de la communauté des joueurs et auteurs
 !   francophones de fictions interactives.
+!   Fork par Hugo Labrande (2014), apportant diverses modifications et améliorations.
 !
 !   Certaines fonctions sont tirées de la traduction en espagnol de Jose Luis Diaz.
 !
@@ -22,8 +23,8 @@
 ! ==============================================================================
 
 ! Version 2.3 du 05/09/2008
-Constant LibReleaseFR      "2.4dev";
-Message		"[Compilé avec la version 2.4dev de la bibliothèque francophone.]";
+Constant LibReleaseFR      "2.4devHL";
+Message		"[Compilé avec le fork de Hugo Labrande de la version 2.4dev de la bibliothèque francophone.]";
 ! note : "message" ne permet pas d'inclure une constante, cela doit être d'un seul bloc
 ! sinon cela ne compile pas. C'est dommage cela aurait été pratique...
 
@@ -951,7 +952,7 @@ Constant COMMA__TX      = ", ";
                         else print " n'est pas consultable ";
                         "ainsi, soit vous tentez de consulter sur le mauvais sujet.";
                     }
-    CrierSansPrecision : "Vous criez ce qui vous passe par la tête.";
+    CrierSansPrecision : ""Cela ne mènerait à rien.";
     Cut:            "Allons, couper ", (the) x1, " ne mènerait pas à grand-chose.";
     Dig:            if (noun==0) "Creuser ne mènerait à rien ici.";
                     else "Creuser cela ne mènerait à rien.";
@@ -1041,8 +1042,7 @@ Constant COMMA__TX      = ", ";
     GetOff:         "Mais vous n'êtes pas sur ", (the) x1, " en ce moment.";
     Give: switch (n) {
         1:  "Vous n'avez pas en main ", (the) x1, ".";
-        2:  "Vous jonglez avec ", (the) x1,
-            " pendant un moment, mais vous n'arrivez pas à grand-chose.";
+        2:  "Vous vous remerciez pour ce cadeau.";
         3:  print (The) x1;
             if (x1 has pluralname)
                 print " n'ont pas l'air intéressé";
@@ -1084,10 +1084,12 @@ Constant COMMA__TX      = ", ";
         3:  print " :^";
         4:  print ".^";
     }
-    Jump:           "Vous sautez sur place, vainement.";
+    Jump:           "Sauter sur place ne vous avancerait en rien.";
     JumpOver:       "Vous n'arriverez à rien comme ça.";
     Kiss:           "Concentrez-vous sur le jeu.";
-    Listen:         "Vous n'entendez rien de particulier.";
+    Listen:
+        if (x1 == 0) "Vous n'entendez rien de particulier.";
+        else print_ret (The) x1, "ne semble", (nt) x1, " pas produire de son particulier.";
     ListMiscellany: switch (n) {
          1: print " (allumé",(es) x1,")";
          2: print " (qui ", (isorare) x1, " fermé",(es) x1,")";
@@ -1374,11 +1376,17 @@ Constant COMMA__TX      = ", ";
     SetTo:          "Non, vous ne pouvez ", (itorthem) x1, " régler sur rien.";
     Show: switch (n) {
         1:  "Vous n'avez pas ", (the) x1, ".";
-        2:  print_ret (The) x1, " ", (isorare) x1, " peu impressionné",(es) x1,".";
+        2:  print (The) x1;
+            if (x1 has pluralname)
+                print " n'ont pas l'air intéressé";
+            else print " n'a pas l'air intéressé";
+            ".";
     }
-    Sing:           "Vous chantez un morceau de la première chanson qui vous vient à l'esprit.";
+    Sing:           "Vous ne chantez pas si bien que ça, alors vous n'osez pas.";
     Sleep:          "Vous n'avez pas particulièrement sommeil.";
-    Smell:          "Vous ne sentez rien de particulier.";
+    Smell:
+       if (x1 == 0) "Vous ne sentez rien de particulier.";
+       else print_ret "Aucune odeur particulière n'émane ", (dedudes) x1, ".";
     Sorry:          "Pas grave.";
     Squeeze: switch (n) {
         1:  "Surveillez vos mains.";
@@ -1421,12 +1429,12 @@ Constant COMMA__TX      = ", ";
             " pour faire de la place)";
     }
     Taste: if (x1 has animate) "Cela ne serait pas très convenable.";
-           else "Vous ne remarquez rien de particulier.";
+           else "Vous préférez ne pas goûter n'importe quoi. On ne sait jamais où ça a pu traîner.";
     Tell: switch (n) {
         1:  "Vous discutez avec vous-même pendant un bon moment...";
         2:  "Pas de réaction.";
     }
-    Think:          "Quelle bonne idée.";
+    Think:          "Vous réfléchissez un peu, mais aucune idée ne vous vient à l'esprit.";
     ThrowAt: switch (n) {
         1:  "Futile.";
         2:  "Vous hésitez au moment crucial.";
@@ -1434,7 +1442,7 @@ Constant COMMA__TX      = ", ";
     Tie:  "Vous n'arriverez à rien comme ça.";
     Touch: switch (n) {
         1:  "Tenez vos mains tranquilles !";
-        2:  "Vous ne sentez rien de particulier.";
+        2:  "Vous préférez ne pas mettre vos mains n'importe où.";
         3:  "Si vous pensez que ça peut aider.";
     }
 !    Turn: see Pull.
@@ -1460,11 +1468,11 @@ Constant COMMA__TX      = ", ";
     WakeOther:      "Cela ne semble pas nécessaire.";
     Wave: switch (n) {
         1: "Mais vous n'avez pas cela !";
-        2: "Vous avez l'air ridicule en agitant ", (the) x1, ".";
+        2: "Vous auriez l'air ridicule en agitant ", (the) x1, ".";
     }
     WaveHands:
-        if (x1 == 0 || x1 == player) "Vous agitez vos mains devant vous.";
-        else "Vous saluez ", (the) x1, ".";
+        if (x1 == 0 || x1 == player) "Vous auriez l'air bête en agitant vos mains devant vous.";
+        else "Votre timidité prend le dessus au dernier moment.";
     Wear: switch (n) {
         1: "Vous ne pouvez pas porter cela !";
         2: "Vous n'avez pas cela !";
