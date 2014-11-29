@@ -343,7 +343,7 @@ Verb 'plonger'
 Verb 'fermer' 'refermer'
         * noun                                         -> Close
         * noun 'avec' held                             -> Lock
-        * noun 'à'/'a' 'clé'/'clef'/'cle' 'avec' held  -> Lock;
+        * noun 'à'/'a' 'clef'/'cle' 'avec' held  -> Lock;
 
 Verb 'ouvrir'
         * noun                              -> Open
