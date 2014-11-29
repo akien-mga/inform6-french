@@ -22,6 +22,56 @@
 !
 ! ==============================================================================
 
+
+
+
+!======================================
+! Quand il y a les prépositions 'a'/'au'/'aux' et 'de'/'du'/'des'/'d^', et qu'il faut
+!    compléter le motif, le parser prend toujours la première préposition pour l'affichage
+!    ce qui donne "se servir (de le passeport)"
+
+Replace PrintCommand;
+
+[ PrintCommand from i k spacing_flag variante_flag prep;
+    if (from == 0) {
+        i = verb_word;
+        if (LanguageVerb(i) == 0)
+            if (PrintVerb(i) == 0) print (address) i;
+        from++; spacing_flag = true;
+    }
+
+	variante_flag = 0;
+    for (k=from : k<pcount : k++) {
+        i = pattern-->k;
+        if (i == PATTERN_NULL) continue;
+        if (spacing_flag && variante_flag == 0) print (char) ' ';
+        if (i ==0 ) { print (string) THOSET__TX; jump TokenPrinted; }
+        if (i == 1) { print (string) THAT__TX;   jump TokenPrinted; }
+        if (i >= REPARSE_CODE) {
+			prep = No__Dword(i-REPARSE_CODE);
+            if (prep == 'de' || prep == 'a') {
+				if (prep == 'de') { variante_flag = 1;} else { variante_flag = 2;}
+				! On skippe, on affichera tout ça au tour suivant
+			}
+			else { print (address) prep; }
+		}
+        else {
+            if (i in compass && LanguageVerbLikesAdverb(verb_word))
+                LanguageDirection (i.door_dir); ! the direction name as adverb
+            else
+                if (variante_flag > 0) {
+					if (variante_flag == 1) { print (DeDuDes) i;}
+					else { print (to_the) i; }
+					variante_flag = 0;
+				}
+				else { print (the) i;}
+		}
+      .TokenPrinted;
+        spacing_flag = true;
+    }
+];
+
+
 ! Version 2.3 du 05/09/2008
 Constant LibReleaseFR      "2.4devHL";
 Message		"[Compilé avec le fork de Hugo Labrande de la version 2.4dev de la bibliothèque francophone.]";
