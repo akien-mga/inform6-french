@@ -1011,7 +1011,7 @@ Constant COMMA__TX      = ", ";
                         else print " n'est pas consultable ";
                         "ainsi, soit vous tentez de consulter sur le mauvais sujet.";
                     }
-    CrierSansPrecision : ""Cela ne mènerait à rien.";
+    CrierSansPrecision : "Cela ne mènerait à rien.";
     Cut:            "Allons, couper ", (the) x1, " ne mènerait pas à grand-chose.";
     Dig:            if (noun==0) "Creuser ne mènerait à rien ici.";
                     else "Creuser cela ne mènerait à rien.";
