@@ -1157,7 +1157,7 @@ Constant COMMA__TX      = ", ";
     Miscellany: switch (n) {
         1:  "(affichage des seize premiers)^";
         2:  "Rien à faire !";
-        3:  print " Vous êtes mort ";
+        3:  print " Vous avez perdu ";
         4:  print " Vous avez gagné ";
         5:  print "^Voulez-vous RECOMMENCER, CHARGER une partie sauvegardée";
             #IFDEF DEATH_MENTION_UNDO;
@@ -1175,7 +1175,7 @@ Constant COMMA__TX      = ", ";
         7:  "[Vous ne pouvez pas ~Annuler~ plus loin.]";
         #Endif; ! TARGET_
         8:  "Faites un choix parmi les propositions ci-dessus.";
-        9:  "^Vous êtes à présent plongé dans l'obscurité !";
+        9:  "^Vous êtes à présent dans le noir total !";
         10: "Je vous demande pardon ?";
         11: "[Vous ne pouvez pas annuler alors que rien n'a encore été fait !]";
         12: "[Impossible d'annuler deux fois de suite. Désolé !]";
@@ -1185,7 +1185,7 @@ Constant COMMA__TX      = ", ";
         16: "~Oops~ ne peut corriger qu'un seul mot.";
         17: "Il fait noir, et vous ne pouvez rien voir.";
         18: print "vous-même";
-        19: "Aussi beau que d'habitude.";
+        19: "Votre apparence est aussi agréable qu'à l'accoutumée.";
         20: "Pour répéter une commande comme ~grenouille, saute~, dîtes seulement
             ~encore~, et pas ~grenouille, encore~.";
         21: "Vous pouvez difficilement répéter cela.";
@@ -1309,7 +1309,7 @@ Constant COMMA__TX      = ", ";
     }
     Quit: switch (n) {
         1:  print "Répondez par oui ou par non, je vous prie.";
-        2:  print "Êtes-vous sûr de vouloir quitter ? (O/N) ";
+        2:  print "Voulez-vous vraiment quitter ? (O/N) ";
     }
     Remove: switch (n) {
         1:  if (x1 has pluralname)
@@ -1322,7 +1322,7 @@ Constant COMMA__TX      = ", ";
         3:  "D'accord."; ! Ok
     }
     Restart: switch (n) {
-        1: print "Êtes-vous sûr de vouloir recommencer ? (O/N) ";
+        1: print "Voulez-vous vraiment recommencer ? (O/N) ";
         2: "Raté.";
     }
     Restore: switch (n) {
@@ -1392,7 +1392,7 @@ Constant COMMA__TX      = ", ";
         1:  "Surveillez vos mains.";
         2:  "Vous n'arriverez à rien ainsi.";
     }
-    Strong:         "Les vrais aventuriers n'emploient pas un tel langage.";
+    Strong:         "Vous n'avez pas besoin de ce genre de langage pour finir l'aventure.";
     Swim:           "Il n'y a pas assez d'eau pour nager dedans.";  ! swim desactive par defaut dans I7
     Swing:          "Ce n'est pas une chose à laquelle il est utile de se balancer.";
     SwitchOff: switch (n) {
