@@ -1468,7 +1468,7 @@ Constant COMMA__TX      = ", ";
     }
     Take:    switch(n) {
         1:  "D'accord."; ! ok.
-        2:  "Vous vous possédez vous-même. Voilà une problématique relevant de la physique quantique.";
+        2:  "Vous vous possédez vous-même. Voilà une problématique sur laquelle les philosophes n'ont pas dû passer beaucoup de temps.";
         3:  "Cela ne semble pas être une bonne idée.";
         4:  print "Vous devez d'abord ";
             if (x1 has supporter) print "descendre "; else print "sortir ";
