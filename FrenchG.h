@@ -278,15 +278,21 @@ Verb 'lever' 'relever' 'soulever'
 
 [GoDownSub; <<Go d_obj>>;];      ! n'existait pas en anglais
 
+[ ExitOrEnterSub ;
+  if (player in noun) { <<Exit noun>>; }
+  else { <<Enter noun>>; }
+];
+
 Verb 'descendre'
         *                                                           -> GoDown
         * 'de'/'du'/'des' noun                                      -> Exit
         * 'a'/'au'/'en'/'vers'/'par' noun=ADirection                -> Go
         * 'a'/'au'/'en'/'vers'/'par'/'dans'/'sur'/'sous' noun       -> Enter
         * noun=ADirection                                           -> Go
-        * noun                                                      -> Enter;
+        * noun                                                      -> ExitOrEnter;
 
 [GoUpSub; <<Go u_obj>>;];      ! n'existait pas en anglais
+
 Verb 'monter' 'remonter'
         *                                                           -> GoUp
         * 'a'/'au'/'en'/'vers'/'par' noun=ADirection                -> Go
