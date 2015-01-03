@@ -8,8 +8,10 @@
 !   Traduit en français par Jean-Luc Pontico 2001-2004.
 !   Certaines fonctions sont tirées de la traduction en espagnol de Jose Luis Diaz.
 !   Diverses modifications apportées par Samuel Verschelde (Stormi)
+!   Et d'autres modifications apportées par Hugo Labrande
 !
-!   Version 2.3 du 05/09/2008
+!   Se base sur la version 2.3 du 05/09/2008
+!   Modifié le 31/12/2014
 !
 !   Dans votre fichier de jeu, incluez les trois bibliothèques dans l'ordre suivant :
 !       Include "Parser";
