@@ -231,7 +231,7 @@ Verb 'asseoir' 'allonger' 'coucher'
 
 Verb 'sortir'
         *                                           -> Exit
-        * 'de' 'là'/'la'                            -> Exit
+        * 'de' 'la'                                 -> Exit
         * 'd^' 'ici'                                -> Exit
         * multiinside 'de'/'du'/'des'/'d^' noun     -> Remove
         * 'par' noun                                -> PasserPar
@@ -240,7 +240,7 @@ Verb 'sortir'
 Verb 'partir'
         *                                           -> VagueGo
         * 'vers'/'a'/'au' noun=ADirection           -> Go
-        * 'de' 'là'/'la'                            -> Exit
+        * 'de' 'la'                                 -> Exit
         * 'd^' 'ici'                                -> Exit
         * 'de'/'du'/'des' noun                      -> Exit
         * 'dans'/'par'/'vers' noun                  -> Enter;

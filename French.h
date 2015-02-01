@@ -429,6 +429,13 @@ global enleveaccents=1;
     Tokenise__(buffer,parse);
     #Ifdef DEBUG; affiche_buffer(buffer, "[ LanguageToInformese:^* Buffer reçu : "); #Endif;
 
+    ! On enlève les accents de la commande
+    !   le seul side-effect de le faire si tôt, c'est "là sortir de" est compris comme "sortir-la de"
+    !   on peut penser qu'un joueur qui tape "là sortir de" pour "sortir de là" ne mérite pas qu'on le comprenne
+    !                  qu'un joueur qui tape "là sortir de la boîte" mérite qu'on le corrige en "la sortir de la boîte" et qu'on le comprenne
+    !   bref, c'est aussi une amélioration
+    enleve_accents();
+
     for (i=0:i<NbMots():i++) ! balayer toute la phrase
     {
          word = Mot(i);
@@ -604,7 +611,6 @@ global enleveaccents=1;
 
     ! Avertir ceux qui oublient de mettre des traits d'union entre les pronons et le verbe
     ! à l'impératif et corriger les cas les plus simples : !*! le plus possible
-    enleve_accents(); ! sinon "à" n'est pas reconnu !*! placer cette fonction encore plus en amont ?
     if ( ((NbMots()==2)&&(Mot(1)=='le'or'la'or'les'or'lui'or'leur')) || ! "parle lui" devient "parle-lui"
             ((NbMots()>=2)&&(Mot(1)=='lui')) || ! "donne lui la pomme" devient "donne-lui la pomme" (pas de confusion possible avec l'article)
             ((NbMots()>=4)&&(Mot(1)=='le'or'la'or'les'or'lui'or'leur')&&(Mot(2)=='a//'or'au'or'aux'or'de'or'du'or'des'or'dans'or'sur')) ) ! "donne le aux moutons" devient "donne-le aux moutons"
@@ -629,8 +635,6 @@ global enleveaccents=1;
     }
 
     Tokenise__(buffer,parse);
-
-    enleve_accents(); !*! déjà fait plus haut ? on ne sait jamais avec enleve_tirets() !*! rendre la suppression des accents systématique ? (dictionnaire ou pas)
 
     #Ifdef DEBUG; affiche_buffer(buffer, "* Buffer traduit en informese : "); #Endif;
 ];
