@@ -314,26 +314,31 @@ global enleveaccents=1;
                 print "|^";
             }
 #Endif;
-            for (i=at:i<at+len:i++)
-                if (buffer->i=='é') buffer->i='e'; !*! plutôt un switch ?
+            for (i=at:i<at+len:i++) {
+				switch(buffer->i) {
+					'é': buffer->i='e';
+					'á': buffer->i='a';   !*! dans certains noms espagnols, comme "Guantánamo"
 
-                else if(buffer->i=='à') buffer->i='a';
-                else if(buffer->i=='è') buffer->i='e';
-                else if(buffer->i=='ù') buffer->i='u';
+					'à': buffer->i='a';
+                	'è': buffer->i='e';
+                	'ù': buffer->i='u';
 
-                else if(buffer->i=='â') buffer->i='a';
-                else if(buffer->i=='ê') buffer->i='e';
-                else if(buffer->i=='î') buffer->i='i';
-                else if(buffer->i=='ô') buffer->i='o';
-                else if(buffer->i=='û') buffer->i='u';
+                	'â': buffer->i='a';
+                	'ê': buffer->i='e';
+                	'î': buffer->i='i';
+                	'ô': buffer->i='o';
+                	'û': buffer->i='u';
 
-                else if(buffer->i=='ä') buffer->i='a';
-                else if(buffer->i=='ë') buffer->i='e';
-                else if(buffer->i=='ï') buffer->i='i';
-                else if(buffer->i=='ö') buffer->i='o';
-                else if(buffer->i=='ü') buffer->i='u';
+                	'ä': buffer->i='a';
+                	'ë': buffer->i='e';
+                	'ï': buffer->i='i';
+                	'ö': buffer->i='o';
+                	'ü': buffer->i='u';
 
-                else if(buffer->i=='ç') buffer->i='c';
+                	'ç': buffer->i='c';
+				}
+			}
+
 
             Tokenise__(buffer,parse);
         }
