@@ -280,68 +280,79 @@ Array LanguageNumbers table
 !   Part III.   Translation
 ! ------------------------------------------------------------------------------
 
-! La fonction enleve_accents enlève les accents des mots qui n'ont pu être
-! interprétés. De cette manière, le joueur peut utiliser les accents ou non.
-! Pour cela le jeu doit définir les mots sans accent, par exemple :
-! object set_of_keys "trousseau de clés"
-! with name 'trousseau' 'cles'
-!
+! La fonction enleve_accents enlève les accents de l'input ; de cette manière,
+! le joueur peut utiliser les accents ou non. Pour cela le jeu doit définir les
+! mots sans accent, par exemple :
+!   object set_of_keys "trousseau de clés"
+!   with name 'trousseau' 'cles';
 ! Si le joueur demande : "examiner cles", le mot est compris directement.
-! S'il demande : "examiner clés" le mot n'est pas compris, ce qui déclenche
-! la suppression des accents et une nouvelle analyse.
+! S'il demande : "examiner clés", les accents sont enlevés et on retombe sur le
+! cas précédent.
 
-! L'appel de cette fonction peut être désactivé avec la commande de
-! deboguage "accents on" pour que les accents soient conservés.
+! On peut modifier ce comportement en modifiant la variable "gardeaccents" :
+!   1 = l'accent est enlevé uniquement si le mot n'est pas dans le dictionnaire
+!       (attention: "clés" dans un name et "cles" dans 10 autres fera un bug sur les 10 autres)
+!       Commande de déboguage : accents on
+!   2 = les accents ne sont jamais enlevés
+!       (pas compatible avec la bibliothèque, puisque les verbes n'ont pas d'accents)
+!       Commande de déboguage : accents strict
 
-global enleveaccents=1;
+global gardeaccents=0;
+
+[ convertir_lettre i ;
+	switch(buffer->i) {
+			'é': buffer->i='e';
+			'á': buffer->i='a';   !*! dans certains noms espagnols, comme "Guantánamo"
+
+			'à': buffer->i='a';
+           	'è': buffer->i='e';
+           	'ù': buffer->i='u';
+
+           	'â': buffer->i='a';
+           	'ê': buffer->i='e';
+           	'î': buffer->i='i';
+           	'ô': buffer->i='o';
+           	'û': buffer->i='u';
+
+           	'ä': buffer->i='a';
+           	'ë': buffer->i='e';
+           	'ï': buffer->i='i';
+           	'ö': buffer->i='o';
+           	'ü': buffer->i='u';
+
+            'ç': buffer->i='c';
+		}
+];
 
 [ enleve_accents x i word at len;
 
     #Ifdef DEBUG; affiche_buffer(buffer, "  [ enleve_accents :^  - Buffer reçu : "); #Endif;
 
-    for (x=0:x<NbMots():x++) ! pour chaque mot
-    {
-        word=Mot(x);
-        at=PositionMot(x);
-        len=LongueurMot(x);
-        if (word==0) ! non compris
-        {
-#Ifdef DEBUG;
-            if (parser_trace>=7)
-            {
-                print "    NON COMPRIS : |";
-                for (i=at:i<at+len:i++) print (char) buffer->i;
-                print "|^";
-            }
-#Endif;
-            for (i=at:i<at+len:i++) {
-				switch(buffer->i) {
-					'é': buffer->i='e';
-					'á': buffer->i='a';   !*! dans certains noms espagnols, comme "Guantánamo"
+    if (gardeaccents ~= 2) {
 
-					'à': buffer->i='a';
-                	'è': buffer->i='e';
-                	'ù': buffer->i='u';
-
-                	'â': buffer->i='a';
-                	'ê': buffer->i='e';
-                	'î': buffer->i='i';
-                	'ô': buffer->i='o';
-                	'û': buffer->i='u';
-
-                	'ä': buffer->i='a';
-                	'ë': buffer->i='e';
-                	'ï': buffer->i='i';
-                	'ö': buffer->i='o';
-                	'ü': buffer->i='u';
-
-                	'ç': buffer->i='c';
+		for (x=0:x<NbMots():x++) ! pour chaque mot
+		{
+			word=Mot(x);
+			at=PositionMot(x);
+			len=LongueurMot(x);
+			if ( gardeaccents == 0 || (gardeaccents == 1 && word==0) )
+			{
+	#Ifdef DEBUG;
+				if (parser_trace>=7 && gardeaccents == 1)
+				{
+					print "    NON COMPRIS : |";
+					for (i=at:i<at+len:i++) print (char) buffer->i;
+					print "|^";
 				}
+	#Endif;
+				for (i=at:i<at+len:i++)
+				{	convertir_lettre(i);
+				}
+
+
+				Tokenise__(buffer,parse);
 			}
-
-
-            Tokenise__(buffer,parse);
-        }
+		}
     }
 
     #Ifdef DEBUG; affiche_buffer(buffer, "  - Buffer sans accents : "); #Endif;

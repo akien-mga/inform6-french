@@ -1,0 +1,41 @@
+Liste des modifications apportées à la bibliothèque francophone :
+
+
+
+Changements dans le code :
+
+    - changement de la façon dont les accents sont pris en compte : désormais on enlève tous les accents par défaut, i.e. si la variable gardeaccents est à 0.
+      Si vous voulez absolument que le joueur tape tous les accents (mauvaise idée en termes d'utilisabilité), mettez-la à 2, mais la bibliothèque n'est pas totalement compatible avec ça de toute façon ; si vous voulez que les accents ne soient enlevés que si le mot n'est pas reconnu (l'ancien comportement), mettez-la à 1. La dernière solution n'est pas franchement satisfaisante, et à vos risques et périls : si vous écrivez "telephone" partout sauf dans un seul name par erreur, téléphone ne sera pas reconnu pour la majorité des objets ; de même si vous écrivez 'à' par erreur dans un name (ce qui casse aussi "parler à" et tous les trucs dans le même genre).
+       La bibli a été corrigée et n'a aucun mot ('clé', 'là' et 'à') avec accent dans la grammaire ; c'est le comportement voulu, vu que aucun des verbes n'a d'accents ("déverrouiller", "goûter", "écouter", etc.)
+
+
+
+
+Correction de bugs :
+
+    - Correction d'un bug qui écrit des actions implicites comme "(de le passeport)". Ce fix n'est pas forcément satisfaisant, parce qu'il duplique du code de PrintCommand (si jamais ce code est modifié, par exemple si un bug est corrigé, il faudra modifier ce code à la main), mais bon, ça marche.
+    - IsOrAre et IsOrAreNot ont été mal traduits (en anglais, pluriel ou player c'est pareil, c'est "are", mais pas en français)
+
+
+    - Descendre noun correspondait à Enter ; "descendre du noun" est Exit, "descendre dans/vers/au noun" est Enter (choix critiquable mais bon). Le plus gros problème c'est que "descendre noun" renvoie "mais vous êtes déjà sur noun", ce qui n'est vraiment pas ce qu'on veut. Désormais, "descendre noun" correspond à ExitOrEnter, qui Exit si on est sur le nom, et Enter sinon.
+      
+Mais peut-être aurait-il fallu utiliser IndirectlyContains ? 
+    - Le "á" de "Guantánamo" n'était pas converti en "a"
+    - "accents on" et "accents off" ne marchaient pas ; désormais c'est "accents strict", "accents on" et "accents off"
+
+
+
+
+
+Changements dans les messages :
+
+    - CrierSansPrecision, Donner à vous-même, Sauter, Chanter, Goûter, Toucher, Agiter, Saluer : une action était faite automatiquement, ce qui n'est pas forcément cohérent en fonction de la situation. Plutôt que de laisser à l'auteur le plaisir de se poser ces questions  (ou plutôt d'oublier de se les poser et de laisser des bugs passer), on change les réponses.
+
+    - Ecouter et Sentir : écouter (général) ne devrait pas donner la même réponse que écouter objet ; en particulier, "vous n'entendez rien de particulier" quand on écoute une table dans une discothèque, c'est pas la bonne réponse.
+
+    - Montrer : "not impressed" est un intraduisible
+
+    - Penser : réponse trop sarcastique, enfin je trouve
+    - Take, 2: "physique quantique" si je veux faire un jeu qui se passe au Moyen-Age c'est un anachronisme (alors certes, on brise le 4ème mur à ce moment-là donc on pourrait dire que ça compte pas ; mais y'a moyen de faire la même chose sans anachronisme alors on change).
+    - Neutralisation du genre de certaines réponses par défaut. La seule dont je ne suis pas vraiment fier, c'est l'alternative à "aussi beau que d'habitude" ; j'ai pensé à "aussi moche que d'habitude", qui est rigolote, et à "votre physique est aussi agréable que d'habitude".
+    - typo dans Miscellany 20

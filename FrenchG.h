@@ -115,18 +115,22 @@ Verb meta 'places' 'endroits'
 
 #Ifdef DEBUG;
 
+[ AccentsStrictSub;
+   gardeaccents=2;
+   "Les accents ne seront jamais éliminés.";
+];
 [ AccentsOnSub;
-!    enleveaccents=0;
-    "Les accents ne seront pas éliminés de chaque commande reçue. (fontion désactivée..)";
+   gardeaccents=1;
+   "Les accents seront éliminés uniquement pour les mots qui ne sont pas dans le dictionnaire.";
 ];
 [ AccentsOffSub;
-!  enleveaccents=1;
-  "Les accents seront éliminés de chaque commande reçue, mais seulement pour
-   les mots qui sinon ne seraient pas compris.(fontion désactivée..)";
+  gardeaccents=0;
+  "Les accents seront éliminés de chaque commande.";
 ];
 Verb meta 'accents'
         *                                   -> AccentsOn
         * 'on'                              -> AccentsOn
+        * 'strict'							-> AccentsStrict
         * 'off'                             -> AccentsOff;
 
 Verb meta 'actions'
