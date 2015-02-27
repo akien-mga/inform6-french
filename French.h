@@ -274,7 +274,11 @@ Array LanguageNumbers table
     'un' 1 'une' 1 'deux' 2 'trois' 3 'quatre' 4 'cinq' 5
     'six' 6 'sept' 7 'huit' 8 'neuf' 9 'dix' 10
     'onze' 11 'douze' 12 'treize' 13 'quatorze' 14 'quinze' 15
-    'seize' 16 'dix-sept' 17 'dix-huit' 18 'dix-neuf' 19 'vingt' 20;
+    'seize' 16 'dix-sept' 17 'dix-huit' 18 'dix-neuf' 19 'vingt' 20
+    'vingt et un' 21 'vingt-deux' 22 'vingt-trois' 23 'vingt-quatre' 24
+   'vingt-cinq' 25 'vingt-six' 26 'vingt-sept' 27 'vingt-huit' 28
+   'vingt-neuf' 29 'trente' 30
+;
 
 ! ------------------------------------------------------------------------------
 !   Part III.   Translation
@@ -742,16 +746,68 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
     }
 ];
 
-[ LanguageNumber n f;
-    if (n==0)    { print "zéro"; rfalse; }
-    if (n<0)     { print "moins "; n=-n; }
-    if (n>=1000) { print (LanguageNumber) n/1000, " mille"; n=n%1000; f=1; }
-    if (n>=100)  {
-        if (f==1) print ", ";
-        print (LanguageNumber) n/100, " cent"; n=n%100; f=1;
+[ LanguageNumber n s f;
+    ! L'argument "s" sert à spécifier si on n'est pas en train de construire la fin du nombre(c-à-d les 3 derniers chiffres). Si s == 1, alors on est à l'intérieur du nombre et on ne peut pas ajouter un "s" à "cent" et à "quatre-vingt".
+    if (n == 0)    { print "zéro"; rfalse; }
+    if (n < 0)     { print "moins "; n = -n; }
+    #Iftrue (WORDSIZE == 4);
+    if (n >= 1000000000)
+    {
+        LanguageNumber(n/1000000000, 1); print " ";
+        print "milliard";
+        if (n/1000000000 > 1) { print "s"; }
+        f = 1;
+        n = n%1000000000;
     }
-
-    if (n==0) rfalse;
+    if (n >= 1000000)
+    {
+        if (f == 1) { print " "; }
+        LanguageNumber(n/1000000, 1); print " ";
+        print "million";
+        if (n/1000000 > 1) { print "s"; }
+        f = 1;
+        n = n%1000000;
+    }
+    #Endif;
+    if (n >= 1000)
+    {
+        if (f == 1) { print " "; }
+        if (n/1000 ~= 1) { LanguageNumber(n/1000, 1); print " "; }
+        print "mille";
+        f = 1;
+        n = n%1000;
+    }
+    if (n >= 100)
+    {
+        if (f == 1) { print " "; }
+        if (n/100 ~= 1) { LanguageNumber(n/100); print " "; }
+        print "cent";
+        if (n%100 == 0 && n/100 > 1 && s == 0) {print "s"; }
+        f = 1;
+        n = n%100;
+    }
+    if (n >= 20)
+    {
+        if (f == 1) { print " "; }
+        switch(n/10)
+        {
+        2: print "vingt";
+        3: print "trente";
+        4: print "quarante";
+        5: print "cinquante";
+        6: print "soixante";
+        7: print "soixante";
+             if (n == 71) { print " et onze"; return; }
+        8: print "quatre-vingt"; if (n == 80 && s == 0) { print "s"; } if (n == 81) { print "-un"; return; }
+        9: print "quatre-vingt";
+        }
+        if (n%10 == 1) { print " et "; }
+        if (n%10 > 1) { print "-"; }
+        n = n%10;
+        f=0;
+    }
+    if (f == 1) { print " "; }
+! ceci ne marche pas :    print (string) LanguageNumbers->(n-1); return;
     switch(n)
     {
         1:  print "un";
@@ -773,32 +829,9 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
         17: print "dix-sept";
         18: print "dix-huit";
         19: print "dix-neuf";
-        20 to 99:
-            switch(n/10)
-            {
-                2:  print "vingt";
-                    if (n%10 == 1) {print " et un"; return; }
-                3:  print "trente";
-                    if (n%10 == 1) {print " et un"; return; }
-                4:  print "quarante";
-                    if (n%10 == 1) {print " et un"; return; }
-                5:  print "cinquante";
-                    if (n%10 == 1) {print " et un"; return; }
-                6:  print "soixante";
-                    if (n%10 == 1) {print " et un"; return; }
-                7:  print "soixante";
-                    if (n%10 == 1) {print " et onze"; return; } !*!
-                    print "-"; LanguageNumber(10 + n%10); return;
-                8:  if (n%10 == 0) {print "quatre vingts"; return; }
-                    print "quatre-vingt";
-                9:  print "quatre-vingt-"; LanguageNumber(10+ n%10); return;
-            }
-            if (n%10 ~= 0)
-            {
-                print "-"; LanguageNumber(n%10);
-            }
     }
 ];
+
 
 [ LanguageTimeOfDay hours mins;
     print hours/10, hours%10, "h", mins/10, mins%10;
