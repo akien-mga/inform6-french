@@ -4,8 +4,8 @@ Liste des modifications apportées à la bibliothèque francophone :
 
 Changements dans le code :
 
-    - changement de la façon dont les accents sont pris en compte : désormais on enlève tous les accents par défaut, i.e. si la variable gardeaccents est à 0.
-      Si vous voulez absolument que le joueur tape tous les accents (mauvaise idée en termes d'utilisabilité), mettez-la à 2, mais la bibliothèque n'est pas totalement compatible avec ça de toute façon ; si vous voulez que les accents ne soient enlevés que si le mot n'est pas reconnu (l'ancien comportement), mettez-la à 1. La dernière solution n'est pas franchement satisfaisante, et à vos risques et périls : si vous écrivez "telephone" partout sauf dans un seul name par erreur, téléphone ne sera pas reconnu pour la majorité des objets ; de même si vous écrivez 'à' par erreur dans un name (ce qui casse aussi "parler à" et tous les trucs dans le même genre).
+    - changement de la façon dont les accents sont pris en compte : désormais on enlève tous les accents par défaut, i.e. si la variable gardeaccents est à 0. Les name avec des accents créent un bug sur l'objet. Le joueur n'est plus obligé de taper des mots avec accents : c'est mieux pour les anglophones, les joueurs sur smartphones, et ça évite de rejeter toute une commande parce qu'il manque un accent.
+      Si vous voulez absolument que le joueur tape tous les accents (mauvaise idée en termes d'utilisabilité), mettez gardeaccents à 2, mais la bibliothèque n'est pas totalement compatible avec ça de toute façon ; si vous voulez que les accents ne soient enlevés que si le mot n'est pas reconnu (l'ancien comportement), mettez-la à 1. La dernière solution n'est pas franchement satisfaisante, et à vos risques et périls : si vous écrivez "cles" 10 fois et "clés" une fois, ça crée 10 bugs sur les objets que vous n'avez pas modifié. De même si vous écrivez 'à' par erreur dans un name (encore pire, ça casse les verbes de la bibliothèque aussi - "parler à" et tous les trucs dans le même genre).
        La bibli a été corrigée et n'a aucun mot ('clé', 'là' et 'à') avec accent dans la grammaire ; c'est le comportement voulu, vu que aucun des verbes n'a d'accents ("déverrouiller", "goûter", "écouter", etc.)
 
 
@@ -18,9 +18,8 @@ Correction de bugs :
 
 
     - Descendre noun correspondait à Enter ; "descendre du noun" est Exit, "descendre dans/vers/au noun" est Enter (choix critiquable mais bon). Le plus gros problème c'est que "descendre noun" renvoie "mais vous êtes déjà sur noun", ce qui n'est vraiment pas ce qu'on veut. Désormais, "descendre noun" correspond à ExitOrEnter, qui Exit si on est sur le nom, et Enter sinon.
-      
-Mais peut-être aurait-il fallu utiliser IndirectlyContains ? 
-    - Le "á" de "Guantánamo" n'était pas converti en "a"
+      Mais peut-être aurait-il fallu utiliser IndirectlyContains ? 
+    - enleve_accents permet maintenant de traiter toutes les lettres de la table 2B du DM4
     - "accents on" et "accents off" ne marchaient pas ; désormais c'est "accents strict", "accents on" et "accents off"
 
 

@@ -280,6 +280,36 @@ Array LanguageNumbers table
 !   Part III.   Translation
 ! ------------------------------------------------------------------------------
 
+
+! Routines utiles pour reconnaître les versions accentuées d'une lettre
+[ IsAnA c;
+    ! aàáâãäæå + majuscules
+    if (c == 'a' or 'A' or 155 or 158 or 169 or 175 or 181 or 186 or 191 or 196 or 201 or 202 or 205 or 208 or 211 or 212) return true;
+    return false;
+];
+[ IsAnE c;
+    ! eéèêë + majuscules
+    if (c == 'e' or 'E' or 164 or 167 or 170 or 176 or 182 or 187 or 192 or 197 ) return true;
+    return false;
+];
+[ IsAnI c;
+    ! iïíìî + majuscules
+    if (c == 'i' or 'I' or 165 or 168 or 171 or 177 or 183 or 188 or 193 or 198 ) return true;
+    return false;
+];
+[ IsAnO c;
+    ! oóòôõö oe + majuscules
+    if (c == 'o' or 'O' or 156 or 159 or 172 or 178 or 184 or 189 or 194 or 199 or 203 or 204 or 207 or 210 or 220 or 221 ) return true;
+    return false;
+];
+[ IsAnU c;
+    ! uüùúû + majuscules
+    if (c == 'u' or 'U' or 157 or 160 or 173 or 179 or 185 or 190 or 195 or 200 ) return true;
+    return false;
+];
+
+
+
 ! La fonction enleve_accents enlève les accents de l'input ; de cette manière,
 ! le joueur peut utiliser les accents ou non. Pour cela le jeu doit définir les
 ! mots sans accent, par exemple :
@@ -299,27 +329,18 @@ Array LanguageNumbers table
 
 global gardeaccents=0;
 
+
 [ convertir_lettre i ;
+    if (IsAnA(buffer->i)) buffer->i='a';
+    if (IsAnE(buffer->i)) buffer->i='e';
+    if (IsAnI(buffer->i)) buffer->i='i';
+    if (IsAnO(buffer->i)) buffer->i='o';
+    if (IsAnU(buffer->i)) buffer->i='u';
 	switch(buffer->i) {
-			'é': buffer->i='e';
-			'á': buffer->i='a';   !*! dans certains noms espagnols, comme "Guantánamo"
-
-			'à': buffer->i='a';
-           	'è': buffer->i='e';
-           	'ù': buffer->i='u';
-
-           	'â': buffer->i='a';
-           	'ê': buffer->i='e';
-           	'î': buffer->i='i';
-           	'ô': buffer->i='o';
-           	'û': buffer->i='u';
-
-           	'ä': buffer->i='a';
-           	'ë': buffer->i='e';
-           	'ï': buffer->i='i';
-           	'ö': buffer->i='o';
-           	'ü': buffer->i='u';
-
+		! d'après mes tests, la conversion en minuscules se fait avant que cette fonction soit appelée
+		    'ÿ': buffer->i='y';
+		    'ı': buffer->i='y';
+		    'ñ': buffer->i='n';
             'ç': buffer->i='c';
 		}
 ];
@@ -682,10 +703,8 @@ Constant LanguageContractionForms = 2;     ! French has two:
                                            ! 0 = starting with a consonant
                                            ! 1 = starting with a vowel
                                            !     or mute h
-!*! ajouter d'autres voyelles (à accents) ?
 [ LanguageContraction text;
-    if (text->0 == 'a' or 'e' or 'é' or 'è' or 'ê' or 'i' or 'ï' or 'o' or 'u' or 'h'
-                    or 'A' or 'E' or 'I' or 'O' or 'U' or 'H') return 1;
+    if (IsAnA(text->0) || IsAnE(text->0) || IsAnI(text->0) || IsAnO(text->0) || IsAnU(text->0) || text->0 == 'h' or 'H') return 1;
     return 0;
 ];
 
