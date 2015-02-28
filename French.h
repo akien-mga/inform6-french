@@ -288,27 +288,47 @@ Array LanguageNumbers table
 ! Routines utiles pour reconnaître les versions accentuées d'une lettre
 [ IsAnA c;
     ! aàáâãäæå + majuscules
-    if (c == 'a' or 'A' or 155 or 158 or 169 or 175 or 181 or 186 or 191 or 196 or 201 or 202 or 205 or 208 or 211 or 212) return true;
+    #Ifdef TARGET_ZCODE;
+    if (c == 'a' or 'A' or 155 or 158 or 169 or 175 or 181 or 186 or 191 or 196 or 201 or 202 or 205 or 208 or '@ae' or 212) return true;
+    #Ifnot; ! TARGET_GLULX    - donc il faut les valeurs Unicode !
+    if ((c == 'a' or 'A') || (c > 191 && c < 199) || (c > 223 && c < 231)) return true;
+    #Endif; ! TARGET_
     return false;
 ];
 [ IsAnE c;
     ! eéèêë + majuscules
+    #Ifdef TARGET_ZCODE;
     if (c == 'e' or 'E' or 164 or 167 or 170 or 176 or 182 or 187 or 192 or 197 ) return true;
+    #Ifnot; ! TARGET_GLULX    - donc il faut les valeurs Unicode !
+    if ((c == 'e' or 'E') || (c > 199 && c < 204) || (c > 231 && c < 236)) return true;
+    #Endif; ! TARGET_
     return false;
 ];
 [ IsAnI c;
     ! iïíìî + majuscules
+    #Ifdef TARGET_ZCODE;
     if (c == 'i' or 'I' or 165 or 168 or 171 or 177 or 183 or 188 or 193 or 198 ) return true;
+    #Ifnot; ! TARGET_GLULX    - donc il faut les valeurs Unicode !
+    if ((c == 'i' or 'I') || (c > 203 && c < 208) || (c > 235 && c < 240)) return true;
+    #Endif; ! TARGET_
     return false;
 ];
 [ IsAnO c;
     ! oóòôõö oe + majuscules
-    if (c == 'o' or 'O' or 156 or 159 or 172 or 178 or 184 or 189 or 194 or 199 or 203 or 204 or 207 or 210 or 220 or 221 ) return true;
+    #Ifdef TARGET_ZCODE;
+    if (c == 'o' or 'O' or 156 or 159 or 172 or 178 or 184 or 189 or 194 or 199 or 203 or 204 or 207 or 210 or '@oe' or 221 ) return true;
+    #Ifnot; ! TARGET_GLULX    - donc il faut les valeurs Unicode !
+    if ((c == 'o' or 'O') || (c > 209 && c < 215) || (c == 216 or 248 or 338 or 339) || (c > 241 && c < 247)) return true;
+    #Endif; ! TARGET_
     return false;
 ];
 [ IsAnU c;
     ! uüùúû + majuscules
+    #Ifdef TARGET_ZCODE;
     if (c == 'u' or 'U' or 157 or 160 or 173 or 179 or 185 or 190 or 195 or 200 ) return true;
+    #Ifnot; ! TARGET_GLULX    - donc il faut les valeurs Unicode !
+    if ((c == 'u' or 'U') || (c > 216 && c < 221) || (c > 248 && c < 253)) return true;
+    #Endif; ! TARGET_
     return false;
 ];
 
