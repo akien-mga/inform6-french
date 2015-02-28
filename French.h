@@ -807,29 +807,10 @@ Array LanguageGNAsToArticles --> 0 1 0 2 2 2 0 1 0 2 2 2;
         f=0;
     }
     if (f == 1) { print " "; }
-! ceci ne marche pas :    print (string) LanguageNumbers->(n-1); return;
-    switch(n)
-    {
-        1:  print "un";
-        2:  print "deux";
-        3:  print "trois";
-        4:  print "quatre";
-        5:  print "cinq";
-        6:  print "six";
-        7:  print "sept";
-        8:  print "huit";
-        9:  print "neuf";
-        10: print "dix";
-        11: print "onze";
-        12: print "douze";
-        13: print "treize";
-        14: print "quatorze";
-        15: print "quinze";
-        16: print "seize";
-        17: print "dix-sept";
-        18: print "dix-huit";
-        19: print "dix-neuf";
-    }
+    ! Attention, il faut skipper le "une" dans la table !
+    ! ("une" est là à cause de NumberWord, qui doit la reconnaître comme 1 ; par contre on aurait pu considérer la bouger à la fin de la table, mais bon)
+    if (n == 1) { print "un"; } else { print (address) LanguageNumbers-->(2*n+1); }
+    return;
 ];
 
 
