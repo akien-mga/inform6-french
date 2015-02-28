@@ -49,7 +49,7 @@ Replace PrintCommand;
         if (i == 1) { print (string) THAT__TX;   jump TokenPrinted; }
         if (i >= REPARSE_CODE) {
 			prep = No__Dword(i-REPARSE_CODE);
-            if (prep == 'de' || prep == 'a') {
+            if (prep == 'de' || prep == 'a//') {
 				if (prep == 'de') { variante_flag = 1;} else { variante_flag = 2;}
 				! On skippe, on affichera tout ça au tour suivant
 			}

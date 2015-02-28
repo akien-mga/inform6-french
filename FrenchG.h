@@ -377,8 +377,8 @@ Verb 'acheter'
         * noun                              -> Buy;
 
 Verb 'payer' 'offrir' 'donner' ! 'remettre' !*!
-        * held '->'/'a'/'au'/'aux' creature          -> Give
-        * '->'/'a'/'au'/'aux' creature held          -> Give reverse;
+        * held 'a'/'au'/'aux'/'->' creature          -> Give
+        * 'a'/'au'/'aux'/'->' creature held          -> Give reverse;
 
 Verb 'nourrir'
         * creature 'avec' held              -> Give reverse;
@@ -590,7 +590,7 @@ Verb 'frotter' 'gratter' 'cirer' 'astiquer' 'balayer' 'nettoyer' 'depoussierer' 
 
 Verb 'nouer' 'attacher' 'fixer' 'connecter' 'brancher'
         * noun                                                -> Tie
-        * noun '->'/'a'/'au'/'aux'/'avec'/'sur' noun          -> Tie
+        * noun 'a'/'au'/'aux'/'avec'/'sur'/'->' noun          -> Tie
         * TexteComprenantEt                                   -> VagueTie;
 
 
@@ -654,7 +654,7 @@ Verb 'repondre' 'dire' 'crier' 'hurler'
         * 'a'/'au'/'aux' creature 'de'/'d^' topic       -> AskTo           ! dire a toto de faire ça
         * creature topic                                -> Answer reverse  ! dis-lui bonjour
         * 'a'/'au'/'aux' creature topic                 -> Answer reverse  ! dire a toto bonjour
-        * topic '->'/'a'/'au'/'aux' creature            -> Answer;         ! dire bonjour à toto
+        * topic 'a'/'au'/'aux'/'->' creature            -> Answer;         ! dire bonjour à toto
 
 Extend only 'crier' 'hurler' first
         *                                             -> CrierSansPrecision;
@@ -662,17 +662,17 @@ Extend only 'crier' 'hurler' first
 Verb 'demander'
         *                                             -> ParlerIncorrect ! demander (d'accord mais quoi...)
         * creature                                    -> ParlerIncorrect ! demande-lui (d'accord mais quoi...)
-        * '->'/'a'/'au'/'aux' creature                -> ParlerIncorrect ! demander à toto (d'accord mais quoi...)
+        * 'a'/'au'/'aux'/'->' creature                -> ParlerIncorrect ! demander à toto (d'accord mais quoi...)
         * 'que'/'qu^' topic                           -> ParlerIncorrect ! (on ne gère pas "demander que toto sorte" à cause du subjonctif)
         * creature 'de'/'d^' topic                    -> AskTo           ! demande lui de faire ça
-        * '->'/'a'/'au'/'aux' creature 'de'/'d^' topic -> AskTo           ! demander a toto de faire ça
+        * 'a'/'au'/'aux'/'->' creature 'de'/'d^' topic -> AskTo           ! demander a toto de faire ça
 !        * 'de'/'d^' topic 'a'/'au'/'aux' creature    -> AskTo reverse  ! demander de partir à toto   !x! ça plante
         * creature noun                               -> AskFor          ! demande-lui du pain
-        * noun '->'/'a'/'au'/'aux' creature           -> AskFor reverse  ! demander du pain au boulanger
-        * '->'/'a'/'au'/'aux' creature noun           -> AskFor          ! demander au boulanger du pain
+        * noun 'a'/'au'/'aux'/'->' creature           -> AskFor reverse  ! demander du pain au boulanger
+        * 'a'/'au'/'aux'/'->' creature noun           -> AskFor          ! demander au boulanger du pain
         * creature topic                              -> Ask             ! dis-lui bonjour
-        * topic '->'/'a'/'au'/'aux' creature          -> Ask reverse     ! demander de l'aide à toto...
-        * '->'/'a'/'au'/'aux' creature topic          -> Ask;            ! dire a toto bonjour
+        * topic 'a'/'au'/'aux'/'->' creature          -> Ask reverse     ! demander de l'aide à toto...
+        * 'a'/'au'/'aux'/'->' creature topic          -> Ask;            ! dire a toto bonjour
 
 Verb 'parler' 'discuter' 'causer'
         * 'avec'/'a'/'au'/'aux' creature                                              -> ParlerSansPrecision
@@ -724,7 +724,7 @@ Verb 'saluer'
         * creature 'de'/'avec' 'la' 'main'          -> WaveHands;
 
 Verb 'montrer' 'pointer' 'presenter'
-        * held '->'/'a'/'au'/'aux' creature         -> Show
+        * held 'a'/'au'/'aux'/'->' creature         -> Show
         * creature held                             -> Show reverse; ! "montre-leur le casque"
 !        * held creature                             -> Show         ! "montre-le-leur"
 
