@@ -1300,11 +1300,11 @@ Constant COMMA__TX      = ", ";
             if (deadflag==2 && AMUSING_PROVIDED==0)
                 print ", lire quelques suggestions amusantes (AMUSING)";
             " ou QUITTER ?"; !*!
-        6:  "[Votre interpréteur ne permet pas d' ~annuler~. Désolé !]";
+        6:  "[Votre interpréteur ne permet pas d'@<< annuler @>>. Désolé !]";
         #Ifdef TARGET_ZCODE;
-        7:  "~Annuler~ a échoué.  [Tous les interpréteurs ne le permettent pas.]";
+        7:  "@<< Annuler @>> a échoué.  [Tous les interpréteurs ne le permettent pas.]";
         #Ifnot; ! TARGET_GLULX
-        7:  "[Vous ne pouvez pas ~Annuler~ plus loin.]";
+        7:  "[Vous ne pouvez pas @<< Annuler @>> plus que cela.]";
         #Endif; ! TARGET_
         8:  "Faites un choix parmi les propositions ci-dessus.";
         9:  "^Vous êtes à présent dans le noir total !";
@@ -1314,18 +1314,18 @@ Constant COMMA__TX      = ", ";
         13: "[Action précédente annulée.]";
         14: "Désolé, impossible de corriger.";
         15: "N'y pensez même pas."; !*! "Think nothing of it."; !*!
-        16: "~Oops~ ne peut corriger qu'un seul mot.";
+        16: "@<< Oops @>> ne peut corriger qu'un seul mot.";
         17: "Il fait noir, et vous ne pouvez rien voir.";
         18: print "vous-même";
         19: "Votre apparence est aussi agréable qu'à l'accoutumée.";
-        20: "Pour répéter une commande comme ~grenouille, saute~, dites seulement
-            ~encore~, et pas ~grenouille, encore~.";
+        20: "Pour répéter une commande comme @<< grenouille, saute @>>, dites seulement
+            @<< encore @>>, et pas @<< grenouille, encore @>>.";
         21: "Vous pouvez difficilement répéter cela.";
         22: "Vous ne pouvez pas commencer par une virgule.";
         23: "Vous semblez vouloir parler à quelqu'un, mais je ne vois pas à qui.";
         24: "Vous ne pouvez pas discuter avec ", (the) x1, ".";
             ! "parler à" serait mieux mais délicat (ex: à l'oiseau)
-        25: "Pour parler à quelqu'un, essayez ~quelqu'un, bonjour~ ou quelque chose dans le genre.";
+        25: "Pour parler à quelqu'un, essayez @<< quelqu'un, bonjour @>> ou quelque chose dans le genre.";
         26: "(vous prenez d'abord ", (the) not_holding, ")";
         27: "Je ne comprends pas cette phrase.";
         28: print "Merci de reformuler. Je n'ai compris que : ";
@@ -1333,16 +1333,16 @@ Constant COMMA__TX      = ", ";
         30: "Vous ne voyez rien de tel, à moins que cela ne soit sans grande importance.";
         31: "Vous semblez en avoir dit trop peu !";
         32: "Vous ne l'avez pas dans vos mains !";
-        33: "Vous ne pouvez pas employer le mot ~tout~ (ou une liste) avec ce verbe.";
-        34: "Vous ne pouvez utiliser le mot ~tout~ (ou une liste) qu'une fois par ligne.";
-        35: "Je ne suis pas sûr de ce à quoi ~", (address) pronoun_word,
-            "~ se réfère.";
+        33: "Vous ne pouvez pas employer le mot @<< tout @>> (ou une liste) avec ce verbe.";
+        34: "Vous ne pouvez utiliser le mot @<< tout @>> (ou une liste) qu'une fois par ligne.";
+        35: "Je ne suis pas sûr de ce à quoi @<< ", (address) pronoun_word,
+            " @>> se réfère.";
         36: "Vous avez exclu quelque chose qui n'était de toute façon pas compris dans la liste !";
         37: "Vous ne pouvez agir ainsi qu'avec une chose animée.";
         38: "Je ne connais pas ce verbe.";
         39: "Ce n'est pas une chose à laquelle vous aurez à vous référer au cours du jeu.";
-        40: "Vous ne pouvez voir ~", (address) pronoun_word,
-            "~ (", (the) pronoun_obj, ") pour l'instant.";
+        40: "Vous ne pouvez voir @<< ", (address) pronoun_word,
+            " @>> (", (the) pronoun_obj, ") pour l'instant.";
         41: "Impossible de comprendre la fin de la phrase.";
         42: if (x1==0) print "Aucun de disponible.";
             else print "Il en reste seulement ", (number) x1, ".";
