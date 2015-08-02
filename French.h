@@ -927,8 +927,11 @@ Constant THOSET__TX   = "ces choses-là";
 Constant THAT__TX     = "cela";
 Constant OR__TX       = " ou ";
 Constant NOTHING__TX  = "rien";
-Constant IS__TX       = "est ";   ! utilisés par WriteListFrom
-Constant ARE__TX      = "sont ";  !
+! Potentiellement utilisés par WriteListFrom (bit ISORARE_BIT), mais pas dans la bibli française
+Constant IS__TX       = "il y a";  ! Constant IS__TX       = "est ";   ! ancienne version
+Constant ARE__TX      = "il y a";  ! Constant ARE__TX      = "sont ";  ! ancienne version
+! Ne pas changer ceux-là, ils sont utilisés dans WriteAfterEntry, qui liste l'inventaire notamment
+!      (et sont déjà bien faits, cf ListMiscellany plus bas)
 Constant IS2__TX      = "";  ! dans/sur lequel " est"  => contenant/supportant
 Constant ARE2__TX     = "";  ! dans/sur lequel " sont" => contenant/supportant
 Constant AND__TX      = " et ";
