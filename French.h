@@ -928,8 +928,8 @@ Constant THAT__TX     = "cela";
 Constant OR__TX       = " ou ";
 Constant NOTHING__TX  = "rien";
 ! Potentiellement utilisés par WriteListFrom (bit ISARE_BIT), mais pas dans la bibli française
-Constant IS__TX       = " il y a";  ! Constant IS__TX       = "est ";   ! ancienne version
-Constant ARE__TX      = " il y a";  ! Constant ARE__TX      = "sont ";  ! ancienne version
+Constant IS__TX       = " se trouve";  ! Constant IS__TX       = "est ";   ! ancienne version
+Constant ARE__TX      = " se trouvent";  ! Constant ARE__TX      = "sont ";  ! ancienne version
 ! Ne pas changer ceux-là, ils sont utilisés dans WriteAfterEntry, qui liste l'inventaire notamment
 !      (et sont déjà bien faits, cf ListMiscellany plus bas)
 Constant IS2__TX      = "";  ! dans/sur lequel " est"  => contenant/supportant
