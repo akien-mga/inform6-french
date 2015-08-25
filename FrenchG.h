@@ -48,8 +48,8 @@ Verb meta 'notify' 'notification'
         * 'on'                              -> NotifyOn
         * 'off'                             -> NotifyOff;
 
-Verb meta 'pronouns' 'nouns'
-        *                                   -> Pronouns;
+Verb meta 'pronoms' 'noms'
+        *                                   -> Pronoms;
 
 Verb meta  'quitter' 'quit'  'q//'
         *                                   -> Quit;

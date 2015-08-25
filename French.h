@@ -24,6 +24,9 @@
 
 
 
+!===============================================================================
+! Hacks dans les routines de la bibliothèque
+
 
 !======================================
 ! Quand il y a les prépositions 'a'/'au'/'aux' et 'de'/'du'/'des'/'d^', et qu'il faut
@@ -72,7 +75,10 @@ Replace PrintCommand;
 ];
 
 
-! Version 2.3 du 05/09/2008
+! --------------------------------------
+! la bibliothèque
+
+
 Constant LibReleaseFR      "2.4devHL";
 Message		"[Compilé avec le fork de Hugo Labrande de la version 2.4dev de la bibliothèque francophone.]";
 ! note : "message" ne permet pas d'inclure une constante, cela doit être d'un seul bloc
@@ -1616,6 +1622,38 @@ Constant COMMA__TX      = ", ";
     }
 !    Yes:  see No.
 ];
+
+
+! Affichage des pronoms - avec les guillemets français
+[ PronomsSub x y c d;
+    L__M(##Pronouns, 1);
+
+    c = (LanguagePronouns-->0)/3;
+    if (player ~= selfobj) c++;
+
+    if (c == 0) return L__M(##Pronouns, 4);
+
+    for (x=1,d=0 : x<=LanguagePronouns-->0 : x=x+3) {
+        print "@<< ", (address) LanguagePronouns-->x, " @>> ";
+        y = LanguagePronouns-->(x+2);
+        if (y == NULL) L__M(##Pronouns, 3);
+        else {
+            L__M(##Pronouns, 2);
+            print (the) y;
+        }
+        d++;
+        if (d < c-1) print (string) COMMA__TX;
+        if (d == c-1) print (string) AND__TX;
+    }
+    if (player ~= selfobj) {
+        print "@<< ", (address) ME1__WD, " @>> "; L__M(##Pronouns, 2);
+        c = player; player = selfobj;
+        print (the) c; player = c;
+    }
+    L__M(##Pronouns, 5);
+];
+
+
 
 ! ==============================================================================
 
