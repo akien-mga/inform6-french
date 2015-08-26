@@ -22,7 +22,7 @@ Correction de bugs :
     - enleve_accents permet maintenant de traiter toutes les lettres de la table 2B du DM4
     - "accents on" et "accents off" ne marchaient pas ; désormais c'est "accents strict", "accents on" et "accents off"
     - une ligne dans "sortir" n'était jamais exécutée : la ligne 'sortir X de Y' était avant 'sortir de Y', et le parser essayait d'inférer X, avec des résultats peu probants. L'ordre a été changé.
-
+    - "pronouns" n'avait pas été traduit, et dans la réponse il y avait les mauvais guillemets.
 
 
 
@@ -39,4 +39,4 @@ Changements dans les messages :
     - Neutralisation du genre de certaines réponses par défaut. La seule dont je ne suis pas vraiment fier, c'est l'alternative à "aussi beau que d'habitude" ; j'ai pensé à "aussi moche que d'habitude", qui est rigolote, et à "votre physique est aussi agréable que d'habitude".
     - typo dans Miscellany 20
     - les bons guillemets français au lieu des ~trucs~
-    - IS__TX, ARE__TX : utilisés par WriteListFrom (bit ISORARE_BIT) : si le bit est mis, ça donne "dans (the supporter) IS__TX/ARE__TX objets". C'est utilisé dans la bibli anglaise, mais pas dans la bibli française, où ça a été reformulé pour éviter des formulations pas correctes comme "dans le placard est une boîte de biscuits". Mais quand même, il vaut mieux bien le traduire : si on copie-colle un code anglophone, ou si on traduit de l'anglais (ce problème a été détecté pendant la traduction de Shade), ou juste parce que ça peut être pratique après tout. On met "il y a" (dans le placard il y a une boîte de biscuits) parce que c'est facile et passe-partout, mais on aurait pu aussi dire "se trouve"/"se trouvent" (mais je trouve que ça fait plus lourd).
+    - IS__TX, ARE__TX : utilisés par WriteListFrom (bit ISORARE_BIT) : si le bit est mis, ça donne "dans (the supporter) IS__TX/ARE__TX objets". C'est utilisé dans la bibli anglaise, mais pas dans la bibli française, où ça a été reformulé pour éviter des formulations pas correctes comme "dans le placard est une boîte de biscuits". Mais quand même, il vaut mieux bien le traduire : si on copie-colle un code anglophone, ou si on traduit de l'anglais (ce problème a été détecté pendant la traduction de Shade), ou juste parce que ça peut être pratique après tout. On met "se trouve"" (dans le placard se trouve une boîte de biscuits), "il y a" c'est moins correct.
